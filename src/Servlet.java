@@ -11,6 +11,7 @@ public class Servlet {
              System.out.println("Questa è la servlet con la giusta è accentata");
              
              System.out.println("ciaociaociao");
+             System.out.println("Forza Italia");
 
 	}
 
