@@ -7,6 +7,9 @@ public class Servlet {
              System.out.println("Forza GIUVE SIUUUUMM");
 
              System.out.println("Questa Ã¨ la seconda servlet");
+             System.out.println("Ce la faremo");
+             
+             System.out.println("Questa è la servlet con la giusta è accentata");
 
 	}
 
