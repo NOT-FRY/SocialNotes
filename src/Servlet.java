@@ -8,9 +8,13 @@ public class Servlet {
              System.out.println("VIVA STALIN U.R.S.S.");
              System.out.println("Questa Ã¨ la seconda servlet");
              
-             System.out.println("Questa è la servlet con la giusta è accentata");
-             
+             System.out.println("Questa ï¿½ la servlet con la giusta ï¿½ accentata");
+             System.out.println("PROVA ALFONSO");
              System.out.println("ciaociaociao");
+             
+             String x = "ciao";
+             
+             System.out.println(x);
 
 	}
 
