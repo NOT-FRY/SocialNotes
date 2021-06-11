@@ -13,18 +13,7 @@ public class Servlet {
              System.out.println("ciaociaociao");
 
              
-             String x = "ciao";
-             
-             System.out.println(x);
-
-
-             System.out.println("Forza Italia");
-
-             System.out.println("SISISISIvabenePROVASASA");
-
-             System.out.println("Forza Italia");
-
-             System.out.println("SISISISIvabenePROVASASA");
+            
  
 	}
 
