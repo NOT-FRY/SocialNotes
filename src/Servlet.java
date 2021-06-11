@@ -11,10 +11,14 @@ public class Servlet {
              System.out.println("Questa � la servlet con la giusta � accentata");
              System.out.println("PROVA ALFONSO");
              System.out.println("ciaociaociao");
+<<<<<<< HEAD
              
              String x = "ciao";
              
              System.out.println(x);
+=======
+             System.out.println("SISISISIvabenePROVASASA");
+>>>>>>> branch 'master' of https://github.com/Ackermann32/SocialNotes.git
 
 	}
 
