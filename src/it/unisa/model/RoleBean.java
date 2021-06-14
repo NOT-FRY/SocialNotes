@@ -38,9 +38,9 @@ public class RoleBean {
 	}
 	
 	
-	@Override 
+	@Override
 	public String toString() {
-		return "("+this.getIdRuolo()+") "+this.getRuolo()+"\n";
+		return "RoleBean [idRuolo=" + idRuolo + ", ruolo=" + ruolo + "]";
 	}
 	
 	
