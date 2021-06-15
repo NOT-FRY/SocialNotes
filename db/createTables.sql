@@ -44,7 +44,8 @@ create table Formato(
     on delete cascade,
     foreign key (CodiceCorso) references Corso(CodiceCorso)
     on update cascade
-    on delete cascade
+    on delete cascade,
+    primary key(Nome,Denominazione,CodiceCorso)
 );
 
 
