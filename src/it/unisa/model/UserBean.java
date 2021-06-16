@@ -104,12 +104,12 @@ public class UserBean {
 	}
 	
 	
-	public GregorianCalendar getUltimoAccesso() {
+	public Date getUltimoAccesso() {
 		return ultimoAccesso;
 	}
 	
 	
-	public void setUltimoAccesso(GregorianCalendar ultimoAccesso) {
+	public void setUltimoAccesso(Date ultimoAccesso) {
 		this.ultimoAccesso = ultimoAccesso;
 	}
 	
@@ -182,7 +182,7 @@ public class UserBean {
     private String pass;
     private Date dataNascita;
     private String matricola;
-    private GregorianCalendar ultimoAccesso;//dobbiamo vedere se c'è un tipo come datetime per sql
+    private Date ultimoAccesso;//dobbiamo vedere se c'è un tipo come datetime per sql
     private int coin;
     private Date ban;
     private String denominazione;

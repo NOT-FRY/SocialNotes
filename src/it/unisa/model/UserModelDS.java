@@ -44,7 +44,7 @@ public class UserModelDS implements Model<UserBean> {
 				bean.setPass(rs.getString("Pass"));
 				bean.setDataNascita(rs.getDate("DataNascita"));
 				bean.setMatricola(rs.getString("Matricola"));
-				bean.setUltimoAccesso(rs.getDate("UltimoAccesso"));//getGregorianCalendar non esiste dobbiamo vedere come fare secondo me la cosa migliore è dividere il campo nel database in data ora
+				bean.setUltimoAccesso(rs.getDate("UltimoAccesso"));//Simone , ho provato con la colesse Date , su Internet dice che va bene per gestire queste problematiche (ALFONSO)
 				bean.setCoin(rs.getInt("Coin"));
 				bean.setBan(rs.getDate("Ban"));
 				bean.setDenominazione(rs.getString("Denominazione"));
