@@ -2,7 +2,6 @@ package it.unisa.model;
 
 import java.sql.Blob;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 
 public class UserBean {
