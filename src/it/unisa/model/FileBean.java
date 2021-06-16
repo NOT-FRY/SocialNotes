@@ -46,6 +46,17 @@ public class FileBean {
 	public void setDimensione(int dimensione) {
 		this.dimensione = dimensione;
 	}
+	
+	
+	public boolean isEmpty() {
+		return this.filename.compareTo("")==0;
+	}
+	
+	
+	@Override
+	public boolean equals(Object obj) {
+		return this.filename.compareTo(((FileBean)obj).getFilename())==0;
+	}
 
 	@Override
 	public String toString() {
@@ -53,10 +64,5 @@ public class FileBean {
 				+ dimensione + "]";
 	}
 
-	
-	
-	
-	
-	
-	
+
 }
