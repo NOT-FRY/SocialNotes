@@ -34,14 +34,6 @@
 	<%
 	}
 	%>
-
-
-
-
-
-	<!-- <button class="btn btn-md btn-principale btn-block" style="border-top-left-radius:40px; border-bottom-left-radius:40px;">Torna indietro</button> -->
-  	
- 
 	 
     <div class="container">
     
@@ -175,9 +167,6 @@
 
 
     <script src="js/form-validation.js" type="text/javascript"></script>
-    <script>
-    
-    </script>
 
   </body>
 </html>

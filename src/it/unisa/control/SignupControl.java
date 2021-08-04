@@ -71,7 +71,7 @@ public class SignupControl extends HttpServlet {
 		
 		
 		
-		//response.sendRedirect("/success.html");
+		response.sendRedirect("success.html");
 		
 		
 		
