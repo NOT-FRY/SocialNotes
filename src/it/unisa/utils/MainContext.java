@@ -17,7 +17,7 @@ import javax.sql.DataSource;
 public class MainContext implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
-		Utility.print("Statrup web application");
+		Utility.print("Startup web application");
 		ServletContext context=sce.getServletContext();
 		DataSource ds=null;
 		try {

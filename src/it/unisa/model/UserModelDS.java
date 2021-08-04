@@ -44,7 +44,7 @@ public class UserModelDS implements Model<UserBean> {
 				bean.setPass(rs.getString("Pass"));
 				bean.setDataNascita(rs.getDate("DataNascita"));
 				bean.setMatricola(rs.getString("Matricola"));
-				bean.setUltimoAccesso(rs.getDate("UltimoAccesso"));//Simone , ho provato con la colesse Date , su Internet dice che va bene per gestire queste problematiche (ALFONSO)
+				bean.setUltimoAccesso(rs.getDate("UltimoAccesso"));//Simone , ho provato con la classe Date , su Internet dice che va bene per gestire queste problematiche (ALFONSO)
 				bean.setCoin(rs.getInt("Coin"));
 				bean.setBan(rs.getDate("Ban"));
 				bean.setDenominazione(rs.getString("Denominazione"));
@@ -67,7 +67,10 @@ public class UserModelDS implements Model<UserBean> {
 
 	@Override
 	public void doSave(UserBean item) throws SQLException {
-		// TODO Auto-generated method stub
+		Connection connection = null;
+		PreparedStatement ps = null;
+
+		String insertSQL = "INSERT INTO Utente" + " (Username, Nome, Cognome, Email, Pass) VALUES (?, ?, ?, ?, ?)";
 		
 	}
 
