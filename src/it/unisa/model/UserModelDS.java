@@ -18,7 +18,7 @@ public class UserModelDS implements Model<UserBean> {
 	}
 
 	@Override
-	public UserBean doRettrieveByKey(String code) throws SQLException {
+	public UserBean doRetrieveByKey(String code) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

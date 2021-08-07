@@ -18,7 +18,7 @@ public class MaterialModelDS implements Model<MaterialBean> {
 	}
 
 	@Override
-	public MaterialBean doRettrieveByKey(String code) throws SQLException {
+	public MaterialBean doRetrieveByKey(String code) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

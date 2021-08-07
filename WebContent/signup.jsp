@@ -101,7 +101,7 @@
             </div>
 
 
-
+<!--
             <div class="row">
               <div class="col-md-6 mb-3">
                   <label for="uni">Universit&agrave;:</label>
@@ -128,6 +128,15 @@
                   </div>
               </div>
             </div>
+-->
+			<div class="mb-3">
+              <label for="datanascita">Data di Nascita:</label>
+                <input type="date" class="form-control" name="nascita" id="nascita" placeholder="gg/mm/aaaa" onblur="validateDate(this)" required >
+              <div class="valid-feedback">Password valida.</div>
+              <div class="invalid-feedback">Inserisci un formato di data corretto (gg/mm/aaaa)</div>
+            </div>
+
+
 
 
             <hr class="mb-4">
@@ -149,9 +158,8 @@
       <footer class="my-5 pt-5 text-muted text-center text-small">
         <p class="mb-1">&copy; 2021 SocialNotes</p>
         <ul class="list-inline">
-          <li class="list-inline-item"><a href="#">Privacy</a></li>
-          <li class="list-inline-item"><a href="#">Terms</a></li>
-          <li class="list-inline-item"><a href="#">Support</a></li>
+          <li class="list-inline-item"><a href="PrivacyPolicy.html">Privacy & Terms</a></li>
+          <li class="list-inline-item"><a href="mailto:socialnotes@gmail.com">Support</a></li>
         </ul>
       </footer>
     </div>
