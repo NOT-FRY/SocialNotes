@@ -21,7 +21,7 @@
             <h5>About</h5>
             <ul class="list-unstyled text-small">
               <li><a class="text-white" href="#">Chi siamo</a></li>
-              <li><a class="text-white" href="PrivacyPolicy.html">Privacy & Terms</a></li>
+              <li><a class="text-white" href="#">Privacy & Terms</a></li>
             </ul>
           </div>
           <div class="col-md-3">
@@ -35,9 +35,9 @@
             <h5>Contattaci</h5>
             <ul class="list-unstyled text-small">
               <li><a class="text-white" href="mailto:socialnotes@gmail.com">E-mail</a></li>
-              <li><a class="text-white" href="https://www.instagram.com">Instagram</a></li>
-              <li><a class="text-white" href="https://www.facebook.com">Facebook</a></li>
-              <li><a class="text-white" href="https://www.twitter.com">Twitter</a></li>
+              <li><a class="text-white" href="www.instagram.com">Instagram</a></li>
+              <li><a class="text-white" href="facebook.com">Facebook</a></li>
+              <li><a class="text-white" href="Twitter.com">Twitter</a></li>
             </ul>
           </div>
         </div>
