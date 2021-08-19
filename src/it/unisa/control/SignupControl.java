@@ -39,14 +39,14 @@ public class SignupControl extends HttpServlet {
 		String pwd = request.getParameter("password");
 		String email = request.getParameter("email");
 		
-		//TODO validazione data
-		
 		if(!checkValidity(nome,cognome,username,pwd,email)) {
 			String error = "Spiacenti, la registrazione non è andata a buon fine.";
 			request.setAttribute("error", error);
 			//Mando una alert 
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/signup.jsp");
 			dispatcher.forward(request, response);	
+		}else {
+			request.removeAttribute("error");
 		}
 		
 		UserBean user = new UserBean();

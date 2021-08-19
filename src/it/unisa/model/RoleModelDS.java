@@ -19,7 +19,7 @@ public class RoleModelDS implements Model<RoleBean>{
 
 
 	@Override
-	public RoleBean doRetrieveByKey(String code) throws SQLException {
+	public RoleBean doRettrieveByKey(String code) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

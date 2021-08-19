@@ -18,7 +18,7 @@ public class MessageModelDS implements Model<MessageBean> {
 	}
 
 	@Override
-	public MessageBean doRetrieveByKey(String code) throws SQLException {
+	public MessageBean doRettrieveByKey(String code) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

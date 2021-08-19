@@ -18,7 +18,7 @@ public class ParticipationModelDS implements Model<ParticipationBean>{
 	}
 	
 	@Override
-	public ParticipationBean doRetrieveByKey(String code) throws SQLException {
+	public ParticipationBean doRettrieveByKey(String code) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

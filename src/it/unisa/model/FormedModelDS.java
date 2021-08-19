@@ -19,7 +19,7 @@ public class FormedModelDS implements Model<FormedBean> {
 	
 	
 	@Override
-	public FormedBean doRetrieveByKey(String code) throws SQLException {
+	public FormedBean doRettrieveByKey(String code) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

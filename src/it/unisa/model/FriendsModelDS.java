@@ -19,7 +19,7 @@ public class FriendsModelDS implements Model<FriendsBean> {
 	
 	
 	@Override
-	public FriendsBean doRetrieveByKey(String code) throws SQLException {
+	public FriendsBean doRettrieveByKey(String code) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

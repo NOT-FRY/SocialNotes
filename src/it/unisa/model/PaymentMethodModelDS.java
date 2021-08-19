@@ -18,7 +18,7 @@ public class PaymentMethodModelDS implements Model<PaymentMethodBean> {
 	}
 	
 	@Override
-	public PaymentMethodBean doRetrieveByKey(String code) throws SQLException {
+	public PaymentMethodBean doRettrieveByKey(String code) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

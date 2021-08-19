@@ -19,7 +19,7 @@ public class CourseModelDS implements Model<CourseBean> {
 
 	
 	@Override
-	public CourseBean doRetrieveByKey(String code) throws SQLException {
+	public CourseBean doRettrieveByKey(String code) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

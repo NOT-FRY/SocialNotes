@@ -19,7 +19,7 @@ public class FileModelDS implements Model<FileBean> {
 	}
 
 	@Override
-	public FileBean doRetrieveByKey(String code) throws SQLException {
+	public FileBean doRettrieveByKey(String code) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

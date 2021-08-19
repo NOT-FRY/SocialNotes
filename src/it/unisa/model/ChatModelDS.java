@@ -18,7 +18,7 @@ public class ChatModelDS implements Model<ChatBean> {
 	}
 	
 	@Override
-	public ChatBean doRetrieveByKey(String code) throws SQLException {
+	public ChatBean doRettrieveByKey(String code) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

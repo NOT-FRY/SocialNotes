@@ -19,7 +19,7 @@ public class FeedbackModelDS implements Model<FeedbackBean> {
 	
 	
 	@Override
-	public FeedbackBean doRetrieveByKey(String code) throws SQLException {
+	public FeedbackBean doRettrieveByKey(String code) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
