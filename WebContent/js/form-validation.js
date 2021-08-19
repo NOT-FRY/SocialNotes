@@ -5,13 +5,16 @@ function formValidation(){
   var username = document.registrazione.username;
   var pwd = document.registrazione.password;
   var uemail = document.registrazione.email;
+  var nascita = document.registrazione.nascita;
 
   if(allLetter(nome)){
     if(allLetter(cognome)){
       if(usernameValidation(username,3,12)){
         if(passwordValidation(pwd,5,12)){
           if(validateEmail(uemail)){
-            return true;
+			if(validateDate(nascita)){
+            	return true;
+			}
           }
         }
       }
@@ -26,8 +29,8 @@ function usernameValidation(uid,mx,my){
 	var feedback = document.getElementById("username-feedback");
   	var uid_len = uid.value.length;
 
-	var stringLunghezza = "Il nome utente è obbligatorio. La lunghezza deve essere compresa tra 3 e 15 caratteri. Non sono ammessi caratteri speciali o spazi.";
-	var stringDisponibile = "Il nome utente è già stato preso, si prega di selezionarne un altro";
+	var stringLunghezza = "Il nome utente \u00E8 obbligatorio. La lunghezza deve essere compresa tra 3 e 15 caratteri. Non sono ammessi caratteri speciali o spazi.";
+	var stringDisponibile = "Il nome utente \u00E8 gi\u00E0 stato preso, si prega di selezionarne un altro";
 	
 	var usernameFormat = /^[A-Za-z0-9]{3,15}$/
 	
@@ -96,7 +99,7 @@ function validateEmail(uemail){
   	uemail.classList.remove("is-valid");
 	var feedback = document.getElementById("email-feedback");
 	var stringValid="Per favore inserisci un indirizzo Email valido.";
-	var stringUnavailable="L'indirizzo scelto è già esistente."
+	var stringUnavailable="L'indirizzo scelto \u00E8 gi\u00E0 esistente."
   	var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
 	if(!uemail.value.match(mailformat)){
@@ -125,6 +128,31 @@ function validateEmail(uemail){
     return true;
 
 }
+
+function validateDate(nascita){
+	nascita.classList.remove("is-invalid");
+	nascita.classList.remove("is-valid");
+	
+	//split divide in parti in base al parametro inserito
+    var parti = nascita.value.split("-"); //Memorizzato in formato aaaa-mm-gg
+	//parseInt converte in intero (base 10)
+    var giorno = parseInt(parti[2], 10);
+    var mese = parseInt(parti[1], 10);
+    var anno = parseInt(parti[0], 10);
+	//alert("anno:"+anno+"mese:"+mese+"giorno:"+giorno);
+	
+	if(nascita.value==""||nascita.value==null||(giorno<=0||giorno>=32)||(mese<=0||mese>=13)||(anno<1900||anno>3000)){
+		nascita.classList.add("is-invalid");		
+		return false;	
+	}
+	else{
+		nascita.classList.add("is-valid");
+		return true;	
+	}
+		 
+}
+
+
 
 function ajaxCall(url, callback, parameter) {
 	var req = getXmlHttpRequest();

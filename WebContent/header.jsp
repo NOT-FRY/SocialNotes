@@ -38,13 +38,13 @@
                 <a class="nav-link" href="news.jsp">News</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="prezzi.jsp">Pricing</a>
+                <a class="nav-link" href="#">Pricing</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="login.html">Accedi</a>
+                <a class="nav-link" href="login.jsp">Accedi</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="signup.html">Registrati</a>
+                <a class="nav-link" href="signup.jsp">Registrati</a>
               </li>
             </ul>
 
