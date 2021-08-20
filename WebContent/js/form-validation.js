@@ -82,7 +82,7 @@ function passwordValidation(passid,mx,my){
 function allLetter(uname){
   uname.classList.remove("is-valid");
   uname.classList.remove("is-invalid");
-  var letters = /^[A-Za-z]+$/;
+  var letters = /^[A-Za-z\ss]+$/;
   if(uname.value.match(letters)){
     uname.classList.add("is-valid");
     return true;
