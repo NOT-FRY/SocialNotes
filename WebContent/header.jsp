@@ -38,7 +38,7 @@
                 <a class="nav-link" href="news.jsp">News</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
+                <a class="nav-link" href="prezzi.jsp">Pricing</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="login.jsp">Accedi</a>

@@ -105,11 +105,11 @@
             <div class="row">
               <div class="col-md-6 mb-3">
                   <label for="uni">Universit&agrave;:</label>
-                  <select class="custom-select d-block w-100" id="uni">
+                  <select class="custom-select d-block w-100" id="uni" name="uni">
                     <option value="">Scegli...</option>
-                    <option>Universit&agrave; degli studi di Salerno</option>
-                    <option>Bocconi</option>
-                    <option>LUISS</option>
+                    <option value = "Unisa">Universit&agrave; degli studi di Salerno</option>
+                    <option value = "Bocconi">Bocconi</option>
+                    <option value ="Luiss">LUISS</option>
                   </select>
                   <div class="invalid-feedback">
                     Per favore seleziona una universit&agrave;.
@@ -117,11 +117,11 @@
               </div>
               <div class="col-md-6 mb-3">
                   <label for="corso">Corso di studi:</label>
-                  <select class="custom-select d-block w-100" id="corso">
+                  <select class="custom-select d-block w-100" id="corso" name="corso">
                     <option value="">Scegli...</option>
-                    <option>Informatica</option>
-                    <option>Ingegneria Informatica</option>
-                    <option>Economia</option>
+                    <option value ="Informatica">Informatica</option>
+                    <option value = "Ingegneria Informatica">Ingegneria Informatica</option>
+                    <option value = "Economia">Economia</option>
                   </select>
                   <div class="invalid-feedback">
                     Per favore seleziona un corso di studi.

@@ -1,7 +1,10 @@
 package it.unisa.control;
 
 import java.io.IOException;
+
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -38,9 +41,16 @@ public class SignupControl extends HttpServlet {
 		String cognome = request.getParameter("lastName");
 		String pwd = request.getParameter("password");
 		String email = request.getParameter("email");
+        Date dataNascita = new Date(System.currentTimeMillis());
+		String denomonazione = request.getParameter("uni");
+		String dipName = request.getParameter("corso");
+		
+	    java.util.Date javaDate = new java.util.Date();
+	    long javaTime = javaDate.getTime();
+		Timestamp ultimoAccesso = new Timestamp(javaTime);
 		
 		if(!checkValidity(nome,cognome,username,pwd,email)) {
-			String error = "Spiacenti, la registrazione non è andata a buon fine.";
+			String error = "Spiacenti, la registrazione non ï¿½ andata a buon fine.";
 			request.setAttribute("error", error);
 			//Mando una alert 
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/signup.jsp");
@@ -56,18 +66,24 @@ public class SignupControl extends HttpServlet {
 		user.setUsername(username);
 		user.setPass(pwd);
 		user.setEmail(email);
-		
+		user.setDenominazione(denomonazione);
+		user.setDipName(dipName);
+		user.setUltimoAccesso(ultimoAccesso);
+		user.setDataNascita(dataNascita);
 		
 		DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
 		UserModelDS model= new UserModelDS(ds);
 		
-		try {
-			
-			model.doSave(user);
-		}catch(SQLException e){
-			
-			
-		}
+	
+		
+			try {
+				model.doSave(user);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		//	System.out.println("Ciao");
+	
 		
 		
 		

@@ -1,7 +1,8 @@
 package it.unisa.model;
 
 import java.sql.Blob;
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Timestamp;
 
 
 public class UserBean {
@@ -103,12 +104,12 @@ public class UserBean {
 	}
 	
 	
-	public Date getUltimoAccesso() {
+	public Timestamp getUltimoAccesso() {
 		return ultimoAccesso;
 	}
 	
 	
-	public void setUltimoAccesso(Date ultimoAccesso) {
+	public void setUltimoAccesso(Timestamp ultimoAccesso) {
 		this.ultimoAccesso = ultimoAccesso;
 	}
 	
@@ -181,7 +182,7 @@ public class UserBean {
     private String pass;
     private Date dataNascita;
     private String matricola;
-    private Date ultimoAccesso;//dobbiamo vedere se c'è un tipo come datetime per sql
+    private Timestamp ultimoAccesso;
     private int coin;
     private Date ban;
     private String denominazione;
