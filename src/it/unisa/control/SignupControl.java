@@ -1,10 +1,10 @@
 package it.unisa.control;
 
 import java.io.IOException;
-
+import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -36,18 +36,32 @@ public class SignupControl extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//TODO controlli lato server
+		
+		
 		String username = request.getParameter("username");
 		String nome = request.getParameter("firstName");
 		String cognome = request.getParameter("lastName");
 		String pwd = request.getParameter("password");
 		String email = request.getParameter("email");
-        Date dataNascita = new Date(System.currentTimeMillis());
+        String nascita = request.getParameter("nascita");
 		String denomonazione = request.getParameter("uni");
 		String dipName = request.getParameter("corso");
 		
 	    java.util.Date javaDate = new java.util.Date();
 	    long javaTime = javaDate.getTime();
 		Timestamp ultimoAccesso = new Timestamp(javaTime);
+		
+		Date dataNascita = new Date(System.currentTimeMillis());
+		
+		try {
+			SimpleDateFormat formatter = new SimpleDateFormat("YYYY-MM-gg");
+			java.util.Date data = formatter.parse(nascita);
+			dataNascita = new Date(data.getTime());
+		}catch(Exception e) {
+			
+		}
+		
 		
 		if(!checkValidity(nome,cognome,username,pwd,email)) {
 			String error = "Spiacenti, la registrazione non � andata a buon fine.";
@@ -80,6 +94,12 @@ public class SignupControl extends HttpServlet {
 				model.doSave(user);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
+				//System.out.println("ho lanciato l'eccezione");
+				String error = "Spiacenti, la registrazione non � andata a buon fine.";
+				request.setAttribute("error", error);
+				//Mando una alert 
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/signup.jsp");
+				dispatcher.forward(request, response);
 				e.printStackTrace();
 			}
 		//	System.out.println("Ciao");

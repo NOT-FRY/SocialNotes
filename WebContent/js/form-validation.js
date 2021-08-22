@@ -141,7 +141,7 @@ function validateDate(nascita){
     var anno = parseInt(parti[0], 10);
 	//alert("anno:"+anno+"mese:"+mese+"giorno:"+giorno);
 	
-	if(nascita.value==""||nascita.value==null||(giorno<=0||giorno>=32)||(mese<=0||mese>=13)||(anno<1900||anno>3000)){
+	if(nascita.value==""||nascita.value==null||(giorno<=0||giorno>=32)||(mese<=0||mese>=13)||(anno<1900||anno>2021)){
 		nascita.classList.add("is-invalid");		
 		return false;	
 	}

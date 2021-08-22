@@ -23,7 +23,54 @@ public class UserModelDS implements Model<UserBean> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public UserBean doRetrieveByUsername(String name)throws SQLException{
+		Connection con=null;
+		PreparedStatement ps=null;
+		String selectSQL="SELECT * FROM Utente WHERE Username = ?";
+		UserBean bean = new UserBean();
+		try {
+			con=ds.getConnection();
+			ps=con.prepareStatement(selectSQL);
+			ps.setString(1, name);	
+			ResultSet rs=ps.executeQuery();
+			if(!rs.first()) {
+				//Setta il cursore sulla prima riga, vedendo se esiste (poiché ResultSet non può mai essere null)
+				//System.out.println("L'utente non è stato trovato");
+				//Se l'utente con quell'username non esiste
+				return null;
+			}
+				while(rs.next()) {
+					bean.setUsername(rs.getString("Username"));
+					bean.setNome(rs.getString("Nome"));
+					bean.setCognome(rs.getString("Cognome"));
+					bean.setImg(rs.getBlob("Img"));
+					bean.setEmail(rs.getString("Email"));
+					bean.setPass(rs.getString("Pass"));
+					bean.setDataNascita(rs.getDate("DataNascita"));
+					bean.setMatricola(rs.getString("Matricola"));
+					bean.setUltimoAccesso(rs.getTimestamp("Denominazione"));
+					bean.setCoin(rs.getInt("Coin"));
+					bean.setBan(rs.getDate("Ban"));
+					bean.setDenominazione(rs.getString("Denominazione"));
+					bean.setDipName(rs.getString("DipName"));
+				}
 
+		}
+		finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			}
+			finally {
+				if(con!=null)
+					con.close();
+			}
+		}
+		
+		return bean;
+	}
+	
 	@Override
 	public Collection<UserBean> doRetrieveAll() throws SQLException {
 		Connection con=null;
@@ -93,7 +140,6 @@ public class UserModelDS implements Model<UserBean> {
 
 			ps.executeUpdate();
 			System.out.println("Ciao2");
-			connection.commit();
 		} finally {
 			try {
 				if(ps!=null)
