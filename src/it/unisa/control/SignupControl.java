@@ -115,11 +115,11 @@ public class SignupControl extends HttpServlet {
 	}
 	//Da migliorare il filtro
 	private boolean checkValidity(String nome,String cognome,String uname,String pwd, String email) {
-		if(nome!=null && nome != "") {
-			if(cognome!=null && cognome!= "") {
-				if(uname!=null && uname!= "") {
-					if(pwd!=null && pwd != "") {
-						if(email!=null && email != "") {
+		if(nome!=null && !nome.trim().equals("")) {
+			if(cognome!=null && !cognome.trim().equals("")) {
+				if(uname!=null && !uname.trim().equals("")) {
+					if(pwd!=null && !pwd.trim().equals("")) {
+						if(email!=null && !email.trim().equals("")) {
 							return true;
 						}
 					}

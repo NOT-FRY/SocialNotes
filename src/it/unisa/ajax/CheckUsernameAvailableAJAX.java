@@ -33,7 +33,7 @@ public class CheckUsernameAvailableAJAX extends HttpServlet {
 		String name=request.getParameter("param");
 		PrintWriter out = response.getWriter();
 		if(name!=null) {
-			System.out.println(name);
+			//System.out.println(name);
 			
 			DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
 			UserModelDS model= new UserModelDS(ds);
