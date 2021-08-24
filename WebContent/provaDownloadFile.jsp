@@ -1,3 +1,4 @@
+<%@page import="java.io.File"%>
 <%@page import="java.io.FileOutputStream"%>
 <%@page import="java.io.BufferedOutputStream"%>
 <%@page import="java.nio.Buffer"%>
@@ -13,24 +14,31 @@
 </head>
 <body>
 	<%
+	response.setHeader("Content-Disposition", "attachment; filename=4settembre2019_9.pdf");
 		response.setContentType("application/pdf");
 		DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
 		FileModelDS model= new FileModelDS(ds);
-		FileBean bean= model.doRetrieveByKey("Esercizi8.pdf");
+		FileBean bean= model.doRetrieveByKey("4settembre2019_9.pdf");
 		try{
 			InputStream is=bean.getContenuto();
-			/*byte[] bytes=new byte[1024*1024*50];
-			int bytesRead;
-			while((bytesRead=is.read(bytes))!=-1){
-				response.getOutputStream().write(bytes, 0, bytesRead);
-			}*/
-			Part p=request.getPart("Contenuto");
-			System.out.println("Ciao");
-		}
-		catch(Exception e){
-			throw new ServletException(e);
-		}
+			
 	
+				    
+				    OutputStream outStream = response.getOutputStream();
+				    byte[] buf = new byte[4096];
+				    int len = -1;
+
+				    //Write the file contents to the servlet response
+				    //Using a buffer of 4kb (configurable). This can be
+				    //optimized based on web server and app server
+				    //properties
+				    while ((len = is.read(buf)) != -1) {
+				        outStream.write(buf, 0, len);
+				    }
+
+				    outStream.flush();
+				    outStream.close();
+		}catch (Exception e){}
 	%>
 </body>
 </html>
