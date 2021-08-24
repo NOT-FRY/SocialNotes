@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
-import java.sql.Date;
 import java.util.LinkedList;
 
 import javax.sql.DataSource;
@@ -19,7 +18,7 @@ public class UserModelDS implements Model<UserBean> {
 	}
 
 	@Override
-	public UserBean doRettrieveByKey(String code) throws SQLException {
+	public UserBean doRetrieveByKey(String code) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -35,8 +34,8 @@ public class UserModelDS implements Model<UserBean> {
 			ps.setString(1, name);	
 			ResultSet rs=ps.executeQuery();
 			if(!rs.first()) {
-				//Setta il cursore sulla prima riga, vedendo se esiste (poiché ResultSet non può mai essere null)
-				//System.out.println("L'utente non è stato trovato");
+				//Setta il cursore sulla prima riga, vedendo se esiste (poichï¿½ ResultSet non puï¿½ mai essere null)
+				//System.out.println("L'utente non ï¿½ stato trovato");
 				//Se l'utente con quell'username non esiste
 				return null;
 			}

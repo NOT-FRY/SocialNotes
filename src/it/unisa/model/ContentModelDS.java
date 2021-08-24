@@ -18,7 +18,7 @@ public class ContentModelDS implements Model<ContentBean>{
 	}
 
 	@Override
-	public ContentBean doRettrieveByKey(String code) throws SQLException {
+	public ContentBean doRetrieveByKey(String code) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -47,7 +47,7 @@ public class Login extends HttpServlet {
 		DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
 		UserModelDS model= new UserModelDS(ds);
 		try {
-			model.doRettrieveByKey(uemail);
+			model.doRetrieveByKey(uemail);
 		}catch(SQLException e) {
 			
 		}

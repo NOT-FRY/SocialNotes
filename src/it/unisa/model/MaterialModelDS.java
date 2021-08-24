@@ -18,7 +18,7 @@ public class MaterialModelDS implements Model<MaterialBean> {
 	}
 
 	@Override
-	public MaterialBean doRettrieveByKey(String code) throws SQLException {
+	public MaterialBean doRetrieveByKey(String code) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -45,6 +45,7 @@ public class MaterialModelDS implements Model<MaterialBean> {
 				bean.setCodiceCorso(rs.getInt("CodiceCorso"));
 				bean.setUsername(rs.getString("Username"));
 				bean.setFileName(rs.getString("FileName"));
+				bean.setAnteprima(rs.getBlob("Anteprima"));
 				material.add(bean);
 			}
 		}
@@ -63,8 +64,38 @@ public class MaterialModelDS implements Model<MaterialBean> {
 
 	@Override
 	public void doSave(MaterialBean item) throws SQLException {
-		// TODO Auto-generated method stub
+		Connection connection = null;
+		PreparedStatement ps = null;
+
+		String insertSQL = "INSERT INTO Utente" + " (DataCaricamento,Keywords,Costo,Descrizione,Hidden,CodiceCorso,Username,FileName,Anteprima) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
+		try {
+			connection = ds.getConnection();
+			ps = connection.prepareStatement(insertSQL);
+			ps.setDate(1, item.getDataCaricamento());
+			ps.setString(2, item.getKeywords());
+			ps.setInt(3, item.getCosto());
+			ps.setString(4, item.getDescrizione());
+			ps.setBoolean(5, item.isHidden());
+			ps.setInt(6, item.getCodiceCorso());
+			ps.setString(7, item.getUsername());
+			ps.setString(8, item.getFileName());
+			ps.setBlob(9, item.getAnteprima());
+			
+		
+
+			ps.executeUpdate();
+			System.out.println("Materiale inserito");
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			}
+			finally {
+				if(connection!=null)
+					connection.close();
+			}
+		}
 	}
 
 	@Override

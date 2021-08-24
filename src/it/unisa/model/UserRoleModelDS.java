@@ -18,7 +18,7 @@ public class UserRoleModelDS implements Model<UserRoleBean> {
 	}
 	
 	@Override
-	public UserRoleBean doRettrieveByKey(String code) throws SQLException {
+	public UserRoleBean doRetrieveByKey(String code) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

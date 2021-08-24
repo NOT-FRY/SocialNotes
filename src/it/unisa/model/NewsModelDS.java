@@ -19,7 +19,7 @@ public class NewsModelDS implements Model<NewsBean>{
 	
 	
 	@Override
-	public NewsBean doRettrieveByKey(String code) throws SQLException {
+	public NewsBean doRetrieveByKey(String code) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

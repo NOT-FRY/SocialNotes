@@ -1,11 +1,12 @@
 package it.unisa.model;
+import java.io.InputStream;
 import java.sql.Blob;
 
 public class FileBean {
 
 	private String filename;
 	private String formato;
-	private Blob contenuto;
+	private InputStream contenuto;
 	private int dimensione;
 	
 	public FileBean() {
@@ -15,10 +16,12 @@ public class FileBean {
 		this.dimensione=0;
 	}
 
+	
 	public String getFilename() {
 		return filename;
 	}
 
+	
 	public void setFilename(String filename) {
 		this.filename = filename;
 	}
@@ -31,15 +34,15 @@ public class FileBean {
 		this.formato = formato;
 	}
 
-	public Blob getContenuto() {
+	public InputStream getContenuto() {
 		return contenuto;
 	}
 
-	public void setContenuto(Blob contenuto) {
+	public void setContenuto(InputStream contenuto) {
 		this.contenuto = contenuto;
 	}
 
-	public int setDimensione() {
+	public int getDimensione() {
 		return dimensione;
 	}
 
