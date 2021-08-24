@@ -224,32 +224,35 @@ not support the canvas tag.</canvas>
 							<div class="tab-pane fade active show" id="posts" role="tabpanel"
 								aria-labelledby="posts-tab">
 								<div class="form-group">
-									<form method="post" action="servlet.java" enctype="multipart/formdata">
+									<form method="post" action="FileUploadServlet" enctype="multipart/form-data">
 										<h4>Condivisione materiale</h4>
 										<div class="mb-3">
 										<label>File PDF</label>
-											<input class="form-control" type="file" id="formFile" accept=".pdf,.doc,.docx,.odt,.ppt,.pptx">
+											<input class="form-control" type="file" id="formFile" name="Contenuto" accept=".pdf,.doc,.docx,.odt,.ppt,.pptx">
 											<label>Immagine anteprima del materiale</label>
-											<input class="form-control" type="file" id="formFile" accept=".jpeg,.png,.jpg,.PNG">
+											<input class="form-control" type="file" id="formFile" name="Anteprima" accept=".jpeg,.png,.jpg,.PNG">
 										</div>
 										
 										<br>
 										
 										<textarea
 											placeholder="Inserisci una descrizione del materiale"
-											rows="3" class="form-control"></textarea>
-					
+											rows="3" class="form-control" name="Descrizione">
+										</textarea>
+											
+										<div class="btn-toolbar justify-content-between">
+											<div class="btn-group">
+												<button type="submit" class="btn bottone-principale text-light"
+												style="background-color: #9697e7" onclick="prova()">Share</button>
+											</div>
+										</div>
 									</form>
+									
 								</div>
 							</div>
 
 						</div>
-						<div class="btn-toolbar justify-content-between">
-							<div class="btn-group">
-								<button type="submit" class="btn bottone-principale text-light"
-									style="background-color: #9697e7" onclick="prova()">Share</button>
-							</div>
-						</div>
+						
 					</div>
 				</div>
 

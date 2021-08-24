@@ -18,7 +18,7 @@ public class UniversityModelDS implements Model<UniversityBean>{
 	 }
 
 	@Override
-	public UniversityBean doRettrieveByKey(String code) throws SQLException {
+	public UniversityBean doRetrieveByKey(String code) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

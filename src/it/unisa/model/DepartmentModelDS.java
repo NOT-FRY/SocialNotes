@@ -18,7 +18,7 @@ public class DepartmentModelDS implements Model<DepartmentBean> {
 	}
 
 	@Override
-	public DepartmentBean doRettrieveByKey(String code) throws SQLException {
+	public DepartmentBean doRetrieveByKey(String code) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
