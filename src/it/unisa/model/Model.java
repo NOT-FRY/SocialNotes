@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.Collection;
 
 public interface Model<T> {
-	public T doRettrieveByKey(String code)throws SQLException;
+	public T doRetrieveByKey(String code)throws SQLException;
 	
 	public Collection<T> doRetrieveAll()throws SQLException;
 	
