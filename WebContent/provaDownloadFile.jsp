@@ -25,6 +25,7 @@
 				response.getOutputStream().write(bytes, 0, bytesRead);
 			}*/
 			Part p=request.getPart("Contenuto");
+			System.out.println("Ciao");
 		}
 		catch(Exception e){
 			throw new ServletException(e);
