@@ -14,7 +14,7 @@
 </head>
 <body>
 	<%
-	response.setHeader("Content-Disposition", "attachment; filename=4settembre2019_9.pdf");
+		response.setHeader("Content-Disposition", "filename=4settembre2019_9.pdf");//se vuoi solo far scaricare senza visualizzare mettere attachment; prima di filename
 		response.setContentType("application/pdf");
 		DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
 		FileModelDS model= new FileModelDS(ds);
