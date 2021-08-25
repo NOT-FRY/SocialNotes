@@ -1,6 +1,5 @@
 package it.unisa.model;
 import java.io.InputStream;
-import java.sql.Blob;
 
 public class FileBean {
 

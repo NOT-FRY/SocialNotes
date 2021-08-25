@@ -23,6 +23,29 @@ public class UserModelDS implements Model<UserBean> {
 		return null;
 	}
 	
+	
+	public boolean checkLogin(String name,String password) {
+		Connection con=null;
+		PreparedStatement ps=null;
+		String sql="SELECT * FROM Utente WHERE (Username=? OR Email=?)AND Pass=?";
+		try {
+			con=ds.getConnection();
+			ps=con.prepareStatement(sql);
+			ps.setString(1, name);
+			ps.setString(2, name);
+			ps.setString(3, password);
+			ResultSet rs=ps.executeQuery(sql);
+			if(rs.first())
+				System.out.println("Utente loggato");
+			else
+				System.out.println("Utente non loggato");
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 	public UserBean doRetrieveByUsername(String name)throws SQLException{
 		Connection con=null;
 		PreparedStatement ps=null;
@@ -81,7 +104,7 @@ public class UserModelDS implements Model<UserBean> {
 			ps.setString(1, Email);	
 			ResultSet rs=ps.executeQuery();
 			if(!rs.first()) {
-				//Setta il cursore sulla prima riga, vedendo se esiste (poiché ResultSet non può mai essere null)
+				//Setta il cursore sulla prima riga, vedendo se esiste (poichï¿½ ResultSet non puï¿½ mai essere null)
 				return null;
 			}
 				while(rs.next()) {
