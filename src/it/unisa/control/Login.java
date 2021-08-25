@@ -20,11 +20,11 @@ import it.unisa.model.UserModelDS;
 @WebServlet("/Login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public Login() {
-        super();
 
-    }
+	public Login() {
+		super();
+
+	}
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,32 +34,42 @@ public class Login extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String login = request.getParameter("login");
 		String pwd = request.getParameter("password");
-		
+		System.out.println(login);
+		System.out.println(pwd);
+
 		//TODO validazione
-		
+
 		//TODO sessione
-		
-		
-		
+
+
+
 		DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
 		UserModelDS model= new UserModelDS(ds);
-		if (model.checkLogin(login, pwd)) {
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/homepage_user.jsp");
-			dispatcher.forward(request, response);
-		}
-		else {
-			String error="Login e/o password non corretti.";
+		try {
+			if ((model.checkLogin(login, pwd))) {
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/homepage_user.jsp");
+				dispatcher.forward(request, response);
+			}
+			else {
+				String error="Login e/o password non corretti.";
+				request.setAttribute("error",error);
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
+				dispatcher.forward(request, response);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			String error="Problema con la query";
 			request.setAttribute("error",error);
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
 			dispatcher.forward(request, response);
 		}
 		//TODO mail e password corrispondono
-		
+
 		doGet(request, response);
 	}
-	
+
 
 }

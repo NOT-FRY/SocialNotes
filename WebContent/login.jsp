@@ -46,7 +46,7 @@
       <img class="d-block mx-auto mb-4" src="img/logo.png" alt="SocialNotes" width="140" height="140">
       <h1 class="h3 mb-3 font-weight-normal">Effettua il Login</h1>
       <label for="inputEmail" class="sr-only">Email</label>
-      <input type="email" name="login "id="inputEmail" class="form-control" placeholder="Indirizzo mail" required autofocus>
+      <input type="text" name="login"id="inputEmail" class="form-control" placeholder="Indirizzo mail" required autofocus>
       <label for="inputPassword" class="sr-only">Password</label>
       <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
       <div class="checkbox mb-3">

@@ -24,26 +24,39 @@ public class UserModelDS implements Model<UserBean> {
 	}
 	
 	
-	public boolean checkLogin(String name,String password) {
+	public boolean checkLogin(String name,String password)throws SQLException {
 		Connection con=null;
 		PreparedStatement ps=null;
-		String sql="SELECT * FROM Utente WHERE (Username=? OR Email=?)AND Pass=?";
+		String sql="SELECT * FROM Utente WHERE (Email = ? OR Username=?) AND Pass=?";
+		System.out.println("name in usermodel "+name);
+		System.out.println("pass in usermodel "+password);
 		try {
 			con=ds.getConnection();
 			ps=con.prepareStatement(sql);
 			ps.setString(1, name);
 			ps.setString(2, name);
 			ps.setString(3, password);
-			ResultSet rs=ps.executeQuery(sql);
-			if(rs.first())
-				System.out.println("Utente loggato");
-			else
+			ResultSet rs=ps.executeQuery();
+			if(!rs.first()) {
 				System.out.println("Utente non loggato");
+				return false;
+			}
+			else{
+				System.out.println("Utente loggato");
+				return true;
+			}	
 		}
-		catch(SQLException e) {
-			e.printStackTrace();
+		
+		finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			}
+			finally {
+				if(con!=null)
+					con.close();
+			}
 		}
-		return false;
 	}
 	
 	public UserBean doRetrieveByUsername(String name)throws SQLException{
