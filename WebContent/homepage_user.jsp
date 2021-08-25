@@ -56,6 +56,14 @@
 </head>
 <body>
 
+<%
+  if (session.getAttribute("username")==null)
+	  response.sendRedirect("/login.jsp");
+
+  String nome = (String)session.getAttribute("nome");
+  String cognome = (String)session.getAttribute("cognome");
+%>
+
 	<%@ include file="header_user.jsp"%>
 
 	<br>
@@ -83,7 +91,7 @@ Swal.fire(
 								<img src="https://bootdey.com/img/Content/avatar/avatar7.png"
 									alt="Admin" class="rounded-circle" width="150">
 								<div class="mt-3">
-									<h4>John Doe</h4>
+									<h4><%=nome%> <%=cognome %></h4>
 									<p class="text-secondary mb-1">Full Stack Developer</p>
 									<p class="text-muted font-size-sm">Bay Area, San Francisco,
 										CA</p>

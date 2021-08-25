@@ -42,10 +42,12 @@ public class UserModelDS implements Model<UserBean> {
 				System.out.println("Utente non loggato");
 				return null;
 			}
-		
+		     rs.beforeFirst();
 			System.out.println("Utente loggato");
 			while(rs.next()) {
+	
 				bean.setUsername(rs.getString("Username"));
+				
 				bean.setNome(rs.getString("Nome"));
 				bean.setCognome(rs.getString("Cognome"));
 				bean.setImg(rs.getBlob("Img"));
@@ -53,13 +55,13 @@ public class UserModelDS implements Model<UserBean> {
 				bean.setPass(rs.getString("Pass"));
 				bean.setDataNascita(rs.getDate("DataNascita"));
 				bean.setMatricola(rs.getString("Matricola"));
-				bean.setUltimoAccesso(rs.getTimestamp("Denominazione"));
+				bean.setUltimoAccesso(rs.getTimestamp("UltimoAccesso"));
 				bean.setCoin(rs.getInt("Coin"));
 				bean.setBan(rs.getDate("Ban"));
 				bean.setDenominazione(rs.getString("Denominazione"));
 				bean.setDipName(rs.getString("DipName"));
 			}
-		
+		   
 		}
 		
 		finally {
@@ -91,8 +93,10 @@ public class UserModelDS implements Model<UserBean> {
 				//Se l'utente con quell'username non esiste
 				return null;
 			}
+			rs.beforeFirst();
 				while(rs.next()) {
 					bean.setUsername(rs.getString("Username"));
+					
 					bean.setNome(rs.getString("Nome"));
 					bean.setCognome(rs.getString("Cognome"));
 					bean.setImg(rs.getBlob("Img"));
@@ -100,7 +104,7 @@ public class UserModelDS implements Model<UserBean> {
 					bean.setPass(rs.getString("Pass"));
 					bean.setDataNascita(rs.getDate("DataNascita"));
 					bean.setMatricola(rs.getString("Matricola"));
-					bean.setUltimoAccesso(rs.getTimestamp("Denominazione"));
+					bean.setUltimoAccesso(rs.getTimestamp("UltimoAccesso"));
 					bean.setCoin(rs.getInt("Coin"));
 					bean.setBan(rs.getDate("Ban"));
 					bean.setDenominazione(rs.getString("Denominazione"));
@@ -136,6 +140,7 @@ public class UserModelDS implements Model<UserBean> {
 				//Setta il cursore sulla prima riga, vedendo se esiste (poich� ResultSet non pu� mai essere null)
 				return null;
 			}
+			rs.beforeFirst();
 				while(rs.next()) {
 					bean.setUsername(rs.getString("Username"));
 					bean.setNome(rs.getString("Nome"));
@@ -145,7 +150,7 @@ public class UserModelDS implements Model<UserBean> {
 					bean.setPass(rs.getString("Pass"));
 					bean.setDataNascita(rs.getDate("DataNascita"));
 					bean.setMatricola(rs.getString("Matricola"));
-					bean.setUltimoAccesso(rs.getTimestamp("Denominazione"));
+					bean.setUltimoAccesso(rs.getTimestamp("UltimoAccesso"));
 					bean.setCoin(rs.getInt("Coin"));
 					bean.setBan(rs.getDate("Ban"));
 					bean.setDenominazione(rs.getString("Denominazione"));
@@ -188,7 +193,7 @@ public class UserModelDS implements Model<UserBean> {
 				bean.setPass(rs.getString("Pass"));
 				bean.setDataNascita(rs.getDate("DataNascita"));
 				bean.setMatricola(rs.getString("Matricola"));
-				bean.setUltimoAccesso(rs.getTimestamp("Denominazione"));
+				bean.setUltimoAccesso(rs.getTimestamp("UltimoAccesso"));
 				bean.setCoin(rs.getInt("Coin"));
 				bean.setBan(rs.getDate("Ban"));
 				bean.setDenominazione(rs.getString("Denominazione"));

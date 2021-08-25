@@ -9,8 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
+import it.unisa.model.UserBean;
 import it.unisa.model.UserModelDS;
 
 /**
@@ -35,7 +37,13 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		
-		
+		HttpSession session = request.getSession(true);
+		System.out.println("SSSSSS:"+session.getId());
+		if(session.getAttribute("username")!=null){
+			String link = "homepage_user.jsp";
+			 String encodedURL = response.encodeRedirectURL(link);
+			 response.sendRedirect(encodedURL);
+		}else {
 		
 		String login = request.getParameter("login");
 		String pwd = request.getParameter("password");
@@ -51,7 +59,8 @@ public class Login extends HttpServlet {
 		DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
 		UserModelDS model= new UserModelDS(ds);
 		try {
-			if ((model.checkLogin(login, pwd))==null) {
+			UserBean bean = model.checkLogin(login, pwd);
+			if (bean==null) {
 				String error="Login e/o password non corretti.";
 				request.setAttribute("error",error);
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
@@ -59,8 +68,14 @@ public class Login extends HttpServlet {
 				
 			}
 			else {
-				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/homepage_user.jsp");
-				dispatcher.forward(request, response);
+		    System.out.println("USERNAME: "+bean.getUsername());		
+			session.setAttribute("username",bean.getUsername());
+			session.setAttribute("nome",bean.getNome());
+			session.setAttribute("cognome",bean.getCognome());
+				
+			String homeURL = response.encodeURL("homepage_user.jsp");
+			
+			response.sendRedirect(homeURL);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -75,4 +90,5 @@ public class Login extends HttpServlet {
 	}
 
 
+}
 }
