@@ -155,7 +155,7 @@ public class UserBean {
 
 	
 	public boolean isEmpty() {
-		return this.username.compareTo("")==0;
+		return (this.username.compareTo(""))==0;
 	}
 	
 	

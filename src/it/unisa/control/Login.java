@@ -51,14 +51,15 @@ public class Login extends HttpServlet {
 		DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
 		UserModelDS model= new UserModelDS(ds);
 		try {
-			if ((!(model.checkLogin(login, pwd).isEmpty()))) {
-				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/homepage_user.jsp");
-				dispatcher.forward(request, response);
-			}
-			else {
+			if ((model.checkLogin(login, pwd))==null) {
 				String error="Login e/o password non corretti.";
 				request.setAttribute("error",error);
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
+				dispatcher.forward(request, response);
+				
+			}
+			else {
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/homepage_user.jsp");
 				dispatcher.forward(request, response);
 			}
 		}catch(SQLException e) {
