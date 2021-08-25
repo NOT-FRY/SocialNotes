@@ -14,11 +14,12 @@
 </head>
 <body>
 	<%
-		response.setHeader("Content-Disposition", "filename=4settembre2019_9.pdf");//se vuoi solo far scaricare senza visualizzare mettere attachment; prima di filename
+	DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
+	FileModelDS model= new FileModelDS(ds);
+	FileBean bean= model.doRetrieveByKey("4settembre2019_9.pdf");
+	response.setHeader("Content-Disposition", "filename="+bean.getFilename());
 		response.setContentType("application/pdf");
-		DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
-		FileModelDS model= new FileModelDS(ds);
-		FileBean bean= model.doRetrieveByKey("4settembre2019_9.pdf");
+
 		try{
 			InputStream is=bean.getContenuto();
 			
