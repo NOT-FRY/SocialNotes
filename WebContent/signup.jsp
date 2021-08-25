@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" import="java.util.*"%>
 <!doctype html>
 <html lang="en">
   <head>
@@ -19,6 +19,21 @@
   </head>
 
   <body class="bg-light">
+  <%
+ 
+ 
+	  synchronized(session) {
+	  
+		 if (session.getAttribute("username")!=null){ 
+		  
+	 String link = "homepage_user.jsp";
+	 String encodedURL = response.encodeRedirectURL(link);
+	 response.sendRedirect(encodedURL);
+	 }
+		 
+  }
+  
+  %>
 	<%
 	String errore = (String) request.getAttribute("error");
 	if (errore != null) {

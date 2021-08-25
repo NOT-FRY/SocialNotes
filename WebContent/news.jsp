@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" import="java.util.Date" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,6 +29,15 @@
 <%@ include file="header.jsp" %>
  <br>
       <br>
+   <%    if(session.isNew()){
+	  System.out.println("La sessione non esiste");
+  }else{
+	  synchronized(session) {
+	  System.out.println("ID SESSIONE NEWS:"+session.getId());
+	  Date dataSessione = new Date(session.getCreationTime());
+	  System.out.println("Data creazione "+ dataSessione);
+	  }
+  } %>
       <div class="container">
      <!--   <div class="row"> -->
       <h2 class="pb-2 border-bottom" style="font-family: 'Archivo', sans-serif;">News</h2>

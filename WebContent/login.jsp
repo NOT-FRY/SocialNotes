@@ -22,6 +22,13 @@
 
 
   <body class="text-center">
+  <%
+      if (session.getAttribute("username")!=null){
+    		 String link = "homepage_user.jsp";
+    		 String encodedURL = response.encodeRedirectURL(link);
+    		 response.sendRedirect(encodedURL);
+      }
+  %>
   <div>
   		<%
 	String errore = (String) request.getAttribute("error");

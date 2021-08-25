@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Enumeration;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import it.unisa.model.UserBean;
@@ -31,13 +33,26 @@ public class SignupControl extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+          
+	/*	HttpSession sessionUser = request.getSession();
+		if (sessionUser.getAttribute("username")!=null) {
+			System.out.println("Sei già loggato");
+		} */
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//TODO controlli lato server
 		
+		HttpSession session = request.getSession(true);
+		System.out.println("SSSSSS:"+session.getId());
+		if(session.getAttribute("username")!=null){
+			String link = "homepage_user.jsp";
+			 String encodedURL = response.encodeRedirectURL(link);
+			 response.sendRedirect(encodedURL);
+		}
+		else {
+			  
 		
 		String username = request.getParameter("username");
 		String nome = request.getParameter("firstName");
@@ -104,14 +119,26 @@ public class SignupControl extends HttpServlet {
 			}
 		//	System.out.println("Ciao");
 	
+			session.setAttribute("username", user.getUsername());
+			session.setAttribute("nome", user.getNome());
+			session.setAttribute("cognome", user.getCognome());
+			  System.out.println("ID SESSIONE:"+session.getId());
+			  Enumeration <String> nomeAttributi = session.getAttributeNames();
+			 while (nomeAttributi.hasMoreElements()){
+				 String nomeAtt = nomeAttributi.nextElement();
+				 System.out.println("Nome attributo.. : "+nomeAtt);
+				 System.out.println("Valore :"+session.getAttribute(nomeAtt));
+			 }
 		
 		
+				String link = "Success.jsp";
+				 String encodedURL = response.encodeRedirectURL(link);
+				 response.sendRedirect(encodedURL);
 		
-		response.sendRedirect("success.html");
 		
-		
-		
+		  
 		doGet(request, response);
+		}
 	}
 	//Da migliorare il filtro
 	private boolean checkValidity(String nome,String cognome,String uname,String pwd, String email) {

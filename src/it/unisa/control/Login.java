@@ -34,6 +34,9 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		
+		
+		
 		String login = request.getParameter("login");
 		String pwd = request.getParameter("password");
 		System.out.println(login);
@@ -48,7 +51,7 @@ public class Login extends HttpServlet {
 		DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
 		UserModelDS model= new UserModelDS(ds);
 		try {
-			if ((model.checkLogin(login, pwd))) {
+			if ((!(model.checkLogin(login, pwd).isEmpty()))) {
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/homepage_user.jsp");
 				dispatcher.forward(request, response);
 			}
