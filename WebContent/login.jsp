@@ -22,12 +22,31 @@
 
 
   <body class="text-center">
+  <div>
+  		<%
+	String errore = (String) request.getAttribute("error");
+	if (errore != null) {
+	%>
+
+	<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		<strong>Attenzione!</strong> Nome utente e/o password non corrispondono.
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+
+	<%
+	}
+	%>
+	</div>
+  		
+  		
   		
     <form class="form-signin" action="Login" method="POST" >
       <img class="d-block mx-auto mb-4" src="img/logo.png" alt="SocialNotes" width="140" height="140">
       <h1 class="h3 mb-3 font-weight-normal">Effettua il Login</h1>
       <label for="inputEmail" class="sr-only">Email</label>
-      <input type="email" name="email "id="inputEmail" class="form-control" placeholder="Indirizzo mail" required autofocus>
+      <input type="email" name="login "id="inputEmail" class="form-control" placeholder="Indirizzo mail" required autofocus>
       <label for="inputPassword" class="sr-only">Password</label>
       <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
       <div class="checkbox mb-3">

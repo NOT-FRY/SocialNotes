@@ -3,6 +3,7 @@ package it.unisa.control;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,7 +35,7 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String uemail = request.getParameter("email");
+		String login = request.getParameter("login");
 		String pwd = request.getParameter("password");
 		
 		//TODO validazione
@@ -42,20 +43,23 @@ public class Login extends HttpServlet {
 		//TODO sessione
 		
 		
-		UserBean user = new UserBean();
 		
 		DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
 		UserModelDS model= new UserModelDS(ds);
-		try {
-			model.doRetrieveByKey(uemail);
-		}catch(SQLException e) {
-			
+		if (model.checkLogin(login, pwd)) {
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/homepage_user.jsp");
+			dispatcher.forward(request, response);
+		}
+		else {
+			String error="Login e/o password non corretti.";
+			request.setAttribute("error",error);
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
+			dispatcher.forward(request, response);
 		}
 		//TODO mail e password corrispondono
 		
-		
-		response.sendRedirect("homepage_user.jsp");
 		doGet(request, response);
 	}
+	
 
 }
