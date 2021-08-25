@@ -24,12 +24,13 @@ public class UserModelDS implements Model<UserBean> {
 	}
 	
 	
-	public boolean checkLogin(String name,String password)throws SQLException {
+	public UserBean checkLogin(String name,String password)throws SQLException {
 		Connection con=null;
 		PreparedStatement ps=null;
 		String sql="SELECT * FROM Utente WHERE (Email = ? OR Username=?) AND Pass=?";
 		System.out.println("name in usermodel "+name);
 		System.out.println("pass in usermodel "+password);
+		UserBean bean=new UserBean();
 		try {
 			con=ds.getConnection();
 			ps=con.prepareStatement(sql);
@@ -39,12 +40,26 @@ public class UserModelDS implements Model<UserBean> {
 			ResultSet rs=ps.executeQuery();
 			if(!rs.first()) {
 				System.out.println("Utente non loggato");
-				return false;
+				return null;
 			}
-			else{
-				System.out.println("Utente loggato");
-				return true;
-			}	
+		
+			System.out.println("Utente loggato");
+			while(rs.next()) {
+				bean.setUsername(rs.getString("Username"));
+				bean.setNome(rs.getString("Nome"));
+				bean.setCognome(rs.getString("Cognome"));
+				bean.setImg(rs.getBlob("Img"));
+				bean.setEmail(rs.getString("Email"));
+				bean.setPass(rs.getString("Pass"));
+				bean.setDataNascita(rs.getDate("DataNascita"));
+				bean.setMatricola(rs.getString("Matricola"));
+				bean.setUltimoAccesso(rs.getTimestamp("Denominazione"));
+				bean.setCoin(rs.getInt("Coin"));
+				bean.setBan(rs.getDate("Ban"));
+				bean.setDenominazione(rs.getString("Denominazione"));
+				bean.setDipName(rs.getString("DipName"));
+			}
+		
 		}
 		
 		finally {
@@ -57,6 +72,7 @@ public class UserModelDS implements Model<UserBean> {
 					con.close();
 			}
 		}
+		return bean;
 	}
 	
 	public UserBean doRetrieveByUsername(String name)throws SQLException{
