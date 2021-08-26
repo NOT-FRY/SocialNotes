@@ -20,8 +20,44 @@ public class MaterialModelDS implements Model<MaterialBean> {
 
 	@Override
 	public MaterialBean doRetrieveByKey(String code) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Connection con=null;
+		PreparedStatement ps=null;
+		String selectSQL="SELECT * FROM Materiale WHERE CodiceMateriale=?;";
+		MaterialBean bean=new MaterialBean();
+		ResultSet rs=null;
+		try {
+			con=ds.getConnection();
+			ps=con.prepareStatement(selectSQL);
+			int codice=Integer.parseInt(code);
+			ps.setInt(1, codice);
+			rs=ps.executeQuery();
+			System.out.println("ciao");
+			if(rs.next()) {
+				bean.setDataCaricamento(rs.getDate("DataCaricamento"));
+				bean.setKeywords(rs.getString("Keywords"));
+				bean.setCosto(rs.getInt("Costo"));
+				bean.setDescrizione(rs.getString("Descrizione"));
+				bean.setHidden(rs.getBoolean("Hidden"));
+				bean.setCodiceCorso(rs.getInt("CodiceCorso"));
+				bean.setUsername(rs.getString("Username"));
+				bean.setFileName(rs.getString("FileName"));
+				bean.setAnteprima(rs.getBlob("Anteprima").getBinaryStream());
+			}
+		}
+		finally {
+			try {
+				if(rs!=null)
+					rs.close();
+				if(ps!=null)
+					ps.close();
+			}
+			finally {
+				if(con!=null)
+					con.close();
+			}
+		}
+		return bean;
+		
 	}
 
 	@Override

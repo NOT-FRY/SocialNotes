@@ -31,7 +31,7 @@ public class FileModelDS implements Model<FileBean> {
 			ps.setString(1, fileName);
 			ResultSet rs=ps.executeQuery();
 			System.out.println("ciao");
-			while(rs.next()) {
+			if(rs.next()) {
 				bean.setFilename(rs.getString("FileName"));
 				System.out.println(bean.getFilename());
 				bean.setFormato(rs.getString("Formato"));
