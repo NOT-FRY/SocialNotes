@@ -1,5 +1,6 @@
 package it.unisa.model;
 
+import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.Date;
 
@@ -20,12 +21,12 @@ public class MaterialBean {
 	}
 	
 	
-	public Blob getAnteprima() {
+	public InputStream getAnteprima() {
 		return anteprima;
 	}
 
 
-	public void setAnteprima(Blob anteprima) {
+	public void setAnteprima(InputStream anteprima) {
 		this.anteprima = anteprima;
 	}
 
@@ -135,8 +136,7 @@ public class MaterialBean {
 	public String toString() {
 		return "MaterialBean [codiceMateriale=" + codiceMateriale + ", dataCaricamento=" + dataCaricamento
 				+ ", keywords=" + keywords + ", costo=" + costo + ", descrizione=" + descrizione + ", hidden=" + hidden
-				+ ", codiceCorso=" + codiceCorso + ", username=" + username + ", fileName=" + fileName + ", anteprima="
-				+ anteprima + "]";
+				+ ", codiceCorso=" + codiceCorso + ", username=" + username + ", fileName=" + fileName +"]";
 	}
 
 
@@ -149,5 +149,5 @@ public class MaterialBean {
     private int codiceCorso;
     private String username;
     private String fileName;
-    private Blob anteprima;
+    private InputStream anteprima;
 }

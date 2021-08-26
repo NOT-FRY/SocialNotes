@@ -213,7 +213,7 @@ public class UserModelDS implements Model<UserBean> {
 		Connection connection = null;
 		PreparedStatement ps = null;
 
-		String insertSQL = "INSERT INTO Utente" + " (Username, Nome, Cognome, Email, Pass, DataNascita, UltimoAccesso, Coin, Denominazione, DipName) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String insertSQL = "INSERT INTO Utente (Username, Nome, Cognome, Email, Pass, DataNascita, UltimoAccesso, Coin, Denominazione, DipName) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			connection = ds.getConnection();

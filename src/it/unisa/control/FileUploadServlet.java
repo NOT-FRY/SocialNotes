@@ -2,7 +2,10 @@ package it.unisa.control;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
@@ -17,9 +20,12 @@ import javax.servlet.http.Part;
 import javax.sql.DataSource;
 
 
+import it.unisa.model.CourseBean;
+import it.unisa.model.CourseModelDS;
 import it.unisa.model.FileBean;
 import it.unisa.model.FileModelDS;
 import it.unisa.model.MaterialBean;
+import it.unisa.model.MaterialModelDS;
 
 @WebServlet("/FileUploadServlet")
 @MultipartConfig(maxFileSize = 1024*1024*50)  
@@ -63,14 +69,22 @@ public class FileUploadServlet extends HttpServlet {
 			if(materialPart!=null) {
 				Date dataCaricamento = new Date(System.currentTimeMillis());
 				material.setDataCaricamento(dataCaricamento);
-				material.setDescrizione((String)request.getAttribute("Descrizione"));
+				String descrizione=(String)request.getParameter("Descrizione");
+				System.out.println("Descrizione "+descrizione);
+				material.setDescrizione(descrizione);
 				material.setHidden(true);
-				
-				material.setCodiceCorso(0);
+				//ottengo la chiave esterna codiceCorso
+				DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
+				CourseModelDS course=new CourseModelDS(ds);
+				String nome=(String) request.getParameter("Corso");
+				System.out.println("nome corso in fileupserv: "+nome);
+				int codiceCorso=course.doRetrieveByName(nome);
+				//continuo inserimento dati
+				material.setCodiceCorso(codiceCorso);
 				material.setUsername((String)session.getAttribute("username"));
 				material.setFileName(filePart.getSubmittedFileName());
 				is=materialPart.getInputStream();
-				//material.setAnteprima(is);
+				material.setAnteprima(is);
 				
 				
 			}
@@ -80,11 +94,13 @@ public class FileUploadServlet extends HttpServlet {
 
 		DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
 		FileModelDS fileModel= new FileModelDS(ds);
+		MaterialModelDS materialModel=new MaterialModelDS(ds);
 		try {
 			fileModel.doSave(file);
+			materialModel.doSave(material);
 		} 
 		catch (SQLException e) {
-			String error = "Spiacenti, la registrazione non � andata a buon fine.";
+			String error = "Spiacenti, la registrazione delle informazioni nel database non è andata a buon fine.";
 			request.setAttribute("error", error);
 			//Mando una alert 
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/signup.jsp");
@@ -92,9 +108,6 @@ public class FileUploadServlet extends HttpServlet {
 			e.printStackTrace();
 		} 
 	}
-	
-	
-	
 	
 	
 }

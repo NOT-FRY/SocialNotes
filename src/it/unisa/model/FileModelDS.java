@@ -98,7 +98,7 @@ public class FileModelDS implements Model<FileBean> {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		String insertSQL = "INSERT INTO Files" + " (FileName, Formato,Contenuto,Dimensione) VALUES (?,?,?,?)";
+		String insertSQL = "INSERT INTO Files (FileName, Formato,Contenuto,Dimensione) VALUES (?,?,?,?)";
 
 		try {
 			connection = ds.getConnection();

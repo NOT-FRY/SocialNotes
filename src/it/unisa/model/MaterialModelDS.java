@@ -1,5 +1,6 @@
 package it.unisa.model;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -45,7 +46,7 @@ public class MaterialModelDS implements Model<MaterialBean> {
 				bean.setCodiceCorso(rs.getInt("CodiceCorso"));
 				bean.setUsername(rs.getString("Username"));
 				bean.setFileName(rs.getString("FileName"));
-				bean.setAnteprima(rs.getBlob("Anteprima"));
+				bean.setAnteprima((InputStream)rs.getBlob("Anteprima"));
 				material.add(bean);
 			}
 		}
