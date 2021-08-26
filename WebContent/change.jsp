@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Aggiorna impostazioni</title>
-  <link rel="shortcut icon" href="https://d1a3f4spazzrp4.cloudfront.net/web-p2/images/favicon.3eb352c8f26c2652495fa86bd0e29063.ico" />
+  <link rel="icon" href="img/favicon.ico" />
   <link rel="stylesheet" type="text/css" href="css/change.css">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -50,14 +50,18 @@
 
   <link rel="stylesheet" type="text/css" href="https://d1a3f4spazzrp4.cloudfront.net/web-p2/stylesheets/home/icons.e225ddcb0b486de3046f4d4c231185ca.css">
   <link href="//d1a3f4spazzrp4.cloudfront.net/uber-icons/3.3.0/uber-icons.css" rel="stylesheet">
-
+  <style>
+  	.btn-principale{
+  		background-color: #9697e7 !important;
+  	}
+  </style>
 </head>
 
 <body>
 
 <%@ include file="header.jsp" %>
 
-  <div class="flexbox height--full main-wrapper">
+ 	<div class="flexbox height--full main-wrapper"> 
 
 
 
@@ -93,13 +97,13 @@
                 <h1>Fonz o bit</h1>
                 <p class='data' data-field='email'>fonzobit@gmail.com</p>
                 <p class='data' data-field='nickname'>fonz on titan</p>
-                <p class='data' data-field='phone'></p>
+
 
               </div>
               <!--
  -->
               <div class="grid__item one-quarter">
-                <button href="#" class="btn edit-hidden-form">
+                <button href="#" class="btn edit-hidden-form btn-principale">
                   Modifica
                 </button>
               </div>
@@ -133,18 +137,10 @@
                       <label>Email</label>
                       <input type="text" class="text-input" value="fonzobit@gmail.com" name="email"></input>
                     </li>
-                    <li>
-                      <label>Username</label>
-                      <input type="text" class="text-input" value="fonzobit" name="nickname"></input>
-                    </li>
-                    <li>
-                      <label>Telefono</label>
-                      <input type="text" class="text-input" value="" name="phone"></input>
-                    </li>
                   </ul>
                   <div class="submit">
                     <div class="messages"></div>
-                    <button class="btn btn--primary" type="submit">Salva</button>
+                    <button class="btn btn--primary btn-principale" type="submit">Salva</button>
                     <a href="#" class="cancel-hidden-form">Annulla</a>
                   </div>
                 </div>
@@ -168,7 +164,7 @@
               <!--
  -->
               <div class="grid__item one-quarter">
-                <button href="#" class="btn edit-hidden-form">
+                <button href="#" class="btn edit-hidden-form btn-principale">
                   Modifica
                 </button>
               </div>
@@ -186,13 +182,12 @@
 
                   <input type="text" class="text-input" name="nome" value="Università degli studi di Salerno" placeholder="Nome">
                   <input type="text" class="text-input" name="indirizzo" value="Via Giovanni Paolo II,132" placeholder="Indirizzo">
-                  <input type="text" class="text-input" name="città" value="Fisciano(SA)" placeholder="Città">
 
                   <input type="text" class="text-input" name="facoltà" value="Informatica" placeholder="Facoltà">
 
                   <div class="submit">
                     <div class="messages"></div>
-                    <button class="btn btn--primary" type="submit">Salva</button>
+                    <button class="btn btn--primary btn-principale" type="submit">Salva</button>
                     <a href="#" class="cancel-hidden-form">Annulla</a>
                   </div>
                 </form>
@@ -217,7 +212,7 @@
               <!--
  -->
               <div class="grid__item one-quarter">
-                <button href="#" class="btn edit-hidden-form">
+                <button href="#" class="btn edit-hidden-form btn-principale">
                   Modifica
                 </button>
               </div>
@@ -236,7 +231,7 @@
 
                   <div class="submit">
                     <div class="messages"></div>
-                    <button class="btn btn--primary" type="submit">Salva</button>
+                    <button class="btn btn--primary btn-principale" type="submit">Salva</button>
                     <a href="#" class="cancel-hidden-form">Annulla</a>
                   </div>
                 </form>
@@ -247,130 +242,6 @@
 
           <!-- Language row -->
 
-
-          <div class="row-group editable-single-row">
-            <div class="grid data-row">
-              <div class="grid__item one-quarter title">
-                Nazionalità
-              </div>
-              <!--
- -->
-              <div class="grid__item one-half data" data-field="None">
-                Italia
-              </div>
-              <!--
- -->
-              <div class="grid__item one-quarter">
-                <button href="#" class="btn edit-hidden-form">
-                  Modifica
-                </button>
-              </div>
-            </div>
-
-            <div class="grid hidden-form hidden">
-              <div class="grid__item one-quarter">
-                Nazionalità
-              </div>
-              <!--
- -->
-              <div class="grid__item one-third">
-                <form action="/profile/" method="post" id="Language">
-                  <input type="hidden" name="_csrf_token" id="-csrf-token" value="1440526831-01-FIiAtX3_sdMNiFb34GXRG49qaUBWsxonFotdT79C_3s=">
-
-
-                  <div class="minimal-select">
-                    <select name="language_id">
-
-                      <option value="1" selected>
-                        Italia
-                      </option>
-
-                      <option value="2">
-                        Francia
-                      </option>
-
-                      <option value="3">
-                        Inghilterra
-                      </option>
-
-                      <option value="4">
-                        Spagna
-                      </option>
-
-                      <option value="5">
-                        Germania
-                      </option>
-
-                      <option value="6">
-                        Svezia
-                      </option>
-
-                      <option value="7">
-                        Svizzera
-                      </option>
-
-                      <option value="8">
-                        Portogallo
-                      </option>
-
-                      <option value="41">
-                        Grecia
-                      </option>
-
-                      <option value="42">
-                        Irlanda
-                      </option>
-
-                      <option value="80">
-                        Bulgaria
-                      </option>
-
-                      <option value="101">
-                        Estonia
-                      </option>
-
-                      <option value="127">
-                        Norvegia
-                      </option>
-
-                      <option value="131">
-                        Polonia
-                      </option>
-
-                      <option value="134">
-                        Romania
-                      </option>
-
-                      <option value="135">
-                        Russia
-                      </option>
-
-                      <option value="136">
-                        Slovacchia
-                      </option>
-
-                      <option value="145">
-                        Turchia
-                      </option>
-
-                    </select>
-                  </div>
-
-
-                  <div class="submit">
-                    <div class="messages"></div>
-                    <button class="btn btn--primary" type="submit">Salva</button>
-                    <a href="#" class="cancel-hidden-form">Annulla</a>
-                  </div>
-                </form>
-              </div>
-              <!--
- -->
-              <div class="grid__item one-half">
-              </div>
-            </div>
-
-          </div>
 
 
 
@@ -446,30 +317,6 @@
 
                     </div>
                   </div>
-                  <div class="address">
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">Indirizzo</label>
-                      <div class="col-sm-9">
-                        <input type="text" class="form-control" value="Via Giovanni Rossi"  placeholder="Indirizzo">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <div class="col-sm-5 col-sm-offset-3">
-                        <input type="text" class="form-control" value="Pagani" placeholder="Città">
-                      </div>
-                      <div class="col-sm-4">
-                        <input type="text" class="form-control" value="84016" placeholder="CAP">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <div class="col-sm-5 col-sm-offset-3">
-                        <input type="text" class="form-control" value="Italia" placeholder="Nazione">
-                      </div>
-                      <div class="col-sm-4">
-                        <input type="text" class="form-control" value="Salerno" placeholder="Provincia">
-                      </div>
-                    </div>
-                  </div>
                   <hr>
 
                 </form>
@@ -482,7 +329,7 @@
 
                   </div>
                   <div class="grid__item one-quarter">
-                    <button href="#" class="btn edit-hidden-form">
+                    <button href="#" class="btn edit-hidden-form btn-principale">
                       Modifica
                     </button>
                   </div>
@@ -542,34 +389,10 @@
                        <p class="help-block">Le 3 cifre che trovi sul retro della carta.</p>
                      </div>
                    </div>
-                   <div class="address">
-                     <div class="form-group">
-                       <label class="col-sm-3 control-label">Indirizzo</label>
-                       <div class="col-sm-9">
-                         <input type="text" class="form-control" placeholder="Indirizzo">
-                       </div>
-                     </div>
-                     <div class="form-group">
-                       <div class="col-sm-5 col-sm-offset-3">
-                         <input type="text" class="form-control" placeholder="Città">
-                       </div>
-                       <div class="col-sm-4">
-                         <input type="text" class="form-control" placeholder="CAP">
-                       </div>
-                     </div>
-                     <div class="form-group">
-                       <div class="col-sm-5 col-sm-offset-3">
-                         <input type="text" class="form-control" placeholder="Nazione">
-                       </div>
-                       <div class="col-sm-4">
-                         <input type="text" class="form-control" placeholder="Provincia">
-                       </div>
-                     </div>
-                   </div>
                    <hr>
                    <div class="submit">
                      <div class="messages"></div>
-                     <button class="btn btn--primary" type="submit">Salva</button>
+                     <button class="btn btn--primary btn-principale" type="submit">Salva</button>
                      <a href="#" class="cancel-hidden-form">Annulla</a>
                    </div>
                  </form>
