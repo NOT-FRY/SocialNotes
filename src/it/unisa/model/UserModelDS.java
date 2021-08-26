@@ -12,7 +12,7 @@ import javax.sql.DataSource;
 import it.unisa.utils.Utility;
 
 public class UserModelDS implements Model<UserBean> {
-	
+
 	public UserModelDS(DataSource ds) {
 		this.ds=ds;
 	}
@@ -22,32 +22,25 @@ public class UserModelDS implements Model<UserBean> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
+
+
 	public UserBean checkLogin(String name,String password)throws SQLException {
 		Connection con=null;
 		PreparedStatement ps=null;
-		String sql="SELECT * FROM Utente WHERE (Email = ? OR Username=?) AND Pass=?";
-		System.out.println("name in usermodel "+name);
-		System.out.println("pass in usermodel "+password);
+		String sql="SELECT * FROM Utente WHERE Email = ? OR Username=?";
+		//System.out.println("name in usermodel "+name);
+		//System.out.println("pass in usermodel "+password);
 		UserBean bean=new UserBean();
 		try {
 			con=ds.getConnection();
 			ps=con.prepareStatement(sql);
 			ps.setString(1, name);
 			ps.setString(2, name);
-			ps.setString(3, password);
 			ResultSet rs=ps.executeQuery();
-			if(!rs.first()) {
-				System.out.println("Utente non loggato");
-				return null;
-			}
-		     rs.beforeFirst();
-			System.out.println("Utente loggato");
-			while(rs.next()) {
-	
+
+			if(rs.next()&&(rs.getString("Pass").compareTo(password))==0) {
+				System.out.println("Utente loggato");
 				bean.setUsername(rs.getString("Username"));
-				
 				bean.setNome(rs.getString("Nome"));
 				bean.setCognome(rs.getString("Cognome"));
 				bean.setImg(rs.getBlob("Img"));
@@ -61,9 +54,14 @@ public class UserModelDS implements Model<UserBean> {
 				bean.setDenominazione(rs.getString("Denominazione"));
 				bean.setDipName(rs.getString("DipName"));
 			}
-		   
+			else {
+				System.out.println("Utente non loggato");
+				return null;
+			}
+			if(rs!=null)
+				rs.close();
 		}
-		
+
 		finally {
 			try {
 				if(ps!=null)
@@ -74,9 +72,10 @@ public class UserModelDS implements Model<UserBean> {
 					con.close();
 			}
 		}
+		//System.out.println(bean.toString());
 		return bean;
 	}
-	
+
 	public UserBean doRetrieveByUsername(String name)throws SQLException{
 		Connection con=null;
 		PreparedStatement ps=null;
@@ -87,30 +86,25 @@ public class UserModelDS implements Model<UserBean> {
 			ps=con.prepareStatement(selectSQL);
 			ps.setString(1, name);	
 			ResultSet rs=ps.executeQuery();
-			if(!rs.first()) {
-				//Setta il cursore sulla prima riga, vedendo se esiste (poich� ResultSet non pu� mai essere null)
-				//System.out.println("L'utente non � stato trovato");
-				//Se l'utente con quell'username non esiste
-				return null;
+			if(rs.next()) {
+				bean.setUsername(rs.getString("Username"));
+				bean.setNome(rs.getString("Nome"));
+				bean.setCognome(rs.getString("Cognome"));
+				bean.setImg(rs.getBlob("Img"));
+				bean.setEmail(rs.getString("Email"));
+				bean.setPass(rs.getString("Pass"));
+				bean.setDataNascita(rs.getDate("DataNascita"));
+				bean.setMatricola(rs.getString("Matricola"));
+				bean.setUltimoAccesso(rs.getTimestamp("UltimoAccesso"));
+				bean.setCoin(rs.getInt("Coin"));
+				bean.setBan(rs.getDate("Ban"));
+				bean.setDenominazione(rs.getString("Denominazione"));
+				bean.setDipName(rs.getString("DipName"));
 			}
-			rs.beforeFirst();
-				while(rs.next()) {
-					bean.setUsername(rs.getString("Username"));
-					
-					bean.setNome(rs.getString("Nome"));
-					bean.setCognome(rs.getString("Cognome"));
-					bean.setImg(rs.getBlob("Img"));
-					bean.setEmail(rs.getString("Email"));
-					bean.setPass(rs.getString("Pass"));
-					bean.setDataNascita(rs.getDate("DataNascita"));
-					bean.setMatricola(rs.getString("Matricola"));
-					bean.setUltimoAccesso(rs.getTimestamp("UltimoAccesso"));
-					bean.setCoin(rs.getInt("Coin"));
-					bean.setBan(rs.getDate("Ban"));
-					bean.setDenominazione(rs.getString("Denominazione"));
-					bean.setDipName(rs.getString("DipName"));
-				}
-
+			else
+				return null;
+			if(rs!=null)
+				rs.close();
 		}
 		finally {
 			try {
@@ -122,10 +116,9 @@ public class UserModelDS implements Model<UserBean> {
 					con.close();
 			}
 		}
-		
 		return bean;
 	}
-	
+
 	public UserBean doRetrieveByEmail(String Email)throws SQLException{
 		Connection con=null;
 		PreparedStatement ps=null;
@@ -136,26 +129,25 @@ public class UserModelDS implements Model<UserBean> {
 			ps=con.prepareStatement(selectSQL);
 			ps.setString(1, Email);	
 			ResultSet rs=ps.executeQuery();
-			if(!rs.first()) {
-				//Setta il cursore sulla prima riga, vedendo se esiste (poich� ResultSet non pu� mai essere null)
-				return null;
+			if(rs.next()) {
+				bean.setUsername(rs.getString("Username"));
+				bean.setNome(rs.getString("Nome"));
+				bean.setCognome(rs.getString("Cognome"));
+				bean.setImg(rs.getBlob("Img"));
+				bean.setEmail(rs.getString("Email"));
+				bean.setPass(rs.getString("Pass"));
+				bean.setDataNascita(rs.getDate("DataNascita"));
+				bean.setMatricola(rs.getString("Matricola"));
+				bean.setUltimoAccesso(rs.getTimestamp("UltimoAccesso"));
+				bean.setCoin(rs.getInt("Coin"));
+				bean.setBan(rs.getDate("Ban"));
+				bean.setDenominazione(rs.getString("Denominazione"));
+				bean.setDipName(rs.getString("DipName"));
 			}
-			rs.beforeFirst();
-				while(rs.next()) {
-					bean.setUsername(rs.getString("Username"));
-					bean.setNome(rs.getString("Nome"));
-					bean.setCognome(rs.getString("Cognome"));
-					bean.setImg(rs.getBlob("Img"));
-					bean.setEmail(rs.getString("Email"));
-					bean.setPass(rs.getString("Pass"));
-					bean.setDataNascita(rs.getDate("DataNascita"));
-					bean.setMatricola(rs.getString("Matricola"));
-					bean.setUltimoAccesso(rs.getTimestamp("UltimoAccesso"));
-					bean.setCoin(rs.getInt("Coin"));
-					bean.setBan(rs.getDate("Ban"));
-					bean.setDenominazione(rs.getString("Denominazione"));
-					bean.setDipName(rs.getString("DipName"));
-				}
+			else
+				return null;
+			if(rs!=null)
+				rs.close();
 
 		}
 		finally {
@@ -168,10 +160,10 @@ public class UserModelDS implements Model<UserBean> {
 					con.close();
 			}
 		}
-		
+
 		return bean;
 	}
-	
+
 	@Override
 	public Collection<UserBean> doRetrieveAll() throws SQLException {
 		Connection con=null;
@@ -200,6 +192,8 @@ public class UserModelDS implements Model<UserBean> {
 				bean.setDipName(rs.getString("DipName"));
 				users.add(bean);
 			}
+			if(rs!=null)
+				rs.close();
 		}
 		finally {
 			try {
@@ -220,7 +214,7 @@ public class UserModelDS implements Model<UserBean> {
 		PreparedStatement ps = null;
 
 		String insertSQL = "INSERT INTO Utente" + " (Username, Nome, Cognome, Email, Pass, DataNascita, UltimoAccesso, Coin, Denominazione, DipName) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		
+
 		try {
 			connection = ds.getConnection();
 			ps = connection.prepareStatement(insertSQL);
@@ -229,15 +223,15 @@ public class UserModelDS implements Model<UserBean> {
 			ps.setString(3, item.getCognome());
 			ps.setString(4, item.getEmail());
 			ps.setString(5, item.getPass());
-			
-		//	Date dataNascita = item.getDataNascita();
-			
+
+			//	Date dataNascita = item.getDataNascita();
+
 			ps.setDate(6, item.getDataNascita());
 			ps.setTimestamp(7, item.getUltimoAccesso());
 			ps.setInt(8, 50);
 			ps.setString(9, item.getDenominazione());
 			ps.setString(10, item.getDipName());
-			
+
 
 			ps.executeUpdate();
 			System.out.println("Salvato nel Database");
@@ -256,13 +250,13 @@ public class UserModelDS implements Model<UserBean> {
 	@Override
 	public void doUpdate(UserBean item) throws SQLException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void doDelete(UserBean item) throws SQLException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	private DataSource ds;

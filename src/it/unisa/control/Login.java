@@ -47,8 +47,8 @@ public class Login extends HttpServlet {
 		
 		String login = request.getParameter("login");
 		String pwd = request.getParameter("password");
-		System.out.println(login);
-		System.out.println(pwd);
+		//System.out.println(login);
+		//System.out.println(pwd);
 
 		//TODO validazione
 
@@ -68,7 +68,7 @@ public class Login extends HttpServlet {
 				
 			}
 			else {
-		    System.out.println("USERNAME: "+bean.getUsername());		
+		   // System.out.println("USERNAME: "+bean.getUsername());		
 			session.setAttribute("username",bean.getUsername());
 			session.setAttribute("nome",bean.getNome());
 			session.setAttribute("cognome",bean.getCognome());
