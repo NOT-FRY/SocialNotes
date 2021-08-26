@@ -38,9 +38,7 @@ public class CourseModelDS implements Model<CourseBean> {
 			while(rs.next()) {
 				CourseBean bean=new CourseBean();
 				bean.setCodiceCorso(rs.getInt("CodiceCorso"));
-				bean.setCFU(rs.getInt("CFU"));
 				bean.setNome(rs.getString("Nome"));
-				bean.setDocente(rs.getString("Docente"));
 				courses.add(bean);
 			}
 		}

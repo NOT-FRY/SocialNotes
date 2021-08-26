@@ -237,6 +237,7 @@ not support the canvas tag.</canvas>
 										<div class="mb-3">
 										<label>File PDF</label>
 											<input class="form-control" type="file" id="formFile" name="Contenuto" accept=".pdf,.doc,.docx,.odt,.ppt,.pptx">
+											<br>
 											<label>Immagine anteprima del materiale</label>
 											<input class="form-control" type="file" id="formFile" name="Anteprima" accept=".jpeg,.png,.jpg,.PNG">
 										</div>
@@ -245,8 +246,11 @@ not support the canvas tag.</canvas>
 										
 										<textarea
 											placeholder="Inserisci una descrizione del materiale"
-											rows="3" class="form-control" name="Descrizione">
-										</textarea>
+											rows="3" class="form-control" name="Descrizione" required></textarea>
+										
+										<br>
+										<textarea placeholder="Inserisci il corso" rows="1" class="form-control" name="Corso" required></textarea>
+										<br>
 											
 										<div class="btn-toolbar justify-content-between">
 											<div class="btn-group">

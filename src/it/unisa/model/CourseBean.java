@@ -3,9 +3,7 @@ package it.unisa.model;
 public class CourseBean {
 	public CourseBean() {
 		this.codiceCorso=-1;
-		this.CFU=0;
 		this.nome="";
-		this.docente="";
 	}
 	
 	
@@ -19,16 +17,6 @@ public class CourseBean {
 	}
 	
 	
-	public int getCFU() {
-		return CFU;
-	}
-	
-	
-	public void setCFU(int cFU) {
-		CFU = cFU;
-	}
-	
-	
 	public String getNome() {
 		return nome;
 	}
@@ -39,21 +27,6 @@ public class CourseBean {
 	}
 	
 	
-	public String getDocente() {
-		return docente;
-	}
-	
-	
-	public void setDocente(String docente) {
-		this.docente = docente;
-	}
-
-	
-	public boolean isEmpty() {
-		return this.codiceCorso==-1;
-	}
-
-	
 	public boolean equals(Object obj) {
 		return this.getCodiceCorso()==((CourseBean)obj).getCodiceCorso();
 	}
@@ -61,13 +34,10 @@ public class CourseBean {
 	
 	@Override
 	public String toString() {
-		return "CourseBean [codiceCorso=" + codiceCorso + ", CFU=" + CFU + ", nome=" + nome + ", docente=" + docente
-				+ "]";
+		return "CourseBean [codiceCorso=" + codiceCorso+ ", nome=" + nome +"]";
 	}
 
 
 	private int codiceCorso;
-    private int CFU;
     private String nome;
-	private String docente;
 }

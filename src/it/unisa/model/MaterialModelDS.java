@@ -67,11 +67,11 @@ public class MaterialModelDS implements Model<MaterialBean> {
 		Connection connection = null;
 		PreparedStatement ps = null;
 
-		String insertSQL = "INSERT INTO Materiale" + " (DataCaricamento,Keywords,Costo,Descrizione,Hidden,CodiceCorso,Username,FileName,Anteprima) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO Materiale" + " (DataCaricamento,Keywords,Costo,Descrizione,Hidden,CodiceCorso,Username,FileName,Anteprima) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
 			connection = ds.getConnection();
-			ps = connection.prepareStatement(insertSQL);
+			ps = connection.prepareStatement(sql);
 			ps.setDate(1, item.getDataCaricamento());
 			ps.setString(2, item.getKeywords());
 			ps.setInt(3, item.getCosto());
