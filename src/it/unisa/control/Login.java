@@ -72,6 +72,16 @@ public class Login extends HttpServlet {
 			session.setAttribute("username",bean.getUsername());
 			session.setAttribute("nome",bean.getNome());
 			session.setAttribute("cognome",bean.getCognome());
+			session.setAttribute("img",bean.getImg());
+			session.setAttribute("email",bean.getEmail());
+			session.setAttribute("password",bean.getPass());
+			session.setAttribute("dataNascita",bean.getDataNascita());
+			session.setAttribute("matricola",bean.getMatricola());
+			session.setAttribute("ultimoAccesso",bean.getUltimoAccesso());
+			session.setAttribute("coin",bean.getCoin());
+			session.setAttribute("ban",bean.getBan());
+			session.setAttribute("denominazione",bean.getDenominazione());
+			session.setAttribute("dipName",bean.getDipName());
 				
 			String homeURL = response.encodeURL("homepage_user.jsp");
 			

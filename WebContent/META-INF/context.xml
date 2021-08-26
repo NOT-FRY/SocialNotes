@@ -5,8 +5,8 @@
         auth="Container"
         driverClassName="com.mysql.cj.jdbc.Driver"
         type="javax.sql.DataSource"
-        username="sudo-poweroff"
-        password="09134"
+        username="Ackermann32"
+        password="alfonso"
         url="jdbc:mysql://151.73.152.16:3306/SocialNotes?serverTimezone=Europe/Rome" />
         </Context>
  
