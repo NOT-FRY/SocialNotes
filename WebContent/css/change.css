@@ -3004,7 +3004,7 @@ a {
 
 
 
-.nav-sidebar a .new-badge {
+.new-badge {
   position: absolute;
   background-color: #27aa0b;
   color: #fff;
@@ -3021,219 +3021,14 @@ a {
  font-family: 'Open Sans', Arial, sans-serif;
 }
 
-.nav-sidebar li {
-  text-transform: uppercase
-}
 
-.nav-sidebar li.external-link {
-  text-transform: capitalize
-}
-
-.nav-sidebar .nav-text {
-  font-size: 0.8rem;
-  color: #929292
-}
-
-.nav-sidebar .logo {
-  color: #fff;
-  display: table;
-  margin: 24px auto;
-  font-size: 1.4rem
-}
-
-.nav-sidebar .block-list {
-  border-color: #9c1421
-}
-
-.nav-sidebar .block-list>li {
-  border-color: #9c1421
-}
-
-.nav-sidebar .block-list>li .icon {
-  margin-top: -1px;
-  margin-left: 4px;
-  display: block;
-  float: left
-}
-
-.nav-sidebar .block-list>li.active {
-  color: #F2961F;
-  background-color: #9c1421
-}
-
-.nav-sidebar .block-list>li.active .icon {
-  margin-left: 0
-}
-
-.nav-sidebar .block-list>li.active a {
-  border-left: 4px solid #F2961F;
-  color: #F2961F;
-  text-decoration: none
-}
-
-.nav-sidebar .block-list>li:hover {
-  background-color: #F2961F
-}
-
-.nav-sidebar .block-list>li:hover a {
-  color: #fff;
-  text-decoration: none
-}
-
-.nav-sidebar .block-list>li>.block-list__link {
-  min-height: 53px;
-  padding-top: 18px
-}
-
-@media only screen and (max-width: 940px) {
-  .nav-sidebar .block-list>li {
-    padding: 10px
-  }
-}
-
-.nav-main {
-  left: 0
-}
-
-@media only screen and (max-width: 940px) {
-  .nav-main {
-    position: fixed;
-    height: 100%;
-    min-height: 500px;
-    left: -240px;
-    overflow: auto
-  }
-  .nav-main.active {
-    left: 0
-  }
-}
-
-@media only screen and (max-width: 940px) {
-  .nav-profile {
-    position: fixed;
-    height: 100%;
-    min-height: 500px;
-    right: -240px;
-    overflow: scroll
-  }
-  .nav-profile.active {
-    right: 0
-  }
-}
-
-html[dir=rtl] .nav-sidebar a .alert-count {
-  left: inherit;
-  right: 9px
-}
-
-html[dir=rtl] .nav-sidebar a .new-badge {
-  left: 1.5em;
-  right: inherit
-}
-
-html[dir=rtl] .nav-sidebar .block-list>li .icon {
-  float: right
-}
-
-.nav-secondary {
-  color: #666;
-  padding: 22px
-}
-
-.nav-secondary a {
-  color: #666;
-  font-weight: 400
-}
-
-.nav-secondary a:hover {
-  text-decoration: none;
-  color: #2dbad4
-}
-
-.nav-secondary ul.nav li {
-  text-transform: uppercase
-}
-
-.nav-secondary .flyout {
-  cursor: pointer
-}
-
-.nav-secondary .flyout__content {
-  margin-right: -10px
-}
-
-.nav-secondary .flyout__content .nav {
-  outline: 1px solid #111125;
-  width: 240px
-}
-
-.nav-secondary .flyout__content .nav:before {
-  border-bottom-color: #111125 !important
-}
-
-.nav-secondary .flyout__content .nav:after {
-  border-bottom-color: #fff !important
-}
-
-.nav-secondary .flyout__content .nav li {
-  text-transform: uppercase
-}
-
-.nav-secondary .flyout__content .nav li:hover {
-  background-color: #2dbad4
-}
-
-.nav-secondary .flyout__content .nav li:hover a {
-  text-decoration: none;
-  color: #fff
-}
-
-.nav-secondary .flyout__content .nav .block-list__link {
-  height: 53px;
-  line-height: 43px
-}
 
 @media only screen and (max-width: 940px) {
   .main-wrapper {
     position: relative;
     background-color: #dcdcdf
   }
-  .nav-secondary {
-    z-index: 2;
-    display: block;
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 60px;
-    color: #fff;
-    background-color: #000000;
-    padding: 22px 0
-  }
-  .nav-secondary .wrapper {
-    position: absolute;
-    top: 0;
-    width: 100vw
-  }
-  .nav-secondary .icon_menu {
-    position: absolute;
-    top: 20px;
-    left: 20px
-  }
-  .nav-secondary .logo.icon_uber {
-    line-height: 60px
-  }
-  .nav-secondary .nav-trigger-portable--left {
-    position: absolute;
-    padding: 16px;
-    top: 8px;
-    left: 8px
-  }
-  .nav-secondary .nav-trigger-portable--right {
-    position: absolute;
-    padding: 16px;
-    top: 8px;
-    right: 8px
-  }
+  
 }
 
 .p2-modal {
@@ -3293,14 +3088,6 @@ body>img {
   margin-top: -1px
 }
 
-a {
-  font-weight: bold;
-  text-decoration: none
-}
-
-a:hover {
-  text-decoration: underline
-}
 
 .contents {
   min-height: calc(100vh - 136px);
@@ -3377,10 +3164,6 @@ a:hover {
   color: #2dbad4
 }
 
-.user-flyout .site-nav>li:last-child>a {
-  border-bottom-right-radius: 2px;
-  border-bottom-left-radius: 2px
-}
 
 .user-flyout:hover .flyout__origin,
 .user-flyout .flyout__content {
@@ -3413,50 +3196,7 @@ html[dir=rtl] .flyout:hover>.flyout__content {
   right: 0
 }
 
-html[dir=rtl] .flyout:hover>.flyout__content ul.nav--stacked {
-  position: absolute;
-  left: -56px !important
-}
 
-html[dir=rtl] .flyout:hover>.flyout__content .nav:before {
-  left: 7px;
-  right: auto
-}
-
-html[dir=rtl] .flyout:hover>.flyout__content .nav:after {
-  left: 8px;
-  right: auto
-}
-
-.nav-bar-referral {
-  margin-top: 10%
-}
-
-.nav-bar-referral .btn {
-  text-transform: uppercase;
-  border-radius: 3px;
-  outline: none;
-  padding: 0.75em 1em;
-  margin-bottom: 1em;
-  font-size: 14px;
-  font-size: 1rem;
-  line-height: 1.71429;
-  color: #ffffff;
-  font-family: 'Open Sans', Arial, sans-serif;
-}
-
-.nav-sidebar .logo {
-  color: #c0c0c8;
-  display: table;
-  margin: 2px auto;
-  font-size: 4.5rem
-}
-
-@media only screen and (max-width: 940px) {
-  .nav-secondary .logo.icon_uber {
-    font-size: 4rem
-  }
-}
 
 .alert {
   color: red
@@ -3938,11 +3678,6 @@ html[dir=rtl] .flyout:hover>.flyout__content .nav:after {
   font-size: 10px
 }
 
-@media print {
-  .nav-main, .nav-secondary, .nav-footer, .nav-sidebar {
-    display: none
-  }
-}
 
 .modal-wrapper {
   position: fixed;
