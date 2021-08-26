@@ -68,6 +68,16 @@ svg.radial-progress circle {
 </head>
 <body>
 
+<%
+if (session.getAttribute("username")!=null){
+	 String link = "homepage_user.jsp";
+	 String encodedURL = response.encodeRedirectURL(link);
+	 response.sendRedirect(encodedURL);
+}
+    	
+%>
+
+
 	<%@ include file="header.jsp"%>
 	<br>
 	<br>
