@@ -63,7 +63,7 @@
 
  	<div class="flexbox height--full main-wrapper"> 
 
-
+	<form action="ChangeProfile" method="POST" enctype="multipart/form-data" id="main-profile">
 
 
 
@@ -87,6 +87,11 @@
 
 
           <div class="row-group editable-main-row">
+          
+          
+          
+          
+          
             <div class="grid data-row">
               <div class="grid__item one-quarter title">
                 <img class="profile-picture" src=https://d1w2poirtb3as9.cloudfront.net/default.jpeg></img>
@@ -109,7 +114,7 @@
               </div>
             </div>
             <div class="grid hidden-form hidden">
-              <form action="/profile/" method="post" enctype="multipart/form-data" id="main-profile">
+              
                 <input type="hidden" name="_csrf_token" id="-csrf-token" value="1440526831-01-FIiAtX3_sdMNiFb34GXRG49qaUBWsxonFotdT79C_3s=">
 
                 <input type="file" name="picture" class="profile-picture"></input>
@@ -135,16 +140,15 @@
                   <ul class="form-fields">
                     <li>
                       <label>Email</label>
-                      <input type="text" class="text-input" value="fonzobit@gmail.com" name="email"></input>
+                      <input type="text" class="text-input" name="mail">
                     </li>
                   </ul>
                   <div class="submit">
                     <div class="messages"></div>
-                    <button class="btn btn--primary btn-principale" type="submit">Salva</button>
-                    <a href="#" class="cancel-hidden-form">Annulla</a>
+                    <button class="btn btn-principale cancel-hidden-form text-dark">Chiudi</button>
                   </div>
                 </div>
-              </form>
+              
             </div>
           </div>
 
@@ -177,20 +181,20 @@
               <!--
  -->
               <div class="grid__item one-third">
-                <form action="/profile/" method="post" id="address" data-field>
+                
                   <input type="hidden" name="_csrf_token" id="-csrf-token" value="1440526831-01-FIiAtX3_sdMNiFb34GXRG49qaUBWsxonFotdT79C_3s=">
 
-                  <input type="text" class="text-input" name="nome" value="Università degli studi di Salerno" placeholder="Nome">
-                  <input type="text" class="text-input" name="indirizzo" value="Via Giovanni Paolo II,132" placeholder="Indirizzo">
+                  <input type="text" class="text-input" name="nomeuni" placeholder="Nome">
+                  <input type="text" class="text-input" name="indirizzo"  placeholder="Indirizzo">
 
-                  <input type="text" class="text-input" name="facoltà" value="Informatica" placeholder="Facoltà">
+                  <input type="text" class="text-input" name="dipartimento" placeholder="Facoltà">
 
                   <div class="submit">
                     <div class="messages"></div>
-                    <button class="btn btn--primary btn-principale" type="submit">Salva</button>
-                    <a href="#" class="cancel-hidden-form">Annulla</a>
+                    <button class="btn btn-principale cancel-hidden-form text-dark">Chiudi</button>
+                    
                   </div>
-                </form>
+              
               </div>
             </div>
           </div>
@@ -220,7 +224,7 @@
             <div class="grid hidden-form hidden">
               <div class="grid__item one-quarter">Password</div>
               <div class="grid__item one-third">
-                <form action="/profile/" method="post" id="password">
+               
                   <input type="hidden" name="_csrf_token" id="_csrf_token" value="1440526831-01-FIiAtX3_sdMNiFb34GXRG49qaUBWsxonFotdT79C_3s=">
 
                   <div class="input-group">
@@ -231,10 +235,9 @@
 
                   <div class="submit">
                     <div class="messages"></div>
-                    <button class="btn btn--primary btn-principale" type="submit">Salva</button>
-                    <a href="#" class="cancel-hidden-form">Annulla</a>
+                    <button class="btn btn-principale cancel-hidden-form text-dark">Chiudi</button>
                   </div>
-                </form>
+               
               </div>
               <div class="grid__item one-half"></div>
             </div>
@@ -245,8 +248,6 @@
 
 
 
-              <div class="grid__item one-half">
-              </div>
 
             <div class="row-group editable-single-row">
               <div class="grid data-row">
@@ -256,75 +257,10 @@
                 <div class="grid__item one-half data" data-field="None">
 
                   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-                <div class="container">
-                <div class="view-account">
-                <section class="module">
-                <div class="module-inner">
+               			 <p class='data' data-field='name'>Titolare</p>
+                		 <p class='data' data-field='number'>Ultime 5 cifre della carta</p>
 
 
-                <div class="content-panel">
-
-                <form id="billing" class="form-horizontal" method="post" action="#" role="form">
-                  <div class="form-group">
-                    <label class="col-sm-3 control-label">Titolare Carta</label>
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" value="Alfonso Califano" placeholder="Nome titolare">
-
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-sm-3 control-label">Numero carta </label>
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" value="1234 5678 9101 1213" placeholder="••••  ••••  ••••  ••••">
-
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-sm-3 control-label">Data scadenza</label>
-                    <div class="col-sm-9 form-inline" >
-                      <select class="form-control">
-                        <option value="01">01</option>
-                        <option value="01">02</option>
-                        <option value="01">03</option>
-                        <option value="01">04</option>
-                        <option value="01">05</option>
-                        <option value="01">06</option>
-                        <option value="01">07</option>
-                        <option value="01">08</option>
-                        <option value="01">09</option>
-                        <option value="01">10</option>
-                        <option value="01">11</option>
-                        <option value="01">12</option>
-                      </select>
-                      <span class="divider">/</span>
-                      <select class="form-control" >
-                        <option value="01">2021</option>
-                        <option value="01">2022</option>
-                        <option value="01">2023</option>
-                        <option value="01">2024</option>
-                        <option value="01">2025</option>
-                        <option value="01">2026</option>
-                        <option value="01">2027</option>
-                        <option value="01">2028</option>
-                      </select>
-
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-sm-3 control-label">CVC</label>
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" style="width: 120px;" placeholder="CVC" value="012">
-
-                    </div>
-                  </div>
-                  <hr>
-
-                </form>
-                </div>
-                </div>
-                </div>
-
-                </div>
 
 
                   </div>
@@ -340,25 +276,25 @@
                     Metodo di pagamento
                   </div>
                <div class="grid__item one-third">
-                 <form id="billing" class="form-horizontal" method="post" action="#" role="form">
+                 
                    <div class="form-group">
                      <label class="col-sm-3 control-label">Titolare Carta</label>
                      <div class="col-sm-9">
-                       <input type="text" class="form-control" placeholder="Nome titolare">
+                       <input type="text" class="form-control" placeholder="Nome titolare"></input>
                        <p class="help-block">Nome che appare sulla carta</p>
                      </div>
                    </div>
                    <div class="form-group">
                      <label class="col-sm-3 control-label">Numero carta </label>
                      <div class="col-sm-9">
-                       <input type="text" class="form-control" placeholder="••••  ••••  ••••  ••••">
+                       <input type="text" class="form-control" placeholder="••••  ••••  ••••  ••••" name="numcarta"></input>
                        <p class="help-block">Le 16 cifre che trovi sulla carta.</p>
                      </div>
                    </div>
                    <div class="form-group">
                      <label class="col-sm-3 control-label">Data scadenza</label>
                      <div class="col-sm-9 form-inline">
-                       <select class="form-control">
+                       <select class="form-control" name="month">
                          <option value="01">01</option>
                          <option value="01">02</option>
                          <option value="01">03</option>
@@ -369,7 +305,7 @@
                          <option value="01">08</option>
                        </select>
                        <span class="divider">/</span>
-                       <select class="form-control">
+                       <select class="form-control" name="year">
                          <option value="01">2015</option>
                          <option value="01">2016</option>
                          <option value="01">2017</option>
@@ -381,8 +317,6 @@
                        </select>
                        <p class="help-block">La data in cui scade la carta. La trovi sul fronte della carta</p>
                      </div>
-                   </div>
-                   <div class="form-group">
                      <label class="col-sm-3 control-label">CVC</label>
                      <div class="col-sm-9">
                        <input type="text" class="form-control" style="width: 120px;" placeholder="CVC">
@@ -392,13 +326,22 @@
                    <hr>
                    <div class="submit">
                      <div class="messages"></div>
-                     <button class="btn btn--primary btn-principale" type="submit">Salva</button>
-                     <a href="#" class="cancel-hidden-form">Annulla</a>
+                     <button class="btn btn-principale cancel-hidden-form text-dark">Chiudi</button>
                    </div>
-                 </form>
+                
+                 
                  </div>
                 </div>
                 </div>
+                <div class="grid__item one-quarter"></div>
+                	<div class="grid__item one-half">
+              		<div class="submit">
+                     <div class="messages"></div>
+                     <button class="btn btn--primary btn-principale text-dark" type="submit">Salva le modifiche</button>
+                     <button class="btn btn-danger" type="reset">Reset</button>
+                   </div>
+                   </div>
+                
                 </div>
                 </div>
 
@@ -408,6 +351,11 @@
 
 
             </div>
+            
+            
+            </form>
+            
+            
             </div>
 
 

@@ -19,6 +19,8 @@ import javax.sql.DataSource;
 import it.unisa.model.UserBean;
 import it.unisa.model.UserModelDS;
 
+import it.unisa.utils.Validation;
+
 /**
  * Servlet implementation class SignupControl
  * Registra l'utente
@@ -142,11 +144,11 @@ public class SignupControl extends HttpServlet {
 	}
 	//Da migliorare il filtro
 	private boolean checkValidity(String nome,String cognome,String uname,String pwd, String email) {
-		if(nome!=null && !nome.trim().equals("")) {
-			if(cognome!=null && !cognome.trim().equals("")) {
-				if(uname!=null && !uname.trim().equals("")) {
-					if(pwd!=null && !pwd.trim().equals("")) {
-						if(email!=null && !email.trim().equals("")) {
+		if(nome!=null && !nome.trim().equals("") && Validation.validateName(nome)) {
+			if(cognome!=null && !cognome.trim().equals("") && Validation.validateName(cognome)) {
+				if(uname!=null && !uname.trim().equals("") &&  Validation.validateUsername(uname)) {
+					if(pwd!=null && !pwd.trim().equals("") && Validation.validatePassword(pwd)) {
+						if(email!=null && !email.trim().equals("") &&  Validation.validateEmail(email)) {
 							return true;
 						}
 					}
