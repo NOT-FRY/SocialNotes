@@ -80,7 +80,6 @@ footer,
 header,
 hgroup,
 main,
-nav,
 section,
 summary {
   display: block
@@ -107,23 +106,6 @@ html {
   -ms-text-size-adjust: 100%
 }
 
-body {
-  margin: 0
-}
-
-a:focus {
-  outline: thin dotted
-}
-
-a:active,
-a:hover {
-  outline: 0
-}
-
-h1 {
-  font-size: 2em;
-  margin: 0.67em 0
-}
 
 abbr[title] {
   border-bottom: 1px dotted
@@ -138,11 +120,7 @@ dfn {
   font-style: italic
 }
 
-hr {
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
-  height: 0
-}
+
 
 mark {
   background: #ff0;
@@ -345,7 +323,6 @@ textarea:focus {
 }
 
 .cf:after,
-.nav:after,
 .island:after,
 .islet:after {
   content: "";
@@ -908,69 +885,7 @@ html.flexbox {
   vertical-align: middle
 }
 
-.nav {
-  list-style: none;
-  margin-left: 0
-}
 
-.nav>li,
-.nav>li>a {
-  display: inline-block;
-  *display: inline;
-  zoom: 1
-}
-
-.nav--stacked>li {
-  display: list-item
-}
-
-.nav--stacked>li>a {
-  display: block
-}
-
-.nav--banner {
-  text-align: center
-}
-
-.nav--block,
-.options {
-  line-height: 1;
-  letter-spacing: -0.31em;
-  word-spacing: -0.43em;
-  white-space: nowrap
-}
-
-.nav--block>li,
-.options>li {
-  letter-spacing: normal;
-  word-spacing: normal
-}
-
-.nav--block>li>a,
-.options>li>a {
-  padding: 8px
-}
-
-.nav--fit {
-  display: table;
-  width: 100%
-}
-
-.nav--fit>li {
-  display: table-cell
-}
-
-.nav--fit>li>a {
-  display: block
-}
-
-.nav--keywords>li:after {
-  content: "\002C" "\00A0"
-}
-
-.nav--keywords>li:last-child:after {
-  display: none
-}
 
 .options>li>a {
   border: 0 solid #e1e1e1;
@@ -1083,42 +998,7 @@ html.flexbox {
   left: 100%
 }
 
-.nav-secondary .flyout__content .nav {
-  position: relative
-}
 
-.nav-secondary .flyout__content .nav:before,
-.nav-secondary .flyout__content .nav:after {
-  content: "";
-  position: absolute;
-  border-collapse: separate
-}
-
-.nav-secondary .flyout__content .nav:before {
-  border: 8px solid transparent
-}
-
-.nav-secondary .flyout__content .nav:after {
-  border: 7px solid transparent
-}
-
-.nav-secondary .flyout__content .nav:before,
-.nav-secondary .flyout__content .nav:after {
-  bottom: 100%
-}
-
-.nav-secondary .flyout__content .nav:before {
-  right: 7px
-}
-
-.nav-secondary .flyout__content .nav:after {
-  right: 8px
-}
-/*!*
- *
- * @csswizardry -- csswizardry.com/beautons
- *
- */
 
 .btn {
   display: inline-block;
@@ -3122,64 +3002,7 @@ a {
   transform: scale(2, 1)
 }
 
-.nav-footer {
-  padding: 22px
-}
 
-.nav-footer a {
-  color: #929292;
-  font-weight: normal
-}
-
-.nav-footer .nav {
-  margin-bottom: 0;
-  text-transform: uppercase
-}
-
-.nav-footer .nav-social a:hover {
-  text-decoration: none;
-  color: #2dbad4
-}
-
-.nav-sidebar {
-  z-index: 5;
-  position: relative;
-  width: 240px;
-  min-width: 240px;
-  background-color: #000000;
-  color: #CFCFCF;
-  -webkit-transition: all 300ms ease;
-  -moz-transition: all 300ms ease;
-  -ms-transition: all 300ms ease;
-  -o-transition: all 300ms ease;
-  transition: all 300ms ease
-}
-
-.nav-sidebar a {
-  color: #F2961F;
-  font-weight: 400
-}
-
-.nav-sidebar a .alert-count {
-  position: absolute;
-  background-color: #d51148;
-  background-image: linear-gradient(to bottom, #d51148, #ed1451);
-  background-image: -moz-linear-gradient(top, #d51148, #ed1451);
-  background-image: -ms-linear-gradient(top, #d51148, #ed1451);
-  background-image: -webkit-linear-gradient(top, #d51148, #ed1451);
-  color: #fff;
-  min-width: 1.75em;
-  height: 1.75em;
-  line-height: 1.4em;
-  text-align: center;
-  border-radius: 4px;
-  left: 9px;
-  padding: .1em 3px 0 3px;
-  margin-top: -1em;
-  vertical-align: middle;
-  z-index: 1;
-  border: 2px solid #000
-}
 
 .nav-sidebar a .new-badge {
   position: absolute;
@@ -4358,25 +4181,6 @@ html[dir=rtl] .flyout:hover>.flyout__content .nav:after {
   margin-bottom: 10px
 }
 
-.nav-bar--golden-link {
-  margin-top: 50px
-}
-
-.nav-bar--golden-link h3 {
-  color: #fff;
-  font-weight: 400;
-  line-height: 21px;
-  margin-bottom: 7px
-}
-
-.nav-bar--golden-link p {
-  line-height: 17px
-}
-
-.nav-bar--golden-link a {
-  color: #1fbad6;
-  text-decoration: underline
-}
 
 input.promo-code {
   border: 1px solid #1fbad6;
@@ -4476,14 +4280,4 @@ input.promo-code {
   line-height: 40px
 }
 
-html[dir=rtl] .float--right {
-  float: left !important
-}
 
-html[dir=rtl] .row-group .data-row .grid__item:nth-child(3) {
-  text-align: left
-}
-
-html[dir=rtl] .text--left {
-  text-align: right !important
-}
