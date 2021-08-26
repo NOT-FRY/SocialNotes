@@ -26,18 +26,30 @@
 </head>
 <body>
 
-<%@ include file="header.jsp" %>
- <br>
-      <br>
-   <%    if(session.isNew()){
-	  System.out.println("La sessione non esiste");
+ <%    
+   if(session.getAttribute("username")==null){
+	  System.out.println("L'utente non è loggato");
+	  %>
+	  <jsp:include page="header.jsp"></jsp:include>
+	  <% 
   }else{
 	  synchronized(session) {
 	  System.out.println("ID SESSIONE NEWS:"+session.getId());
 	  Date dataSessione = new Date(session.getCreationTime());
 	  System.out.println("Data creazione "+ dataSessione);
+	 
+	  %>
+	  <jsp:include page="header_user.jsp"></jsp:include>
+	 <%  
 	  }
   } %>
+
+
+
+
+ <br>
+      <br>
+  
       <div class="container">
      <!--   <div class="row"> -->
       <h2 class="pb-2 border-bottom" style="font-family: 'Archivo', sans-serif;">News</h2>

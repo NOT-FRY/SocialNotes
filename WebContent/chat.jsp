@@ -12,7 +12,19 @@
 <link href="css/chat.css" rel="stylesheet">
 </head>
 <body>
-<%@ include file="header.jsp" %>
+<%
+   if(session.getAttribute("username")==null){
+	  %>
+	  
+	  <jsp:include page="header.jsp"></jsp:include>
+	  
+	  <%
+   }else{
+	   %>
+	   <jsp:include page="header_user.jsp"></jsp:include>
+	   <% }
+
+%>
 <br><br><br>
 <div class="container">
 

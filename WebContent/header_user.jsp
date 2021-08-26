@@ -24,6 +24,23 @@
 <body>
 
 
+<%
+String chatLink = "chat.jsp";
+String priceLink = "prezzi.jsp";
+String newsLink = "news.jsp";
+String homeLink = "homepage.jsp";
+if (session.getAttribute("username")!=null){
+
+homeLink = "homepage_user.jsp";
+homeLink = response.encodeURL(homeLink);
+chatLink = response.encodeURL(chatLink);
+priceLink = response.encodeURL(priceLink);
+newsLink = response.encodeURL(newsLink);
+
+}
+
+%>
+
 	<nav class="navbar navbar-expand-lg navbar-dark colore-principale justify-content-end">
 		<a class="navbar-brand" href="#">
 			<img src="img/LogoDefinitivo1.png" height="25" width="150">
@@ -47,7 +64,7 @@
 				<ul class="navbar-nav mr-auto">
 					<!-- Chat -->
 					
-					<li class="nav-item icona" ><a class="nav-link" href="#">
+					<li class="nav-item icona" ><a class="nav-link" href="<%=chatLink %>">
 						<svg style="color:white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-chat-text-fill" viewBox="0 0 16 16">
   							<path d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM4.5 5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7zm0 2.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7zm0 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4z" />
 						</svg>
@@ -82,13 +99,13 @@
 							</svg>
 						</a></li>
 
-					<li class="nav-item active"><a class="nav-link" href="homepage.jsp">
+					<li class="nav-item active"><a class="nav-link" href="<%=homeLink %>">
 							Home
 							<span class="sr-only">(current)</span>
 						</a></li>
-					<li class="nav-item"><a class="nav-link" href="news.jsp">News</a></li>
+					<li class="nav-item"><a class="nav-link" href="<%=newsLink %>">News</a></li>
 					
-					<li class="nav-item"><a class="nav-link" href="#">Pricing</a></li>
+					<li class="nav-item"><a class="nav-link" href="<%=priceLink %>">Pricing</a></li>
 					
 					
 					<!-- Icona utente -->
