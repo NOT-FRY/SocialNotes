@@ -62,6 +62,10 @@
 
   String nome = (String)session.getAttribute("nome");
   String cognome = (String)session.getAttribute("cognome");
+  String dipName = (String)session.getAttribute("dipName");
+  String universita = (String)session.getAttribute("denominazione");
+  
+  
 %>
 
 	<%@ include file="header_user.jsp"%>
@@ -92,9 +96,8 @@ Swal.fire(
 									alt="Admin" class="rounded-circle" width="150">
 								<div class="mt-3">
 									<h4><%=nome%> <%=cognome %></h4>
-									<p class="text-secondary mb-1">Full Stack Developer</p>
-									<p class="text-muted font-size-sm">Bay Area, San Francisco,
-										CA</p>
+									<p class="text-secondary mb-1"><%=dipName %></p>
+									<p class="text-muted font-size-sm"><%=universita %></p>
 								</div>
 							</div>
 						</div>
