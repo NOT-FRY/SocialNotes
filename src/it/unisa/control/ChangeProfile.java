@@ -126,6 +126,7 @@ public class ChangeProfile extends HttpServlet {
 								model_carta.doSave(pbean);
 							}catch(SQLException e) {
 								System.out.println("Errore: Metodo di pagamento non inserito\n");
+								e.printStackTrace();
 							}
 						}
 					}

@@ -63,7 +63,7 @@ public class PaymentMethodModelDS implements Model<PaymentMethodBean> {
 		Connection connection = null;
 		PreparedStatement ps = null;
 
-		String insertSQL = "INSERT INTO MetodoPagamento (NumeroCarta, DataScadenza,NomeIntestatario,CognomeIntestataro,Username) VALUES (?,?,?,?,?);";
+		String insertSQL = "INSERT INTO MetodoPagamento (NumeroCarta, DataScadenza,NomeIntestatario,CognomeIntestatario,Username) VALUES (?,?,?,?,?)";
 
 		try {
 			connection = ds.getConnection();
@@ -74,9 +74,7 @@ public class PaymentMethodModelDS implements Model<PaymentMethodBean> {
 			ps.setString(3, item.getNomeIntestatario());
 			ps.setString(4, item.getCognomeIntestatario());
 			ps.setString(5,item.getUsername());
-			System.out.println("ciao");
 			ps.executeUpdate();
-			System.out.println("ciaovero");
 			System.out.println("Metodo di pagamento inserito");
 
 		} finally {

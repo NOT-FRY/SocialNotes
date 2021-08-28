@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html"
-    pageEncoding="ISO-8859-1" import="java.util.*"%>
+    pageEncoding="ISO-8859-1" import="java.util.*,it.unisa.model.*,java.io.InputStream,javax.sql.DataSource"%>
 <!doctype html>
 <html lang="en">
   <head>
@@ -122,9 +122,26 @@
                   <label for="uni">Universit&agrave;:</label>
                   <select class="custom-select d-block w-100" id="uni" name="uni">
                     <option value="">Scegli...</option>
-                    <option value = "Unisa">Universit&agrave; degli studi di Salerno</option>
-                    <option value = "Bocconi">Bocconi</option>
-                    <option value ="Luiss">LUISS</option>
+                    
+                    <%
+	          			DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
+	          			UniversityModelDS umodel = new UniversityModelDS(ds);
+	          			Collection <UniversityBean> universities = umodel.doRetrieveAll();
+                    
+                    
+                    %>
+                    <%
+                  			
+							if(universities!=null&&universities.size()>0){
+								Iterator<?> it=universities.iterator();
+								while(it.hasNext()){
+									UniversityBean ubean=(UniversityBean)it.next();
+                  	%>
+                      <option value="<%=ubean.getDenominazione()%>"><%=ubean.getDenominazione()%></option>
+							<%
+								}
+							}
+							%>
                   </select>
                   <div class="invalid-feedback">
                     Per favore seleziona una universit&agrave;.
