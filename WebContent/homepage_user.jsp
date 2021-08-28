@@ -1,5 +1,11 @@
+<%@page import="it.unisa.model.MaterialModelDS"%>
+<%@page import="it.unisa.model.FriendsModelDS"%>
+<%@page import="it.unisa.model.FriendsBean"%>
+<%@page import="java.util.Collection"%>
+<%@page import="java.util.Iterator"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@page import="javax.sql.DataSource"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,28 +33,27 @@
 </style>
 
 <style>
-
 .form-control::file-selector-button {
-
-
-  padding: 0.55rem 0.75rem;
-  margin: -0.375rem -0.75rem;
-  -webkit-margin-end: 0.75rem;
-  margin-inline-end: 0.75rem;
-  color: white;
-  background-color: #9697e7;
-  pointer-events: none;
-  border-color: inherit;
-  border-style: solid;
-  border-width: 0;
-  border-inline-end-width: 1px;
-  border-radius: 0;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+	padding: 0.55rem 0.75rem;
+	margin: -0.375rem -0.75rem;
+	-webkit-margin-end: 0.75rem;
+	margin-inline-end: 0.75rem;
+	color: white;
+	background-color: #9697e7;
+	pointer-events: none;
+	border-color: inherit;
+	border-style: solid;
+	border-width: 0;
+	border-inline-end-width: 1px;
+	border-radius: 0;
+	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+		border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-#img-2 {filter: blur(10px); -webkit-filter: blur(10px);}
-
-
+#img-2 {
+	filter: blur(10px);
+	-webkit-filter: blur(10px);
+}
 </style>
 
 
@@ -56,7 +61,7 @@
 </head>
 <body>
 
-<%
+	<%
   if (session.getAttribute("username")==null)
 	  response.sendRedirect("login.jsp");
 
@@ -64,7 +69,13 @@
   String cognome = (String)session.getAttribute("cognome");
   String dipName = (String)session.getAttribute("dipName");
   String universita = (String)session.getAttribute("denominazione");
-  
+  String username=(String)session.getAttribute("username");
+  DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
+  FriendsModelDS friends=new FriendsModelDS(ds);
+  int numeroAmici=friends.getNumerFriends(username);
+  MaterialModelDS material=new MaterialModelDS(ds);
+  int quantitaMateriale=material.getQuantitaMaterialeCondiviso(username);
+  Collection<FriendsBean> f=friends.doRetrieveByUsername(username);
   
 %>
 
@@ -73,17 +84,12 @@
 	<br>
 	<main class="container">
 
- 
-<script>
 
-function prova(){
-Swal.fire(
-		  'Good job!',
-		  'You clicked the button!',
-		  'success'
-		)
-}
-</script>
+		<script>
+			function prova() {
+				Swal.fire('Good job!', 'You clicked the button!', 'success')
+			}
+		</script>
 
 		<div class="row g-5">
 
@@ -95,7 +101,8 @@ Swal.fire(
 								<img src="https://bootdey.com/img/Content/avatar/avatar7.png"
 									alt="Admin" class="rounded-circle" width="150">
 								<div class="mt-3">
-									<h4><%=nome%> <%=cognome %></h4>
+									<h4><%=nome%>
+										<%=cognome %></h4>
 									<p class="text-secondary mb-1"><%=dipName %></p>
 									<p class="text-muted font-size-sm"><%=universita %></p>
 								</div>
@@ -110,11 +117,11 @@ Swal.fire(
 						<ul class="list-group list-group-flush">
 							<li class="list-group-item">
 								<div class="h6 text-muted">Amici</div>
-								<div class="h5">5.2342</div>
+								<div class="h5"><%=numeroAmici %></div>
 							</li>
 							<li class="list-group-item">
 								<div class="h6 text-muted">Materiale condiviso</div>
-								<div class="h5">6758</div>
+								<div class="h5"><%=quantitaMateriale %></div>
 							</li>
 							<li class="list-group-item">
 								<div class="h6 text-muted">Valutazione</div>
@@ -130,16 +137,27 @@ not support the canvas tag.</canvas>
 						<div class="card-body">
 							<h5 class="card-title">Amici aggiunti di ricente</h5>
 							<ul class="friend-list">
+								<%
+									if(f!=null&&f.size()>0){
+										Iterator<?> it=f.iterator();
+										while(it.hasNext()){
+											FriendsBean bean=(FriendsBean)it.next();
+								%>
 								<li>
 									<div class="left">
 										<img src="https://bootdey.com/img/Content/avatar/avatar1.png"
 											alt="">
 									</div>
 									<div class="right">
-										<h3>John Doe</h3>
+										<h3><%=bean.getUsername1() %></h3>
 										<p>10 Friends</p>
 									</div>
 								</li>
+								
+								<%
+										}
+									}
+								%>
 								<li>
 									<div class="left">
 										<img src="https://bootdey.com/img/Content/avatar/avatar2.png"
@@ -235,39 +253,43 @@ not support the canvas tag.</canvas>
 							<div class="tab-pane fade active show" id="posts" role="tabpanel"
 								aria-labelledby="posts-tab">
 								<div class="form-group">
-									<form method="post" action="FileUploadServlet" enctype="multipart/form-data">
+									<form method="post" action="FileUploadServlet"
+										enctype="multipart/form-data">
 										<h4>Condivisione materiale</h4>
 										<div class="mb-3">
-										<label>File PDF</label>
-											<input class="form-control" type="file" id="formFile" name="Contenuto" accept=".pdf,.doc,.docx,.odt,.ppt,.pptx">
-											<br>
-											<label>Immagine anteprima del materiale</label>
-											<input class="form-control" type="file" id="formFile" name="Anteprima" accept=".jpeg,.png,.jpg,.PNG">
+											<label>File PDF</label> <input class="form-control"
+												type="file" id="formFile" name="Contenuto"
+												accept=".pdf,.doc,.docx,.odt,.ppt,.pptx"> <br>
+											<label>Immagine anteprima del materiale</label> <input
+												class="form-control" type="file" id="formFile"
+												name="Anteprima" accept=".jpeg,.png,.jpg,.PNG">
 										</div>
-										
+
 										<br>
-										
+
 										<textarea
 											placeholder="Inserisci una descrizione del materiale"
 											rows="3" class="form-control" name="Descrizione" required></textarea>
-										
+
 										<br>
-										<textarea placeholder="Inserisci il corso" rows="1" class="form-control" name="Corso" required></textarea>
+										<textarea placeholder="Inserisci il corso" rows="1"
+											class="form-control" name="Corso" required></textarea>
 										<br>
-											
+
 										<div class="btn-toolbar justify-content-between">
 											<div class="btn-group">
-												<button type="submit" class="btn bottone-principale text-light"
-												style="background-color: #9697e7" onclick="prova()">Share</button>
+												<button type="submit"
+													class="btn bottone-principale text-light"
+													style="background-color: #9697e7" onclick="prova()">Share</button>
 											</div>
 										</div>
 									</form>
-									
+
 								</div>
 							</div>
 
 						</div>
-						
+
 					</div>
 				</div>
 
@@ -309,8 +331,9 @@ not support the canvas tag.</canvas>
 							<i class="fa fa-clock-o"></i>10 min ago
 						</div>
 						<a class="card-link" href="#"><h5 class="card-title">Lorem
-									ipsum dolor sit amet, consectetur adip.</h5> </a>
-									<img src="provvisorio/Cattura6.PNG" height="500px" width="500px" class="img-fluid">
+								ipsum dolor sit amet, consectetur adip.</h5> </a> <img
+							src="provvisorio/Cattura6.PNG" height="500px" width="500px"
+							class="img-fluid">
 					</div>
 					<div class="card-footer">
 						<a href="#" class="card-link"><i class="fa fa-gittip"></i>
@@ -318,28 +341,33 @@ not support the canvas tag.</canvas>
 							Effettua una recensione</a>
 					</div>
 				</div>
-				
+
 				<div class="d-flex justify-content-center">
-  <div class="spinner-border" role="status">
-    <span class="sr-only">Loading...</span>
-  </div>
-</div>
-<br>
-				
+					<div class="spinner-border" role="status">
+						<span class="sr-only">Loading...</span>
+					</div>
+				</div>
+				<br>
+
 			</div>
 
 
 		</div>
-		
+
 
 	</main>
 
-<%@ include file="footer.jsp" %>
+	<%@ include file="footer.jsp"%>
 </body>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-  
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+	integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+	crossorigin="anonymous"></script>
+
 
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
