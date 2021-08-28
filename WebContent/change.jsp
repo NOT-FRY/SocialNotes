@@ -12,6 +12,8 @@
   <link rel="icon" href="img/favicon.ico" />
   <link rel="stylesheet" type="text/css" href="css/change.css">
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
 
@@ -167,10 +169,11 @@
                   <ul class="form-fields">
                     <li>
                       <label>Email</label>
-                      <input type="text" class="text-input" name="mail">
+                      <input type="text" class="text-input" name="mail" onblur="validateEmail(this)">
                     </li>
                   </ul>
                   <div class="submit">
+                  	<div class="invalid-feedback" id="email-feedback"></div>
                     <div class="messages"></div>
                     <button class="btn btn-principale cancel-hidden-form text-dark">Chiudi</button>
                   </div>
@@ -252,7 +255,7 @@
               <div class="grid__item one-quarter">Password</div>
               <div class="grid__item one-third">
                
-                  <input type="hidden" name="_csrf_token" id="_csrf_token" value="1440526831-01-FIiAtX3_sdMNiFb34GXRG49qaUBWsxonFotdT79C_3s=">
+                  <input type="hidden" name="_csrf_token" id="_csrf_token1" value="1440526831-01-FIiAtX3_sdMNiFb34GXRG49qaUBWsxonFotdT79C_3s=">
 
                   <div class="input-group">
                     <input type="password" class="text-input" name="current_password" placeholder="Password corrente"></input>
@@ -307,8 +310,12 @@
                    <div class="form-group">
                      <label class="col-sm-3 control-label">Titolare Carta</label>
                      <div class="col-sm-9">
-                       <input type="text" class="form-control" placeholder="Nome titolare"></input>
+                       <input type="text" class="form-control" name="nomecarta" placeholder="Nome titolare"></input>
                        <p class="help-block">Nome che appare sulla carta</p>
+                     </div>
+                     <div class="col-sm-9">
+                       <input type="text" class="form-control" name="cognomecarta" placeholder="Cognome titolare"></input>
+                       <p class="help-block">Cognome che appare sulla carta</p>
                      </div>
                    </div>
                    <div class="form-group">
@@ -323,24 +330,24 @@
                      <div class="col-sm-9 form-inline">
                        <select class="form-control" name="month">
                          <option value="01">01</option>
-                         <option value="01">02</option>
-                         <option value="01">03</option>
-                         <option value="01">04</option>
-                         <option value="01">05</option>
-                         <option value="01">06</option>
-                         <option value="01">07</option>
-                         <option value="01">08</option>
+                         <option value="02">02</option>
+                         <option value="03">03</option>
+                         <option value="04">04</option>
+                         <option value="05">05</option>
+                         <option value="06">06</option>
+                         <option value="07">07</option>
+                         <option value="08">08</option>
                        </select>
                        <span class="divider">/</span>
                        <select class="form-control" name="year">
-                         <option value="01">2015</option>
-                         <option value="01">2016</option>
-                         <option value="01">2017</option>
-                         <option value="01">2018</option>
-                         <option value="01">2019</option>
-                         <option value="01">2020</option>
-                         <option value="01">2021</option>
-                         <option value="01">2022</option>
+                         <option value="2015">2015</option>
+                         <option value="2016">2016</option>
+                         <option value="2017">2017</option>
+                         <option value="2018">2018</option>
+                         <option value="2019">2019</option>
+                         <option value="2020">2020</option>
+                         <option value="2021">2021</option>
+                         <option value="2022">2022</option>
                        </select>
                        <p class="help-block">La data in cui scade la carta. La trovi sul fronte della carta</p>
                      </div>
@@ -422,7 +429,12 @@
   <script src="https://d1a3f4spazzrp4.cloudfront.net/web-p2/scripts/home.5c8d8c29a8be9f0ab47ff38f71bbcd21.js"></script>
 
   <script src="https://d1a3f4spazzrp4.cloudfront.net/web-p2/scripts/profile/profile.08c09f44a289bf166e5d65b952b1ee74.js"></script>
+  <script src="js/form-validation.js" type="text/javascript"></script>
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 
 </body>
