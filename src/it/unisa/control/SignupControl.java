@@ -121,10 +121,20 @@ public class SignupControl extends HttpServlet {
 			}
 		//	System.out.println("Ciao");
 	
-			session.setAttribute("username", user.getUsername());
-			session.setAttribute("nome", user.getNome());
-			session.setAttribute("cognome", user.getCognome());
-			  System.out.println("ID SESSIONE:"+session.getId());
+			session.setAttribute("username",user.getUsername());
+			session.setAttribute("nome",user.getNome());
+			session.setAttribute("cognome",user.getCognome());
+			session.setAttribute("img",user.getImg());
+			session.setAttribute("email",user.getEmail());
+			session.setAttribute("password",user.getPass());
+			session.setAttribute("dataNascita",user.getDataNascita());
+			session.setAttribute("matricola",user.getMatricola());
+			session.setAttribute("ultimoAccesso",user.getUltimoAccesso());
+			session.setAttribute("coin",user.getCoin());
+			session.setAttribute("ban",user.getBan());
+			session.setAttribute("denominazione",user.getDenominazione());
+			session.setAttribute("dipName",user.getDipName());
+				 System.out.println("ID SESSIONE:"+session.getId());
 			  Enumeration <String> nomeAttributi = session.getAttributeNames();
 			 while (nomeAttributi.hasMoreElements()){
 				 String nomeAtt = nomeAttributi.nextElement();

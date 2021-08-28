@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" %>
+    pageEncoding="ISO-8859-1" import="java.sql.Date"%>
+    
+<%@ page import ="java.io.InputStream" %>
+    
 <!DOCTYPE html>
 <html>
 <head prefix="og:http://ogp.me/ns#">
@@ -59,7 +62,31 @@
 
 <body>
 
-<%@ include file="header.jsp" %>
+ <%
+ 
+ if (session.getAttribute("username")==null){
+	 String linkLogin = "login.jsp";
+	 String encodeURL = response.encodeRedirectURL(linkLogin);
+	 response.sendRedirect(encodeURL);
+	 
+ }
+	 String nome = (String)session.getAttribute("nome");
+	 String cognome = (String)session.getAttribute("cognome");
+	 String username = (String)session.getAttribute("username");
+	 InputStream img = (InputStream)session.getAttribute("img");
+	 String email = (String)session.getAttribute("email");
+	 String password = (String)session.getAttribute("password");
+	 Date dataNascita = (Date)session.getAttribute("dataNascita");
+	 String matricola = (String)session.getAttribute("matricola");
+	// int coin = (int)session.getAttribute("coin");
+	 String denominazione = (String)session.getAttribute("denominazione");
+	 String dipName = (String)session.getAttribute("dipName");
+	 
+	 	 
+
+
+ %>
+ <%@include file="header_user.jsp" %>
 
  	<div class="flexbox height--full main-wrapper"> 
 
@@ -99,9 +126,9 @@
               <!--
  -->
               <div class="grid__item one-half data" data-field="None">
-                <h1>Fonz o bit</h1>
-                <p class='data' data-field='email'>fonzobit@gmail.com</p>
-                <p class='data' data-field='nickname'>fonz on titan</p>
+                <h1><%=nome %> <%=cognome %></h1>
+                <p class='data' data-field='email'><%=email %></p>
+                <p class='data' data-field='nickname'><%=username %></p>
 
 
               </div>
@@ -136,7 +163,7 @@
                 <!--
    -->
                 <div class="grid__item one-third">
-                  <h1> Fonz o bit</h1>
+                  <h1>fonz i bit</h1>
                   <ul class="form-fields">
                     <li>
                       <label>Email</label>
@@ -163,7 +190,7 @@
               <!--
  -->
               <div class="grid__item one-half data" data-field="None">
-                Università degli Studi di Salerno - Via Giovanni Paolo II,132 -Fisciano (SA)-Informatica
+                <%=denominazione %> - <%=dipName %>
               </div>
               <!--
  -->
@@ -211,7 +238,7 @@
               <!--
  -->
               <div class="grid__item one-half data" data-field="None">
-                ••••••••••••
+                &#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;
               </div>
               <!--
  -->
