@@ -150,7 +150,7 @@ not support the canvas tag.</canvas>
 									</div>
 									<div class="right">
 										<h3><%=bean.getUsername1() %></h3>
-										<p>10 Friends</p>
+										<p><%=friends.getNumerFriends(bean.getUsername1()) %> Friends</p>
 									</div>
 								</li>
 								
@@ -158,86 +158,6 @@ not support the canvas tag.</canvas>
 										}
 									}
 								%>
-								<li>
-									<div class="left">
-										<img src="https://bootdey.com/img/Content/avatar/avatar2.png"
-											alt="">
-									</div>
-									<div class="right">
-										<h3>John Doe</h3>
-										<p>10 Friends</p>
-									</div>
-								</li>
-								<li>
-									<div class="left">
-										<img src="https://bootdey.com/img/Content/avatar/avatar3.png"
-											alt="">
-									</div>
-									<div class="right">
-										<h3>John Doe</h3>
-										<p>10 Friends</p>
-									</div>
-								</li>
-								<li>
-									<div class="left">
-										<img src="https://bootdey.com/img/Content/avatar/avatar4.png"
-											alt="">
-									</div>
-									<div class="right">
-										<h3>John Doe</h3>
-										<p>10 Friends</p>
-									</div>
-								</li>
-								<li>
-									<div class="left">
-										<img src="https://bootdey.com/img/Content/avatar/avatar5.png"
-											alt="">
-									</div>
-									<div class="right">
-										<h3>John Doe</h3>
-										<p>10 Friends</p>
-									</div>
-								</li>
-								<li>
-									<div class="left">
-										<img src="https://bootdey.com/img/Content/avatar/avatar2.png"
-											alt="">
-									</div>
-									<div class="right">
-										<h3>John Doe</h3>
-										<p>10 Friends</p>
-									</div>
-								</li>
-								<li>
-									<div class="left">
-										<img src="https://bootdey.com/img/Content/avatar/avatar3.png"
-											alt="">
-									</div>
-									<div class="right">
-										<h3>John Doe</h3>
-										<p>10 Friends</p>
-									</div>
-								</li>
-								<li>
-									<div class="left">
-										<img src="https://bootdey.com/img/Content/avatar/avatar4.png"
-											alt="">
-									</div>
-									<div class="right">
-										<h3>John Doe</h3>
-										<p>10 Friends</p>
-									</div>
-								</li>
-								<li>
-									<div class="left">
-										<img src="https://bootdey.com/img/Content/avatar/avatar6.png"
-											alt="">
-									</div>
-									<div class="right">
-										<h3>John Doe</h3>
-										<p>10 Friends</p>
-									</div>
-								</li>
 							</ul>
 						</div>
 					</div>

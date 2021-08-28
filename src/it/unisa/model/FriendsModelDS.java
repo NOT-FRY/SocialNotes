@@ -109,7 +109,7 @@ public class FriendsModelDS implements Model<FriendsBean> {
 		Connection con=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
-		String sql="SELECT * FROM Amicizia WHERE Username1=? 	OR Username2=?  ORDER BY DataInizio desc LIMIT 9;";
+		String sql="SELECT * FROM Amicizia WHERE Username1=? 	OR Username2=?  ORDER BY DataInizio desc LIMIT 10;";
 		Collection<FriendsBean> friends=new LinkedList<FriendsBean>();
 		try {
 			con=ds.getConnection();
