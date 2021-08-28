@@ -32,6 +32,14 @@
 
 
 	<%
+	/*Sessione: non posso fare la sendRedirect probabilmente perchè questo header viene incluso in jsp dove già ne viene fatta un'altra
+	 if (session.getAttribute("username")==null){
+		 String linkLogin = "login.jsp";
+		 String encodeURL = response.encodeRedirectURL(linkLogin);
+		 response.sendRedirect(encodeURL);
+		 
+	 }
+	*/
 	String chatLink = "chat.jsp";
 	String priceLink = "prezzi.jsp";
 	String newsLink = "news.jsp";
@@ -148,7 +156,7 @@
 
 	</nav>
 
-
+ <% %>
 </body>
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

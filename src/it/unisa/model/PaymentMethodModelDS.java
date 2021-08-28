@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
+
 import javax.sql.DataSource;
 
 import it.unisa.utils.Utility;
@@ -59,7 +60,35 @@ public class PaymentMethodModelDS implements Model<PaymentMethodBean> {
 
 	@Override
 	public void doSave(PaymentMethodBean item) throws SQLException {
-		// TODO Auto-generated method stub
+		Connection connection = null;
+		PreparedStatement ps = null;
+
+		String insertSQL = "INSERT INTO MetodoPagamento (NumeroCarta, DataScadenza,NomeIntestatario,CognomeIntestataro,Username) VALUES (?,?,?,?,?);";
+
+		try {
+			connection = ds.getConnection();
+			ps = connection.prepareStatement(insertSQL);
+
+			ps.setString(1,item.getNumeroCarta());
+			ps.setDate(2, item.getDataScadenza());
+			ps.setString(3, item.getNomeIntestatario());
+			ps.setString(4, item.getCognomeIntestatario());
+			ps.setString(5,item.getUsername());
+			System.out.println("ciao");
+			ps.executeUpdate();
+			System.out.println("ciaovero");
+			System.out.println("Metodo di pagamento inserito");
+
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+			} finally {
+				if (connection != null) {
+					connection.close();
+				}
+			}
+		}
 		
 	}
 

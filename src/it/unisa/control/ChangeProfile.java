@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
+import it.unisa.model.PaymentMethodBean;
 import it.unisa.model.PaymentMethodModelDS;
 import it.unisa.model.UserBean;
 import it.unisa.model.UserModelDS;
@@ -96,16 +97,36 @@ public class ChangeProfile extends HttpServlet {
 		String numerocarta = request.getParameter("numcarta");
 		String mesecarta = request.getParameter("month");
 		String annocarta = request.getParameter("year");
-		//CVC non lo prendo
+		/*
+		 * 
+		 * 
+		 * CVC non lo prendo per ora
+		 * 
+		 * 
+		 * 
+		 * 
+		 * */
 		if(nomecarta!=null && nomecarta!="") {
 			if(cognomecarta!=null && cognomecarta!="") {
-				if(numerocarta!=null && numerocarta!="") {
+				if(numerocarta!=null && numerocarta!="" && numerocarta.length()<=16) { //<=16 vincolo DB
 					if(mesecarta!=null && mesecarta!="") {
 						if(annocarta!=null && annocarta!="") {
 							Calendar calendar = Calendar.getInstance();
 							calendar.set(Integer.parseInt(annocarta),Integer.parseInt(mesecarta), 1);
 							Date datacarta = new Date(calendar.getTimeInMillis());
-							//TODO Salva carta
+							PaymentMethodBean pbean = new PaymentMethodBean();
+							pbean.setNomeIntestatario(nomecarta);
+							pbean.setCognomeIntestatario(cognomecarta);
+							pbean.setNumeroCarta(numerocarta);
+							pbean.setDataScadenza(datacarta);
+							pbean.setUsername(username);
+							System.out.println("\nBEAN:"+pbean.toString()+"\n"
+									);
+							try {
+								model_carta.doSave(pbean);
+							}catch(SQLException e) {
+								System.out.println("Errore: Metodo di pagamento non inserito\n");
+							}
 						}
 					}
 				}
@@ -120,9 +141,12 @@ public class ChangeProfile extends HttpServlet {
 				"\n current_password:"+current_password+
 				"\n password:"+password+
 				"\n confirm_password:"+confirm_password+
+				"\n nomecarta:"+nomecarta+
+				"\n cognomecarta:"+cognomecarta+
 				"\n numerocarta:"+numerocarta+
 				"\n mesecarta:"+mesecarta+
-				"\n annocarta:"+annocarta);
+				"\n annocarta:"+annocarta+
+				"\n username:"+username);
 		
 		
 		doGet(request, response);

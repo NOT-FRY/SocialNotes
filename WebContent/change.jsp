@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="java.sql.Date"%>
+    pageEncoding="ISO-8859-1" import="java.sql.Date,it.unisa.model.*,java.util.Collection,java.util.Iterator"%>
     
 <%@ page import ="java.io.InputStream" %>
     
@@ -65,7 +65,6 @@
 <body>
 
  <%
- 
  if (session.getAttribute("username")==null){
 	 String linkLogin = "login.jsp";
 	 String encodeURL = response.encodeRedirectURL(linkLogin);
@@ -91,15 +90,37 @@
  <%@include file="header_user.jsp" %>
 
  	<div class="flexbox height--full main-wrapper"> 
+	
 
+	
 	<form action="ChangeProfile" method="POST" enctype="multipart/form-data" id="main-profile">
 
-
+	
 
 
     <div class="contents flexbox hard">
 
 
+		<% 
+		if (false){
+			
+		%>
+		<div class="alert alert-success alert-dismissible fade show" role="alert">
+  			<strong>Fatto!</strong> Le modifiche sono state salvate con successo.
+  			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    		<span aria-hidden="true">&times;</span>
+ 			 </button>
+		</div>
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  			<strong>Ops!</strong> Si &egrave verificato un errore.
+  			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    		<span aria-hidden="true">&times;</span>
+ 			 </button>
+		</div>
+		<%
+		} 
+		%>
+		
       <div class="soft-double portable--hard">
 
 
@@ -165,7 +186,7 @@
                 <!--
    -->
                 <div class="grid__item one-third">
-                  <h1>fonz i bit</h1>
+                 <h1><%=nome %> <%=cognome %></h1>
                   <ul class="form-fields">
                     <li>
                       <label>Email</label>
@@ -188,7 +209,7 @@
           <div class="row-group editable-single-row">
             <div class="grid data-row">
               <div class="grid__item one-quarter title">
-                Università
+                Universit&agrave;
               </div>
               <!--
  -->
@@ -213,12 +234,57 @@
               <div class="grid__item one-third">
                 
                   <input type="hidden" name="_csrf_token" id="-csrf-token" value="1440526831-01-FIiAtX3_sdMNiFb34GXRG49qaUBWsxonFotdT79C_3s=">
-
-                  <input type="text" class="text-input" name="nomeuni" placeholder="Nome">
+                  		<%
+                  			DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
+                  			UniversityModelDS umodel = new UniversityModelDS(ds);
+                  			Collection <UniversityBean> universities = umodel.doRetrieveAll();
+                  			
+                  			DepartmentModelDS dmodel = new DepartmentModelDS(ds);
+                  			Collection <DepartmentBean> dipartimenti = dmodel.doRetrieveAll();
+                      	%>	
+                  		<label>Universit&agrave;</label>
+    				    <select class="form-control" name="nomeuni">
+                        <option value="">Scegli...</option>
+                  		<%
+                  			
+							if(universities!=null&&universities.size()>0){
+								Iterator<?> it=universities.iterator();
+								while(it.hasNext()){
+									UniversityBean ubean=(UniversityBean)it.next();
+                  		%>
+                         <option value="<%=ubean.getDenominazione()%>"><%=ubean.getDenominazione()%></option>
+							<%
+								}
+							}
+							%>
+                       </select>	
+                       
+                       <span class="divider"></span>
+                       
+                       <label>Corso di studi</label>
+                       <select class="form-control" name="dipartimento">
+                         <option value="">Scegli...</option>
+                         
+                        <%
+                  			
+							if(dipartimenti!=null&&dipartimenti.size()>0){
+								Iterator<?> it=dipartimenti.iterator();
+								while(it.hasNext()){
+									DepartmentBean dbean=(DepartmentBean)it.next();
+                  		%>
+                         <option value="<%=dbean.getNome()%>"><%=dbean.getNome()%></option>
+							<%
+								}
+							}
+							%>
+                         
+                       </select>
+                  
+                 <!--  <input type="text" class="text-input" name="nomeuni" placeholder="Nome">
                   <input type="text" class="text-input" name="indirizzo"  placeholder="Indirizzo">
 
                   <input type="text" class="text-input" name="dipartimento" placeholder="Facoltà">
-
+					-->
                   <div class="submit">
                     <div class="messages"></div>
                     <button class="btn btn-principale cancel-hidden-form text-dark">Chiudi</button>
@@ -340,14 +406,14 @@
                        </select>
                        <span class="divider">/</span>
                        <select class="form-control" name="year">
-                         <option value="2015">2015</option>
-                         <option value="2016">2016</option>
-                         <option value="2017">2017</option>
-                         <option value="2018">2018</option>
-                         <option value="2019">2019</option>
-                         <option value="2020">2020</option>
                          <option value="2021">2021</option>
                          <option value="2022">2022</option>
+                         <option value="2023">2023</option>
+                         <option value="2024">2024</option>
+                         <option value="2025">2025</option>
+                         <option value="2026">2026</option>
+                         <option value="2027">2027</option>
+                         <option value="2028">2028</option>
                        </select>
                        <p class="help-block">La data in cui scade la carta. La trovi sul fronte della carta</p>
                      </div>
@@ -372,7 +438,7 @@
               		<div class="submit">
                      <div class="messages"></div>
                      <button class="btn btn--primary btn-principale text-dark" type="submit">Salva le modifiche</button>
-                     <button class="btn btn-danger" type="reset">Reset</button>
+                     <button class="btn btn-danger" type="reset">Annulla</button>
                    </div>
                    </div>
                 
