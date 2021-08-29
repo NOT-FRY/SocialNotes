@@ -147,13 +147,30 @@
                     Per favore seleziona una universit&agrave;.
                   </div>
               </div>
+              
+              <%
+              
+
+              DepartmentModelDS departmentModel = new DepartmentModelDS(ds);
+              Collection <DepartmentBean> departments = departmentModel.doRetrieveAll();
+                                
+              
+              %>
               <div class="col-md-6 mb-3">
                   <label for="corso">Corso di studi:</label>
                   <select class="custom-select d-block w-100" id="corso" name="corso">
-                    <option value="">Scegli...</option>
-                    <option value ="Informatica">Informatica</option>
-                    <option value = "Ingegneria Informatica">Ingegneria Informatica</option>
-                    <option value = "Economia">Economia</option>
+                                       <% if(departments!=null&&departments.size()>0){
+								Iterator<?> iterator=departments.iterator();
+								while(iterator.hasNext()){
+									DepartmentBean dbean=(DepartmentBean)iterator.next();
+								
+									%>
+                    
+                    <option value ="<%=dbean.getNome() %>"><%=dbean.getNome() %></option>
+                    <%
+								}
+                                       }
+                    %>
                   </select>
                   <div class="invalid-feedback">
                     Per favore seleziona un corso di studi.

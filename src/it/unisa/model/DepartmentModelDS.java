@@ -56,6 +56,38 @@ public class DepartmentModelDS implements Model<DepartmentBean> {
 	
 	}
 
+	public Collection<DepartmentBean> doRetrieveByDenominazione(String denominazione) throws SQLException{
+		Connection con=null;
+		PreparedStatement ps=null;
+		String selectSQL="SELECT * FROM Dipartimento WHERE Denominazione = ?;";
+		Collection<DepartmentBean> departments=new LinkedList<DepartmentBean>();
+		try {
+			con=ds.getConnection();
+			ps=con.prepareStatement(selectSQL);
+			ps.setString(1, denominazione);
+			//Utility.print("doRetrieveAll:"+ps.toString());
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()) {
+				DepartmentBean bean=new DepartmentBean();
+				bean.setNome(rs.getString("Nome"));
+				bean.setDenominazione(rs.getString("Denominazione"));
+				bean.setDescrizione(rs.getString("Descrizione"));
+				departments.add(bean);
+			}
+		}
+		finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			}
+			finally {
+				if(con!=null)
+					con.close();
+			}
+		}
+		return departments;
+	}
+	
 	@Override
 	public void doSave(DepartmentBean item) throws SQLException {
 		// TODO Auto-generated method stub
