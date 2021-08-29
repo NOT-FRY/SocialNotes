@@ -58,7 +58,7 @@ public class ChangeProfile extends HttpServlet {
 		
 		String mail = request.getParameter("mail");
 		
-		if(mail!=null && mail!="" && Validation.validateEmail(mail)) {
+		if(mail!=null && !mail.trim().equals("") && Validation.validateEmail(mail)) {
 			//TODO CAMBIA MAIL
 		}
 		
@@ -72,7 +72,7 @@ public class ChangeProfile extends HttpServlet {
 		String password = request.getParameter("password");
 		String confirm_password = request.getParameter("confirm_password");
 		
-		if(current_password !=null && current_password!="") {
+		if(current_password !=null && !current_password.trim().equals("")) {
 			UserBean bean = new UserBean();
 			//Vedo se la password è corretta
 			try {
@@ -81,10 +81,16 @@ public class ChangeProfile extends HttpServlet {
 				System.out.println("Errore checkLogin in ChangeProfile");
 			}
 			
-			if(password!=null && password!="" && Validation.validatePassword(password)) {
-				if(confirm_password!=null && confirm_password!="" && Validation.validatePassword(confirm_password)) {
+			if(password!=null && !password.trim().equals("") && Validation.validatePassword(password)) {
+				if(confirm_password!=null && !confirm_password.trim().equals("") && Validation.validatePassword(confirm_password)) {
 					if(password.compareTo(confirm_password)==0){
-						//TODO CAMBIA PASSWORD
+						try {
+							model_utente.doUpdatePassword(username, confirm_password);
+							}
+						catch(SQLException e) {
+							System.out.println("Errore: Password non aggiornata");
+							e.printStackTrace();
+						}
 					}
 				}
 			}
@@ -106,11 +112,11 @@ public class ChangeProfile extends HttpServlet {
 		 * 
 		 * 
 		 * */
-		if(nomecarta!=null && nomecarta!="") {
-			if(cognomecarta!=null && cognomecarta!="") {
-				if(numerocarta!=null && numerocarta!="" && numerocarta.length()<=16) { //<=16 vincolo DB
-					if(mesecarta!=null && mesecarta!="") {
-						if(annocarta!=null && annocarta!="") {
+		if(nomecarta!=null && !nomecarta.trim().equals("")) {
+			if(cognomecarta!=null && !cognomecarta.trim().equals("")) {
+				if(numerocarta!=null && !numerocarta.trim().equals("") && numerocarta.length()<=16) { //<=16 vincolo DB
+					if(mesecarta!=null && !mesecarta.trim().equals("")) {
+						if(annocarta!=null && !annocarta.trim().equals("")) {
 							Calendar calendar = Calendar.getInstance();
 							calendar.set(Integer.parseInt(annocarta),Integer.parseInt(mesecarta), 1);
 							Date datacarta = new Date(calendar.getTimeInMillis());
@@ -120,8 +126,6 @@ public class ChangeProfile extends HttpServlet {
 							pbean.setNumeroCarta(numerocarta);
 							pbean.setDataScadenza(datacarta);
 							pbean.setUsername(username);
-							System.out.println("\nBEAN:"+pbean.toString()+"\n"
-									);
 							try {
 								model_carta.doSave(pbean);
 							}catch(SQLException e) {

@@ -252,7 +252,32 @@ public class UserModelDS implements Model<UserBean> {
 		// TODO Auto-generated method stub
 
 	}
+	
+	public void doUpdatePassword(String username,String newPassword)throws SQLException {
+		Connection connection = null;
+		PreparedStatement ps = null;
 
+		String sql = "UPDATE Utente SET Pass = ? WHERE Username = ?";
+		
+		try {
+			connection = ds.getConnection();
+			ps = connection.prepareStatement(sql);
+			ps.setString(1, newPassword);
+			ps.setString(2, username);
+			ps.executeUpdate();
+			System.out.println("Password aggiornata");
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			}
+			finally {
+				if(connection!=null)
+					connection.close();
+			}
+		}
+	}
+	
 	@Override
 	public void doDelete(UserBean item) throws SQLException {
 		// TODO Auto-generated method stub
