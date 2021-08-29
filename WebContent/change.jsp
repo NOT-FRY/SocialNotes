@@ -102,17 +102,25 @@
 
 
 		<% 
-		if (false){
-			
+		String success =(String)request.getAttribute("success");
+		if (success!=null){
+			System.out.println("ciaociaociao");
 		%>
 		<div class="alert alert-success alert-dismissible fade show" role="alert">
-  			<strong>Fatto!</strong> Le modifiche sono state salvate con successo.
+  			<strong>Fatto!</strong> Le modifiche sono state salvate con successo:<%=success%>
   			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
     		<span aria-hidden="true">&times;</span>
  			 </button>
 		</div>
+		<%
+		}
+		%>
+		<%
+		String error = (String)request.getAttribute("error");
+		if(error!=null){
+		%>
 		<div class="alert alert-danger alert-dismissible fade show" role="alert">
-  			<strong>Ops!</strong> Si &egrave verificato un errore.
+  			<strong>Ops!</strong> Si &egrave verificato un errore:<%=error%>
   			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
     		<span aria-hidden="true">&times;</span>
  			 </button>

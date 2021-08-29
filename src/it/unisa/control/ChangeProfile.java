@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Calendar;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -39,9 +40,11 @@ public class ChangeProfile extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//nome e cognome titolare
-		//da controllare se diversi da null
-		//da fare controlli javascript
+		//da fare controlli javascript anche con ajax
+		
+		String success =""; //I messaggi da mettere negli alert
+		String error ="";
+		
 		
 		HttpSession session = request.getSession(false);
 		if(session==null) {
@@ -62,8 +65,6 @@ public class ChangeProfile extends HttpServlet {
 			//TODO CAMBIA MAIL
 		}
 		
-		
-		// DATABASE?
 		String nomeuni = request.getParameter("nomeuni");
 		String indirizzo = request.getParameter("indirizzo");
 		String dipartimento = request.getParameter("dipartimento");
@@ -86,9 +87,14 @@ public class ChangeProfile extends HttpServlet {
 					if(password.compareTo(confirm_password)==0){
 						try {
 							model_utente.doUpdatePassword(username, confirm_password);
+							success+=" Password aggiornata-";
+							request.setAttribute("success", success);
 							}
 						catch(SQLException e) {
 							System.out.println("Errore: Password non aggiornata");
+							error+=" Errore password non aggiornata";
+							request.setAttribute("error",error);	
+							
 							e.printStackTrace();
 						}
 					}
@@ -128,8 +134,13 @@ public class ChangeProfile extends HttpServlet {
 							pbean.setUsername(username);
 							try {
 								model_carta.doSave(pbean);
+								success+=" Metodo di pagamento aggiornato-";
+								request.setAttribute("success", success);
+								
 							}catch(SQLException e) {
 								System.out.println("Errore: Metodo di pagamento non inserito\n");
+								error+=" Errore: metodo di pagamento non aggiornato-";
+								request.setAttribute("error",error);							
 								e.printStackTrace();
 							}
 						}
@@ -155,6 +166,9 @@ public class ChangeProfile extends HttpServlet {
 		
 		
 		doGet(request, response);
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/change.jsp");
+		dispatcher.forward(request, response);
+		
 	}
 
 }
