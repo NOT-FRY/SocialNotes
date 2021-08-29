@@ -38,17 +38,20 @@
 	String newsLink = "news.jsp";
 	String homeLink = "homepage.jsp";
 	String changeLink = "change.jsp";
+	String logoutLink = "homepage.jsp";
 	int coin = 99;
 	
 	//Sessione: non posso fare la sendRedirect probabilmente perchè questo header viene incluso in jsp dove già ne viene fatta un'altra
 	 if(session.getAttribute("username")!=null){
 	    coin = (int)session.getAttribute("coin");
 		homeLink = "homepage_user.jsp";
+		logoutLink = "Logout";
 		homeLink = response.encodeURL(homeLink);
 		chatLink = response.encodeURL(chatLink);
 		priceLink = response.encodeURL(priceLink);
 		newsLink = response.encodeURL(newsLink);
 		changeLink = response.encodeURL(changeLink);
+		
 	}
 	 
 	
@@ -132,6 +135,9 @@
 
 					<li class="nav-item"><a class="nav-link"
 						href="<%=priceLink %>">Pricing</a></li>
+						
+				    					<li class="nav-item"><a class="nav-link"
+						href="<%=logoutLink %>">Logout</a></li>
 
 
 					<!-- Icona utente -->
