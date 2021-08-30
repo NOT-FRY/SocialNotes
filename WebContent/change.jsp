@@ -47,11 +47,28 @@
     };
   </script>
 
+	<script type="text/javascript">
+	function passwordUguali(){
+		console.log("ciao");
+		var pwd1 = document.main-profile.pwd;
+		var pwd2 = document.main-profile.newpwd;
+	    pwd2.classList.remove("is-invalid");
+	    pwd2.classList.remove("is-valid");
+	    if(pwd1.valueof()===pwd2.valueof())
+	    	console.log("sono uguali");
+	    	pwd2.classList.add("is-valid");
+	    	return true;
+	    else{
+	    	console.log("sono diversi");
+	    	pwd2.classList.add("is-invalid");
+	    	return false;
+	    }
+	}
+	</script>
 
   <script>
     window.utag_data = {};
   </script>
-
 
   <link rel="stylesheet" type="text/css" href="https://d1a3f4spazzrp4.cloudfront.net/web-p2/stylesheets/home/icons.e225ddcb0b486de3046f4d4c231185ca.css">
   <link href="//d1a3f4spazzrp4.cloudfront.net/uber-icons/3.3.0/uber-icons.css" rel="stylesheet">
@@ -104,7 +121,6 @@
 		<% 
 		String success =(String)request.getAttribute("success");
 		if (success!=null){
-			System.out.println("ciaociaociao");
 		%>
 		<div class="alert alert-success alert-dismissible fade show" role="alert">
   			<strong>Fatto!</strong> Le modifiche sono state salvate con successo:<%=success%>
@@ -128,6 +144,8 @@
 		<%
 		} 
 		%>
+		
+
 		
       <div class="soft-double portable--hard">
 
@@ -199,10 +217,10 @@
                     <li>
                       <label>Email</label>
                       <input type="text" class="text-input" name="mail" onblur="validateEmail(this)">
+                      <div class="invalid-feedback" id="email-feedback" style="font-size:12px;"></div>
                     </li>
                   </ul>
                   <div class="submit">
-                  	<div class="invalid-feedback" id="email-feedback"></div>
                     <div class="messages"></div>
                     <button class="btn btn-principale cancel-hidden-form text-dark">Chiudi</button>
                   </div>
@@ -333,8 +351,13 @@
 
                   <div class="input-group">
                     <input type="password" class="text-input" name="current_password" placeholder="Password corrente"></input>
-                    <input type="password" class="text-input" name="password" placeholder="Nuova Password"></input>
-                    <input type="password" class="text-input" name="confirm_password" placeholder="Conferma nuova Password"></input>
+                    <input type="password" class="text-input" name="password" id="pwd" placeholder="Nuova Password" onblur="passwordValidation(this,5,12)"></input>
+                    <div class="valid-feedback">Password valida.</div>
+                <div class="invalid-feedback">Per favore inserisci una password di lunghezza compresa tra 5 e 12 caratteri, che contenga almeno una lettera maiuscola, un numero e una lettera minuscola.</div>
+                    
+                    <input type="password" class="text-input" name="confirm_password" id="newpwd" onblur="passwordUguali()" placeholder="Conferma nuova Password"></input>
+                    <!--  <div class="valid-feedback">Password valida.</div>
+                	<div class="invalid-feedback">Le password non corrispondono.</div> -->
                   </div>
 
                   <div class="submit">
@@ -488,6 +511,9 @@
           debug: false
         };
   </script>
+
+	
+
 
   <script src="https://d1a3f4spazzrp4.cloudfront.net/web-p2/scripts/analytics.cb25f45deae12fe2582214808908f898.js"></script>
 
