@@ -6,6 +6,7 @@
 <%@page import="java.io.InputStream"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="javax.sql.DataSource,it.unisa.model.*"%>
+<%@page import="com.mysql.cj.jdbc.Blob"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,15 +15,16 @@
 </head>
 <body>
 <%
-	DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
-	MaterialModelDS model= new MaterialModelDS(ds);
-	MaterialBean bean= model.doRetrieveByKey("1");
+	//DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
+	//MaterialModelDS model= new MaterialModelDS(ds);
+	//MaterialBean bean= model.doRetrieveByKey("1");
 	//response.setHeader("Content-Disposition", "filename="+bean.getFilename());
 		response.setContentType("image/png");
 
 		try{
-			InputStream is=bean.getAnteprima();
-			
+			//InputStream is=bean.getAnteprima();
+			Blob image=(Blob)session.getAttribute("img");
+			InputStream is=image.getBinaryStream();
 	
 				    
 				    OutputStream outStream = response.getOutputStream();

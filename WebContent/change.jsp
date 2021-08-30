@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1" import="java.sql.Date,it.unisa.model.*,java.util.Collection,java.util.Iterator"%>
     
 <%@ page import ="java.io.InputStream" %>
-    
+<%@page import="com.mysql.cj.jdbc.Blob"%>  
 <!DOCTYPE html>
 <html>
 <head prefix="og:http://ogp.me/ns#">
@@ -91,7 +91,8 @@
 	 String nome = (String)session.getAttribute("nome");
 	 String cognome = (String)session.getAttribute("cognome");
 	 String username = (String)session.getAttribute("username");
-	 InputStream img = (InputStream)session.getAttribute("img");
+	 Blob image = (Blob)session.getAttribute("img");
+	 InputStream img=image.getBinaryStream();
 	 String email = (String)session.getAttribute("email");
 	 String password = (String)session.getAttribute("password");
 	 Date dataNascita = (Date)session.getAttribute("dataNascita");

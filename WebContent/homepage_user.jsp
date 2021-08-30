@@ -1,3 +1,4 @@
+<%@page import="java.io.InputStream"%>
 <%@page import="it.unisa.model.MaterialModelDS"%>
 <%@page import="it.unisa.model.FriendsModelDS"%>
 <%@page import="it.unisa.model.FriendsBean"%>
@@ -6,6 +7,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="javax.sql.DataSource"%>
+<%@page import="com.mysql.cj.jdbc.Blob"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,6 +72,7 @@
   String dipName = (String)session.getAttribute("dipName");
   String universita = (String)session.getAttribute("denominazione");
   String username=(String)session.getAttribute("username");
+  Blob imgProfile=(Blob)session.getAttribute("img");
   DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
   FriendsModelDS friends=new FriendsModelDS(ds);
   int numeroAmici=friends.getNumerFriends(username);
@@ -98,8 +101,11 @@
 					<div class="card">
 						<div class="card-body">
 							<div class="d-flex flex-column align-items-center text-center">
-								<img src="https://bootdey.com/img/Content/avatar/avatar7.png"
-									alt="Admin" class="rounded-circle" width="150">
+								<%if(session.getAttribute("img")!=null){ %>
+									<img src="PrintProfileImage" alt="Admin" class="rounded-circle" width="150">
+								<%}else{ %>
+									<img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+								<%} %>
 								<div class="mt-3">
 									<h4><%=nome%>
 										<%=cognome %></h4>

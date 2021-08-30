@@ -1,5 +1,6 @@
 package it.unisa.model;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -277,6 +278,87 @@ public class UserModelDS implements Model<UserBean> {
 			}
 		}
 	}
+	
+	
+	public void doUpdateEmail(String username,String newMail)throws SQLException{
+		Connection connection = null;
+		PreparedStatement ps = null;
+
+		String sql = "UPDATE Utente SET  Email= ? WHERE Username = ?";
+		
+		try {
+			connection = ds.getConnection();
+			ps = connection.prepareStatement(sql);
+			ps.setString(1, newMail);
+			ps.setString(2, username);
+			ps.executeUpdate();
+			System.out.println("Email aggiornata");
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			}
+			finally {
+				if(connection!=null)
+					connection.close();
+			}
+		}
+		
+	}
+	
+	
+	public void doUpdateDepartment(String username,String newDipName,String newUniversity) throws SQLException {
+		Connection connection = null;
+		PreparedStatement ps = null;
+
+		String sql = "UPDATE Utente SET  dipName= ?,Denominazione=? WHERE Username = ?";
+		
+		try {
+			connection = ds.getConnection();
+			ps = connection.prepareStatement(sql);
+			ps.setString(1, newDipName);
+			ps.setString(2, newUniversity);
+			ps.setString(3, username);
+			ps.executeUpdate();
+			System.out.println("Dipartimento aggiornato");
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			}
+			finally {
+				if(connection!=null)
+					connection.close();
+			}
+		}
+	}
+	
+	
+	public void doUpdateImage(String username,InputStream image) throws SQLException{
+		Connection connection = null;
+		PreparedStatement ps = null;
+
+		String sql = "UPDATE Utente SET  Img=? WHERE Username = ?";
+		
+		try {
+			connection = ds.getConnection();
+			ps = connection.prepareStatement(sql);
+			ps.setBlob(1, image);
+			ps.setString(2, username);
+			ps.executeUpdate();
+			System.out.println("Immagine di profilo aggiornata");
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			}
+			finally {
+				if(connection!=null)
+					connection.close();
+			}
+		}
+	}
+	
 	
 	@Override
 	public void doDelete(UserBean item) throws SQLException {

@@ -1,6 +1,7 @@
 package it.unisa.control;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Calendar;
@@ -13,7 +14,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import javax.sql.DataSource;
+
+import com.mysql.cj.jdbc.Blob;
 
 import it.unisa.model.PaymentMethodBean;
 import it.unisa.model.PaymentMethodModelDS;
@@ -58,24 +62,109 @@ public class ChangeProfile extends HttpServlet {
 		
 		String username = (String)session.getAttribute("username");
 		
+//CAMBIO IMMAGINE PROFILO
+		Part image=request.getPart("picture");
+		InputStream is=null;
+		if(image.getSize()>0) {
+			System.out.println("sto nell if ma non dovrei esserci");
+			is=image.getInputStream();
+			try {
+				model_utente.doUpdateImage(username, is);
+				success+=" Immagine di profilo aggiornata-";
+				request.setAttribute("success", success);
+				}
+			catch(SQLException e) {
+				System.out.println("Errore: Immagine di profilo non aggiornata");
+				error+=" Errore immagine di profilo non aggiornata";
+				request.setAttribute("error",error);	
+				e.printStackTrace();
+			}
+			
+			//aggiorno le varabili di sessione
+			UserModelDS user=new UserModelDS(ds);
+			UserBean bean;
+			try {
+				bean = user.doRetrieveByUsername(username);
+				session.setAttribute("img",bean.getImg());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+		}
 		
+		
+//CAMBIO MAIL
 		String mail = request.getParameter("mail");
 		
 		if(mail!=null && !mail.trim().equals("") && Validation.validateEmail(mail)) {
-			//TODO CAMBIA MAIL
+			try {
+				model_utente.doUpdateEmail(username, mail);
+				success+=" Email aggiornata-";
+				request.setAttribute("success", success);
+				}
+			catch(SQLException e) {
+				System.out.println("Errore: Email non aggiornata");
+				error+=" Errore email non aggiornata";
+				request.setAttribute("error",error);	
+				e.printStackTrace();
+			}
+			//aggiorno le varabili di sessione
+			UserModelDS user=new UserModelDS(ds);
+			UserBean bean;
+			try {
+				bean = user.doRetrieveByUsername(username);
+				session.setAttribute("email",bean.getEmail());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		
+//CAMBIO UNI/DIPATRIMENTO
 		String nomeuni = request.getParameter("nomeuni");
-		String indirizzo = request.getParameter("indirizzo");
+		//String indirizzo = request.getParameter("indirizzo");
 		String dipartimento = request.getParameter("dipartimento");
+		if(nomeuni!=null&&!nomeuni.equals(""))
+			if(dipartimento!=null&&!dipartimento.equals("")) {
+				try {
+					model_utente.doUpdateDepartment(username, dipartimento,nomeuni);
+					success+="Dipartimento aggiornato-";
+					request.setAttribute("success", success);
+					}
+				catch(SQLException e) {
+					System.out.println("Errore: Dipartimento non aggiornato");
+					error+=" Errore dipartimento non aggiornato";
+					request.setAttribute("error",error);	
+					
+					e.printStackTrace();
+				}
+				//aggiorno le varabili di sessione
+				UserModelDS user=new UserModelDS(ds);
+				UserBean bean;
+				try {
+					bean = user.doRetrieveByUsername(username);
+					session.setAttribute("denominazione",bean.getDenominazione());
+					session.setAttribute("dipName",bean.getDipName());
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		
+		
+		
+		
+		
+		
+//CAMBIO PASSWORD
 		String current_password = request.getParameter("current_password");
 		String password = request.getParameter("password");
 		String confirm_password = request.getParameter("confirm_password");
 		
 		if(current_password !=null && !current_password.trim().equals("")) {
 			UserBean bean = new UserBean();
-			//Vedo se la password è corretta
+			//Vedo se la password ï¿½ corretta
 			try {
 				bean = model_utente.checkLogin(username,current_password);
 			}catch(SQLException e) {
@@ -100,8 +189,20 @@ public class ChangeProfile extends HttpServlet {
 					}
 				}
 			}
+			//aggiorno le varabili di sessione
+			UserModelDS user=new UserModelDS(ds);
+			UserBean b;
+			try {
+				b = user.doRetrieveByUsername(username);
+				session.setAttribute("password",b.getPass());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-
+		
+		
+//AGGIORNAMENTO DATI CARTA
 		PaymentMethodModelDS model_carta= new PaymentMethodModelDS(ds);
 		
 		String nomecarta = request.getParameter("nomecarta");
@@ -152,7 +253,6 @@ public class ChangeProfile extends HttpServlet {
 		
 		System.out.println("mail:"+mail+
 				"\n nomeuni:"+nomeuni+
-				"\n indirizzo:"+indirizzo+
 				"\n dipartimento:"+dipartimento+
 				"\n current_password:"+current_password+
 				"\n password:"+password+
