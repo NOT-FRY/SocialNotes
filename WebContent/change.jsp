@@ -92,7 +92,9 @@
 	 String cognome = (String)session.getAttribute("cognome");
 	 String username = (String)session.getAttribute("username");
 	 Blob image = (Blob)session.getAttribute("img");
-	 InputStream img=image.getBinaryStream();
+	 if(image!=null){
+		InputStream img=image.getBinaryStream();
+	 }
 	 String email = (String)session.getAttribute("email");
 	 String password = (String)session.getAttribute("password");
 	 Date dataNascita = (Date)session.getAttribute("dataNascita");
