@@ -29,7 +29,6 @@
     		 response.sendRedirect(encodedURL);
       }
   %>
-  <div>
   		<%
 	String errore = (String) request.getAttribute("error");
 	if (errore != null) {
@@ -45,7 +44,6 @@
 	<%
 	}
 	%>
-	</div>
   		
   		
   		
