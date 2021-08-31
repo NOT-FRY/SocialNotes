@@ -30,11 +30,9 @@ public class PrintImage extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("image/png");
-		System.out.println("ciao in doGet");
 		String username=request.getParameter("username");
 		DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
 		try{
-			System.out.println("Username in print image "+username);
 			UserModelDS user=new UserModelDS(ds);
 			UserBean bean=user.doRetrieveByUsername(username);
 			

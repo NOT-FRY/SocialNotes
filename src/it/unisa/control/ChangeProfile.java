@@ -201,7 +201,7 @@ public class ChangeProfile extends HttpServlet {
 		}
 		
 		
-//AGGIORNAMENTO DATI CARTA
+//AGGIUNTI NUOVA CARTA
 		PaymentMethodModelDS model_carta= new PaymentMethodModelDS(ds);
 		
 		String nomecarta = request.getParameter("nomecarta");
@@ -220,7 +220,7 @@ public class ChangeProfile extends HttpServlet {
 		 * */
 		if(nomecarta!=null && !nomecarta.trim().equals("")) {
 			if(cognomecarta!=null && !cognomecarta.trim().equals("")) {
-				if(numerocarta!=null && !numerocarta.trim().equals("") && numerocarta.length()<=16) { //<=16 vincolo DB
+				if(numerocarta!=null && !numerocarta.trim().equals("") && numerocarta.length()==16) { //=16 vincolo DB
 					if(mesecarta!=null && !mesecarta.trim().equals("")) {
 						if(annocarta!=null && !annocarta.trim().equals("")) {
 							Calendar calendar = Calendar.getInstance();
@@ -234,7 +234,7 @@ public class ChangeProfile extends HttpServlet {
 							pbean.setUsername(username);
 							try {
 								model_carta.doSave(pbean);
-								success+=" Metodo di pagamento aggiornato-";
+								success+=" Metodo di pagamento aggiunto-";
 								request.setAttribute("success", success);
 								
 							}catch(SQLException e) {
@@ -248,6 +248,25 @@ public class ChangeProfile extends HttpServlet {
 				}
 			}
 		}
+		
+		
+//ELIMINA CARTA
+		String eliminaCarta=request.getParameter("numcartaDelete");
+		if(eliminaCarta!=null && !eliminaCarta.trim().equals("") && eliminaCarta.length()==16) {
+			PaymentMethodModelDS pay=new PaymentMethodModelDS(ds);
+			try {
+				pay.doDeleteByNumber(eliminaCarta);
+				success+=" Metodo di pagamento eliminato-";
+				request.setAttribute("success", success);
+			} catch (SQLException e) {
+				System.out.println("Metodo di pagamento non eliminato");
+				error+=" Errore: metodo di pagamento non eliminato-";
+				request.setAttribute("error",error);
+				e.printStackTrace();
+			}
+		}
+		
+		
 		
 		
 		/*System.out.println("mail:"+mail+

@@ -3,6 +3,7 @@
     
 <%@ page import ="java.io.InputStream" %>
 <%@page import="com.mysql.cj.jdbc.Blob"%>  
+<%@page import="java.util.LinkedList"%>  
 <!DOCTYPE html>
 <html>
 <head prefix="og:http://ogp.me/ns#">
@@ -104,8 +105,9 @@
 	 String dipName = (String)session.getAttribute("dipName");
 	 
 	 	 
-
-
+	 DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
+	
+	
  %>
  <%@include file="header_user.jsp" %>
 
@@ -173,7 +175,7 @@
           
             <div class="grid data-row">
               <div class="grid__item one-quarter title">
-                <img class="profile-picture" src="PrintProfileImage"></img>
+                <img class="profile-picture" src="PrintImage?username=<%=username %>" alt="ciao">
               </div>
               <!--
  -->
@@ -201,7 +203,7 @@
                 <div class="grid__item one-quarter">
 
                   <div class="change-profile-picture">
-                    <img src="PrintProfileImage" class="profile-picture">
+                    <img src="PrintImage?username=<%=username %>" class="profile-picture" alt="ciao">
                     <div class="black-filter"></div>
                     <div class="helper-profile-picture">
                       <p>
@@ -264,7 +266,7 @@
                 
                   <input type="hidden" name="_csrf_token" id="-csrf-token" value="1440526831-01-FIiAtX3_sdMNiFb34GXRG49qaUBWsxonFotdT79C_3s=">
                   		<%
-                  			DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
+                  			//DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
                   			UniversityModelDS umodel = new UniversityModelDS(ds);
                   			Collection <UniversityBean> universities = umodel.doRetrieveAll();
                   			
@@ -369,14 +371,27 @@
             <div class="row-group editable-single-row">
               <div class="grid data-row">
                 <div class="grid__item one-quarter title">
-                  Metodo di pagamento
+                    Aggiungi metodo di pagamento
                 </div>
                 <div class="grid__item one-half data" data-field="None">
 
                   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-               			 <p class='data' data-field='name'>Titolare</p>
-                		 <p class='data' data-field='number'>Ultime 5 cifre della carta</p>
-
+                  <h5><b>Le tue carte</b></h5>
+                  <%
+                 	Collection<PaymentMethodBean> cards=new LinkedList<PaymentMethodBean>();
+             	 	PaymentMethodModelDS payment=new PaymentMethodModelDS(ds);
+             	 	cards=payment.doRetrieveByUsername(username);
+             	 	if(cards!=null&&cards.size()>0){
+						Iterator<?> it=cards.iterator();
+						while(it.hasNext()){
+							PaymentMethodBean bean=(PaymentMethodBean)it.next();
+							String ultimeCifre=bean.getNumeroCarta().substring(11);
+                  %>
+               			 <p class='data' data-field='name'><%=bean.getNomeIntestatario() %> <%=bean.getCognomeIntestatario() %>		<%=ultimeCifre %></p>
+				<%
+						}
+             	 	}
+				%>
 
 
 
@@ -390,7 +405,7 @@
 
                 <div class="grid hidden-form hidden">
                   <div class="grid__item one-quarter">
-                    Metodo di pagamento
+                    Aggiungi metodo di pagamento
                   </div>
                <div class="grid__item one-third">
                  
@@ -408,7 +423,7 @@
                    <div class="form-group">
                      <label class="col-sm-3 control-label">Numero carta </label>
                      <div class="col-sm-9">
-                       <input type="text" class="form-control" placeholder="••••  ••••  ••••  ••••" name="numcarta"></input>
+                       <input type="text" class="form-control" placeholder="&#8226;&#8226;&#8226;&#8226; &#8226;&#8226;&#8226;&#8226; &#8226;&#8226;&#8226;&#8226; &#8226;&#8226;&#8226;&#8226;" name="numcarta"></input>
                        <p class="help-block">Le 16 cifre che trovi sulla carta.</p>
                      </div>
                    </div>
@@ -454,6 +469,44 @@
                  </div>
                 </div>
                 </div>
+                 <div class="row-group editable-single-row">
+            <div class="grid data-row">
+              <div class="grid__item one-quarter title">
+                Elimina metodo di pagamento
+              </div>
+              <!--
+ -->
+                <div class="grid__item one-half data" data-field="None">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </div>
+              <!--
+ -->
+              <div class="grid__item one-quarter">
+                <button href="#" class="btn edit-hidden-form btn-principale">
+                  Modifica
+                </button>
+              </div>
+            </div>
+            <div class="grid hidden-form hidden">
+              <div class="grid__item one-quarter">Elimina metodo di pagamento</div>
+              <div class="grid__item one-third">
+               
+				  <div class="form-group">
+                     <label class="col-sm-3 control-label">Numero carta </label>
+                     <div class="col-sm-9">
+                       <input type="text" class="form-control" placeholder="&#8226;&#8226;&#8226;&#8226; &#8226;&#8226;&#8226;&#8226; &#8226;&#8226;&#8226;&#8226; &#8226;&#8226;&#8226;&#8226;" name="numcartaDelete"></input>
+                       <p class="help-block">Le 16 cifre che trovi sulla carta.</p>
+                     </div>
+
+                  <div class="submit">
+                    <div class="messages"></div>
+                    <button class="btn btn-principale cancel-hidden-form text-dark">Chiudi</button>
+                  </div>
+               
+              </div>
+              <div class="grid__item one-half"></div>
+            </div>
+          </div>
                 <div class="grid__item one-quarter"></div>
                 	<div class="grid__item one-half">
               		<div class="submit">
@@ -461,8 +514,9 @@
                      <button class="btn btn--primary btn-principale text-dark" type="submit">Salva le modifiche</button>
                      <button class="btn btn-danger" type="reset">Annulla</button>
                    </div>
+                   <br>
                    </div>
-                
+                	
                 </div>
                 </div>
 

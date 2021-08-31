@@ -32,7 +32,7 @@ public class DepartmentModelDS implements Model<DepartmentBean> {
 		try {
 			con=ds.getConnection();
 			ps=con.prepareStatement(selectSQL);
-			Utility.print("doRetrieveAll:"+ps.toString());
+			//Utility.print("doRetrieveAll:"+ps.toString());
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()) {
 				DepartmentBean bean=new DepartmentBean();
