@@ -64,7 +64,7 @@
         <div class="col-md-4">
 
 
-          <form name="registrazione" action="SignupControl" method="POST" onSubmit="return formValidation();" novalidate>
+          <form name="registrazione" id="reg" action="SignupControl" method="POST" onSubmit="return formValidation();" novalidate>
 
 
             <div class="row">
@@ -147,30 +147,13 @@
                     Per favore seleziona una universit&agrave;.
                   </div>
               </div>
-              
-              <%
-              
-
-              DepartmentModelDS departmentModel = new DepartmentModelDS(ds);
-              Collection <DepartmentBean> departments = departmentModel.doRetrieveAll();
-                                
-              
-              %>
+       
               <div class="col-md-6 mb-3">
                   <label for="corso">Corso di studi:</label>
                   <select class="custom-select d-block w-100" id="corso" name="corso">
-                                       <% if(departments!=null&&departments.size()>0){
-								Iterator<?> iterator=departments.iterator();
-								while(iterator.hasNext()){
-									DepartmentBean dbean=(DepartmentBean)iterator.next();
-								
-									%>
-                    
-                    <option value ="<%=dbean.getNome() %>"><%=dbean.getNome() %></option>
-                    <%
-								}
-                                       }
-                    %>
+              
+                   
+                   
                   </select>
                   <div class="invalid-feedback">
                     Per favore seleziona un corso di studi.
@@ -212,14 +195,14 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+   
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 
     <script src="js/form-validation.js" type="text/javascript"></script>
+    <script src="js/FindDepartment.js" type="text/javascript"></script>
 
   </body>
 </html>

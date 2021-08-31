@@ -73,6 +73,7 @@ public class DepartmentModelDS implements Model<DepartmentBean> {
 				bean.setDenominazione(rs.getString("Denominazione"));
 				bean.setDescrizione(rs.getString("Descrizione"));
 				departments.add(bean);
+				System.out.println("DIPARTIMENTO: "+bean.getNome());
 			}
 		}
 		finally {
