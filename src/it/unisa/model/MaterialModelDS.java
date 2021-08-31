@@ -98,6 +98,49 @@ public class MaterialModelDS implements Model<MaterialBean> {
 		}
 		return material;
 	}
+	
+	public Collection<MaterialBean>  doRetrieveByString(String str) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+
+		
+		String selectSQL="SELECT * FROM Materiale WHERE Descrizione LIKE ? OR CodiceCorso IN (SELECT CodiceCorso From Corso WHERE Nome LIKE ?);";
+		Collection<MaterialBean> material=new LinkedList<MaterialBean>();
+		try {
+			con=ds.getConnection();
+			ps=con.prepareStatement(selectSQL);
+			ps.setString(1, '%'+str+'%');
+			ps.setString(2, '%'+str+'%');
+			
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()) {
+				MaterialBean bean=new MaterialBean();
+				bean.setCodiceMateriale(rs.getInt("CodiceMateriale"));
+				bean.setDataCaricamento(rs.getDate("DataCaricamento"));
+				bean.setKeywords(rs.getString("Keywords"));
+				bean.setCosto(rs.getInt("Costo"));
+				bean.setDescrizione(rs.getString("Descrizione"));
+				bean.setHidden(rs.getBoolean("Hidden"));
+				bean.setCodiceCorso(rs.getInt("CodiceCorso"));
+				bean.setUsername(rs.getString("Username"));
+				bean.setFileName(rs.getString("FileName"));
+				bean.setAnteprima(rs.getBlob("Anteprima").getBinaryStream());
+				material.add(bean);
+			}
+		}
+		finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			}
+			finally {
+				if(con!=null)
+					con.close();
+			}
+		}
+		return material;
+		
+	}
 
 	@Override
 	public void doSave(MaterialBean item) throws SQLException {
