@@ -17,7 +17,6 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import javax.sql.DataSource;
 
-import com.mysql.cj.jdbc.Blob;
 
 import it.unisa.model.PaymentMethodBean;
 import it.unisa.model.PaymentMethodModelDS;
