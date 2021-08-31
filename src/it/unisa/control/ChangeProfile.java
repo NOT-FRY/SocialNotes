@@ -66,7 +66,7 @@ public class ChangeProfile extends HttpServlet {
 		Part image=request.getPart("picture");
 		InputStream is=null;
 		if(image.getSize()>0) {
-			System.out.println("sto nell if ma non dovrei esserci");
+			//System.out.println("sto nell if ma non dovrei esserci");
 			is=image.getInputStream();
 			try {
 				model_utente.doUpdateImage(username, is);

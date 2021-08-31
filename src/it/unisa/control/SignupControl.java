@@ -1,6 +1,10 @@
 package it.unisa.control;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -16,6 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
+import it.unisa.model.FileBean;
+import it.unisa.model.FileModelDS;
 import it.unisa.model.UserBean;
 import it.unisa.model.UserModelDS;
 
@@ -89,7 +95,7 @@ public class SignupControl extends HttpServlet {
 		}else {
 			request.removeAttribute("error");
 		}
-		
+		DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
 		UserBean user = new UserBean();
 		
 		user.setNome(nome);
@@ -101,14 +107,19 @@ public class SignupControl extends HttpServlet {
 		user.setDipName(dipName);
 		user.setUltimoAccesso(ultimoAccesso);
 		user.setDataNascita(dataNascita);
+		user.setCoin(50);
+		String path=getServletContext().getResource("/img/avatar7.png").getPath();
+		File file=new File(path);
+		InputStream image=new FileInputStream(file);
 		
-		DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
 		UserModelDS model= new UserModelDS(ds);
 		
 	
 		
 			try {
 				model.doSave(user);
+				model.doUpdateImage(username, image);
+				user=model.doRetrieveByUsername(username);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				//System.out.println("ho lanciato l'eccezione");

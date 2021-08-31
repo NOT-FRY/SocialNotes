@@ -229,7 +229,7 @@ public class UserModelDS implements Model<UserBean> {
 
 			ps.setDate(6, item.getDataNascita());
 			ps.setTimestamp(7, item.getUltimoAccesso());
-			ps.setInt(8, 50);
+			ps.setInt(8, item.getCoin());
 			ps.setString(9, item.getDenominazione());
 			ps.setString(10, item.getDipName());
 

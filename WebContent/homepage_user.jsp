@@ -72,7 +72,8 @@
   String dipName = (String)session.getAttribute("dipName");
   String universita = (String)session.getAttribute("denominazione");
   String username=(String)session.getAttribute("username");
-  Blob imgProfile=(Blob)session.getAttribute("img");
+  Blob img=(Blob)session.getAttribute("img");
+  InputStream imgProfile=img.getBinaryStream();
   DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
   FriendsModelDS friends=new FriendsModelDS(ds);
   int numeroAmici=friends.getNumerFriends(username);
@@ -101,11 +102,7 @@
 					<div class="card">
 						<div class="card-body">
 							<div class="d-flex flex-column align-items-center text-center">
-								<%if(session.getAttribute("img")!=null){ %>
-									<img src="PrintProfileImage" alt="Admin" class="rounded-circle" width="150">
-								<%}else{ %>
-									<img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
-								<%} %>
+									<img src="PrintProfileImage" alt="pippo" class="rounded-circle" width="150">
 								<div class="mt-3">
 									<h4><%=nome%>
 										<%=cognome %></h4>
@@ -148,11 +145,12 @@ not support the canvas tag.</canvas>
 										Iterator<?> it=f.iterator();
 										while(it.hasNext()){
 											FriendsBean bean=(FriendsBean)it.next();
+											//request.setAttribute("usernameImg",bean.getUsername1());
+											session.setAttribute("usernameFriend", bean.getUsername1());
 								%>
 								<li>
 									<div class="left">
-										<img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-											alt="">
+										<img src="" alt="ciao">
 									</div>
 									<div class="right">
 										<h3><%=bean.getUsername1() %></h3>
