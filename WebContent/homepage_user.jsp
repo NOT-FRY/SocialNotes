@@ -73,7 +73,9 @@
   String universita = (String)session.getAttribute("denominazione");
   String username=(String)session.getAttribute("username");
   Blob img=(Blob)session.getAttribute("img");
-  InputStream imgProfile=img.getBinaryStream();
+  if(img!=null){
+  	InputStream imgProfile=img.getBinaryStream();
+  }
   DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
   FriendsModelDS friends=new FriendsModelDS(ds);
   int numeroAmici=friends.getNumerFriends(username);
@@ -145,12 +147,11 @@ not support the canvas tag.</canvas>
 										Iterator<?> it=f.iterator();
 										while(it.hasNext()){
 											FriendsBean bean=(FriendsBean)it.next();
-											//request.setAttribute("usernameImg",bean.getUsername1());
-											session.setAttribute("usernameFriend", bean.getUsername1());
+											
 								%>
 								<li>
 									<div class="left">
-										<img src="" alt="ciao">
+										<img src="PrintImage?username=<%=bean.getUsername1() %>" alt="ciao">
 									</div>
 									<div class="right">
 										<h3><%=bean.getUsername1() %></h3>

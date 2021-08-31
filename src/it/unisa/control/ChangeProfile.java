@@ -250,7 +250,7 @@ public class ChangeProfile extends HttpServlet {
 		}
 		
 		
-		System.out.println("mail:"+mail+
+		/*System.out.println("mail:"+mail+
 				"\n nomeuni:"+nomeuni+
 				"\n dipartimento:"+dipartimento+
 				"\n current_password:"+current_password+
@@ -261,7 +261,7 @@ public class ChangeProfile extends HttpServlet {
 				"\n numerocarta:"+numerocarta+
 				"\n mesecarta:"+mesecarta+
 				"\n annocarta:"+annocarta+
-				"\n username:"+username);
+				"\n username:"+username);*/
 		
 		
 		doGet(request, response);

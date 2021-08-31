@@ -29,16 +29,11 @@ public class PrintImage extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session=request.getSession(true);
-		if(session.getAttribute("username")==null) {
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
-			dispatcher.forward(request, response);
-		}
 		response.setContentType("image/png");
 		System.out.println("ciao in doGet");
+		String username=request.getParameter("username");
 		DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
 		try{
-			String username=(String)session.getAttribute("usernameFriend");
 			System.out.println("Username in print image "+username);
 			UserModelDS user=new UserModelDS(ds);
 			UserBean bean=user.doRetrieveByUsername(username);
