@@ -55,7 +55,7 @@
                 <!-- /FEATURES -->
                 <!-- PT-FOOTER -->
                 <div class="pt-footer">
-                    <a href="Carrello">AGGIUNGI AL CARRELLO</a>
+                    <a href="cart.jsp">AGGIUNGI AL CARRELLO</a>
                 </div>
                 <!-- /PT-FOOTER -->
             </div>
@@ -83,7 +83,7 @@
                 <!-- /FEATURES -->
                 <!-- PT-FOOTER -->
                 <div class="pt-footer">
-                    <a href="Carrello">AGGIUNGI AL CARRELLO</a>
+                    <a href="cart.jsp">AGGIUNGI AL CARRELLO</a>
                 </div>
                 <!-- /PT-FOOTER -->
             </div>
@@ -112,7 +112,7 @@
 
                 <!-- PT-FOOTER -->
                 <div class="pt-footer">
-                    <a href="Carrello">AGGIUNGI AL CARRELLO</a>
+                    <a href="cart.jsp">AGGIUNGI AL CARRELLO</a>
                 </div>
                 <!-- /PT-FOOTER -->
             </div>

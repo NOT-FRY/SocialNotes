@@ -39,7 +39,7 @@
 	String homeLink = "homepage.jsp";
 	String changeLink = "change.jsp";
 	String logoutLink = "homepage.jsp";
-	int coin = 99;
+	int coin = 0;
 	
 	//Sessione: non posso fare la sendRedirect probabilmente perchè questo header viene incluso in jsp dove già ne viene fatta un'altra
 	 if(session.getAttribute("username")!=null){

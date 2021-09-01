@@ -82,7 +82,14 @@
   MaterialModelDS material=new MaterialModelDS(ds);
   int quantitaMateriale=material.getQuantitaMaterialeCondiviso(username);
   Collection<FriendsBean> f=friends.doRetrieveByUsername(username);
+  UserModelDS user=new UserModelDS(ds);
+  float media=user.getValutazione(username);
   
+  
+  String visitUserLink="visitUser.jsp";
+  if(username!=null){
+	  visitUserLink=response.encodeURL(visitUserLink);
+  }
 %>
 
 	<%@ include file="header_user.jsp"%>
@@ -130,7 +137,7 @@
 							</li>
 							<li class="list-group-item">
 								<div class="h6 text-muted">Valutazione</div>
-								<canvas class="myCanvas" data-rating="3.12" width="100"
+								<canvas class="myCanvas" data-rating="<%=media %>" width="100"
 									height="20">
 not support the canvas tag.</canvas>
 							</li>
@@ -154,7 +161,7 @@ not support the canvas tag.</canvas>
 										<img src="PrintImage?username=<%=bean.getUsername1() %>" alt="ciao">
 									</div>
 									<div class="right">
-										<h3><%=bean.getUsername1() %></h3>
+										<a style="color:black"  href="<%=visitUserLink%>?friendname=<%=bean.getUsername1() %>" ><h3><%=bean.getUsername1() %></h3></a>
 										<p><%=friends.getNumerFriends(bean.getUsername1()) %> Friends</p>
 									</div>
 								</li>

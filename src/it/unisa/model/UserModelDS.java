@@ -365,6 +365,35 @@ public class UserModelDS implements Model<UserBean> {
 		// TODO Auto-generated method stub
 
 	}
+	
+	
+	public float getValutazione(String username)throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		String sql="SELECT avg(Valutazione) as Media FROM Materiale,Feedback WHERE Materiale.CodiceMateriale=Feedback.CodiceMateriale and Feedback.CodiceMateriale in (select Materiale.CodiceMateriale from Materiale where Username=?);";
+		try {
+			con=ds.getConnection();
+			ps=con.prepareStatement(sql);
+			ps.setString(1, username);
+			rs=ps.executeQuery();
+			if(rs.next()) 
+				return rs.getInt("Media");
+			return 0;
+		}finally {
+			try {
+				if(rs!=null)
+					rs.close();
+				if(ps!=null)
+					ps.close();
+			}
+			finally {
+				if(con!=null)
+					con.close();
+			}
+		}
+	}
+	
 
 	private DataSource ds;
 }

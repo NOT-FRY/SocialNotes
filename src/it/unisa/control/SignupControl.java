@@ -75,15 +75,15 @@ public class SignupControl extends HttpServlet {
 	    long javaTime = javaDate.getTime();
 		Timestamp ultimoAccesso = new Timestamp(javaTime);
 		
-		Date dataNascita = new Date(System.currentTimeMillis());
+		Date dataNascita =Date.valueOf(nascita);
 		
-		try {
+		/*try {
 			SimpleDateFormat formatter = new SimpleDateFormat("YYYY-MM-gg");
 			java.util.Date data = formatter.parse(nascita);
 			dataNascita = new Date(data.getTime());
 		}catch(Exception e) {
 			
-		}
+		}*/
 		
 		
 		if(!checkValidity(nome,cognome,username,pwd,email)) {
