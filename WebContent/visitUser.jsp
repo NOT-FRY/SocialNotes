@@ -1,7 +1,12 @@
+<%@page import="java.util.concurrent.TimeUnit"%>
 <%@page import="it.unisa.model.FriendsModelDS"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@page import="it.unisa.model.MaterialModelDS"%>
+<%@page import="java.util.Collection"%>
+<%@page import="it.unisa.model.MaterialBean"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.sql.Date"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,6 +37,8 @@
 	MaterialModelDS material=new MaterialModelDS(ds);
 	int quantitaMateriale=material.getQuantitaMaterialeCondiviso(friendname);
 	float media=user.getValutazione(friendname);
+	
+	Collection<MaterialBean> materials=material.doRetrieveByUsername(friendname);
 %>
 
 <div class="container">
@@ -161,6 +168,17 @@ not support the canvas tag.</canvas>
 					</div>
 					
 					
+					
+					<%
+									if(materials!=null&&materials.size()>0){
+										Iterator<?> it=materials.iterator();
+										while(it.hasNext()){
+											MaterialBean mat=(MaterialBean)it.next();
+											Date dataAttuale = new Date(System.currentTimeMillis());
+											Date dataCaricamento=mat.getDataCaricamento();
+											long diffInMillies=dataAttuale.getTime()-dataCaricamento.getTime();
+											long diff=TimeUnit.DAYS.convert(diffInMillies,TimeUnit.MILLISECONDS);
+								%>
 					<br><br>
 					<div class="card social-timeline-card">
 					<div class="card-header">
@@ -189,10 +207,10 @@ not support the canvas tag.</canvas>
 					</div>
 					<div class="card-body">
 						<div class="text-muted h7 mb-2">
-							<i class="fa fa-clock-o"></i>10 min ago
+							<i class="fa fa-clock-o"></i><%=diff %> days ago
 						</div>
-						<a class="card-link" href="#"><h5 class="card-title">Lorem
-								ipsum dolor sit amet, consectetur adip.</h5> </a> <img src="provvisorio/Cattura6.PNG" class="img-fluid" width="500px" height="500px">
+						<a class="card-link" href="#"><h5 class="card-title"><%=mat.getDescrizione() %></h5> </a>
+						<img src="PrintAnteprima?codice=<%=mat.getCodiceMateriale() %>" class="img-fluid" width="500px" height="500px">
 					</div>
 					<div class="card-footer">
 						<a href="#" class="card-link"><i class="fa fa-gittip"></i>
@@ -200,6 +218,7 @@ not support the canvas tag.</canvas>
 							Effettua una recensione</a>
 					</div>
 				</div>
+				<%}} %>
 				</div>
 			</div>
 		</div>

@@ -29,10 +29,12 @@ public class MaterialModelDS implements Model<MaterialBean> {
 			con=ds.getConnection();
 			ps=con.prepareStatement(selectSQL);
 			int codice=Integer.parseInt(code);
+			//System.out.println("Codice in materilmodel "+codice);
 			ps.setInt(1, codice);
 			rs=ps.executeQuery();
-			System.out.println("ciao");
+			//System.out.println("ciao");
 			if(rs.next()) {
+				bean.setCodiceMateriale(rs.getInt("CodiceMateriale"));
 				bean.setDataCaricamento(rs.getDate("DataCaricamento"));
 				bean.setKeywords(rs.getString("Keywords"));
 				bean.setCosto(rs.getInt("Costo"));
@@ -143,6 +145,53 @@ public class MaterialModelDS implements Model<MaterialBean> {
 		return material;
 		
 	}
+	
+	
+	public Collection<MaterialBean>  doRetrieveByUsername(String username) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		String sql="SELECT * FROM Materiale WHERE Username=?;";
+		Collection<MaterialBean> material=new LinkedList<MaterialBean>();
+		try {
+			con=ds.getConnection();
+			ps=con.prepareStatement(sql);
+			ps.setString(1,username);
+			
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				MaterialBean bean=new MaterialBean();
+				bean.setCodiceMateriale(rs.getInt("CodiceMateriale"));
+				bean.setDataCaricamento(rs.getDate("DataCaricamento"));
+				bean.setKeywords(rs.getString("Keywords"));
+				bean.setCosto(rs.getInt("Costo"));
+				bean.setDescrizione(rs.getString("Descrizione"));
+				bean.setHidden(rs.getBoolean("Hidden"));
+				bean.setCodiceCorso(rs.getInt("CodiceCorso"));
+				bean.setUsername(rs.getString("Username"));
+				bean.setFileName(rs.getString("FileName"));
+				bean.setAnteprima(rs.getBlob("Anteprima").getBinaryStream());
+				material.add(bean);
+			}
+		}
+		finally {
+			try {
+				if(rs!=null)
+					rs.close();
+				if(ps!=null)
+					ps.close();
+			}
+			finally {
+				if(con!=null)
+					con.close();
+			}
+		}
+		return material;
+		
+	}
+	
+	
 	
 	public Collection<MaterialBean>  doRetrieveByParameters(String str,String date,String ratingOrder, int rating) throws SQLException {
 		Connection con=null;
