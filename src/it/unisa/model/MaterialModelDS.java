@@ -59,6 +59,8 @@ public class MaterialModelDS implements Model<MaterialBean> {
 		return bean;
 		
 	}
+	
+	
 
 	@Override
 	public Collection<MaterialBean> doRetrieveAll() throws SQLException {
@@ -140,6 +142,224 @@ public class MaterialModelDS implements Model<MaterialBean> {
 		}
 		return material;
 		
+	}
+	
+	public Collection<MaterialBean>  doRetrieveByParameters(String str,String date,String ratingOrder, int rating) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		PreparedStatement view = null;
+		PreparedStatement dropViewSQL = null;
+
+		String dropView = "DROP VIEW IF EXISTS FeedbackMedia;";
+		String viewSQL = "CREATE VIEW FeedbackMedia AS\n"
+				+ "Select CodiceMateriale, ROUND(AVG(Valutazione)) AS ValutazioneMedia\n"
+				+ "FROM Feedback\n"
+				+ "GROUP BY CodiceMateriale;";
+		
+		
+		String selectSQL="SELECT Materiale.CodiceMateriale, Materiale.DataCaricamento,Materiale.Keywords, Materiale.costo, Materiale.Descrizione, Materiale.Hidden, Materiale.Username, Materiale.CodiceCorso,Materiale.Username,Materiale.FileName, Materiale.Anteprima, FeedbackMedia.ValutazioneMedia\n"
+				+ "FROM Materiale LEFT JOIN FeedbackMedia ON Materiale.CodiceMateriale = FeedbackMedia.CodiceMateriale \n"
+				+ "WHERE Descrizione LIKE ? OR CodiceCorso IN (SELECT CodiceCorso from Corso WHERE Nome LIKE ?) \n"
+				+ "ORDER BY DataCaricamento , ValutazioneMedia;";
+		
+		if (rating == 0) {
+		
+		if ((date.compareTo("DESC")==0)&&(ratingOrder.compareTo("DESC")==0)) {
+		selectSQL="SELECT Materiale.CodiceMateriale, Materiale.DataCaricamento,Materiale.Keywords, Materiale.costo, Materiale.Descrizione, Materiale.Hidden, Materiale.Username, Materiale.CodiceCorso,Materiale.Username,Materiale.FileName, Materiale.Anteprima, FeedbackMedia.ValutazioneMedia\n"
+				+ "FROM Materiale LEFT JOIN FeedbackMedia ON Materiale.CodiceMateriale = FeedbackMedia.CodiceMateriale \n"
+				+ "WHERE Descrizione LIKE ? OR CodiceCorso IN (SELECT CodiceCorso from Corso WHERE Nome LIKE ?) \n"
+				+ "ORDER BY DataCaricamento DESC, ValutazioneMedia DESC;";
+		}
+		if ((date.compareTo("DESC")==0)&&(ratingOrder.compareTo("ASC")==0)) {
+			selectSQL="SELECT Materiale.CodiceMateriale, Materiale.DataCaricamento,Materiale.Keywords, Materiale.costo, Materiale.Descrizione, Materiale.Hidden, Materiale.Username, Materiale.CodiceCorso,Materiale.Username,Materiale.FileName, Materiale.Anteprima, FeedbackMedia.ValutazioneMedia\n"
+					+ "FROM Materiale LEFT JOIN FeedbackMedia ON Materiale.CodiceMateriale = FeedbackMedia.CodiceMateriale \n"
+					+ "WHERE Descrizione LIKE ? OR CodiceCorso IN (SELECT CodiceCorso from Corso WHERE Nome LIKE ?) \n"
+					+ "ORDER BY DataCaricamento DESC, ValutazioneMedia ASC;";
+			}
+		if ((date.compareTo("ASC")==0)&&(ratingOrder.compareTo("DESC")==0)) {
+			selectSQL="SELECT Materiale.CodiceMateriale, Materiale.DataCaricamento,Materiale.Keywords, Materiale.costo, Materiale.Descrizione, Materiale.Hidden, Materiale.Username, Materiale.CodiceCorso,Materiale.Username,Materiale.FileName, Materiale.Anteprima, FeedbackMedia.ValutazioneMedia\n"
+					+ "FROM Materiale LEFT JOIN FeedbackMedia ON Materiale.CodiceMateriale = FeedbackMedia.CodiceMateriale \n"
+					+ "WHERE Descrizione LIKE ? OR CodiceCorso IN (SELECT CodiceCorso from Corso WHERE Nome LIKE ?) \n"
+					+ "ORDER BY DataCaricamento ASC, ValutazioneMedia DESC;";
+			}
+		
+		if ((date.compareTo("novalue")==0)&&(ratingOrder.compareTo("ASC")==0)) {
+			selectSQL="SELECT Materiale.CodiceMateriale, Materiale.DataCaricamento,Materiale.Keywords, Materiale.costo, Materiale.Descrizione, Materiale.Hidden, Materiale.Username, Materiale.CodiceCorso,Materiale.Username,Materiale.FileName, Materiale.Anteprima, FeedbackMedia.ValutazioneMedia\n"
+					+ "FROM Materiale LEFT JOIN FeedbackMedia ON Materiale.CodiceMateriale = FeedbackMedia.CodiceMateriale \n"
+					+ "WHERE Descrizione LIKE ? OR CodiceCorso IN (SELECT CodiceCorso from Corso WHERE Nome LIKE ?) \n"
+					+ "ORDER BY ValutazioneMedia ASC;";
+			}
+		if ((date.compareTo("ASC")==0)&&(ratingOrder.compareTo("novalue")==0)) {
+			selectSQL="SELECT Materiale.CodiceMateriale, Materiale.DataCaricamento,Materiale.Keywords, Materiale.costo, Materiale.Descrizione, Materiale.Hidden, Materiale.Username, Materiale.CodiceCorso,Materiale.Username,Materiale.FileName, Materiale.Anteprima, FeedbackMedia.ValutazioneMedia\n"
+					+ "FROM Materiale LEFT JOIN FeedbackMedia ON Materiale.CodiceMateriale = FeedbackMedia.CodiceMateriale \n"
+					+ "WHERE Descrizione LIKE ? OR CodiceCorso IN (SELECT CodiceCorso from Corso WHERE Nome LIKE ?) \n"
+					+ "ORDER BY DataCaricamento ASC;";
+			}
+		if ((date.compareTo("novalue")==0)&&(ratingOrder.compareTo("novalue")==0)) {
+			selectSQL="SELECT Materiale.CodiceMateriale, Materiale.DataCaricamento,Materiale.Keywords, Materiale.costo, Materiale.Descrizione, Materiale.Hidden, Materiale.Username, Materiale.CodiceCorso,Materiale.Username,Materiale.FileName, Materiale.Anteprima, FeedbackMedia.ValutazioneMedia\n"
+					+ "FROM Materiale LEFT JOIN FeedbackMedia ON Materiale.CodiceMateriale = FeedbackMedia.CodiceMateriale \n"
+					+ "WHERE Descrizione LIKE ? OR CodiceCorso IN (SELECT CodiceCorso from Corso WHERE Nome LIKE ?);";
+			}
+		if ((date.compareTo("DESC")==0)&&(ratingOrder.compareTo("novalue")==0)) {
+			selectSQL="SELECT Materiale.CodiceMateriale, Materiale.DataCaricamento,Materiale.Keywords, Materiale.costo, Materiale.Descrizione, Materiale.Hidden, Materiale.Username, Materiale.CodiceCorso,Materiale.Username,Materiale.FileName, Materiale.Anteprima, FeedbackMedia.ValutazioneMedia\n"
+					+ "FROM Materiale LEFT JOIN FeedbackMedia ON Materiale.CodiceMateriale = FeedbackMedia.CodiceMateriale \n"
+					+ "WHERE Descrizione LIKE ? OR CodiceCorso IN (SELECT CodiceCorso from Corso WHERE Nome LIKE ?) \n"
+					+ "ORDER BY DataCaricamento DESC;";
+			}
+		if ((date.compareTo("novalue")==0)&&(ratingOrder.compareTo("DESC")==0)) {
+			selectSQL="SELECT Materiale.CodiceMateriale, Materiale.DataCaricamento,Materiale.Keywords, Materiale.costo, Materiale.Descrizione, Materiale.Hidden, Materiale.Username, Materiale.CodiceCorso,Materiale.Username,Materiale.FileName, Materiale.Anteprima, FeedbackMedia.ValutazioneMedia\n"
+					+ "FROM Materiale LEFT JOIN FeedbackMedia ON Materiale.CodiceMateriale = FeedbackMedia.CodiceMateriale \n"
+					+ "WHERE Descrizione LIKE ? OR CodiceCorso IN (SELECT CodiceCorso from Corso WHERE Nome LIKE ?) \n"
+					+ "ORDER BY ValutazioneMedia DESC;";
+			}
+		
+		}else {
+			
+
+		
+		if ((date.compareTo("DESC")==0)&&(ratingOrder.compareTo("DESC")==0)) {
+			selectSQL="SELECT Materiale.CodiceMateriale, Materiale.DataCaricamento,Materiale.Keywords, Materiale.costo, Materiale.Descrizione, Materiale.Hidden, Materiale.Username, Materiale.CodiceCorso,Materiale.Username,Materiale.FileName, Materiale.Anteprima, FeedbackMedia.ValutazioneMedia\n"
+					+ "FROM Materiale LEFT JOIN FeedbackMedia ON Materiale.CodiceMateriale = FeedbackMedia.CodiceMateriale \n"
+					+ "WHERE (Descrizione LIKE ? OR CodiceCorso IN (SELECT CodiceCorso from Corso WHERE Nome LIKE ?)) AND (ValutazioneMedia = ?) \n"
+					+ "ORDER BY DataCaricamento DESC, ValutazioneMedia DESC;";
+			}
+			if ((date.compareTo("DESC")==0)&&(ratingOrder.compareTo("ASC")==0)) {
+				selectSQL="SELECT Materiale.CodiceMateriale, Materiale.DataCaricamento,Materiale.Keywords, Materiale.costo, Materiale.Descrizione, Materiale.Hidden, Materiale.Username, Materiale.CodiceCorso,Materiale.Username,Materiale.FileName, Materiale.Anteprima, FeedbackMedia.ValutazioneMedia\n"
+						+ "FROM Materiale LEFT JOIN FeedbackMedia ON Materiale.CodiceMateriale = FeedbackMedia.CodiceMateriale \n"
+						+ "WHERE (Descrizione LIKE ? OR CodiceCorso IN (SELECT CodiceCorso from Corso WHERE Nome LIKE ?)) AND (ValutazioneMedia = ?) \n"
+						+ "ORDER BY DataCaricamento DESC, ValutazioneMedia ASC;";
+				}
+			if ((date.compareTo("ASC")==0)&&(ratingOrder.compareTo("DESC")==0)) {
+				selectSQL="SELECT Materiale.CodiceMateriale, Materiale.DataCaricamento,Materiale.Keywords, Materiale.costo, Materiale.Descrizione, Materiale.Hidden, Materiale.Username, Materiale.CodiceCorso,Materiale.Username,Materiale.FileName, Materiale.Anteprima, FeedbackMedia.ValutazioneMedia\n"
+						+ "FROM Materiale LEFT JOIN FeedbackMedia ON Materiale.CodiceMateriale = FeedbackMedia.CodiceMateriale \n"
+						+ "WHERE (Descrizione LIKE ? OR CodiceCorso IN (SELECT CodiceCorso from Corso WHERE Nome LIKE ?)) AND (ValutazioneMedia = ?) \n"
+						+ "ORDER BY DataCaricamento ASC, ValutazioneMedia DESC;";
+				}
+			if ((date.compareTo("ASC")==0)&&(ratingOrder.compareTo("ASC")==0)) {
+				selectSQL="SELECT Materiale.CodiceMateriale, Materiale.DataCaricamento,Materiale.Keywords, Materiale.costo, Materiale.Descrizione, Materiale.Hidden, Materiale.Username, Materiale.CodiceCorso,Materiale.Username,Materiale.FileName, Materiale.Anteprima, FeedbackMedia.ValutazioneMedia\n"
+						+ "FROM Materiale LEFT JOIN FeedbackMedia ON Materiale.CodiceMateriale = FeedbackMedia.CodiceMateriale \n"
+						+ "WHERE (Descrizione LIKE ? OR CodiceCorso IN (SELECT CodiceCorso from Corso WHERE Nome LIKE ?)) AND (ValutazioneMedia = ?) \n"
+						+ "ORDER BY DataCaricamento ASC, ValutazioneMedia DESC;";
+				}
+			
+			if ((date.compareTo("novalue")==0)&&(ratingOrder.compareTo("ASC")==0)) {
+				selectSQL="SELECT Materiale.CodiceMateriale, Materiale.DataCaricamento,Materiale.Keywords, Materiale.costo, Materiale.Descrizione, Materiale.Hidden, Materiale.Username, Materiale.CodiceCorso,Materiale.Username,Materiale.FileName, Materiale.Anteprima, FeedbackMedia.ValutazioneMedia\n"
+						+ "FROM Materiale LEFT JOIN FeedbackMedia ON Materiale.CodiceMateriale = FeedbackMedia.CodiceMateriale \n"
+						+ "WHERE (Descrizione LIKE ? OR CodiceCorso IN (SELECT CodiceCorso from Corso WHERE Nome LIKE ?)) AND (ValutazioneMedia = ?) \n"
+						+ "ORDER BY ValutazioneMedia ASC;";
+				}
+			if ((date.compareTo("ASC")==0)&&(ratingOrder.compareTo("novalue")==0)) {
+				selectSQL="SELECT Materiale.CodiceMateriale, Materiale.DataCaricamento,Materiale.Keywords, Materiale.costo, Materiale.Descrizione, Materiale.Hidden, Materiale.Username, Materiale.CodiceCorso,Materiale.Username,Materiale.FileName, Materiale.Anteprima, FeedbackMedia.ValutazioneMedia\n"
+						+ "FROM Materiale LEFT JOIN FeedbackMedia ON Materiale.CodiceMateriale = FeedbackMedia.CodiceMateriale \n"
+						+ "WHERE (Descrizione LIKE ? OR CodiceCorso IN (SELECT CodiceCorso from Corso WHERE Nome LIKE ?)) AND (ValutazioneMedia = ?) \n"
+						+ "ORDER BY DataCaricamento ASC;";
+				}
+			if ((date.compareTo("novalue")==0)&&(ratingOrder.compareTo("novalue")==0)) {
+				selectSQL="SELECT Materiale.CodiceMateriale, Materiale.DataCaricamento,Materiale.Keywords, Materiale.costo, Materiale.Descrizione, Materiale.Hidden, Materiale.Username, Materiale.CodiceCorso,Materiale.Username,Materiale.FileName, Materiale.Anteprima, FeedbackMedia.ValutazioneMedia\n"
+						+ "FROM Materiale LEFT JOIN FeedbackMedia ON Materiale.CodiceMateriale = FeedbackMedia.CodiceMateriale \n"
+						+ "WHERE (Descrizione LIKE ? OR CodiceCorso IN (SELECT CodiceCorso from Corso WHERE Nome LIKE ?)) AND (ValutazioneMedia = ?);";
+				}
+			if ((date.compareTo("DESC")==0)&&(ratingOrder.compareTo("novalue")==0)) {
+				selectSQL="SELECT Materiale.CodiceMateriale, Materiale.DataCaricamento,Materiale.Keywords, Materiale.costo, Materiale.Descrizione, Materiale.Hidden, Materiale.Username, Materiale.CodiceCorso,Materiale.Username,Materiale.FileName, Materiale.Anteprima, FeedbackMedia.ValutazioneMedia\n"
+						+ "FROM Materiale LEFT JOIN FeedbackMedia ON Materiale.CodiceMateriale = FeedbackMedia.CodiceMateriale \n"
+						+ "WHERE (Descrizione LIKE ? OR CodiceCorso IN (SELECT CodiceCorso from Corso WHERE Nome LIKE ?)) AND (ValutazioneMedia = ?) \n"
+						+ "ORDER BY DataCaricamento DESC;";
+				}
+			if ((date.compareTo("novalue")==0)&&(ratingOrder.compareTo("DESC")==0)) {
+				selectSQL="SELECT Materiale.CodiceMateriale, Materiale.DataCaricamento,Materiale.Keywords, Materiale.costo, Materiale.Descrizione, Materiale.Hidden, Materiale.Username, Materiale.CodiceCorso,Materiale.Username,Materiale.FileName, Materiale.Anteprima, FeedbackMedia.ValutazioneMedia\n"
+						+ "FROM Materiale LEFT JOIN FeedbackMedia ON Materiale.CodiceMateriale = FeedbackMedia.CodiceMateriale \n"
+						+ "WHERE (Descrizione LIKE ? OR CodiceCorso IN (SELECT CodiceCorso from Corso WHERE Nome LIKE ?)) AND (ValutazioneMedia = ?) \n"
+						+ "ORDER BY ValutazioneMedia DESC;";
+				}
+
+		}
+
+		Collection<MaterialBean> material=new LinkedList<MaterialBean>();
+		try {
+			con=ds.getConnection();
+			ps=con.prepareStatement(selectSQL);
+			view = con.prepareStatement(viewSQL);
+			dropViewSQL = con.prepareStatement(dropView);
+			ps.setString(1, '%'+str+'%');
+			ps.setString(2, '%'+str+'%');
+			if(rating!=0)
+				ps.setInt(3, rating);
+			
+			dropViewSQL.execute();
+			view.execute();
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()) {
+				MaterialBean bean=new MaterialBean();
+				bean.setCodiceMateriale(rs.getInt("Materiale.CodiceMateriale"));
+				bean.setDataCaricamento(rs.getDate("Materiale.DataCaricamento"));
+				bean.setKeywords(rs.getString("Keywords"));
+				bean.setCosto(rs.getInt("Costo"));
+				bean.setDescrizione(rs.getString("Descrizione"));
+				bean.setHidden(rs.getBoolean("Hidden"));
+				bean.setCodiceCorso(rs.getInt("Materiale.CodiceCorso"));
+				bean.setUsername(rs.getString("Materiale.Username"));
+				bean.setFileName(rs.getString("FileName"));
+				bean.setAnteprima(rs.getBlob("Anteprima").getBinaryStream());
+				material.add(bean);
+			}
+		}
+		finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			}
+			finally {
+				if(con!=null)
+					con.close();
+			}
+		}
+		
+		return material;
+		
+	}
+	
+	public int doRetrieveFeedback(int code) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		PreparedStatement view = null;
+		PreparedStatement dropViewSQL = null;
+
+		String dropView = "DROP VIEW IF EXISTS FeedbackMedia;";
+		String viewSQL = "CREATE VIEW FeedbackMedia AS\n"
+				+ "Select CodiceMateriale, ROUND(AVG(Valutazione)) AS ValutazioneMedia\n"
+				+ "FROM Feedback\n"
+				+ "GROUP BY CodiceMateriale;";
+
+		
+		String selectSQL="SELECT * FROM FeedbackMedia WHERE codiceMateriale = ?";
+		
+		try {
+			con=ds.getConnection();
+			ps=con.prepareStatement(selectSQL);
+			dropViewSQL = con.prepareStatement(dropView);
+			view = con.prepareStatement(viewSQL);
+			ps.setInt(1, code);
+			
+			dropViewSQL.execute();
+			view.execute();
+			ResultSet rs=ps.executeQuery();
+			
+			if(rs.first()) {
+				return rs.getInt("ValutazioneMedia");
+			}
+			
+		}
+		finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			}
+			finally {
+				if(con!=null)
+					con.close();
+			}
+		}
+		return 0;
 	}
 
 	@Override

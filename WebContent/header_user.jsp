@@ -70,9 +70,8 @@
 		</button>
 		<div class="collapse navbar-collapse justify-content-end float-right"
 			id="navbarText">
-			<form class="form-inline " id="form1" style="padding-bottom: 5px;">
-				<input class="form-control mr-sm-2" type="search" id="ricerca"
-					placeholder="Search" aria-label="Search">
+			<form class="form-inline " id="form1" style="padding-bottom:5px;" action="SearchServlet" >
+				 <input class="form-control mr-sm-2"  type="search" id="ricerca" name="ricerca" placeholder="Search" aria-label="Search">
 				<button class="btn btn-dark btn-md my-2 my-sm-0 " type="submit">
 					<i class="fas fa-search"></i> Cerca
 				</button>

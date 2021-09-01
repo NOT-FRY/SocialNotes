@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="java.util.*, it.unisa.model.*"%>
+    pageEncoding="ISO-8859-1" import="java.util.*, it.unisa.model.*,javax.sql.DataSource"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +16,6 @@
   width: 160px;
   flex-direction: row-reverse;
   justify-content: space-between;
-  margin: 40px auto;
   position: relative;
 }
 /* hide the inputs */
@@ -78,20 +77,39 @@
 <div class="container">
 <br><br>
 <div class="row">
-<div class="col-md-3"></div>
-<div class="col-md-6">
-<form class="form-inline shadow p-3 mb-5 bg-white rounded" action="" >
-  <div class="col">
+<div class="col-md-2"></div>
+<div class="col-md-8">
+<%
+DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
+
+  String stringRicerca = (String)request.getAttribute("ricercaNew");
+  System.out.println("STAMPA:" +stringRicerca);
+%>
+<form class="form shadow p-3 mb-5 bg-white rounded" action="SearchServlet" >
+<input type="search" id="ricerca" name="ricerca" hidden value="<%=stringRicerca%>">
+<div class="form-row">
+  <div class="form-group col-md-4">
     <label for="email">Ordine di caricamento</label>
      <select class="custom-select d-block w-100" id="date" name="date">
+       <option value="novalue"> - </option>
      <option value="ASC">Crescente</option>
      <option value="DESC">Decrescente</option>
      </select>
   </div>
 <br>
-<label>Rating:</label>
-     <div class="col">
-     <div class="star-rating">
+  <div class="form-group col-md-4">
+    <label for="email">Ordine in base al Rating:</label>
+     <select class="custom-select d-block w-100" id="ratingOrder" name="ratingOrder">
+     <option value="novalue"> - </option>
+     <option value="ASC">Crescente</option>
+     <option value="DESC">Decrescente</option>
+     </select>
+  </div>
+<br>
+       
+     <div class="form-group col-md-4" >
+   <label for="stella">Rating</label>
+     <div class="star-rating" id="stella">
       <input type="radio" name="stars" id="star-a" value="5"/>
       <label for="star-a"></label>
 
@@ -108,16 +126,17 @@
       <label for="star-e"></label>
 </div>
   </div>
-  <button type="submit" class="btn btn-default" style="background-color:#9697e7; color:white">Cerca</button>
+</div>
+<button type="submit" class="btn btn-default" style="background-color:#9697e7; color:white">Cerca</button>
 </form>
 
 </div>
-<div class="col-md-3"></div>
+<div class="col-md-2"></div>
 
 
 <%
   Collection <MaterialModelDS> collection = (Collection<MaterialModelDS>) request.getAttribute("materiale");
-
+  MaterialModelDS material = new MaterialModelDS(ds);
 if(collection!=null&&collection.size()>0){
 	Iterator<?> it=collection.iterator();
 	%>
@@ -127,16 +146,19 @@ if(collection!=null&&collection.size()>0){
     <th>Costo</th>
     <th>Username</th>
     <th>Data Caricamento</th>
+    <th>Feedback</th>
     </tr>
 	 <%
 	while(it.hasNext()){
 		MaterialBean mbean=(MaterialBean)it.next();
+		int feedback = material.doRetrieveFeedback(mbean.getCodiceMateriale());
 		%>
 		  <tr>
     <th><%=mbean.getDescrizione() %></th>
     <th><%=mbean.getCosto() %></th>
     <th><%=mbean.getUsername() %></th>
     <th><%=mbean.getDataCaricamento() %></th>
+    <th><%=feedback %></th>
   </tr>
 		
 		<% 
@@ -146,6 +168,8 @@ if(collection!=null&&collection.size()>0){
 	 
 	 </table>
 	 <% 
+}else{
+	response.sendRedirect("errorSearch.jsp");
 }
 %>
 
