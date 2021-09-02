@@ -87,7 +87,7 @@
   Collection<FriendsBean> f=friends.doRetrieveByUsername(username);
   UserModelDS user=new UserModelDS(ds);
   float media=user.getValutazione(username);
-  
+  System.out.println("media"+media);
   
   String visitUserLink="visitUser.jsp";
   if(username!=null){

@@ -1,6 +1,5 @@
 package it.unisa.model;
 
-import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -21,7 +20,7 @@ public class UserBean {
 		this.matricola="";
 		this.ultimoAccesso=null;
 		this.coin=0;
-		this.ban=null;
+		this.ban=false;
 		this.denominazione="";
 		this.dipName="";
 	}
@@ -127,12 +126,12 @@ public class UserBean {
 	}
 	
 	
-	public Date getBan() {
+	public boolean getBan() {
 		return ban;
 	}
 	
 	
-	public void setBan(Date ban) {
+	public void setBan(boolean ban) {
 		this.ban = ban;
 	}
 	
@@ -187,7 +186,7 @@ public class UserBean {
     private String matricola;
     private Timestamp ultimoAccesso;
     private int coin;
-    private Date ban;
+    private boolean ban;
     private String denominazione;
     private String dipName;
 }

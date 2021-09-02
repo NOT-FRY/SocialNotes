@@ -156,9 +156,9 @@ if (session.getAttribute("username")!=null){
 					<div class="card-body">
 
 						<div style="float: left; margin-right: 5px;">
-							<img src="img/politecnico.png" alt="..." width="100" height="70">
+							<img src="img/politecnico.jpeg" alt="..." width="100" height="70">
 						</div>
-						<a href="https://www.polimi.it/"><p align=center>Politecnico di MIlano</p></a>
+						<a href="https://www.polimi.it/"><p align=center>Politecnico di Milano</p></a>
 					</div>
 				</div>
 			</div>

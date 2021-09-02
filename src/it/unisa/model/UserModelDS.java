@@ -51,7 +51,7 @@ public class UserModelDS implements Model<UserBean> {
 				bean.setMatricola(rs.getString("Matricola"));
 				bean.setUltimoAccesso(rs.getTimestamp("UltimoAccesso"));
 				bean.setCoin(rs.getInt("Coin"));
-				bean.setBan(rs.getDate("Ban"));
+				bean.setBan(rs.getBoolean("Ban"));
 				bean.setDenominazione(rs.getString("Denominazione"));
 				bean.setDipName(rs.getString("DipName"));
 			}
@@ -98,7 +98,7 @@ public class UserModelDS implements Model<UserBean> {
 				bean.setMatricola(rs.getString("Matricola"));
 				bean.setUltimoAccesso(rs.getTimestamp("UltimoAccesso"));
 				bean.setCoin(rs.getInt("Coin"));
-				bean.setBan(rs.getDate("Ban"));
+				bean.setBan(rs.getBoolean("Ban"));
 				bean.setDenominazione(rs.getString("Denominazione"));
 				bean.setDipName(rs.getString("DipName"));
 			}
@@ -141,7 +141,7 @@ public class UserModelDS implements Model<UserBean> {
 				bean.setMatricola(rs.getString("Matricola"));
 				bean.setUltimoAccesso(rs.getTimestamp("UltimoAccesso"));
 				bean.setCoin(rs.getInt("Coin"));
-				bean.setBan(rs.getDate("Ban"));
+				bean.setBan(rs.getBoolean("Ban"));
 				bean.setDenominazione(rs.getString("Denominazione"));
 				bean.setDipName(rs.getString("DipName"));
 			}
@@ -188,7 +188,7 @@ public class UserModelDS implements Model<UserBean> {
 				bean.setMatricola(rs.getString("Matricola"));
 				bean.setUltimoAccesso(rs.getTimestamp("UltimoAccesso"));
 				bean.setCoin(rs.getInt("Coin"));
-				bean.setBan(rs.getDate("Ban"));
+				bean.setBan(rs.getBoolean("Ban"));
 				bean.setDenominazione(rs.getString("Denominazione"));
 				bean.setDipName(rs.getString("DipName"));
 				users.add(bean);
@@ -209,6 +209,52 @@ public class UserModelDS implements Model<UserBean> {
 		return users;
 	}
 
+	
+	public Collection<UserBean> doRetrieveUsers() throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		String selectSQL="SELECT * FROM Utente,Copre WHERE Utente.Username=Copre.Username AND IDRuolo!=1;";
+		Collection<UserBean> users=new LinkedList<UserBean>();
+		try {
+			con=ds.getConnection();
+			ps=con.prepareStatement(selectSQL);
+			Utility.print("doRetrieveAll:"+ps.toString());
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()) {
+				UserBean bean=new UserBean();
+				bean.setUsername(rs.getString("Username"));
+				bean.setNome(rs.getString("Nome"));
+				bean.setCognome(rs.getString("Cognome"));
+				bean.setImg(rs.getBlob("Img"));
+				bean.setEmail(rs.getString("Email"));
+				bean.setPass(rs.getString("Pass"));
+				bean.setDataNascita(rs.getDate("DataNascita"));
+				bean.setMatricola(rs.getString("Matricola"));
+				bean.setUltimoAccesso(rs.getTimestamp("UltimoAccesso"));
+				bean.setCoin(rs.getInt("Coin"));
+				bean.setBan(rs.getBoolean("Ban"));
+				bean.setDenominazione(rs.getString("Denominazione"));
+				bean.setDipName(rs.getString("DipName"));
+				users.add(bean);
+			}
+			if(rs!=null)
+				rs.close();
+		}
+		finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			}
+			finally {
+				if(con!=null)
+					con.close();
+			}
+		}
+		return users;
+	}
+
+	
+	
 	@Override
 	public void doSave(UserBean item) throws SQLException {
 		Connection connection = null;
@@ -252,6 +298,30 @@ public class UserModelDS implements Model<UserBean> {
 	public void doUpdate(UserBean item) throws SQLException {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public void manageBan(String username,boolean ban) throws SQLException{
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		String sql = "UPDATE Utente SET Ban = ? WHERE Username = ?";
+		try {
+			con = ds.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setBoolean(1, ban);
+			ps.setString(2, username);
+			ps.executeUpdate();
+			System.out.println("Ban aggiornato");
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			}
+			finally {
+				if(con!=null)
+					con.close();
+			}
+		}
 	}
 	
 	public void doUpdatePassword(String username,String newPassword)throws SQLException {
@@ -378,7 +448,7 @@ public class UserModelDS implements Model<UserBean> {
 			ps.setString(1, username);
 			rs=ps.executeQuery();
 			if(rs.next()) 
-				return rs.getInt("Media");
+				return rs.getFloat("Media");
 			return 0;
 		}finally {
 			try {
