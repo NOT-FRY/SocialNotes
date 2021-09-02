@@ -6,10 +6,11 @@
 <meta charset="ISO-8859-1">
 <title>Gestione Utenti</title>
 <link rel="stylesheet" type="text/css" href="css/editUser.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
 </head>
 <body>
 <%@include file="header.jsp" %>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+
 <div class="container mt-3 mb-4">
 <div class="col-lg-9 mt-4 mt-lg-0">
     <div class="row">
@@ -44,9 +45,9 @@
                 </td>
                 <td>
                   <ul class="list-unstyled mb-0 d-flex justify-content-end">
-                    <li><a href="#" class="text-primary" data-toggle="tooltip" title="" data-original-title="view"><i class="far fa-eye"></i></a></li>
-                    <li><a href="#" class="text-info" data-toggle="tooltip" title="" data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a></li>
-                    <li><a href="#" class="text-danger" data-toggle="tooltip" title="" data-original-title="Delete"><i class="far fa-trash-alt"></i></a></li>
+                    <li><a href="#" class="text-primary" data-toggle="tooltip" title="" data-original-title="Visita"><i class="far fa-eye"></i></a></li>
+                    <li><a href="#" class="text-info" data-toggle="tooltip" title="" data-original-title="Sblocca"><i class="fas fa-lock-open"></i></a></li>
+                    <li><a href="#" class="text-danger" data-toggle="tooltip" title="" data-original-title="Blocca"><i class="fas fa-lock"></i></a></li>
                   </ul>
                 </td>
               </tr>
@@ -70,9 +71,9 @@
                 </td>
                 <td>
                   <ul class="list-unstyled mb-0 d-flex justify-content-end">
-                    <li><a href="#" class="text-primary" data-toggle="tooltip" title="" data-original-title="view"><i class="far fa-eye"></i></a></li>
-                    <li><a href="#" class="text-info" data-toggle="tooltip" title="" data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a></li>
-                    <li><a href="#" class="text-danger" data-toggle="tooltip" title="" data-original-title="Delete"><i class="far fa-trash-alt"></i></a></li>
+                    <li><a href="#" class="text-primary" data-toggle="tooltip" title="" data-original-title="Visita"><i class="far fa-eye"></i></a></li>
+                    <li><a href="#" class="text-info" data-toggle="tooltip" title="" data-original-title="Sblocca"><i class="fas fa-lock-open"></i></a></li>
+                    <li><a href="#" class="text-danger" data-toggle="tooltip" title="" data-original-title="Blocca"><i class="fas fa-lock"></i></a></li>
                   </ul>
                 </td>
               </tr>
@@ -96,9 +97,9 @@
                 </td>
                 <td>
                   <ul class="list-unstyled mb-0 d-flex justify-content-end">
-                    <li><a href="#" class="text-primary" data-toggle="tooltip" title="" data-original-title="view"><i class="far fa-eye"></i></a></li>
-                    <li><a href="#" class="text-info" data-toggle="tooltip" title="" data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a></li>
-                    <li><a href="#" class="text-danger" data-toggle="tooltip" title="" data-original-title="Delete"><i class="far fa-trash-alt"></i></a></li>
+                    <li><a href="#" class="text-primary" data-toggle="tooltip" title="" data-original-title="Visita"><i class="far fa-eye"></i></a></li>
+                    <li><a href="#" class="text-info" data-toggle="tooltip" title="" data-original-title="Sblocca"><i class="fas fa-lock-open"></i></a></li>
+                    <li><a href="#" class="text-danger" data-toggle="tooltip" title="" data-original-title="Blocca"><i class="fas fa-lock"></i></a></li>
                   </ul>
                 </td>
               </tr>
@@ -122,9 +123,9 @@
                 </td>
                 <td>
                   <ul class="list-unstyled mb-0 d-flex justify-content-end">
-                    <li><a href="#" class="text-primary" data-toggle="tooltip" title="" data-original-title="view"><i class="far fa-eye"></i></a></li>
-                    <li><a href="#" class="text-info" data-toggle="tooltip" title="" data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a></li>
-                    <li><a href="#" class="text-danger" data-toggle="tooltip" title="" data-original-title="Delete"><i class="far fa-trash-alt"></i></a></li>
+                    <li><a href="#" class="text-primary" data-toggle="tooltip" title="" data-original-title="Visita"><i class="far fa-eye"></i></a></li>
+                    <li><a href="#" class="text-info" data-toggle="tooltip" title="" data-original-title="Sblocca"><i class="fas fa-lock-open"></i></a></li>
+                    <li><a href="#" class="text-danger" data-toggle="tooltip" title="" data-original-title="Blocca"><i class="fas fa-lock"></i></a></li>
                   </ul>
                 </td>
               </tr>
@@ -148,9 +149,9 @@
                 </td>
                 <td>
                   <ul class="list-unstyled mb-0 d-flex justify-content-end">
-                    <li><a href="#" class="text-primary" data-toggle="tooltip" title="" data-original-title="view"><i class="far fa-eye"></i></a></li>
-                    <li><a href="#" class="text-info" data-toggle="tooltip" title="" data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a></li>
-                    <li><a href="#" class="text-danger" data-toggle="tooltip" title="" data-original-title="Delete"><i class="far fa-trash-alt"></i></a></li>
+                    <li><a href="#" class="text-primary" data-toggle="tooltip" title="" data-original-title="Visita"><i class="far fa-eye"></i></a></li>
+                    <li><a href="#" class="text-info" data-toggle="tooltip" title="" data-original-title="Sblocca"><i class="fas fa-lock-open"></i></a></li>
+                    <li><a href="#" class="text-danger" data-toggle="tooltip" title="" data-original-title="Blocca"><i class="fas fa-lock"></i></a></li>
                   </ul>
                 </td>
               </tr>

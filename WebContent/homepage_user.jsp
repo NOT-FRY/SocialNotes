@@ -8,6 +8,9 @@
 	pageEncoding="ISO-8859-1"%>
 <%@page import="javax.sql.DataSource"%>
 <%@page import="com.mysql.cj.jdbc.Blob"%>
+<%@page import="it.unisa.model.MaterialBean"%>
+<%@page import="java.sql.Date"%>
+<%@page import="java.util.concurrent.TimeUnit"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,6 +93,9 @@
   if(username!=null){
 	  visitUserLink=response.encodeURL(visitUserLink);
   }
+  
+  
+  Collection<MaterialBean> materials=material.doRetrieveByOrderDate();
 %>
 
 	<%@ include file="header_user.jsp"%>
@@ -224,19 +230,31 @@ not support the canvas tag.</canvas>
 
 					</div>
 				</div>
-
+				<%
+				if(materials!=null&&materials.size()>0){
+					Iterator<?> it=materials.iterator();
+					int i=0;
+					while(it.hasNext()&&i<10){
+					MaterialBean mat=(MaterialBean)it.next();
+					FriendsModelDS friend=new FriendsModelDS(ds);
+					if(friend.isFriend(mat.getUsername(), username)){
+						UserBean us=user.doRetrieveByUsername(mat.getUsername());
+						Date dataAttuale = new Date(System.currentTimeMillis());
+						Date dataCaricamento=mat.getDataCaricamento();
+						long diffInMillies=dataAttuale.getTime()-dataCaricamento.getTime();
+						long diff=TimeUnit.DAYS.convert(diffInMillies,TimeUnit.MILLISECONDS);
+						i++;
+				%>
 				<div class="card social-timeline-card">
 					<div class="card-header">
 						<div class="d-flex justify-content-between align-items-center">
 							<div class="d-flex justify-content-between align-items-center">
 								<div class="mr-2">
-									<img class="rounded-circle"
-										src="https://bootdey.com/img/Content/avatar/avatar1.png"
-										alt="" width="45">
+									<img class="rounded-circle"src="PrintImage?username=<%=mat.getUsername() %>" alt="ciao" width="45">
 								</div>
 								<div class="ml-2">
-									<div class="h5 m-0 text-blue">@JaneSmith</div>
-									<div class="h7 text-muted">Miracles Lee Cross</div>
+									<div class="h5 m-0 text-blue"><%=mat.getUsername() %></div>
+									<div class="h7 text-muted"><%=us.getNome() %> <%=us.getCognome() %></div>
 								</div>
 							</div>
 							<div>
@@ -260,11 +278,10 @@ not support the canvas tag.</canvas>
 					</div>
 					<div class="card-body">
 						<div class="text-muted h7 mb-2">
-							<i class="fa fa-clock-o"></i>10 min ago
+							<i class="fa fa-clock-o"></i><%=diff %> days ago
 						</div>
-						<a class="card-link" href="#"><h5 class="card-title">Lorem
-								ipsum dolor sit amet, consectetur adip.</h5> </a> <img
-							src="provvisorio/Cattura6.PNG" height="500px" width="500px"
+						<a class="card-link" href="#"><h5 class="card-title"><%=mat.getDescrizione() %></h5> </a> <img
+							src="PrintAnteprima?codice=<%=mat.getCodiceMateriale() %>" height="500px" width="500px"
 							class="img-fluid">
 					</div>
 					<div class="card-footer">
@@ -273,7 +290,7 @@ not support the canvas tag.</canvas>
 							Effettua una recensione</a>
 					</div>
 				</div>
-
+				<%}}} %>
 				<div class="d-flex justify-content-center">
 					<div class="spinner-border" role="status">
 						<span class="sr-only">Loading...</span>

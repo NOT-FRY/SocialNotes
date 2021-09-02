@@ -1,5 +1,8 @@
+<%@page import="java.sql.SQLException"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@page import="javax.sql.DataSource"%>
+<%@page import="it.unisa.model.UserRoleModelDS"%>
 <!doctype html>
 <html lang="en">
   <head>
@@ -23,11 +26,26 @@
 
   <body class="text-center">
   <%
-      if (session.getAttribute("username")!=null){
-    		 String link = "homepage_user.jsp";
-    		 String encodedURL = response.encodeRedirectURL(link);
-    		 response.sendRedirect(encodedURL);
-      }
+  if(session.getAttribute("username")!=null){
+	    DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
+		String username=(String)session.getAttribute("username");
+		UserRoleModelDS role=new UserRoleModelDS(ds);
+		try {
+			int userRole=role.doRetrieveByUsername(username);
+			if(userRole==1) {
+				String link = "admin.jsp";
+				String encodedURL = response.encodeRedirectURL(link);
+				response.sendRedirect(encodedURL);
+			}
+			else{
+				String link = "homepage_user.jsp";
+				String encodedURL = response.encodeRedirectURL(link);
+				response.sendRedirect(encodedURL);
+			}
+		}catch(SQLException e){}
+		
+		
+	}
   %>
   		<%
 	String errore = (String) request.getAttribute("error");

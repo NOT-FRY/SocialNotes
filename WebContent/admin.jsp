@@ -8,7 +8,7 @@
     <title>Admin</title>
   </head>
   <body>
-  <%@include file="header.jsp" %>
+  <%@include file="header_user.jsp" %>
      
 <div class="container-fluid">
   <div class="row">
@@ -17,7 +17,7 @@
       <div class="position-sticky pt-3">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="homepage.jsp">
+            <a class="nav-link active" aria-current="page" href="admin.jsp">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#9697e7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
               Torna alla Home
             </a>

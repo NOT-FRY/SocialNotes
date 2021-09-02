@@ -133,7 +133,7 @@ if (session.getAttribute("username")!=null){
 						<div style="float: left; margin-right: 5px;">
 							<img src="img/unisa.png" alt="..." width="70" height="70">
 						</div>
-						<p align=center>Materiale Universit&agrave;Â  degli studi di Salerno</p>
+						<a href="https://www.unisa.it/"><p align=center>Universit&agrave;  degli studi di Salerno</p></a>
 					</div>
 				</div>
 			</div>
@@ -144,9 +144,9 @@ if (session.getAttribute("username")!=null){
 					<div class="card-body">
 
 						<div style="float: left; margin-right: 5px;">
-							<img src="img/unisa.png" alt="..." width="70" height="70">
+							<img src="img/unina.jpg" alt="..." width="70" height="70">
 						</div>
-						<p align=center>Materiale Universit&agrave;Â  degli studi di Salerno</p>
+						<a href="http://www.unina.it/home;jsessionid=C9445FB3F3128D9495102099AE7E1B00.node_publisher11"><p align=center>Universit&agrave;  degli studi di Napoli Federico II</p></a>
 					</div>
 				</div>
 			</div>
@@ -156,9 +156,9 @@ if (session.getAttribute("username")!=null){
 					<div class="card-body">
 
 						<div style="float: left; margin-right: 5px;">
-							<img src="img/unisa.png" alt="..." width="70" height="70">
+							<img src="img/politecnico.png" alt="..." width="100" height="70">
 						</div>
-						<p align=center>Materiale Universit&agrave;Â  degli studi di Salerno</p>
+						<a href="https://www.polimi.it/"><p align=center>Politecnico di MIlano</p></a>
 					</div>
 				</div>
 			</div>

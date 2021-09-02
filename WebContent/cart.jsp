@@ -35,7 +35,7 @@
                   <tr>
                     <td class="p-4">
                       <div class="media align-items-center">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="d-block ui-w-40 ui-bordered mr-4" alt="">
+                        <img src="img/50.png" class="d-block ui-w-40 ui-bordered mr-4" alt="">
                         <div class="media-body">
                           <p class="d-block text-dark">Pochi ma buoni</p>
                           <small>
@@ -55,7 +55,7 @@
                   <tr>
                     <td class="p-4">
                       <div class="media align-items-center">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar6.png" class="d-block ui-w-40 ui-bordered mr-4" alt="">
+                        <img src="img/100.jpg" class="d-block ui-w-40 ui-bordered mr-4" alt="">
                         <div class="media-body">
                           <p class="d-block text-dark">Il giusto sprint</p>
                           <small>
@@ -76,7 +76,7 @@
                   <tr>
                     <td class="p-4">
                       <div class="media align-items-center">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="d-block ui-w-40 ui-bordered mr-4" alt="">
+                        <img src="img/500.jpg" class="d-block ui-w-40 ui-bordered mr-4" alt="">
                         <div class="media-body">
                           <p class="d-block text-dark">Vai alla grande!</p>
                           <small>
@@ -110,7 +110,7 @@
         
             <div class="float-right">
               <a href="prezzi.jsp"><button type="button" class="btn btn-lg btn-default md-btn-flat mt-2 mr-3">Ritorna agli abbonamenti</button></a>
-              <button type="button" class="btn btn-lg btn-primary mt-2">Continua Acquisto</button>
+             <a href="choosePayment.jsp"> <button type="button" class="btn btn-lg btn-primary mt-2">Continua Acquisto</button> </a>
             </div>
         
           </div>

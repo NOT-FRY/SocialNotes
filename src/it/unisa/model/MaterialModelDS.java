@@ -86,7 +86,7 @@ public class MaterialModelDS implements Model<MaterialBean> {
 				bean.setCodiceCorso(rs.getInt("CodiceCorso"));
 				bean.setUsername(rs.getString("Username"));
 				bean.setFileName(rs.getString("FileName"));
-				bean.setAnteprima((InputStream)rs.getBlob("Anteprima"));
+				bean.setAnteprima(rs.getBlob("Anteprima").getBinaryStream());
 				material.add(bean);
 			}
 		}
@@ -152,7 +152,7 @@ public class MaterialModelDS implements Model<MaterialBean> {
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		
-		String sql="SELECT * FROM Materiale WHERE Username=?;";
+		String sql="SELECT * FROM Materiale WHERE Username=? ORDER BY DataCaricamento desc;";
 		Collection<MaterialBean> material=new LinkedList<MaterialBean>();
 		try {
 			con=ds.getConnection();
@@ -410,6 +410,48 @@ public class MaterialModelDS implements Model<MaterialBean> {
 		}
 		return 0;
 	}
+	
+	
+	public Collection<MaterialBean> doRetrieveByOrderDate() throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		String selectSQL="SELECT * FROM Materiale ORDER BY DataCaricamento desc;";
+		Collection<MaterialBean> material=new LinkedList<MaterialBean>();
+		try {
+			con=ds.getConnection();
+			ps=con.prepareStatement(selectSQL);
+			//Utility.print("doRetrieveAll:"+ps.toString());
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()) {
+				MaterialBean bean=new MaterialBean();
+				bean.setCodiceMateriale(rs.getInt("CodiceMateriale"));
+				bean.setDataCaricamento(rs.getDate("DataCaricamento"));
+				bean.setKeywords(rs.getString("Keywords"));
+				bean.setCosto(rs.getInt("Costo"));
+				bean.setDescrizione(rs.getString("Descrizione"));
+				bean.setHidden(rs.getBoolean("Hidden"));
+				bean.setCodiceCorso(rs.getInt("CodiceCorso"));
+				bean.setUsername(rs.getString("Username"));
+				bean.setFileName(rs.getString("FileName"));
+				bean.setAnteprima(rs.getBlob("Anteprima").getBinaryStream());
+				material.add(bean);
+			}
+		}
+		finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			}
+			finally {
+				if(con!=null)
+					con.close();
+			}
+		}
+		return material;
+	}
+	
+	
+	
 
 	@Override
 	public void doSave(MaterialBean item) throws SQLException {
@@ -446,6 +488,7 @@ public class MaterialModelDS implements Model<MaterialBean> {
 			}
 		}
 	}
+	
 
 	@Override
 	public void doUpdate(MaterialBean item) throws SQLException {

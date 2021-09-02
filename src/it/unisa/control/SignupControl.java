@@ -24,7 +24,8 @@ import it.unisa.model.FileBean;
 import it.unisa.model.FileModelDS;
 import it.unisa.model.UserBean;
 import it.unisa.model.UserModelDS;
-
+import it.unisa.model.UserRoleBean;
+import it.unisa.model.UserRoleModelDS;
 import it.unisa.utils.Validation;
 
 /**
@@ -113,11 +114,15 @@ public class SignupControl extends HttpServlet {
 		InputStream image=new FileInputStream(file);
 		
 		UserModelDS model= new UserModelDS(ds);
-		
+		UserRoleBean role=new UserRoleBean();
+		role.setIdRuolo(2);
+		role.setUsername(username);
+		UserRoleModelDS roleModel=new UserRoleModelDS(ds);
 	
 		
 			try {
 				model.doSave(user);
+				roleModel.doSave(role);
 				model.doUpdateImage(username, image);
 				user=model.doRetrieveByUsername(username);
 			} catch (SQLException e) {

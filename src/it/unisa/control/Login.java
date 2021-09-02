@@ -14,6 +14,7 @@ import javax.sql.DataSource;
 
 import it.unisa.model.UserBean;
 import it.unisa.model.UserModelDS;
+import it.unisa.model.UserRoleModelDS;
 
 /**
  * Servlet implementation class Login
@@ -36,14 +37,31 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		
+		DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
 		HttpSession session = request.getSession(true);
 		System.out.println("SSSSSS:"+session.getId());
 		if(session.getAttribute("username")!=null){
-			String link = "homepage_user.jsp";
-			 String encodedURL = response.encodeRedirectURL(link);
-			 response.sendRedirect(encodedURL);
-		}else {
+			String username=(String)session.getAttribute("username");
+			UserRoleModelDS role=new UserRoleModelDS(ds);
+			try {
+				int userRole=role.doRetrieveByUsername(username);
+				if(userRole==1) {
+					String link = "admin.jsp";
+					String encodedURL = response.encodeRedirectURL(link);
+					response.sendRedirect(encodedURL);
+				}
+				else{
+					String link = "homepage_user.jsp";
+					String encodedURL = response.encodeRedirectURL(link);
+					response.sendRedirect(encodedURL);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			
+		}
+		else {
 		
 		String login = request.getParameter("login");
 		String pwd = request.getParameter("password");
@@ -56,7 +74,6 @@ public class Login extends HttpServlet {
 
 
 
-		DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
 		UserModelDS model= new UserModelDS(ds);
 		try {
 			UserBean bean = model.checkLogin(login, pwd);
@@ -82,10 +99,15 @@ public class Login extends HttpServlet {
 			session.setAttribute("ban",bean.getBan());
 			session.setAttribute("denominazione",bean.getDenominazione());
 			session.setAttribute("dipName",bean.getDipName());
-				
+			UserRoleModelDS role=new UserRoleModelDS(ds);
+			int userRole=role.doRetrieveByUsername(bean.getUsername());
+			//System.out.println("user role in login.java"+userRole);
+			String adminURL=response.encodeURL("admin.jsp");
 			String homeURL = response.encodeURL("homepage_user.jsp");
-			
-			response.sendRedirect(homeURL);
+			if(userRole==1)
+				response.sendRedirect(adminURL);
+			else
+				response.sendRedirect(homeURL);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();

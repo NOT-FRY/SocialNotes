@@ -20,7 +20,7 @@
           <div class="col-md-3">
             <h5>About</h5>
             <ul class="list-unstyled text-small">
-              <li><a class="text-white" href="#">Chi siamo</a></li>
+              <li><a class="text-white" href="aboutUs.jsp">Chi siamo</a></li>
               <li><a class="text-white" href="PrivacyPolicy.html">Privacy & Terms</a></li>
             </ul>
           </div>
