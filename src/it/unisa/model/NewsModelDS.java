@@ -42,6 +42,7 @@ public class NewsModelDS implements Model<NewsBean>{
 				bean.setArgomento(rs.getString("Argomento"));
 				bean.setContenuto(rs.getString("Contenuto"));
 				bean.setUsername(rs.getString("Username"));
+				bean.setDataCaricamento(rs.getDate("DataCaricamento"));
 				news.add(bean);
 			}
 		}
@@ -60,7 +61,32 @@ public class NewsModelDS implements Model<NewsBean>{
 
 	@Override
 	public void doSave(NewsBean item) throws SQLException {
-		// TODO Auto-generated method stub
+		Connection connection = null;
+		PreparedStatement ps = null;
+
+		String insertSQL = "INSERT INTO News (Titolo, Argomento, Contenuto, Username, DataCaricamento) VALUES (?, ?, ?, ?, ?)";
+
+		try {
+			connection = ds.getConnection();
+			ps = connection.prepareStatement(insertSQL);
+			ps.setString(1, item.getTitolo());
+			ps.setString(2, item.getArgomento());
+			ps.setString(3, item.getContenuto());
+			ps.setString(4, item.getUsername());
+			ps.setDate(5, item.getDataCaricamento());
+
+			ps.executeUpdate();
+			System.out.println("News Salvata nel Database");
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			}
+			finally {
+				if(connection!=null)
+					connection.close();
+			}
+		}
 		
 	}
 

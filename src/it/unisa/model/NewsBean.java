@@ -1,5 +1,7 @@
 package it.unisa.model;
 
+import java.sql.Date;
+
 public class NewsBean {
 
 	public NewsBean() {
@@ -78,7 +80,16 @@ public class NewsBean {
 				+ contenuto + ", username=" + username + "]";
 	}
 
+	public Date getDataCaricamento() {
+		return dataCaricamento;
+	}
 
+
+	public void setDataCaricamento(Date dataCaricamento) {
+		this.dataCaricamento = dataCaricamento;
+	}
+	
+	private Date dataCaricamento;
 	private int codiceNews;
     private String titolo;
     private String argomento;

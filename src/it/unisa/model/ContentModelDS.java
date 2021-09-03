@@ -22,6 +22,38 @@ public class ContentModelDS implements Model<ContentBean>{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	/**
+	 * 
+	 * @param codiceNews
+	 * @return Restituisce una collezione di stringhe corrispondenti ai nomi dei file che ha quella news
+	 * @throws SQLException
+	 */
+	public Collection<String> doRetrieveByCodiceNews(String codiceNews)throws SQLException{
+		Connection con=null;
+		PreparedStatement ps=null;
+		String selectSQL="SELECT * FROM Contenuto WHERE CodiceNews = ? ;";
+		Collection<String> fileNames=new LinkedList<String>();
+		try {
+			con=ds.getConnection();
+			ps=con.prepareStatement(selectSQL);
+			Utility.print("doRetrieveByCodiceNews:"+ps.toString());
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()) {
+				fileNames.add(rs.getString("FileName"));
+			}
+		}
+		finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			}
+			finally {
+				if(con!=null)
+					con.close();
+			}
+		}
+		return fileNames;
+	}
 
 	@Override
 	public Collection<ContentBean> doRetrieveAll() throws SQLException {
