@@ -70,8 +70,14 @@
       <h1 class="h3 mb-3 font-weight-normal">Effettua il Login</h1>
       <label for="inputEmail" class="sr-only">Email</label>
       <input type="text" name="login"id="inputEmail" class="form-control" placeholder="Indirizzo mail o username" required autofocus>
+      <br>
       <label for="inputPassword" class="sr-only">Password</label>
       <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+      
+      <div class="checkbox mb-3">
+      <br>
+      </div>
+      
       
       <button class="btn btn-lg btn-principale btn-block" type="submit">Log In</button>
       <button class="bottoneindietro" onclick="history.back()">Torna indietro</button>

@@ -33,7 +33,7 @@ public class Logout extends HttpServlet {
 HttpSession session = request.getSession(false);
 		
 		if(session == null) {
-			String signUpURL = "signup.jsp";
+			String signUpURL = "login.jsp";
 			String link = response.encodeRedirectURL(signUpURL);
 			response.sendRedirect(link);
 		}else {
