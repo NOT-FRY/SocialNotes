@@ -191,7 +191,7 @@ not support the canvas tag.</canvas>
 							<div class="tab-pane fade active show" id="posts" role="tabpanel"
 								aria-labelledby="posts-tab">
 								<div class="form-group">
-									<form method="post" action="FileUploadServlet"
+									<form method="post" action=<%="FileUploadServlet;jsessionid="+session.getId()%>
 										enctype="multipart/form-data">
 										<h4>Condivisione materiale</h4>
 										<div class="mb-3">

@@ -115,7 +115,7 @@
 	
 
 	
-	<form action="ChangeProfile" method="POST" enctype="multipart/form-data" id="main-profile">
+	<form action=<%="ChangeProfile;jsessionid="+session.getId()%> method="POST" enctype="multipart/form-data" id="main-profile">
 
 	
 
