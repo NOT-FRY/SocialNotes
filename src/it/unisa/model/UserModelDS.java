@@ -253,6 +253,122 @@ public class UserModelDS implements Model<UserBean> {
 		return users;
 	}
 
+	public Collection<UserBean>  doRetrieveByParametersUser(String str,String ratingOrder, int rating) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		PreparedStatement viewFeedbackmedia = null;
+		PreparedStatement dropViewFeedbackmedia = null;
+		PreparedStatement viewFeedbackuser = null;
+		PreparedStatement dropViewFeedbackuser = null;
+
+		String dropViewFeedbackmediaSQL = "DROP VIEW IF EXISTS FeedbackMedia;";
+		String viewFeedbackmediaSQL = "CREATE VIEW FeedbackMedia AS\n"
+				+ "Select CodiceMateriale, ROUND(AVG(Valutazione)) AS ValutazioneMedia\n"
+				+ "FROM Feedback\n"
+				+ "GROUP BY CodiceMateriale;";
+		
+		String dropViewFeedbackuserSQL = "DROP VIEW IF EXISTS FeedbackUser;";
+		String viewFeedbackuserSQL = "CREATE VIEW FeedbackUser AS\n"
+				+ "SELECT NULL AS feedback,Username,nome,Cognome,Denominazione,dipName,Img from Utente\n"
+				+ "UNION\n"
+				+ "SELECT ROUND(AVG(ValutazioneMedia)) AS feedback, Utente.Username, Utente.Nome, Utente.Cognome,Utente.Denominazione, Utente.dipName, Img\n"
+				+ "FROM Materiale LEFT JOIN FeedbackMedia ON Materiale.CodiceMateriale = FeedbackMedia.CodiceMateriale INNER JOIN Utente ON Materiale.Username = Utente.Username\n"
+				+ "group by Utente.Username;";
+		
+
+		
+		
+		String selectSQL="SELECT feedback, Username, Nome, Cognome, Denominazione, dipName, Img FROM FeedbackUser;";
+		
+		if (rating == 0) {
+		
+		if ((ratingOrder.compareTo("DESC")==0)) {
+		selectSQL="SELECT feedback, Username, Nome, Cognome, Denominazione, dipName, Img FROM FeedbackUser WHERE (Username LIKE ? OR Nome LIKE ? OR Cognome LIKE ?)  ORDER BY feedback DESC;";
+		}
+		if ((ratingOrder.compareTo("ASC")==0)) {
+			selectSQL="SELECT feedback, Username, Nome, Cognome, Denominazione, dipName, Img FROM FeedbackUser WHERE (Username LIKE ? OR Nome LIKE ? OR Cognome LIKE ?) ORDER BY feedback ASC;";
+			}
+		if ((ratingOrder.compareTo("novalue")==0)) {
+			selectSQL="SELECT feedback, Username, Nome, Cognome, Denominazione, dipName, Img FROM FeedbackUser WHERE (Username LIKE ? OR Nome LIKE ? OR Cognome LIKE ?);";
+			}
+		
+		
+		}else {
+			
+
+		
+		if ((ratingOrder.compareTo("DESC")==0)) {
+			selectSQL="SELECT feedback, Username, Nome, Cognome, Denominazione, dipName, Img FROM FeedbackUser WHERE (Username LIKE ? OR Nome LIKE ? OR Cognome LIKE ?) AND feedback = ? ORDER BY feedback DESC;";
+			}
+			if ((ratingOrder.compareTo("ASC")==0)) {
+				selectSQL="SELECT feedback, Username, Nome, Cognome, Denominazione, dipName, Img FROM FeedbackUser WHERE (Username LIKE ? OR Nome LIKE ? OR Cognome LIKE ?) AND feedback = ? ORDER BY feedback ASC;";
+				}
+
+
+			if ((ratingOrder.compareTo("novalue")==0)) {
+				selectSQL="SELECT feedback, Username, Nome, Cognome, Denominazione, dipName, Img FROM FeedbackUser WHERE (Username LIKE ? OR Nome LIKE ? OR Cognome LIKE ?) AND feedback = ? ORDER BY feedback;";
+				}
+
+
+		}
+
+		Collection<UserBean> collectionBean=new LinkedList<UserBean>();
+		try {
+			con=ds.getConnection();
+			ps=con.prepareStatement(selectSQL);
+
+            
+		   dropViewFeedbackmedia = con.prepareStatement(dropViewFeedbackmediaSQL);
+		   viewFeedbackmedia = con.prepareStatement(viewFeedbackmediaSQL);
+		   dropViewFeedbackuser = con.prepareStatement(dropViewFeedbackuserSQL);
+		   viewFeedbackuser = con.prepareStatement(viewFeedbackuserSQL);
+		   
+			if(rating!=0) {
+				ps.setInt(4, rating);
+				ps.setString(1, '%'+str+'%');
+				ps.setString(2, '%'+str+'%');
+				ps.setString(3, '%'+str+'%');
+			}else {
+				ps.setString(1, '%'+str+'%');
+				ps.setString(2, '%'+str+'%');
+				ps.setString(3, '%'+str+'%');
+			}
+			
+			
+			dropViewFeedbackmedia.execute();
+			viewFeedbackmedia.execute();
+			dropViewFeedbackuser.execute();
+			viewFeedbackuser.execute();
+			
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()) {
+				UserBean bean=new UserBean();
+	
+				bean.setUsername(rs.getString("Username"));
+				bean.setNome(rs.getString("Nome"));
+				bean.setCognome(rs.getString("Cognome"));
+			    bean.setImg(rs.getBlob("Img"));
+				bean.setDenominazione(rs.getString("Denominazione"));
+				bean.setDipName(rs.getString("dipName"));
+				
+				
+				collectionBean.add(bean);
+			}
+		}
+		finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			}
+			finally {
+				if(con!=null)
+					con.close();
+			}
+		}
+		
+		return collectionBean;
+		
+	}
 	
 	
 	@Override

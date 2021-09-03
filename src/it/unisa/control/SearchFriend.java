@@ -3,7 +3,6 @@ package it.unisa.control;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
-import java.util.LinkedList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,19 +15,20 @@ import javax.sql.DataSource;
 
 import it.unisa.model.MaterialBean;
 import it.unisa.model.MaterialModelDS;
+import it.unisa.model.UserBean;
 import it.unisa.model.UserModelDS;
 
 /**
- * Servlet implementation class SearchServlet
+ * Servlet implementation class SearchFriend
  */
-@WebServlet("/SearchServlet")
-public class SearchServlet extends HttpServlet {
+@WebServlet("/SearchFriend")
+public class SearchFriend extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchServlet() {
+    public SearchFriend() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,39 +38,32 @@ public class SearchServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
 		HttpSession session = request.getSession(false);
 		
 		String url = "errorSearch.jsp";
+		String homeLink = "homepage.jsp";
 		if (session!=null) {
 			
 			url = response.encodeRedirectURL(url);
-			
+			homeLink = response.encodeRedirectURL(homeLink);
+		}else {
+			response.sendRedirect(homeLink);
 		}
-		
-		if((request.getParameter("ricerca").isEmpty())||request.getParameter("ricerca").isBlank()) {
-			response.sendRedirect(url);
-			return;
-		}
-		String str = (String)request.getParameter("ricerca");
+
+		String str = (String)request.getParameter("search");
 
 	
 		DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
-		MaterialModelDS model= new MaterialModelDS(ds);
+		UserModelDS userDS = new UserModelDS(ds);
 		
 		
-		
-
-		try {
+try {
 			
-			String date="novalue";
 			String ratOrder="novalue";
 			int rating = 0;
 			if (request.getParameter("stars")!=null)
 			rating= Integer.parseInt(request.getParameter("stars"));
 		
-			if(request.getParameter("date")!=null)
-				date=(String)request.getParameter("date");
 			
 			if(request.getParameter("ratingOrder")!=null)
 				ratOrder=(String)request.getParameter("ratingOrder");
@@ -98,13 +91,12 @@ public class SearchServlet extends HttpServlet {
 				rating = 0;
 			} */
 			
-			System.out.println("VALORI :"+ date +" "+ratOrder+" "+rating);
+			System.out.println("VALORI :"+ str +" "+ratOrder+" "+rating);
 			
-			Collection<MaterialBean> material= model.doRetrieveByParameters(str, date, ratOrder, rating);
+			Collection<UserBean> bean= userDS.doRetrieveByParametersUser(str, ratOrder, rating);
 			
-			request.setAttribute("ricercaNew", str);
-			request.setAttribute("materiale", material);
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Search.jsp");
+			request.setAttribute("utente", bean);
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/searchFriend.jsp");
 			dispatcher.forward(request, response);
 			
 		}catch(SQLException e) {
@@ -114,12 +106,12 @@ public class SearchServlet extends HttpServlet {
 	}
 	}
 
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	/* protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+/*	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//doGet(request, response);
-	} */
+		doGet(request, response);
+	}
+   */
 }
