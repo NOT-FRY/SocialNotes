@@ -15,6 +15,7 @@ import javax.sql.DataSource;
 import it.unisa.model.UserBean;
 import it.unisa.model.UserModelDS;
 import it.unisa.model.UserRoleModelDS;
+import it.unisa.utils.Validation;
 
 /**
  * Servlet implementation class Login
@@ -68,55 +69,58 @@ public class Login extends HttpServlet {
 		//System.out.println(login);
 		//System.out.println(pwd);
 
-		//TODO validazione
-
-		//TODO sessione
-
-
-
-		UserModelDS model= new UserModelDS(ds);
-		try {
-			UserBean bean = model.checkLogin(login, pwd);
-			if (bean==null) {
-				String error="Login e/o password non corretti.";
-				request.setAttribute("error",error);
-				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
-				dispatcher.forward(request, response);
-				
-			}
-			else {
-		   // System.out.println("USERNAME: "+bean.getUsername());		
-			session.setAttribute("username",bean.getUsername());
-			session.setAttribute("nome",bean.getNome());
-			session.setAttribute("cognome",bean.getCognome());
-			session.setAttribute("img",bean.getImg());
-			session.setAttribute("email",bean.getEmail());
-			session.setAttribute("password",bean.getPass());
-			session.setAttribute("dataNascita",bean.getDataNascita());
-			session.setAttribute("matricola",bean.getMatricola());
-			session.setAttribute("ultimoAccesso",bean.getUltimoAccesso());
-			session.setAttribute("coin",bean.getCoin());
-			session.setAttribute("ban",bean.getBan());
-			session.setAttribute("denominazione",bean.getDenominazione());
-			session.setAttribute("dipName",bean.getDipName());
-			UserRoleModelDS role=new UserRoleModelDS(ds);
-			int userRole=role.doRetrieveByUsername(bean.getUsername());
-			//System.out.println("user role in login.java"+userRole);
-			String adminURL=response.encodeURL("admin.jsp");
-			String homeURL = response.encodeURL("homepage_user.jsp");
-			if(userRole==1)
-				response.sendRedirect(adminURL);
-			else
-				response.sendRedirect(homeURL);
-			}
-		}catch(SQLException e) {
-			e.printStackTrace();
-			String error="Problema con la query";
+		//validazione
+		
+		if(login==null || login.trim().equals("") || pwd==null || pwd.trim().equals("") || !Validation.validatePassword(pwd)) {
+			String error="Accesso negato";
 			request.setAttribute("error",error);
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
 			dispatcher.forward(request, response);
 		}
-		//TODO mail e password corrispondono
+		
+				UserModelDS model= new UserModelDS(ds);
+				try {
+					UserBean bean = model.checkLogin(login, pwd);
+					if (bean==null) {
+						String error="Login e/o password non corretti.";
+						request.setAttribute("error",error);
+						RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
+						dispatcher.forward(request, response);
+						
+					}
+					else {
+				   // System.out.println("USERNAME: "+bean.getUsername());		
+					session.setAttribute("username",bean.getUsername());
+					session.setAttribute("nome",bean.getNome());
+					session.setAttribute("cognome",bean.getCognome());
+					session.setAttribute("img",bean.getImg());
+					session.setAttribute("email",bean.getEmail());
+					session.setAttribute("password",bean.getPass());
+					session.setAttribute("dataNascita",bean.getDataNascita());
+					session.setAttribute("matricola",bean.getMatricola());
+					session.setAttribute("ultimoAccesso",bean.getUltimoAccesso());
+					session.setAttribute("coin",bean.getCoin());
+					session.setAttribute("ban",bean.getBan());
+					session.setAttribute("denominazione",bean.getDenominazione());
+					session.setAttribute("dipName",bean.getDipName());
+					UserRoleModelDS role=new UserRoleModelDS(ds);
+					int userRole=role.doRetrieveByUsername(bean.getUsername());
+					//System.out.println("user role in login.java"+userRole);
+					String adminURL=response.encodeURL("admin.jsp");
+					String homeURL = response.encodeURL("homepage_user.jsp");
+					if(userRole==1)
+						response.sendRedirect(adminURL);
+					else
+						response.sendRedirect(homeURL);
+					}
+				}catch(SQLException e) {
+					e.printStackTrace();
+					String error="Problema con la query";
+					request.setAttribute("error",error);
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
+					dispatcher.forward(request, response);
+				}
+				
 
 		doGet(request, response);
 	}
