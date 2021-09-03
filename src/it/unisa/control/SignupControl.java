@@ -109,6 +109,7 @@ public class SignupControl extends HttpServlet {
 		user.setUltimoAccesso(ultimoAccesso);
 		user.setDataNascita(dataNascita);
 		user.setCoin(50);
+		user.setBan(false);
 		String path=getServletContext().getResource("/img/avatar7.png").getPath();
 		File file=new File(path);
 		InputStream image=new FileInputStream(file);

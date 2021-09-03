@@ -142,9 +142,8 @@
       </li>
       </ul>
   </div>
-
   </div>
-  
+
   </div>
 
 </article>

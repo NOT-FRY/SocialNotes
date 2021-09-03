@@ -174,7 +174,7 @@ public class UserModelDS implements Model<UserBean> {
 		try {
 			con=ds.getConnection();
 			ps=con.prepareStatement(selectSQL);
-			Utility.print("doRetrieveAll:"+ps.toString());
+			//Utility.print("doRetrieveAll:"+ps.toString());
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()) {
 				UserBean bean=new UserBean();
@@ -218,7 +218,7 @@ public class UserModelDS implements Model<UserBean> {
 		try {
 			con=ds.getConnection();
 			ps=con.prepareStatement(selectSQL);
-			Utility.print("doRetrieveAll:"+ps.toString());
+			//Utility.print("doRetrieveAll:"+ps.toString());
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()) {
 				UserBean bean=new UserBean();
@@ -376,7 +376,7 @@ public class UserModelDS implements Model<UserBean> {
 		Connection connection = null;
 		PreparedStatement ps = null;
 
-		String insertSQL = "INSERT INTO Utente (Username, Nome, Cognome, Email, Pass, DataNascita, UltimoAccesso, Coin, Denominazione, DipName) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String insertSQL = "INSERT INTO Utente (Username, Nome, Cognome, Email, Pass, DataNascita, UltimoAccesso, Coin, Denominazione, DipName,Ban) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 
 		try {
 			connection = ds.getConnection();
@@ -394,7 +394,7 @@ public class UserModelDS implements Model<UserBean> {
 			ps.setInt(8, item.getCoin());
 			ps.setString(9, item.getDenominazione());
 			ps.setString(10, item.getDipName());
-
+			ps.setBoolean(11, item.getBan());
 
 			ps.executeUpdate();
 			System.out.println("Salvato nel Database");
