@@ -1,6 +1,13 @@
+<%@page import="it.unisa.model.MaterialModelDS"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    
+ <%@page import="com.mysql.cj.jdbc.Blob"%>
+ <%@page import="java.io.InputStream"%>  
+ <%@page import="java.util.Collection"%>
+ <%@page import="it.unisa.model.MaterialBean"%> 
+ <%@page import="java.util.Iterator"%>
+ <%@page import="java.sql.Date"%>
+<%@page import="java.util.concurrent.TimeUnit"%>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -14,23 +21,44 @@
 
   </head>
   <body>
+  <%
+	  if (session.getAttribute("username")==null)
+		  response.sendRedirect("login.jsp");
+
+	  DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
+	  MaterialModelDS material=new MaterialModelDS(ds);
+	  UserModelDS user=new UserModelDS(ds);
+	  Collection<MaterialBean> materials=material.notValidated();
+  %>
   <%@include file="header_user.jsp" %>
     <div class="container">
     	<div class="row">
+    	<%
+	    	if(materials!=null&&materials.size()>0){
+				Iterator<?> it=materials.iterator();
+				while(it.hasNext()){
+    				MaterialBean mat=(MaterialBean)it.next();
+    				UserBean bean=user.doRetrieveByUsername(mat.getUsername());
+    				Date dataAttuale = new Date(System.currentTimeMillis());
+					Date dataCaricamento=mat.getDataCaricamento();
+					long diffInMillies=dataAttuale.getTime()-dataCaricamento.getTime();
+					long diff=TimeUnit.DAYS.convert(diffInMillies,TimeUnit.MILLISECONDS);
+    				
+    	%>
     	<div class="card social-timeline-card">
 					<div class="card-header">
 						<div class="d-flex justify-content-between align-items-center">
 							<div class="d-flex justify-content-between align-items-center">
 								<div class="mr-2">
-									<img class="rounded-circle"src="PrintImage?username=img" alt="ciao" width="45">
+									<img class="rounded-circle"src="PrintImage?username=<%=mat.getUsername()%>" alt="ciao" width="45">
 								</div>
 								<div class="ml-2">
-									<div class="h5 m-0 text-blue">Fonz O Bit</div>
-									<div class="h7 text-muted">Alfonso  Califano</div>
+									<div class="h5 m-0 text-blue"><%=mat.getUsername() %></div>
+									<div class="h7 text-muted"><%=bean.getNome() %> <%=bean.getCognome() %></div>
 								</div>
 							</div>
 							<div>
-								<div class="dropdown">
+								<!-- <div class="dropdown">
 									<button class="btn btn-link dropdown-toggle" type="button"
 										id="gedf-drop11" data-toggle="dropdown" aria-haspopup="true"
 										aria-expanded="false">
@@ -44,171 +72,32 @@
 											class="dropdown-item" href="#">Hide</a> <a
 											class="dropdown-item" href="#">Report</a>
 									</div>
-								</div>
+								</div> -->
 							</div>
 						</div>
 					</div>
 					<div class="card-body">
 						<div class="text-muted h7 mb-2">
-							<i class="fa fa-clock-o"></i>3 days ago
+							<i class="fa fa-clock-o"></i><%=diff %> days ago
 						</div>
-						<a class="card-link" href="#"><h5 class="card-title">Descrizione</h5> </a> <img
-							src="PrintAnteprima?codice=12345" height="500px" width="500px"
+						<a class="card-link" href="provaDownloadFile.jsp?filename=<%=mat.getFileName()%>"><h5 class="card-title"><%=mat.getDescrizione() %></h5> </a> 
+						<img src="PrintAnteprima?codice=<%=mat.getCodiceMateriale() %>" height="500px" width="500px"
 							class="img-fluid">
 					</div>
 					<div class="card-footer">
-						<a href="#" class="card-link"><i class="fa fa-gittip"></i>
-							Aggiungi Prezzo</a> <a href="#" class="card-link"><i class="fa fa-comment"></i>
-							Valida Materiale</a>
-					</div>
-				</div>
-				<br>
-				<hr>
-				<div class="card social-timeline-card">
-					<div class="card-header">
-						<div class="d-flex justify-content-between align-items-center">
-							<div class="d-flex justify-content-between align-items-center">
-								<div class="mr-2">
-									<img class="rounded-circle"src="PrintImage?username=img" alt="ciao" width="45">
-								</div>
-								
-								<div class="ml-2">
-									<div class="h5 m-0 text-blue">Armando0524</div>
-									<div class="h7 text-muted">Armando Caso</div>
-								</div>
+						<form method="post" action=<%="SetPrice;jsessionid="+session.getId()%> enctype="multipart/form-data">
+							<div class="btn-group">
+								<input type="hidden" name="codice" value="<%=mat.getCodiceMateriale() %>">
+								<input type="number" class="form-control" name="costo" id="costo" placeholder="Costo" required>&nbsp&nbsp&nbsp&nbsp
+								<button type="submit" class="btn bottone-principale text-light" style="background-color: #9697e7" onclick="prova()">Imposta prezzo</button>
 							</div>
-							<div>
-								<div class="dropdown">
-									<button class="btn btn-link dropdown-toggle" type="button"
-										id="gedf-drop11" data-toggle="dropdown" aria-haspopup="true"
-										aria-expanded="false">
-										<i class="fa fa-ellipsis-h"></i>
-									</button>
-									<div class="dropdown-menu dropdown-menu-right"
-										aria-labelledby="gedf-drop11" x-placement="bottom-end"
-										style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(42px, 38px, 0px);">
-										<div class="h6 dropdown-header">Configuration</div>
-										<a class="dropdown-item" href="#">Save</a> <a
-											class="dropdown-item" href="#">Hide</a> <a
-											class="dropdown-item" href="#">Report</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="card-body">
-						<div class="text-muted h7 mb-2">
-							<i class="fa fa-clock-o"></i>3 days ago
-						</div>
-						<a class="card-link" href="#"><h5 class="card-title">Descrizione</h5> </a> <img
-							src="PrintAnteprima?codice=12345" height="500px" width="500px"
-							class="img-fluid">
-					</div>
-					<div class="card-footer">
-						<a href="#" class="card-link"><i class="fa fa-gittip"></i>
-							Aggiungi Prezzo</a> <a href="#" class="card-link"><i class="fa fa-comment"></i>
-							Valida Materiale</a>
-					</div>
-				</div>
-
-    		
-           <br>
-    			<div class="card social-timeline-card">
-					<div class="card-header">
-						<div class="d-flex justify-content-between align-items-center">
-							<div class="d-flex justify-content-between align-items-center">
-								<div class="mr-2">
-									<img class="rounded-circle"src="PrintImage?username=img" alt="ciao" width="45">
-								</div>
-								<br>
-								<div class="ml-2">
-									<div class="h5 m-0 text-blue">Simone8</div>
-									<div class="h7 text-muted">Simone Della Porta</div>
-								</div>
-							</div>
-							<div>
-								<div class="dropdown">
-									<button class="btn btn-link dropdown-toggle" type="button"
-										id="gedf-drop11" data-toggle="dropdown" aria-haspopup="true"
-										aria-expanded="false">
-										<i class="fa fa-ellipsis-h"></i>
-									</button>
-									<div class="dropdown-menu dropdown-menu-right"
-										aria-labelledby="gedf-drop11" x-placement="bottom-end"
-										style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(42px, 38px, 0px);">
-										<div class="h6 dropdown-header">Configuration</div>
-										<a class="dropdown-item" href="#">Save</a> <a
-											class="dropdown-item" href="#">Hide</a> <a
-											class="dropdown-item" href="#">Report</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="card-body">
-						<div class="text-muted h7 mb-2">
-							<i class="fa fa-clock-o"></i>3 days ago
-						</div>
-						<a class="card-link" href="#"><h5 class="card-title">Descrizione</h5> </a> <img
-							src="PrintAnteprima?codice=12345" height="500px" width="500px"
-							class="img-fluid">
-					</div>
-					<div class="card-footer">
-						<a href="#" class="card-link"><i class="fa fa-gittip"></i>
-							Aggiungi Prezzo</a> <a href="#" class="card-link"><i class="fa fa-comment"></i>
-							Valida Materiale</a>
-					</div>
-				</div>
-				<br>
-				<hr>
-				<br>
-				<div class="card social-timeline-card">
-					<div class="card-header">
-						<div class="d-flex justify-content-between align-items-center">
-							<div class="d-flex justify-content-between align-items-center">
-								<div class="mr-2">
-									<img class="rounded-circle"src="PrintImage?username=img" alt="ciao" width="45">
-								</div>
-								<div class="ml-2">
-									<div class="h5 m-0 text-blue">Not-Fry</div>
-									<div class="h7 text-muted">Francesco di Lauro</div>
-								</div>
-							</div>
-							<div>
-								<div class="dropdown">
-									<button class="btn btn-link dropdown-toggle" type="button"
-										id="gedf-drop11" data-toggle="dropdown" aria-haspopup="true"
-										aria-expanded="false">
-										<i class="fa fa-ellipsis-h"></i>
-									</button>
-									<div class="dropdown-menu dropdown-menu-right"
-										aria-labelledby="gedf-drop11" x-placement="bottom-end"
-										style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(42px, 38px, 0px);">
-										<div class="h6 dropdown-header">Configuration</div>
-										<a class="dropdown-item" href="#">Save</a> <a
-											class="dropdown-item" href="#">Hide</a> <a
-											class="dropdown-item" href="#">Report</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="card-body">
-						<div class="text-muted h7 mb-2">
-							<i class="fa fa-clock-o"></i>3 days ago
-						</div>
-						<a class="card-link" href="#"><h5 class="card-title">Descrizione</h5> </a> <img
-							src="PrintAnteprima?codice=12345" height="500px" width="500px"
-							class="img-fluid">
-					</div>
-					<div class="card-footer">
-						<a href="#" class="card-link"><i class="fa fa-gittip"></i>
-							Aggiungi Prezzo</a> <a href="#" class="card-link"><i class="fa fa-comment"></i>
-							Valida Materiale</a>
+						</form>
 					</div>
 				</div>
 				
-			
+				<br>
+				<hr>
+				<%}} %>
 				
 			
     	</div>
