@@ -28,14 +28,15 @@ public class ContentModelDS implements Model<ContentBean>{
 	 * @return Restituisce una collezione di stringhe corrispondenti ai nomi dei file che ha quella news
 	 * @throws SQLException
 	 */
-	public Collection<String> doRetrieveByCodiceNews(String codiceNews)throws SQLException{
+	public Collection<String> doRetrieveByCodiceNews(int codiceNews)throws SQLException{
 		Connection con=null;
 		PreparedStatement ps=null;
 		String selectSQL="SELECT * FROM Contenuto WHERE CodiceNews = ? ;";
 		Collection<String> fileNames=new LinkedList<String>();
 		try {
-			con=ds.getConnection();
+			con=ds.getConnection();	
 			ps=con.prepareStatement(selectSQL);
+			ps.setInt(1, codiceNews);
 			Utility.print("doRetrieveByCodiceNews:"+ps.toString());
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()) {

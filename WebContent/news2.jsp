@@ -49,7 +49,7 @@ $(document).ready(function() {
     	    language: {
     	        "emptyTable": "La ricerca non ha prodotto risultati",
     	        "infoEmpty": "Nessun risultato disponibile",
-    	        "zeroRecords": "Nessun risultato",
+    	        "zeroRecords": "La ricerca non ha prodotto risultati",
 	              "paginate": {
 	            	  'first':    '<<',
 	            	  'last':     '>>',
@@ -90,7 +90,7 @@ $(document).ready(function() {
 
 
 
- <!-- DA FARE IMMAGINI E DATE -->
+ <!-- DA FARE IMMAGINI -->
 
 
 
@@ -126,6 +126,8 @@ $(document).ready(function() {
 <%
 	DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
 	NewsModelDS model= new NewsModelDS(ds);
+	ContentModelDS cmodel = new ContentModelDS(ds);
+	FileModelDS fmodel = new FileModelDS(ds);
   	Collection <NewsBean> collection = model.doRetrieveAll();
 if(collection!=null&&collection.size()>0){
 	Iterator<?> it=collection.iterator();
@@ -140,19 +142,38 @@ if(collection!=null&&collection.size()>0){
 	 <%
 	while(it.hasNext()){
 		NewsBean nbean=(NewsBean)it.next();
+		Collection<String> fileNames = cmodel.doRetrieveByCodiceNews(nbean.getCodiceNews());
+		
 		%>
 		
 		  <tr>
 		   <td>
 		  	  <div class="col" style="margin-bottom:3%">
 				  <div class="card shadow-sm">
-				  		<div class="card-header">
-				   			 <small class="text-muted">gg-mm-aaaa</small>
-				  		</div>
+				  			 <div class="card-header">
+								<small class="text-muted"><%=nbean.getDataCaricamento()+"  "%>-<%=nbean.getUsername()%></small>
+							</div>
+							
 					    <div class="card-horizontal">
-			
 					        <div class="img-square-wrapper">
-					            <img class="" src="img/news3.jpg" width="300" height="182" alt="News">
+					        	<% if(fileNames!=null&&fileNames.size()>0){
+					        		Iterator<?> itfiles = fileNames.iterator();
+					        		if(itfiles.hasNext()){
+					        			String fileName = (String)itfiles.next();	
+					        			FileBean fb = fmodel.doRetrieveByKey(fileName);
+					        			if(fb!=null){
+					        				%>
+					        				<img class="" src="PrintNewsImage?filename=<%=fb.getFilename()%>"  width="300" height="182" alt="News">
+					        			<%
+					        			}
+					        		}
+					        	}else{
+					        			%>
+					        	
+					        		<img class="" src="img/news3.jpg" width="300" height="182" alt="News">
+					        		<%
+					        		}
+					        	%>
 					        </div>
 					        <div class="card-body">
 					            <h4 class="card-title"><%=nbean.getTitolo() %></h4>
@@ -162,9 +183,12 @@ if(collection!=null&&collection.size()>0){
 					            <!-- stretched link rende tutta la card un link -->
 					        </div>
 					    </div>
-						<div class="card-footer">
-							<small class="text-muted">-Utente</small>
+					     
+						<!--  <div class="card-footer">
+							<small class="text-muted"><%=nbean.getDataCaricamento()+" "%>-<%=nbean.getUsername()%></small>
 						</div>
+						-->
+						
 				    </div>
 				</div>
 				</td>
