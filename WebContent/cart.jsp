@@ -102,8 +102,8 @@
               <div class="d-flex">
                 
                 <div class="text-right mt-4">
-                  <label class="text-muted font-weight-normal m-0 ">&ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp;&emsp;  Prezzo Totale</label>
-                  <div class="text-large"><strong>&ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp;&emsp;&ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp;&emsp;  &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp;&emsp;  &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp;&emsp;  &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp;&emsp;  &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp;&emsp;  &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp;&emsp;  &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp;&emsp;  &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp;&emsp;  &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp;&emsp;  &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp;&emsp;  &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp;&emsp;  &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp;&emsp;    &euro;205</strong></div>
+                  <label class="text-muted font-weight-normal m-0 ">Prezzo Totale</label>
+                  <div class="text-large"><strong>&euro;205</strong></div>
                 </div>
               </div>
             </div>

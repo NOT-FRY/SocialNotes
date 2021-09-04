@@ -19,7 +19,7 @@
 	DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
 	FileModelDS model= new FileModelDS(ds);
 	FileBean bean= model.doRetrieveByKey(filename);
-	response.setHeader("Content-Disposition", "filename="+bean.getFilename());
+	response.setHeader("Content-Disposition", "filename="+bean.getFilename());//attachment dopo la virgola per scaricare direttamente
 		response.setContentType("application/pdf");
 
 		try{
