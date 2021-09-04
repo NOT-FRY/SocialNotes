@@ -42,12 +42,14 @@ public class SearchFriend extends HttpServlet {
 		
 		String url = "errorSearch.jsp";
 		String homeLink = "homepage.jsp";
-		if (session!=null) {
+		//System.out.println("ID "+session.getAttribute("username"));
+		if (session.getAttribute("username")!=null) {
 			
 			url = response.encodeRedirectURL(url);
 			homeLink = response.encodeRedirectURL(homeLink);
 		}else {
 			response.sendRedirect(homeLink);
+			return;
 		}
 
 		String str = (String)request.getParameter("search");
@@ -96,8 +98,10 @@ try {
 			Collection<UserBean> bean= userDS.doRetrieveByParametersUser(str, ratOrder, rating);
 			
 			request.setAttribute("utente", bean);
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/searchFriend.jsp");
+			String urlSearch = response.encodeRedirectURL("/searchFriend.jsp");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(urlSearch);
 			dispatcher.forward(request, response);
+	
 			
 		}catch(SQLException e) {
 			e.printStackTrace();

@@ -72,7 +72,7 @@
 <% 
    if(session.getAttribute("username")==null){
 	  
-	  String homeGuest = "homepage.jpg";
+	  String homeGuest = "homepage.jsp";
 	  String encodedURL = response.encodeRedirectURL(homeGuest);
 	  response.sendRedirect(encodedURL);
 
@@ -89,7 +89,7 @@
 <div class="col-md-2"></div>
 <div class="col-md-8">
 	   
-	   <form class="form shadow p-3 mb-5 bg-white rounded" action="SearchFriend" >
+	   <form class="form shadow p-3 mb-5 bg-white rounded" action=<%="SearchFriend;jsessionid="+session.getId() %>>
 	   
 	  
 <div class="form-row">
@@ -142,10 +142,14 @@
 <%
 DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
 
+ int feed=0;
+ int c=0;
+
   Collection <UserModelDS> collection = (Collection<UserModelDS>) request.getAttribute("utente");
   UserModelDS material = new UserModelDS(ds);
 if(collection!=null&&collection.size()>0){
 	Iterator<?> it=collection.iterator();
+	//Iterator<?> iterator2=collection.iterator();
 	%>
 	<table>
 	<tr>
@@ -154,11 +158,27 @@ if(collection!=null&&collection.size()>0){
     <th>Nome</th>
     <th>Cognome</th>
     <th>dipName</th>
+       <th>Feedback</th>
     </tr>
 	 <%
 	while(it.hasNext()){
 		UserBean bean=(UserBean)it.next();
-	//	int feedback = mbean.doRetrieveFeedback(mbean.getCodiceMateriale());
+		
+/*		while (iterator2.hasNext()){
+			UserBean beanControllo = (UserBean)iterator2.next();
+			//String username1 = bean.getUsername();
+			//String username2 = beanControllo.getUsername();
+			System.out.println("BEAN1 : "+bean.getUsername()+" BEAN2: "+beanControllo.getUsername());
+			if (((bean.getUsername().compareTo(beanControllo.getUsername()))!=0)||(c==0)){
+				if ((bean.getUsername().compareTo(beanControllo.getUsername()))!=0) c
+	*/
+		
+		FeedbackModelDS fmodel = new FeedbackModelDS(ds);
+
+		feed = fmodel.getFeedbackByUsername(bean.getUsername());
+		
+	//	System.out.println("FEEDBACK : "+ fmodel.getFeedbackByUsername(bean.getUsername()));
+		
 		%>
 		  <tr>
     <th><%=bean.getDenominazione() %></th>
@@ -166,12 +186,15 @@ if(collection!=null&&collection.size()>0){
     <th><%=bean.getNome() %></th>
     <th><%=bean.getCognome() %></th>
         <th><%=bean.getDipName() %></th>
+        <th><%=feed %></th>
+ 
 
   </tr>
 		
 		<% 
 		
 	}
+
 	 %> 
 	 
 	 </table>

@@ -269,10 +269,8 @@ public class UserModelDS implements Model<UserBean> {
 		
 		String dropViewFeedbackuserSQL = "DROP VIEW IF EXISTS FeedbackUser;";
 		String viewFeedbackuserSQL = "CREATE VIEW FeedbackUser AS\n"
-				+ "SELECT NULL AS feedback,Username,nome,Cognome,Denominazione,dipName,Img from Utente\n"
-				+ "UNION\n"
 				+ "SELECT ROUND(AVG(ValutazioneMedia)) AS feedback, Utente.Username, Utente.Nome, Utente.Cognome,Utente.Denominazione, Utente.dipName, Img\n"
-				+ "FROM Materiale LEFT JOIN FeedbackMedia ON Materiale.CodiceMateriale = FeedbackMedia.CodiceMateriale INNER JOIN Utente ON Materiale.Username = Utente.Username\n"
+				+ "FROM Materiale LEFT JOIN FeedbackMedia ON Materiale.CodiceMateriale = FeedbackMedia.CodiceMateriale RIGHT JOIN Utente ON Materiale.Username = Utente.Username\n"
 				+ "group by Utente.Username;";
 		
 
@@ -286,10 +284,10 @@ public class UserModelDS implements Model<UserBean> {
 		selectSQL="SELECT feedback, Username, Nome, Cognome, Denominazione, dipName, Img FROM FeedbackUser WHERE (Username LIKE ? OR Nome LIKE ? OR Cognome LIKE ?)  ORDER BY feedback DESC;";
 		}
 		if ((ratingOrder.compareTo("ASC")==0)) {
-			selectSQL="SELECT feedback, Username, Nome, Cognome, Denominazione, dipName, Img FROM FeedbackUser WHERE (Username LIKE ? OR Nome LIKE ? OR Cognome LIKE ?) ORDER BY feedback ASC;";
+			selectSQL="SELECT feedback,Username, Nome, Cognome, Denominazione, dipName, Img FROM FeedbackUser WHERE (Username LIKE ? OR Nome LIKE ? OR Cognome LIKE ?) ORDER BY feedback ASC;";
 			}
 		if ((ratingOrder.compareTo("novalue")==0)) {
-			selectSQL="SELECT feedback, Username, Nome, Cognome, Denominazione, dipName, Img FROM FeedbackUser WHERE (Username LIKE ? OR Nome LIKE ? OR Cognome LIKE ?);";
+			selectSQL="SELECT feedback,Username, Nome, Cognome, Denominazione, dipName, Img FROM FeedbackUser WHERE (Username LIKE ? OR Nome LIKE ? OR Cognome LIKE ?);";
 			}
 		
 		
@@ -334,26 +332,29 @@ public class UserModelDS implements Model<UserBean> {
 				ps.setString(3, '%'+str+'%');
 			}
 			
-			
+			int feed=0;
 			dropViewFeedbackmedia.execute();
 			viewFeedbackmedia.execute();
 			dropViewFeedbackuser.execute();
 			viewFeedbackuser.execute();
 			
 			ResultSet rs=ps.executeQuery();
+
 			while(rs.next()) {
-				UserBean bean=new UserBean();
-	
-				bean.setUsername(rs.getString("Username"));
-				bean.setNome(rs.getString("Nome"));
-				bean.setCognome(rs.getString("Cognome"));
-			    bean.setImg(rs.getBlob("Img"));
-				bean.setDenominazione(rs.getString("Denominazione"));
-				bean.setDipName(rs.getString("dipName"));
 				
-				
-				collectionBean.add(bean);
-			}
+							UserBean bean=new UserBean();
+							
+							bean.setUsername(rs.getString("Username"));
+							bean.setNome(rs.getString("Nome"));
+							bean.setCognome(rs.getString("Cognome"));
+						    bean.setImg(rs.getBlob("Img"));
+							bean.setDenominazione(rs.getString("Denominazione"));
+							bean.setDipName(rs.getString("dipName"));
+							
+							
+							collectionBean.add(bean);
+						}
+					
 		}
 		finally {
 			try {

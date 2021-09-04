@@ -85,7 +85,7 @@ DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
   String stringRicerca = (String)request.getAttribute("ricercaNew");
   System.out.println("STAMPA:" +stringRicerca);
 %>
-<form class="form shadow p-3 mb-5 bg-white rounded" action="SearchServlet" >
+<form class="form shadow p-3 mb-5 bg-white rounded" action=<%="SearchServlet;jsessionid="+session.getId() %>>
 <input type="search" id="ricerca" name="ricerca" hidden value="<%=stringRicerca%>">
 <div class="form-row">
   <div class="form-group col-md-4">
@@ -139,34 +139,46 @@ DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
   MaterialModelDS material = new MaterialModelDS(ds);
 if(collection!=null&&collection.size()>0){
 	Iterator<?> it=collection.iterator();
-	%>
-	<table>
-	<tr>
-	    <th>Descrizione</th>
-    <th>Costo</th>
-    <th>Username</th>
-    <th>Data Caricamento</th>
-    <th>Feedback</th>
-    </tr>
-	 <%
+
 	while(it.hasNext()){
 		MaterialBean mbean=(MaterialBean)it.next();
 		int feedback = material.doRetrieveFeedback(mbean.getCodiceMateriale());
 		%>
-		  <tr>
-    <th><%=mbean.getDescrizione() %></th>
-    <th><%=mbean.getCosto() %></th>
-    <th><%=mbean.getUsername() %></th>
-    <th><%=mbean.getDataCaricamento() %></th>
-    <th><%=feedback %></th>
-  </tr>
-		
+
+
+           
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          
+            <div class="well search-result">
+                <div class="row">
+                    <a href="documentPreview.jsp">
+                        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
+                            <img class="img-responsive" src="PrintAnteprima?codice=<%=mbean.getCodiceMateriale() %>" width="250" height="250" alt="">
+                        </div>
+                        <div class="col-xs-6 col-sm-9 col-md-9 col-lg-10 title">
+                            <h3><%=mbean.getDescrizione() %></h3>
+                            <p>Utente: <%=mbean.getUsername() %></p>
+                            <p>Costo :<%=mbean.getCosto() %></p>
+                            <p>Data caricamento : <%=mbean.getDataCaricamento() %></p>
+                            <p>Feedback :<%=feedback %></p>
+                        </div>
+                    </a>
+                </div>
+            
+          
+           
+        </div>
+         <hr class="my-4">
+    </div>
+        
+
+
 		<% 
 		
 	}
 	 %> 
 	 
-	 </table>
+	 
 	 <% 
 }else{
 	response.sendRedirect("errorSearch.jsp");
@@ -174,6 +186,7 @@ if(collection!=null&&collection.size()>0){
 %>
 
 </div>
+
 
 </div>
 
