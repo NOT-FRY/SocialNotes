@@ -33,7 +33,7 @@ public class NewsModelDS implements Model<NewsBean>{
 		try {
 			con=ds.getConnection();
 			ps=con.prepareStatement(selectSQL);
-			Utility.print("doRetrieveAll:"+ps.toString());
+			//Utility.print("doRetrieveAll:"+ps.toString());
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()) {
 				NewsBean bean=new NewsBean();
@@ -58,6 +58,35 @@ public class NewsModelDS implements Model<NewsBean>{
 		}
 		return news;
 	}
+	
+	
+	public int doRetrieveKey()throws SQLException{
+		Connection con=null;
+		PreparedStatement ps=null;
+		String sql="SELECT CodiceNews FROM News ORDER BY CodiceNews;";
+		ResultSet rs=null;
+		try {
+			con=ds.getConnection();
+			ps=con.prepareStatement(sql);
+			rs=ps.executeQuery();
+			if(rs.last()) {
+				return rs.getInt("CodiceNews");
+			}
+			return -1;
+		}finally {
+			try {
+				if(rs!=null)
+					rs.close();
+				if(ps!=null)
+					ps.close();
+			}
+			finally {
+				if(con!=null)
+					con.close();
+			}
+		}
+	}
+	
 
 	@Override
 	public void doSave(NewsBean item) throws SQLException {

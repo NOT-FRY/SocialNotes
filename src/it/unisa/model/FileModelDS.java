@@ -57,6 +57,36 @@ public class FileModelDS implements Model<FileBean> {
 		
 	}
 	
+	public boolean isPresent(String fileName) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		String sql="SELECT Filename FROM Files WHERE FileName=?;";
+		try {
+			con=ds.getConnection();
+			ps=con.prepareStatement(sql);
+			ps.setString(1, fileName);
+			rs=ps.executeQuery();
+			if(rs.next())
+				return true;
+			else
+				return false;
+		}finally{
+			try {
+				if(rs!=null)
+					rs.close();
+				if(ps!=null)
+					ps.close();
+			}
+			finally {
+				if(con!=null)
+					con.close();
+			}
+			
+		}
+		
+	}
+	
 	@Override
 	public Collection<FileBean> doRetrieveAll() throws SQLException {
 		Connection con=null;

@@ -37,8 +37,7 @@ public class FileUploadServlet extends HttpServlet {
 	 */
 	private static final long serialVersionUID = -4001419296020204828L;
 
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 		// gets values of text fields
 		//String description = request.getParameter("Descrizione");
 		HttpSession session=request.getSession(true);

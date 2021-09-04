@@ -16,22 +16,36 @@
   <%@include file="header.jsp" %>
     <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <div class="file-upload">
-  <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">AGGIUNGI NEWS</button>
-
-  <div class="image-upload-wrap">
-    <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
-    <div class="drag-text">
-      <h3>TRASCINA E RILASCIA UNA NEWS</h3>
-    </div>
-  </div>
-  <div class="file-upload-content">
-    <img class="file-upload-image" src="#" alt="your image" />
-    <div class="image-title-wrap">
-      <button type="button" onclick="removeUpload()" class="remove-image">RIMUOVI <span class="image-title">FILE CARICATI</span></button>
-    </div>
-  </div>
+ <!--   <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">AGGIUNGI FOTO</button>-->
+<form method="post" action=<%="NewsUploadServlet;jsessionid="+session.getId()%> enctype="multipart/form-data">
+	  <div class="image-upload-wrap">
+	    <input class="file-upload-input" name="img" type='file' onchange="readURL(this);" accept="image/*" />
+	    <div class="drag-text">
+	      <h3>TRASCINA E RILASCIA UNA FOTO</h3>
+	    </div>
+	  </div>
+	  <div class="file-upload-content">
+	    <img class="file-upload-image" src="#" alt="your image" />
+	    <div class="image-title-wrap">
+	      <button type="button" onclick="removeUpload()" class="remove-image">RIMUOVI <span class="image-title">FILE CARICATI</span></button>
+	    </div>
+	  </div>
+	  <br>
+	  <textarea placeholder="Inserisci il titolo della news" rows="3" class="form-control" name="titolo" required></textarea>
+	  <br>
+	  <textarea placeholder="Inserisci l'argomento trattato" rows="3" class="form-control" name="argomento" required></textarea>
+	  <br>
+	  <textarea placeholder="Inserisci il contenuto" rows="4" class="form-control" name="contenuto" required></textarea>
+	  <br>
+	  	<div class="btn-toolbar justify-content-between">
+			<div class="btn-group">
+				<button type="submit" class="btn bottone-principale text-light" style="background-color: #9697e7" onclick="prova()">Pubblica News</button>
+			</div>
+	    </div>
+</form>
 </div>
 <br>
+
 <br>
 <br>
 <h1> ULTIME NEWS CARICATE</h1>

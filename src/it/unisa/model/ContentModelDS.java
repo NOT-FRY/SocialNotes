@@ -88,8 +88,25 @@ public class ContentModelDS implements Model<ContentBean>{
 
 	@Override
 	public void doSave(ContentBean item) throws SQLException {
-		// TODO Auto-generated method stub
-		
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql="INSERT INTO Contenuto (CodiceNews,Filename) values (?,?);";
+		try {
+			con=ds.getConnection();
+			ps=con.prepareStatement(sql);
+			ps.setInt(1, item.getCodiceNews());
+			ps.setString(2, item.getFileName());
+			ps.executeUpdate();
+		}finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			}
+			finally {
+				if(con!=null)
+					con.close();
+			}
+		}
 	}
 
 	@Override

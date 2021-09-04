@@ -88,6 +88,9 @@ public class Login extends HttpServlet {
 						dispatcher.forward(request, response);
 						
 					}
+					else if(bean.getBan()) {
+						System.out.println("Sei bannato go to fuck your self");
+					}
 					else {
 				   // System.out.println("USERNAME: "+bean.getUsername());		
 					session.setAttribute("username",bean.getUsername());
