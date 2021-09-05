@@ -137,11 +137,19 @@ DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
 <%
   Collection <MaterialModelDS> collection = (Collection<MaterialModelDS>) request.getAttribute("materiale");
   MaterialModelDS material = new MaterialModelDS(ds);
+  CourseModelDS cModel = new CourseModelDS(ds);
+  
 if(collection!=null&&collection.size()>0){
 	Iterator<?> it=collection.iterator();
 
 	while(it.hasNext()){
 		MaterialBean mbean=(MaterialBean)it.next();
+		
+		String keyCourse = String.valueOf(mbean.getCodiceCorso());
+		//System.out.println("CODICE CORSO : "+keyCourse);
+		CourseBean cBean = cModel.doRetrieveByKey(keyCourse);
+	    
+		
 		int feedback = material.doRetrieveFeedback(mbean.getCodiceMateriale());
 		%>
 
@@ -161,6 +169,7 @@ if(collection!=null&&collection.size()>0){
                             <p>Costo :<%=mbean.getCosto() %></p>
                             <p>Data caricamento : <%=mbean.getDataCaricamento() %></p>
                             <p>Feedback :<%=feedback %></p>
+                            <p>Corso :  <%=cBean.getNome() %></p>
                         </div>
                     </a>
                 </div>

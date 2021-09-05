@@ -21,6 +21,50 @@ public class CourseModelDS implements Model<CourseBean> {
 	@Override
 	public CourseBean doRetrieveByKey(String code) throws SQLException {
 		// TODO Auto-generated method stub
+		
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		String sql="SELECT * FROM Corso WHERE CodiceCorso=  ?;";
+	
+		try {
+			con=ds.getConnection();
+			ps=con.prepareStatement(sql);
+			
+			int key = Integer.parseInt(code);
+			
+			ps.setInt(1, key);
+			rs=ps.executeQuery();
+			if(rs.next()) {
+				CourseBean bean = new CourseBean();
+				bean.setCodiceCorso(rs.getInt("CodiceCorso"));
+				bean.setNome(rs.getString("Nome"));
+				
+				return bean;
+			}
+				
+
+
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+				if (con != null) 
+					con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+				
+		}
+		
+		
 		return null;
 	}
 
