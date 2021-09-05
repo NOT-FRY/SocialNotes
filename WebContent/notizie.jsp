@@ -17,7 +17,6 @@
   <%@include file="header.jsp" %>
     <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <div class="file-upload">
- <!--   <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">AGGIUNGI FOTO</button>-->
 <form method="post" action=<%="NewsUploadServlet;jsessionid="+session.getId()%> enctype="multipart/form-data">
 	  <div class="image-upload-wrap">
 	    <input class="file-upload-input" name="img" type='file' onchange="readURL(this);" accept="image/*" />
@@ -48,6 +47,7 @@
 <br>
 
 <br>
+<<<<<<< HEAD
 <br>
 <h1> ULTIME NEWS CARICATE</h1> <a href="editNotizie.jsp"><button id="modifica"> Modifica
   
@@ -108,6 +108,7 @@
          </div>
     </div>
 </div>
+
 
 
 <%@include file="footer.jsp" %>

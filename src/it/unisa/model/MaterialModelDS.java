@@ -63,6 +63,69 @@ public class MaterialModelDS implements Model<MaterialBean> {
 	}
 	
 	
+	public Collection<MaterialBean> notValidated()throws SQLException{
+		Connection con=null;
+		PreparedStatement ps=null;
+		String selectSQL="SELECT * FROM Materiale WHERE Hidden=1 ;";
+		Collection<MaterialBean> material=new LinkedList<MaterialBean>();
+		try {
+			con=ds.getConnection();
+			ps=con.prepareStatement(selectSQL);
+			//Utility.print("doRetrieveAll:"+ps.toString());
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()) {
+				MaterialBean bean=new MaterialBean();
+				bean.setCodiceMateriale(rs.getInt("CodiceMateriale"));
+				bean.setDataCaricamento(rs.getDate("DataCaricamento"));
+				bean.setKeywords(rs.getString("Keywords"));
+				bean.setCosto(rs.getInt("Costo"));
+				bean.setDescrizione(rs.getString("Descrizione"));
+				bean.setHidden(rs.getBoolean("Hidden"));
+				bean.setCodiceCorso(rs.getInt("CodiceCorso"));
+				bean.setUsername(rs.getString("Username"));
+				bean.setFileName(rs.getString("FileName"));
+				bean.setAnteprima(rs.getBlob("Anteprima").getBinaryStream());
+				material.add(bean);
+			}
+		}
+		finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			}
+			finally {
+				if(con!=null)
+					con.close();
+			}
+		}
+		return material;
+		
+	}
+	
+	
+	public void setPrice(int codiceMateriale,int price)throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		String sql="UPDATE Materiale SET Costo=?,Hidden=0 WHERE CodiceMateriale=?";
+		try {
+			con = ds.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, price);
+			ps.setInt(2, codiceMateriale);
+			ps.executeUpdate();
+			System.out.println("Prezzo impostato");
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			}
+			finally {
+				if(con!=null)
+					con.close();
+			}
+		}
+	}
+	
 
 	@Override
 	public Collection<MaterialBean> doRetrieveAll() throws SQLException {
@@ -152,7 +215,7 @@ public class MaterialModelDS implements Model<MaterialBean> {
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		
-		String sql="SELECT * FROM Materiale WHERE Username=? ORDER BY DataCaricamento desc;";
+		String sql="SELECT * FROM Materiale WHERE Username=? AND Hidden=0 ORDER BY DataCaricamento desc;";
 		Collection<MaterialBean> material=new LinkedList<MaterialBean>();
 		try {
 			con=ds.getConnection();
@@ -415,7 +478,7 @@ public class MaterialModelDS implements Model<MaterialBean> {
 	public Collection<MaterialBean> doRetrieveByOrderDate() throws SQLException {
 		Connection con=null;
 		PreparedStatement ps=null;
-		String selectSQL="SELECT * FROM Materiale ORDER BY DataCaricamento desc;";
+		String selectSQL="SELECT * FROM Materiale WHERE Hidden=0 ORDER BY DataCaricamento desc;";
 		Collection<MaterialBean> material=new LinkedList<MaterialBean>();
 		try {
 			con=ds.getConnection();

@@ -14,10 +14,12 @@
 </head>
 <body>
 	<%
+	String filename=request.getParameter("filename");
+	System.out.println(filename);
 	DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
 	FileModelDS model= new FileModelDS(ds);
-	FileBean bean= model.doRetrieveByKey("4settembre2019_9.pdf");
-	response.setHeader("Content-Disposition", "filename="+bean.getFilename());
+	FileBean bean= model.doRetrieveByKey(filename);
+	response.setHeader("Content-Disposition", "filename="+bean.getFilename());//attachment dopo la virgola per scaricare direttamente
 		response.setContentType("application/pdf");
 
 		try{

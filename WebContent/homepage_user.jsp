@@ -280,7 +280,7 @@ not support the canvas tag.</canvas>
 						<div class="text-muted h7 mb-2">
 							<i class="fa fa-clock-o"></i><%=diff %> days ago
 						</div>
-						<a class="card-link" href="#"><h5 class="card-title"><%=mat.getDescrizione() %></h5> </a> <img
+						<h5 class="card-title"><%=mat.getDescrizione() %></h5> <img
 							src="PrintAnteprima?codice=<%=mat.getCodiceMateriale() %>" height="500px" width="500px"
 							class="img-fluid">
 					</div>
