@@ -108,6 +108,9 @@ public class Login extends HttpServlet {
 					session.setAttribute("dipName",bean.getDipName());
 					UserRoleModelDS role=new UserRoleModelDS(ds);
 					int userRole=role.doRetrieveByUsername(bean.getUsername());
+					
+					session.setAttribute("role", userRole);
+					
 					//System.out.println("user role in login.java"+userRole);
 					String adminURL=response.encodeURL("admin.jsp");
 					String homeURL = response.encodeURL("homepage_user.jsp");

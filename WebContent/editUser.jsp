@@ -15,21 +15,26 @@
 </head>
 <body>
 <%
+String homeUser = "homepage_user.jsp";
 	if (session.getAttribute("username")==null)
 		  response.sendRedirect("login.jsp");
-
+	else if (((int)session.getAttribute("role"))!=1){
+    	String encodeHomeUserURL = response.encodeRedirectURL(homeUser);
+    	response.sendRedirect(encodeHomeUserURL);
+    }
 	DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
 	UserModelDS model=new UserModelDS(ds);
 	Collection<UserBean> users=model.doRetrieveUsers();
 %>
 
 
-<%@include file="header.jsp" %>
+  <%@include file="header_admin.jsp" %>
 
 <div class="container mt-3 mb-4">
-<div class="col-lg-9 mt-4 mt-lg-0">
+
     <div class="row">
-      <div class="col-md-12">
+  
+      
         <div class="user-dashboard-info-box table-responsive mb-0 bg-white p-4 shadow-sm">
           <table class="table manage-candidates-top mb-0">
             <thead>
@@ -85,8 +90,7 @@
         </div>
       </div>
     </div>
-  </div>
-</div>
+
 
 
 

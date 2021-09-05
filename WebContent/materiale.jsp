@@ -5,8 +5,11 @@
  <%@page import="java.io.InputStream"%>  
  <%@page import="java.util.Collection"%>
  <%@page import="it.unisa.model.MaterialBean"%> 
+<%@page import="it.unisa.model.UserModelDS"%> 
+<%@page import="it.unisa.model.UserBean"%> 
  <%@page import="java.util.Iterator"%>
  <%@page import="java.sql.Date"%>
+  <%@page import="javax.sql.DataSource"%>
 <%@page import="java.util.concurrent.TimeUnit"%>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -14,25 +17,33 @@
     <meta charset="utf-8">
     <title>Gestione Materiale</title>
     <link rel="stylesheet" type="text/css" href="css/materiale.css">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
   </head>
   <body>
   <%
-	  if (session.getAttribute("username")==null)
+String homeUser = "homepage_user.jsp";
+	if (session.getAttribute("username")==null)
 		  response.sendRedirect("login.jsp");
+	else if (((int)session.getAttribute("role"))!=1){
+    	String encodeHomeUserURL = response.encodeRedirectURL(homeUser);
+    	response.sendRedirect(encodeHomeUserURL);
+    }
 
 	  DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
 	  MaterialModelDS material=new MaterialModelDS(ds);
 	  UserModelDS user=new UserModelDS(ds);
 	  Collection<MaterialBean> materials=material.notValidated();
   %>
-  <%@include file="header_user.jsp" %>
+
+ <%@include file="header_admin.jsp" %>
+ 
     <div class="container">
     	<div class="row">
+    	 
+    	
     	<%
 	    	if(materials!=null&&materials.size()>0){
 				Iterator<?> it=materials.iterator();
@@ -85,12 +96,22 @@
 							class="img-fluid">
 					</div>
 					<div class="card-footer">
-						<form method="post" action=<%="SetPrice;jsessionid="+session.getId()%> enctype="multipart/form-data">
-							<div class="btn-group">
+						<form method="post" class="form shadow p-3 mb-5 bg-white rounde" action=<%="SetPrice;jsessionid="+session.getId()%> enctype="multipart/form-data">
+							<div class="form-row">
+							<div class="form-group col-md-4">
 								<input type="hidden" name="codice" value="<%=mat.getCodiceMateriale() %>">
 								<input type="number" class="form-control" name="costo" id="costo" placeholder="Costo" required>&nbsp&nbsp&nbsp&nbsp
+								
+						</div>
+						
+						
+					
+							<div class="form-group col-md-3">
 								<button type="submit" class="btn bottone-principale text-light" style="background-color: #9697e7" onclick="prova()">Imposta prezzo</button>
-							</div>
+								
+						</div>
+						
+						</div>
 						</form>
 					</div>
 				</div>
@@ -101,7 +122,8 @@
 				
 			
     	</div>
-    </div>
+    	</div>
+   
     <br>
 <%@include file="footer.jsp" %>
   </body>

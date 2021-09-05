@@ -43,10 +43,12 @@ public class SearchFriend extends HttpServlet {
 		String url = "errorSearch.jsp";
 		String homeLink = "homepage.jsp";
 		//System.out.println("ID "+session.getAttribute("username"));
+		if (session!=null) {
 		if (session.getAttribute("username")!=null) {
 			
 			url = response.encodeRedirectURL(url);
 			homeLink = response.encodeRedirectURL(homeLink);
+		}
 		}else {
 			response.sendRedirect(homeLink);
 			return;

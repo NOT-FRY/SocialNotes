@@ -13,31 +13,45 @@
 <title>Grafici andamento</title>
 </head>
 <body>
-<%@include file="header.jsp" %>
+<%
+String homeUser = "homepage_user.jsp";
+	if (session.getAttribute("username")==null)
+		  response.sendRedirect("login.jsp");
+	else if (((int)session.getAttribute("role"))!=1){
+    	String encodeHomeUserURL = response.encodeRedirectURL(homeUser);
+    	response.sendRedirect(encodeHomeUserURL);
+    }
+
+%>
+
+<%@include file="header_admin.jsp" %>
+
   <section class="container-fluid">
-  <a href="admin.jsp"><button id="back"> Torna Indietro
-  
-  </button></a>
+
+
+
   
   <h1 >GRAFICI ANDAMENTO SocialNotes</h1>
+         
     <div class="row">
-      <div class="col-md-4">
+  
+      <div class="col-md-8">
       <h3>Rapporto utenti Registrati/Bannati</h3>
         <div id="bar-chart">
         </div>
       </div>
       
-      <div class="col-md-8">
+      <div class="col-md-4">
       <h3>Rapporto utenti Registrati/Non Registrati</h3>
         <div id="line-chart"></div>
       </div>
       
-      <div class="col-md-8">
+      <div class="col-md-4">
       <h3>Rapporto materiale Caricato/Scaricato</h3>
         <div id="area-chart"></div>
       </div>
       
-      <div class="col-md-4">
+      <div class="col-md-8">
       <h3>Grafico Riassuntivo</h3>
         <div id="donut-chart"></div>
       </div>

@@ -14,8 +14,24 @@
 <script src="js/notizie.js" charset="utf-8"></script>
   </head>
   <body>
-  <%@include file="header.jsp" %>
-    <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <%
+String homeUser = "homepage_user.jsp";
+	if (session.getAttribute("username")==null)
+		  response.sendRedirect("login.jsp");
+	else if (((int)session.getAttribute("role"))!=1){
+    	String encodeHomeUserURL = response.encodeRedirectURL(homeUser);
+    	response.sendRedirect(encodeHomeUserURL);
+    }
+
+%>
+
+<%@include file="header_admin.jsp" %>
+
+
+<div class="container">
+<div class="row">
+<div class="col-md-3"></div>
+    <div class="col-md-6">
 <div class="file-upload">
 <form method="post" action=<%="NewsUploadServlet;jsessionid="+session.getId()%> enctype="multipart/form-data">
 	  <div class="image-upload-wrap">
@@ -44,6 +60,10 @@
 	    </div>
 </form>
 </div>
+</div>
+<div class="col-md-3"></div>
+</div>
+</div>
 <br>
 
 <br>
@@ -51,4 +71,5 @@
 
 <%@include file="footer.jsp" %>
   </body>
+  <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 </html>
