@@ -47,68 +47,6 @@
 <br>
 
 <br>
-<<<<<<< HEAD
-<br>
-<h1> ULTIME NEWS CARICATE</h1> <a href="editNotizie.jsp"><button id="modifica"> Modifica
-  
-  </button></a>
-
-<div class="container">
-    
-    
-    <div class="friend-list">
-        <div class="row">
-            <div class="col-md-4 col-sm-6">
-              <div class="friend-card">
-                  <img src="https://via.placeholder.com/200x100/6495ED" alt="profile-cover" class="img-responsive cover">
-                  <div class="card-info">
-                 
-                  <div class="friend-info">
-                    <p class="pull-right text-green">[Calcio]</p>
-                  	<h5><a href="timeline.html" class="profile-link">Messi al PSG</a></h5>
-                  	<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <br>
-            <div class="col-md-4 col-sm-6">
-              <div class="friend-card">
-                  <img src="https://via.placeholder.com/200x100/008B8B" alt="profile-cover" class="img-responsive cover">
-                  <div class="card-info">
-                  <div class="friend-info">
-                    <p class="pull-right text-green">[Calcio]</p>
-                  	<h5><a href="timeline.html" class="profile-link">Messi al PSG</a></h5>
-                  	                  	<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.</p>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="col-md-4 col-sm-6">
-              
-              <div class="friend-card">
-                 <img src="https://via.placeholder.com/200x100/9932CC" alt="profile-cover" class="img-responsive cover"> 
-                  <div class="card-info">
-                  <div class="friend-info">
-                     <p class="pull-right text-green">[Calcio]</p>
-                  	<h5><a href="timeline.html" class="profile-link">Messi al PSG</a></h5>
-                  	<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.</p>
-                  </div>
-                </div>
-              </div>
-         
-            </div>
-            
-        
-            
-         
-            
-         </div>
-    </div>
-</div>
-
 
 
 <%@include file="footer.jsp" %>

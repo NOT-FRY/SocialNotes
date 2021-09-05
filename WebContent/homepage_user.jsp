@@ -143,9 +143,7 @@
 							</li>
 							<li class="list-group-item">
 								<div class="h6 text-muted">Valutazione</div>
-								<canvas class="myCanvas" data-rating="<%=media %>" width="100"
-									height="20">
-not support the canvas tag.</canvas>
+								<canvas class="myCanvas" data-rating="<%=media %>" width="100" height="20">not support the canvas tag.</canvas>
 							</li>
 						</ul>
 					</div>

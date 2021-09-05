@@ -28,7 +28,6 @@
 	else{
 		friendname=(String)request.getAttribute("friendname");
 	}
-	//System.out.println(username);
 	UserModelDS user=new UserModelDS(ds);
 	UserBean bean=user.doRetrieveByUsername(friendname);
 	String username=(String)session.getAttribute("username");
@@ -209,7 +208,7 @@ not support the canvas tag.</canvas>
 						<div class="text-muted h7 mb-2">
 							<i class="fa fa-clock-o"></i><%=diff %> days ago
 						</div>
-						<a class="card-link" href="#"><h5 class="card-title"><%=mat.getDescrizione() %></h5> </a>
+						<a style="color:black" class="card-link" href="documentPreview.jsp?codice=<%=mat.getCodiceMateriale()%>"><h5 class="card-title"><%=mat.getDescrizione() %></h5> </a>
 						<img src="PrintAnteprima?codice=<%=mat.getCodiceMateriale() %>" class="img-fluid" width="500px" height="500px">
 					</div>
 					<div class="card-footer">
