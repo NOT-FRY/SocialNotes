@@ -58,7 +58,44 @@ public class NewsModelDS implements Model<NewsBean>{
 		}
 		return news;
 	}
-	
+	public NewsBean doRetrieveByCodiceNews(int codiceNews) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		String selectSQL="SELECT * FROM News WHERE CodiceNews = ?";
+		NewsBean bean= new NewsBean();
+		//System.out.println("doRetrieveByCodiceNews-codice:"+codiceNews);
+		try {
+			con=ds.getConnection();
+			ps=con.prepareStatement(selectSQL);
+			//Utility.print("doRetrieveAll:"+ps.toString());
+			ps.setInt(1, codiceNews);
+			ResultSet rs=ps.executeQuery();
+			if(rs.next()) {
+				bean.setCodiceNews(rs.getInt("CodiceNews"));
+				bean.setTitolo(rs.getString("Titolo"));
+				bean.setArgomento(rs.getString("Argomento"));
+				bean.setContenuto(rs.getString("Contenuto"));
+				bean.setUsername(rs.getString("Username"));
+				bean.setDataCaricamento(rs.getDate("DataCaricamento"));
+				//System.out.println("News trovata");
+			}
+			else {
+				//System.out.println("News non trovata");
+				return null;
+			}
+		}
+		finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			}
+			finally {
+				if(con!=null)
+					con.close();
+			}
+		}
+		return bean;
+	}
 	
 	public int doRetrieveKey()throws SQLException{
 		Connection con=null;

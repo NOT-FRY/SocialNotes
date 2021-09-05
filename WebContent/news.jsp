@@ -1,27 +1,71 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="java.util.Date" %>
+    pageEncoding="ISO-8859-1" import="java.util.*, it.unisa.model.*,javax.sql.DataSource"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>SocialNotes - News</title>
+<link rel="icon" href="img/favicon.ico">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
- <link rel="icon" href="img/favicon.ico">   
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:ital@1&family=Manrope:wght@300;500;600&display=swap" rel="stylesheet"> 
 <style>
-
-.img-fluid1 {
-    max-width: 100%;
-    height: 200px;
+.paginate_button:hover{
+	background:none !important;
+	border:none !important;
+}
+.paginate_button {
+	padding: .5em .2em !important;
 }
 
-
 </style>
+
+<style>
+.card-horizontal {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.btn-principale{
+	background-color: #9697e7 !important;
+}
+</style>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.0/datatables.min.css"/>
+ 
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.11.0/datatables.min.js"></script>
+<script>
+
+	
+$(document).ready(function() {
+	$.noConflict();
+    $("#table").DataTable({
+    		"sPaginationType": "full_numbers",
+    		"info":true,
+    		//"ordering":false,
+    		//"searching":false,
+    		"pageLength":6,
+    		"lengthChange": false,
+    	    language: {
+    	        "emptyTable": "La ricerca non ha prodotto risultati",
+    	        "infoEmpty": "Nessun risultato disponibile",
+    	        "zeroRecords": "La ricerca non ha prodotto risultati",
+	              "paginate": {
+	            	  'first':    '<<',
+	            	  'last':     '>>',
+	                  'previous': 'Precedente',
+	                  'next':     'Successivo',
+	              },
+	              "info": "Pagina _PAGE_ di _PAGES_",
+	              "search": "Cerca:",
+	  	          "aria": {
+		          }
+    	      },
+
+    });
+} );
+
+</script>
 
 </head>
 <body>
@@ -46,134 +90,108 @@
 
 
 
+ <!-- DA FARE IMMAGINI -->
 
- <br>
-      <br>
-  
-      <div class="container">
-     <!--   <div class="row"> -->
-      <h2 class="pb-2 border-bottom" style="font-family: 'Archivo', sans-serif;">News</h2>
-     <!-- </div> -->
-   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+
+<div class="container">
+ <h2 class="pb-2 border-bottom" style="margin-top:15px; font-family: 'Archivo', sans-serif;">News</h2>
    
-        <div class="col" style="margin-bottom:5%">
-          <div class="card shadow-sm">
-<img src="img\news2.png" class="img-fluid1" alt="..." >
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col" style="margin-bottom:5%">
-          <div class="card shadow-sm">
-         <img src="img\news1.jpg" class="img-fluid1" alt="...">
+<%
+	DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
+	NewsModelDS model= new NewsModelDS(ds);
+	ContentModelDS cmodel = new ContentModelDS(ds);
+	FileModelDS fmodel = new FileModelDS(ds);
+  	Collection <NewsBean> collection = model.doRetrieveAll();
+if(collection!=null&&collection.size()>0){
+	Iterator<?> it=collection.iterator();
+	%>
+	<table id="table">
+	<thead>
+		<tr>
+		    <th>Ordina per data caricamento</th>
+    	</tr>
+    </thead>
+    <tbody>
+	 <%
+	while(it.hasNext()){
+		NewsBean nbean=(NewsBean)it.next();
+		Collection<String> fileNames = cmodel.doRetrieveByCodiceNews(nbean.getCodiceNews());
+		String fileName = null; //Per passarmela dopo nella showNews.jsp
+		%>
+		
+		  <tr>
+		   <td>
+		  	  <div class="col" style="margin-bottom:3%">
+				  <div class="card shadow-sm">
+				  			 <div class="card-header">
+								<small class="text-muted"><%=nbean.getDataCaricamento()+"  "%>-<%=nbean.getUsername()%></small>
+							</div>
+							
+					    <div class="card-horizontal">
+					        <div class="img-square-wrapper">
+					        	<% if(fileNames!=null&&fileNames.size()>0){
+					        		Iterator<?> itfiles = fileNames.iterator();
+					        		if(itfiles.hasNext()){
+					        			fileName = (String)itfiles.next();	
+					        			FileBean fb = fmodel.doRetrieveByKey(fileName);
+					        			if(fb!=null){
+					        				%>
+					        				<img class="" src="PrintNewsImage?filename=<%=fb.getFilename()%>"  width="300" height="182" alt="News">
+					        			<%
+					        			}
+					        		}
+					        	}else{
+					        			%>
+					        	
+					        		<img class="" src="img/news3.jpg" width="300" height="182" alt="News">
+					        		<%
+					        		}
+					        	%>
+					        </div>
+					        <div class="card-body">
+					            <h4 class="card-title"><%=nbean.getTitolo() %></h4>
+					            <p class="card-text"><%=nbean.getArgomento() %></p>
+					            <br>
+					            <a href="showNews.jsp<%="?newsId="+nbean.getCodiceNews()+"&newsImage="+fileName%>" class="btn btn-principale stretched-link">Vai alla notizia</a>
+					            <!-- stretched link rende tutta la card un link -->
+					        </div>
+					    </div>
+					     
+						<!--  <div class="card-footer">
+							<small class="text-muted"><%=nbean.getDataCaricamento()+" "%>-<%=nbean.getUsername()%></small>
+						</div>
+						-->
+						
+				    </div>
+				</div>
+				</td>
+            
+  		</tr>
+		
+	
+	 <%	
+		}
+	 %> 
+	  </tbody>
+	 </table>
+	 <% 
+}
+%>
 
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col" style="margin-bottom:5%">
-          <div class="card shadow-sm">
-<img src="img\news3.jpg" class="img-fluid1" alt="...">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">sssew</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-       <div class="col" style="margin-bottom:5%">
-          <div class="card shadow-sm">
-<img src="img\news2.png" class="img-fluid1" alt="...">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-         <div class="col" style="margin-bottom:5%">
-          <div class="card shadow-sm">
-<img src="img\news2.png" class="img-fluid1" alt="...">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-         <div class="col" style="margin-bottom:5%">
-          <div class="card shadow-sm">
-<img src="img\news2.png" class="img-fluid1" alt="...">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div> 
-    </div>
-    
-<nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-center">
-    <li class="page-item disabled">
-      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#">Next</a>
-    </li>
-  </ul>
-</nav>
-    
+
 </div>
 
-     <br><br>
+
+
+
+
 
 <%@ include file="footer.jsp" %>
 
 </body>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-  
+
+<script src="js/search.js" type="text/javascript"></script>
 
 </html>

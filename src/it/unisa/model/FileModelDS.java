@@ -30,17 +30,18 @@ public class FileModelDS implements Model<FileBean> {
 			ps=con.prepareStatement(selectSQL);
 			ps.setString(1, fileName);
 			ResultSet rs=ps.executeQuery();
-			System.out.println("ciao");
 			if(rs.next()) {
 				bean.setFilename(rs.getString("FileName"));
 				System.out.println(bean.getFilename());
-				bean.setFormato(rs.getString("Formato"));
-				
+				bean.setFormato(rs.getString("Formato"));			
 				bean.setContenuto(rs.getBlob("Contenuto").getBinaryStream());
 				if(bean.getContenuto()!=null)
 				System.out.println("ciao33");
 				bean.setDimensione(rs.getInt("Dimensione"));
 				
+			}
+			else {
+				return null;
 			}
 		}
 		finally {
