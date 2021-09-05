@@ -93,7 +93,7 @@ public class FeedbackModelDS implements Model<FeedbackBean> {
 			   dropViewFeedbackuser = con.prepareStatement(dropViewFeedbackuserSQL);
 			   viewFeedbackuser = con.prepareStatement(viewFeedbackuserSQL);
 
-			Utility.print("doRetrieveAll:"+ps.toString());
+			//Utility.print("doRetrieveAll:"+ps.toString());
 
 			dropViewFeedbackmedia.execute();
 			viewFeedbackmedia.execute();

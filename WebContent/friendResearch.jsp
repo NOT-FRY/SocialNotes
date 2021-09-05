@@ -30,7 +30,7 @@
                                     </div>
                                 </div>
                                 <div class="result-body">
-                                    <div class="table-responsive">
+                                   <!-- inizio --> <div class="table-responsive">
                                         <table class="table widget-26">
                                             <tbody>
                                                 <tr>
@@ -326,7 +326,7 @@
                                              
                                             </tbody>
                                         </table>
-                                    </div>
+                                    </div><!-- fine -->
                                 </div>
                             </div>
                         </div>
@@ -362,4 +362,5 @@
  <br>
  <%@include file="footer.jsp" %>
 </body>
+
 </html>

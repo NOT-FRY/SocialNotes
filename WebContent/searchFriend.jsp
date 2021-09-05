@@ -63,13 +63,15 @@
   }
 }  
 </style>
-
+<link rel="stylesheet" type="text/css" href="css/friendResearch.css">
 </head>
 
 	   
 <body>
 
 <% 
+String visitUserLink="visitUser.jsp";
+	  
    if(session.getAttribute("username")==null){
 	  
 	  String homeGuest = "homepage.jsp";
@@ -78,7 +80,7 @@
 
 	  
    }else{
-		  System.out.println("OOOOOOOO");
+	   visitUserLink=response.encodeURL(visitUserLink);
 	   %>
 	   <jsp:include page="header_user.jsp"></jsp:include>
 	   <% }%>
@@ -148,60 +150,59 @@ DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
   Collection <UserModelDS> collection = (Collection<UserModelDS>) request.getAttribute("utente");
   UserModelDS material = new UserModelDS(ds);
 if(collection!=null&&collection.size()>0){
-	Iterator<?> it=collection.iterator();
-	//Iterator<?> iterator2=collection.iterator();
-	%>
-	<table>
-	<tr>
-	    <th>Denominazione</th>
-    <th>Username</th>
-    <th>Nome</th>
-    <th>Cognome</th>
-    <th>dipName</th>
-       <th>Feedback</th>
-    </tr>
-	 <%
+	Iterator<?> it=collection.iterator();%>
+	<div class="table-responsive">
+    	<table class="table widget-26">
+        <tbody>
+   <%
 	while(it.hasNext()){
 		UserBean bean=(UserBean)it.next();
-		
-/*		while (iterator2.hasNext()){
-			UserBean beanControllo = (UserBean)iterator2.next();
-			//String username1 = bean.getUsername();
-			//String username2 = beanControllo.getUsername();
-			System.out.println("BEAN1 : "+bean.getUsername()+" BEAN2: "+beanControllo.getUsername());
-			if (((bean.getUsername().compareTo(beanControllo.getUsername()))!=0)||(c==0)){
-				if ((bean.getUsername().compareTo(beanControllo.getUsername()))!=0) c
-	*/
-		
 		FeedbackModelDS fmodel = new FeedbackModelDS(ds);
-
 		feed = fmodel.getFeedbackByUsername(bean.getUsername());
-		
-	//	System.out.println("FEEDBACK : "+ fmodel.getFeedbackByUsername(bean.getUsername()));
-		
 		%>
-		  <tr>
-    <th><%=bean.getDenominazione() %></th>
-    <th><%=bean.getUsername()%></th>
-    <th><%=bean.getNome() %></th>
-    <th><%=bean.getCognome() %></th>
-        <th><%=bean.getDipName() %></th>
-        <th><%=feed %></th>
- 
-
-  </tr>
+		<tr>
+	        <td>
+	            <div class="widget-26-job-emp-img">
+	                <img src="PrintImage?username=<%=bean.getUsername() %>" alt="ciao" width="150px"/>
+	            </div>
+	        </td>
+	        <td>
+	            <div class="widget-26-job-title">
+	                <a style="color:black"  href="<%=visitUserLink%>?friendname=<%=bean.getUsername()%>" ><%=bean.getNome() %> <%=bean.getCognome() %></a>
+	               
+	            </div>
+	        </td>
+	        <td>
+	            <div class="widget-26-job-info">
+	                <p class="type m-0"><%=bean.getUsername() %></p>
+	            </div>
+	        </td>
+	        <td>
+	            <div class="widget-26-job-salary"><%=bean.getDenominazione() %></div>
+	        </td>
+	        <td>
+	            <div class="widget-26-job-category bg-soft-base">
+	              <i class="indicator bg-info"></i>
+	                <span><%=bean.getDipName() %></span>
+	            </div>
+	        </td>
+	        <td>
+	            <div class="widget-26-job-starred">
+	             								<canvas class="myCanvas" data-rating="<%=feed %>" width="100"
+									height="20">
+not support the canvas tag.</canvas>
+	            </div>
+	        </td>
+	    </tr>
 		
 		<% 
 		
 	}
-
-	 %> 
-	 
-	 </table>
-	 <% 
 }
 %>
-
+ </tbody>
+</table>
+</div>
 </div>
 
 </div>
@@ -211,5 +212,5 @@ if(collection!=null&&collection.size()>0){
 </body>
 
 <script src="js/search.js" type="text/javascript"></script>
-
+<script src="js/homepage_user.js"></script>
 </html>
