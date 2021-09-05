@@ -8,6 +8,7 @@
     <title>Gestione News</title>
     <link rel="stylesheet" type="text/css" href="css/notizie.css">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="js/notizie.js" charset="utf-8"></script>
@@ -48,111 +49,66 @@
 
 <br>
 <br>
-<h1> ULTIME NEWS CARICATE</h1>
-<div class="col-md-9 animated fadeInRight">
+<h1> ULTIME NEWS CARICATE</h1> <a href="editNotizie.jsp"><button id="modifica"> Modifica
+  
+  </button></a>
+
+<div class="container">
+    
+    
+    <div class="friend-list">
         <div class="row">
-            <div class="col-lg-12">
-                <div class="file-box">
-                    <div class="file">
-                        <a href="https://www.adisurcampania.it/">
-                            <span class="corner"></span>
-
-                            <div class="icon">
-                                <img src="img/adisurc.png" alt="adisurc" class="img-responsive">
-                            </div>
-                            <div class="file-name">
-                                Novità ADISURC
-                                <br>
-                                <small>Aggiunto: 11 luglio, 2021</small>
-                            </div>
-                        </a>
-                    </div>
-
+            <div class="col-md-4 col-sm-6">
+              <div class="friend-card">
+                  <img src="https://via.placeholder.com/200x100/6495ED" alt="profile-cover" class="img-responsive cover">
+                  <div class="card-info">
+                 
+                  <div class="friend-info">
+                    <p class="pull-right text-green">[Calcio]</p>
+                  	<h5><a href="timeline.html" class="profile-link">Messi al PSG</a></h5>
+                  	<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.</p>
+                  </div>
                 </div>
-                <div class="file-box">
-                    <div class="file">
-                        <a href="https://www.unisa.it/">
-                            <span class="corner"></span>
-
-                            <div class="image">
-                                <img alt="unisa" class="img-responsive" src="img/unisa.png">
-                            </div>
-                            <div class="file-name">
-                                Novità UNISA
-                                <br>
-                                <small>Aggiunto: 11 luglio, 2021</small>
-                            </div>
-                        </a>
-
-                    </div>
-                </div>
-                <div class="file-box">
-                    <div class="file">
-                        <a href="https://www.milanotoday.it/tag/scioperi/">
-                            <span class="corner"></span>
-
-                            <div class="image">
-                                <img alt="image" class="img-responsive" src="img/sciopero.jpg" class="img-responsive">
-                            </div>
-                            <div class="file-name">
-                                Sciopero dei mezzi a Milano
-                                <br>
-                                <small>Aggiunto: 11 luglio, 2021</small>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="file-box">
-                    <div class="file">
-                        <a href="https://easycourse.unisa.it/EasyTest/Calendario/index.php?_lang=it">
-                            <span class="corner"></span>
-
-                            <div class="icon">
-                              <img src="img/esami.jpg" alt="esami" class="img-responsive">
-                            </div>
-                            <div class="file-name">
-                                Pubblicati calendari appelli
-                                <br>
-                                <small>Aggiunto: 11 luglio, 2021</small>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="file-box">
-                    <div class="file">
-                        <a href="https://www.luiss.it/entra-luiss/ammissione-triennali-e-ciclo-unico">
-                            <span class="corner"></span>
-
-                            <div class="image">
-                                <img alt="image" class="img-responsive" src="img/luiss.jpg">
-                            </div>
-                            <div class="file-name">
-                                Test di ingresso LUISS
-                                <br>
-                                <small>Aggiunto: 11 luglio, 2021</small>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="file-box">
-                    <div class="file">
-                        <a href="editNotizie.jsp">
-                            <span class="corner"></span>
-
-                            <div class="icon">
-                                <img alt="image" class="img-responsive" src="img/impostazioni.jpg">
-                            </div>
-                            <div class="file-name">
-                                MODIFICA
-                                <br>
-
-                            </div>
-                        </a>
-                    </div>
-                </div>
+              </div>
             </div>
-        </div>
-        </div>
+            <br>
+            <div class="col-md-4 col-sm-6">
+              <div class="friend-card">
+                  <img src="https://via.placeholder.com/200x100/008B8B" alt="profile-cover" class="img-responsive cover">
+                  <div class="card-info">
+                  <div class="friend-info">
+                    <p class="pull-right text-green">[Calcio]</p>
+                  	<h5><a href="timeline.html" class="profile-link">Messi al PSG</a></h5>
+                  	                  	<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.</p>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-md-4 col-sm-6">
+              
+              <div class="friend-card">
+                 <img src="https://via.placeholder.com/200x100/9932CC" alt="profile-cover" class="img-responsive cover"> 
+                  <div class="card-info">
+                  <div class="friend-info">
+                     <p class="pull-right text-green">[Calcio]</p>
+                  	<h5><a href="timeline.html" class="profile-link">Messi al PSG</a></h5>
+                  	<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.</p>
+                  </div>
+                </div>
+              </div>
+         
+            </div>
+            
+        
+            
+         
+            
+         </div>
+    </div>
+</div>
+
 
 <%@include file="footer.jsp" %>
   </body>

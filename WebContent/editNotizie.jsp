@@ -5,73 +5,101 @@
   <head>
     <meta charset="utf-8">
     <title>Gestione News</title>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="js/editnotizie.js" charset="utf-8"></script> 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.0.7/css/boxicons.min.css">
+  
 <link rel="stylesheet" type="text/css" href="css/editNotizie.css">
 
   </head>
   <body>
   <%@include file="header.jsp" %>
+    <br>
     <div class="container">
-          <div class="table-wrapper">
-              <div class="table-title">
-                  <div class="row">
-                      <div class="col-sm-8"><h2>Modifica <b>NEWS</b></h2></div>
-                    <!--  <div class="col-sm-4">
-                          <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add New</button>
-                      </div> -->
-                  </div>
-              </div>
-              <table class="table table-bordered">
-                  <thead>
-                      <tr>
-                          <th>Titolo</th>
-                          <th>Pubblicato da:</th>
-                          <th>Data</th>
-                          <th>Azioni</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      <tr>
-                          <td>Novità UNISA</td>
-                          <td>Alfonso</td>
-                          <td>11/07/2021</td>
-                          <td>
-<!-- <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons"></i></a> -->                              <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons"></i></a>
-                              <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons"></i></a>
-                          </td>
-                      </tr>
-                      <tr>
-                          <td>Sciopero dei mezzi a Milano</td>
-                          <td>Armando</td>
-                          <td>11/07/2021</td>
-                          <td>
-<!-- <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons"></i></a> -->                              <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons"></i></a>
-                              <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons"></i></a>
-                          </td>
-                      </tr>
-                      <tr>
-                          <td>Test di ingresso LUISS</td>
-                          <td>Simone</td>
-                          <td>11/07/2021</td>
-                          <td>
-  						<!-- <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons"></i></a> -->
-                              <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons"></i></a>
-                              <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons"></i></a>
-                          </td>
-                      </tr>
-                  </tbody>
-              </table>
-          </div>
-      </div>
+<div class="row row-cols-1 row-cols-lg-2 row-cols-xl-4">
+	<div class="col">
+		<div class="card radius-15">
+			<div class="card-body text-center">
+				<div class="p-4 border radius-15">
+					<img src="https://bootdey.com/img/Content/avatar/avatar7.png" width="110" height="110"  alt="">
+					<h5 class="mb-0 mt-5">Messi al PSG</h5>
+					<p class="mb-3">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et</p>
+					<div class="list-inline contacts-social mt-3 mb-3">
+					<ul class="list-inline">
+   <li class="list-inline-item"><a class="social-icon text-xs-center" target="_blank" href="#"><i class="far fa-eye"></i></a></li>
+   <li class="list-inline-item"><a class="social-icon text-xs-center" target="_blank" href="#"><i class="far fa-edit"></i></a></li>
+   <li class="list-inline-item"><a class="social-icon text-xs-center" target="_blank" href="#" ><i class="far fa-trash-alt "></i></a></li>
+</ul>
+					</div>
+					<div class="d-grid"> <a href="#" class="btn btn-outline-primary radius-15">Salva Modifiche</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col">
+		<div class="card radius-15">
+			<div class="card-body text-center">
+				<div class="p-4 border radius-15">
+					<img src="https://bootdey.com/img/Content/avatar/avatar1.png" width="110" height="110"  alt="">
+					<h5 class="mb-0 mt-5">Messi al PSG</h5>
+					<p class="mb-3">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et</p>
+					<div class="list-inline contacts-social mt-3 mb-3"> 
+									<ul class="list-inline">
+   <li class="list-inline-item"><a class="social-icon text-xs-center" target="_blank" href="#"><i class="far fa-eye"></i></a></li>
+   <li class="list-inline-item"><a class="social-icon text-xs-center" target="_blank" href="#"><i class="far fa-edit"></i></a></li>
+   <li class="list-inline-item"><a class="social-icon text-xs-center" target="_blank" href="#" ><i class="far fa-trash-alt "></i></a></li>
+</ul>
+					</div>
+					<div class="d-grid"> <a href="#" class="btn btn-outline-primary radius-15">Salva Modifiche</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col">
+		<div class="card radius-15">
+			<div class="card-body text-center">
+				<div class="p-4 border radius-15">
+					<img src="https://bootdey.com/img/Content/avatar/avatar6.png" width="110" height="110"  alt="">
+					<h5 class="mb-0 mt-5">Messi al PSG</h5>
+					<p class="mb-3">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et</p>
+					<div class="list-inline contacts-social mt-3 mb-3"> 
+									<ul class="list-inline">
+   <li class="list-inline-item"><a class="social-icon text-xs-center" target="_blank" href="#"><i class="far fa-eye"></i></a></li>
+   <li class="list-inline-item"><a class="social-icon text-xs-center" target="_blank" href="#"><i class="far fa-edit"></i></a></li>
+   <li class="list-inline-item"><a class="social-icon text-xs-center" target="_blank" href="#" ><i class="far fa-trash-alt "></i></a></li>
+</ul>
+					
+					</div>
+					<div class="d-grid"> <a href="#" class="btn btn-outline-primary radius-15">Salva Modifiche</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col">
+		<div class="card radius-15">
+			<div class="card-body text-center">
+				<div class="p-4 border radius-15">
+					<img src="https://bootdey.com/img/Content/avatar/avatar2.png" width="110" height="110"  alt="">
+					<h5 class="mb-0 mt-5">Messi al PSG</h5>
+					<p class="mb-3">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et</p>
+					<div class="list-inline contacts-social mt-3 mb-3"> 
+				<ul class="list-inline">
+   <li class="list-inline-item"><a class="social-icon text-xs-center" target="_blank" href="#"><i class="far fa-eye"></i></a></li>
+   <li class="list-inline-item"><a class="social-icon text-xs-center" target="_blank" href="#"><i class="far fa-edit"></i></a></li>
+   <li class="list-inline-item"><a class="social-icon text-xs-center" target="_blank" href="#" ><i class="far fa-trash-alt "></i></a></li>
+</ul>					
+					
+					</div>
+					<div class="d-grid"> <a href="#" class="btn btn-outline-primary radius-15">Salva Modifiche</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+    
       <%@include file="footer.jsp" %>
   </body>
 </html>
