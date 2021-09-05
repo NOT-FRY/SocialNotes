@@ -159,20 +159,31 @@ if(collection!=null&&collection.size()>0){
           
             <div class="well search-result">
                 <div class="row">
-                    <a href="documentPreview.jsp">
                         <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
-                            <img class="img-responsive" src="PrintAnteprima?codice=<%=mbean.getCodiceMateriale() %>" width="250" height="250" alt="">
+                            <img class="img-responsive" src="PrintAnteprima?codice=<%=mbean.getCodiceMateriale() %>" width="160" height="160" alt="hello">
                         </div>
                         <div class="col-xs-6 col-sm-9 col-md-9 col-lg-10 title">
-                            <h3><%=mbean.getDescrizione() %></h3>
-                            <p>Utente: <%=mbean.getUsername() %></p>
-                            <p>Costo :<%=mbean.getCosto() %></p>
-                            <p>Data caricamento : <%=mbean.getDataCaricamento() %></p>
-                            <p>Feedback :<%=feedback %></p>
-                            <p>Corso :  <%=cBean.getNome() %></p>
+                        <% 
+						String documentPreviewLink="documentPreview.jsp";
+	  
+   						if(session.getAttribute("username")==null){
+						  
+						  String homeGuest = "homepage.jsp";
+						  String encodedURL = response.encodeRedirectURL(homeGuest);
+						  response.sendRedirect(encodedURL);
+
+	  
+					   }else{
+						   documentPreviewLink=response.encodeURL(documentPreviewLink);
+						   }%>
+                            <a href="documentPreview.jsp?codice=<%=mbean.getCodiceMateriale()%>"> <h4><%=mbean.getDescrizione() %></h4></a>
+                            <span>Utente: <%=mbean.getUsername() %></span><br>
+                            <span>Costo :<%=mbean.getCosto() %></span><br>
+                            <span>Data caricamento : <%=mbean.getDataCaricamento() %></span><br>
+                            <span>Feedback :<%=feedback %></span><br>
+                            <span>Corso :  <%=cBean.getNome() %></span><br>
                         </div>
-                    </a>
-                </div>
+                    </div>
             
           
            

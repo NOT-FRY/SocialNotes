@@ -1,3 +1,7 @@
+<%@page import="it.unisa.model.CourseBean"%>
+<%@page import="it.unisa.model.CourseModelDS"%>
+<%@page import="it.unisa.model.MaterialBean"%>
+<%@page import="it.unisa.model.MaterialModelDS"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -7,12 +11,27 @@
 <title>Anteprima Materiale</title>
 <link rel="stylesheet" type="text/css" href="css/documentPreview.css">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-        
+<link rel="stylesheet" type="text/css" href="css/friendResearch.css">        
 
 
 
 </head>
 <body>
+<%
+
+
+	DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
+	String code=request.getParameter("codice");
+	int codiceMateriale=Integer.parseInt(code);
+	MaterialModelDS materialModel=new MaterialModelDS(ds);
+	MaterialBean material=materialModel.doRetrieveByKey(code);
+	int feed=materialModel.doRetrieveFeedback(codiceMateriale);
+	UserModelDS userModel=new UserModelDS(ds);
+	UserBean user=userModel.doRetrieveByUsername(material.getUsername());
+	CourseModelDS courseModel=new CourseModelDS(ds);
+	String codiceCorso=""+material.getCodiceCorso();
+	CourseBean course=courseModel.doRetrieveByKey(codiceCorso);
+%>
 <%@include file="header_user.jsp" %>
 <br>
 <br>
@@ -24,18 +43,14 @@
                 <div class="block product no-border z-depth-2-top z-depth-2--hover">
                     <div class="block-image">
                      
-                            <img src="https://via.placeholder.com/550x350/FFB6C1/000000" class="img-center">
+                            <img src="PrintAnteprima?codice=<%=material.getCodiceMateriale() %>" class="img-center">
                         
                     </div>
                     <div class="block-body text-center">
-                        <h3 class="heading heading-5 strong-600 text-capitalize">
-                            
-                                Materiale 1
-                          
-                        </h3>
-                        <p class="product-description">
-                            ALFONSO RICORDA DI METTERE STELLINE
-                        </p>
+                        <h3 class="heading heading-5 strong-600 text-capitalize"><%=material.getFileName() %></h3>
+                  	    <div class="widget-26-job-starred">
+	             			<canvas class="myCanvas" data-rating="<%=feed %>" width="100" height="20">not support the canvas tag.</canvas>
+	            		</div>
                         
                         <div class="product-buttons mt-4">
                             <div class="row align-items-center">
@@ -57,35 +72,22 @@
                     <div class="block-image">
                        
                             <div class="product-content product-wrap clearfix">
-		<div class="row">
+							<div class="row">
 				
-				<div class="col-md-7 col-sm-12 col-xs-12">
+				<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="product-deatil">
-						<h2 class="name">
-							
-								&ensp;&ensp;&ensp;&ensp;Appunti TSW
-							
-						</h2>
-						
-						<span class="tag1"></span> 
+				</div> 
+				<div class="description"><br><br>
+				<h4 align=center><b><%=material.getDescrizione() %></b></h4>
 				</div>
-				<div class="description">
-				<p> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. </p>
-				</div>
-				<div class="product-info smart-form">
-					<div class="row">
-					
-						<div class="col-md-6 col-sm-6 col-xs-6">
-							
-						</div>
-					</div>
-				</div>
-				 <div class="project-info-box">
-                <p><b>Caricato da:</b> Alfonso Califano</p>
-                <p><b>Date:</b> 02/09/2021</p>
-                <p><b>Corso:</b> Informatica</p>
-                <p><b>Universita':</b> Universita' degli studi di Salerno</p>
-                
+				<div class="project-info-box">
+                <h5>&nbsp;<b>Caricato da: </b><%=user.getNome()%> <%=user.getCognome() %></h5>
+                <h5>&nbsp;<b>Data: </b><%=material.getDataCaricamento() %></h5>
+                <h5>&nbsp;<b>Corso: </b><%=course.getNome() %></h5>
+                <h5>&nbsp;<b>Universita': </b><%=user.getDenominazione() %></h5>
+                <h5>&nbsp;<b>Coin: </b><%=material.getCosto() %></h5>
+	            </div>
+	           <br>
             </div>
             
 			</div>
@@ -95,17 +97,13 @@
 	</div>
                         
                     </div>
-    
+  
                 
                 </div>
+                  
             </div>
-            
-            
         </div>
-        
     </div>
-    <button type="button" class="btn btn-primary" id="coins"disabled>20 COINS</button>
-    
 </div>
             
       
@@ -114,4 +112,5 @@
 <%@include file="footer.jsp" %>
 
 </body>
+<script src="js/homepage_user.js"></script>
 </html>
