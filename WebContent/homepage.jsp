@@ -62,6 +62,154 @@ svg.radial-progress text {
 svg.radial-progress circle {
 	stroke: #9697e6;
 }
+
+body{margin-top:20px;}
+
+.align-center {
+    text-align: center;
+}
+.hash-list {
+    display: block;
+    padding: 0;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px){
+    .hash-list.cols-3 > li:nth-last-child(-n+3) {
+        border-bottom: none;
+    }
+}
+@media (min-width: 768px){
+    .hash-list.cols-3 > li {
+        width: 33.3333%;
+    }
+}
+.hash-list > li {
+    display: block;
+    float: left;
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+.pad-30, .pad-30-all > * {
+    padding: 30px;
+}
+img {
+    border: 0;
+}
+.mgb-20, .mgb-20-all > * {
+    margin-bottom: 20px;
+}
+.wpx-100, .wpx-100-after:after {
+    width: 100px;
+}
+.img-round, .img-rel-round {
+    border-radius: 50%;
+}
+.padb-30, .padb-30-all > * {
+    padding-bottom: 30px;
+}
+
+.mgb-40, .mgb-40-all > * {
+    margin-bottom: 40px;
+}
+.align-center {
+    text-align: center;
+}
+[class*="line-b"] {
+    position: relative;
+    padding-bottom: 20px;
+    border-color: #E6AF2A;
+}
+.fg-text-d, .fg-hov-text-d:hover, .fg-active-text-d.active {
+    color: #222;
+}
+.font-cond-b {
+    font-weight: 700 !important;
+}
+
+
+/**********************
+/***** Services *******
+/*********************/
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/5.7.0/css/font-awesome.min.css');
+section{
+    padding: 60px 0;
+}
+section .section-title{
+	text-align:center;
+	color:#white;
+	margin-bottom:50px;
+	text-transform:uppercase;
+}
+#what-we-do{
+	background:#ffffff;
+}
+#what-we-do .card{
+	padding: 1rem!important;
+	border: none;
+	margin-bottom:1rem;
+	-webkit-transition: .5s all ease;
+	-moz-transition: .5s all ease;
+	transition: .5s all ease;
+}
+#what-we-do .card:hover{
+	-webkit-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+	-moz-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+	box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+}
+#what-we-do .card .card-block{
+	padding-left: 50px;
+    position: relative;
+}
+#what-we-do .card .card-block a{
+	color: #9697e7 !important;
+	font-weight:700;
+	text-decoration:none;
+}
+#what-we-do .card .card-block a i{
+	display:none;
+	
+}
+#what-we-do .card:hover .card-block a i{
+	display:inline-block;
+	font-weight:700;
+	
+}
+#what-we-do .card .card-block:before{
+	font-family: FontAwesome;
+    position: absolute;
+    font-size: 39px;
+    color: #9697e7;
+    left: 0;
+	-webkit-transition: -webkit-transform .2s ease-in-out;
+    transition:transform .2s ease-in-out;
+}
+#what-we-do .card .block-1:before{
+    content: "1";
+}
+#what-we-do .card .block-2:before{
+    content: "2";
+}
+#what-we-do .card .block-3:before{
+    content: "3";
+}
+#what-we-do .card .block-4:before{
+    content: "4";
+}
+#what-we-do .card .block-5:before{
+    content: "5";
+}
+#what-we-do .card .block-6:before{
+    content: "6";
+}
+#what-we-do .card:hover .card-block:before{
+	-webkit-transform: rotate(360deg);
+	transform: rotate(360deg);	
+	-webkit-transition: .5s all ease;
+	-moz-transition: .5s all ease;
+	transition: .5s all ease;
+}
+
 </style>
 
 
@@ -89,22 +237,22 @@ if (session.getAttribute("username")!=null){
 						<div class="carousel-item active">
 							<img class="d-block w-100" src="img/carousel1.jpg" alt="First slide">
 							<div class="carousel-caption d-none d-md-block divtrasparente">
-								<h5>Campus Unisa</h5>
-								<p>RITORNO DAD OTTOBRE 2021</p>
+								<h5>SEI INDIETRO CON LO STUDIO?</h5>
+								<p>Grazie a SocialNotes puoi trovare tutto il materiale necessario per recuperare gli argomenti arretrati e riuscire così a preparare i tuoi esami in tempo.</p>
 							</div>
 						</div>
 						<div class="carousel-item">
 							<img class="d-block w-100" src="img/carousel2.jpg" alt="Second slide">
 							<div class="carousel-caption d-none d-md-block divtrasparente">
-								<h5>Campus Unisa</h5>
-								<p>RITORNO DAD OTTOBRE 2021</p>
+								<h5>TIENITI IN CONTATTO COL MONDO</h5>
+								<p>SocialNotes non è solo un sito di condivisione materiale. E' un vero e proprio social che ti permette di restare in contatto con gli altri utenti. SocialNotes non è solo scambio di materiale...E' SCAMBIO DI IDEE </p>
 							</div>
 						</div>
 						<div class="carousel-item">
 							<img class="d-block w-100" src="img/carousel3.jpg" alt="Third slide">
 							<div class="carousel-caption d-none d-md-block divtrasparente">
-								<h5>Campus Unisa</h5>
-								<p>RITORNO DAD OTTOBRE 2021</p>
+								<h5>SARAI SEMPRE AL CORRENTE DI TUTTO</h5>
+								<p>Noi del team di SocialNotes ci impegneremo per tenerti sempre aggiornato sulle news di qualsiasi università: dalla pubblicazione degli appelli alle notizie che circondano il mondo universitario.</p>
 							</div>
 						</div>
 					</div>
@@ -172,101 +320,113 @@ if (session.getAttribute("username")!=null){
 		<br>
 		<br>
 		<br>
-		<h3>News</h3>
-		<div class="row">
-
-			<div class="col-md-6">
-				<div class="card flex-md-row mb-4 box-shadow h-md-250">
-					<img class="card-img-left flex-auto d-none d-md-block" src="img/1.jpg" alt="Card image cap" height="100" width="100"
-						style="margin-top: 15px; margin-left: 15px;">
-					<div class="card-body d-flex flex-column align-items-start">
-						<strong class="d-inline-block mb-2 text-primary">World</strong>
-
-						<div class="mb-1 text-muted">Nov 12</div>
-						<p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-						<a href="www.google.com">Continua</a>
-					</div>
-
-				</div>
-
-				<div class="card flex-md-row mb-4 box-shadow h-md-250">
-					<img class="card-img-left flex-auto d-none d-md-block" src="img/2.jpg" alt="Card image cap" height="100" width="100"
-						style="margin-top: 15px; margin-left: 15px;">
-					<div class="card-body d-flex flex-column align-items-start">
-						<strong class="d-inline-block mb-2 text-primary">World</strong>
-
-						<div class="mb-1 text-muted">Nov 12</div>
-						<p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-						<a href="www.google.com">Continua</a>
-					</div>
-
-				</div>
-
-				<div class="card flex-md-row mb-4 box-shadow h-md-250">
-					<img class="card-img-left flex-auto d-none d-md-block" src="img/unisa.png" alt="Card image cap" height="100" width="100"
-						style="margin-top: 15px; margin-left: 15px;">
-					<div class="card-body d-flex flex-column align-items-start">
-						<strong class="d-inline-block mb-2 text-primary">World</strong>
-
-						<div class="mb-1 text-muted">Nov 12</div>
-						<p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-						<a href="www.google.com">Continua</a>
-					</div>
-
-				</div>
-
-
-			</div>
-
-			<div class="col-md-6">
-
-				<div class="card mb-3">
-					<img src="img/unisa.png" class="card-img-top" alt="..." height="400" width="400">
-					<div class="card-body">
-						<h5 class="card-title">Card title</h5>
-						<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a
-							little bit longer.</p>
-						<p class="card-text">
-							<small class="text-muted">Last updated 3 mins ago</small>
-						</p>
-					</div>
-				</div>
-			</div>
-
-		</div>
+		
+		<div class="container">
+    <div class="mgb-40 padb-30 auto-invert line-b-4 align-center">
+        <h4 class="font-cond-l fg-accent lts-md mgb-10" contenteditable="false">Non ti abbiamo ancora convinto?</h4>
+        <h1 class="font-cond-b fg-text-d lts-md fs-300 fs-300-xs no-mg" contenteditable="false">Leggi le recensioni dei nostri utenti</h1>
+    </div>
+    <ul class="hash-list cols-3 cols-1-xs pad-30-all align-center text-sm">
+        <li>
+          <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="wpx-100 img-round mgb-20" title="" alt="" data-edit="false" data-editor="field" data-field="src[Image Path]; title[Image Title]; alt[Image Alternate Text]">
+          <p class="fs-110 font-cond-l" contenteditable="false">" Ho superato il mio ultimo esame grazie al materiale trovato su questo sito... sarò ben felice di mettere SocialNotes nei ringraziamenti della mia tesi di laurea ;-) "</p>
+          <h5 class="font-cond mgb-5 fg-text-d fs-130" contenteditable="false">Pippo Baudo</h5>
+          <small class="font-cond case-u lts-sm fs-80 fg-text-l" contenteditable="false">pipp8</small>
+        </li>
+        </ul>
+        <ul class="hash-list cols-3 cols-1-xs pad-30-all align-center text-sm">
+        <li>
+          <img src="https://bootdey.com/img/Content/avatar/avatar4.png" class="wpx-100 img-round mgb-20" title="" alt="" data-edit="false" data-editor="field" data-field="src[Image Path]; title[Image Title]; alt[Image Alternate Text]">
+          <p class="fs-110 font-cond-l" contenteditable="false">" Nel momento di difficoltà dovuto alla pandemia, avete trovato subito la soluzione migliore per aiutarci con gli esami.   "</p>
+          <h5 class="font-cond mgb-5 fg-text-d fs-130" contenteditable="false">Marcella Anselmo</h5>
+          <small class="font-cond case-u lts-sm fs-80 fg-text-l" contenteditable="false">manselmo</small>
+        </li>
+        </ul>
+       <ul class="hash-list cols-3 cols-1-xs pad-30-all align-center text-sm">
+        <li>
+          <img src="https://bootdey.com/img/Content/avatar/avatar5.png" class="wpx-100 img-round mgb-20" title="" alt="" data-edit="false" data-editor="field" data-field="src[Image Path]; title[Image Title]; alt[Image Alternate Text]">
+          <p class="fs-110 font-cond-l" contenteditable="false">" Team preparato e sempre disponibile, rispondono in maniera veloce e sono sempre pronti a dare una mano..IL MEGLIO! "</p>
+          <h5 class="font-cond mgb-5 fg-text-d fs-130" contenteditable="false">Andrea Abate</h5>
+          <small class="font-cond case-u lts-sm fs-80 fg-text-l" contenteditable="false">abate</small>
+        </li>
+      </ul>
+</div>
 		<br>
 
 		<div class="row">
 
 
-			<div class="col-lg-4" style="text-align: center;">
-				<svg class="radial-progress" data-percentage="45" viewBox="0 0 80 80">
-  <circle class="incomplete" cx="40" cy="40" r="35"></circle>
-  <circle class="complete" cx="40" cy="40" r="35" style="stroke-dashoffset: 39.58406743523136;"></circle>
-  <text class="percentage" x="50%" y="57%" transform="matrix(0, 1, -1, 0, 80, 0)">45%</text>
-  <h3>Studenti</h3>
-</svg>
+		<!-- Services section -->
+    <section id="what-we-do">
+    	<div class="container-fluid">
+			<h2 class="section-title mb-2 h1">Unisciti a noi!</h2>
+			<p class="text-center text-muted h5">Osserva tutto ciò che ha da offrire SocialNotes. Il prezzo? Solo la tua iscrizione!</p>
+			<div class="row mt-5">
+				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+					<div class="card">
+						<div class="card-block block-1">
+							<h3 class="card-title">REGISTRATI</h3>
+							<p class="card-text">Inserisci le tue generalità ed entra a far parte del mondo SocialNotes.</p>
+							<a href="signup.jsp" title="Read more" class="read-more" >Portami lì<i class="fa fa-angle-double-right ml-2"></i></a>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+					<div class="card">
+						<div class="card-block block-2">
+							<h3 class="card-title">NAVIGA</h3>
+							<p class="card-text">Cerca e sfoglia il materiale di cui hai bisogno.</p>
+							<a href="signup.jsp" title="Read more" class="read-more" >Portami lì<i class="fa fa-angle-double-right ml-2"></i></a>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+					<div class="card">
+						<div class="card-block block-3">
+							<h3 class="card-title">ACQUISTA COINS</h3>
+							<p class="card-text">Visualizza i nostri pricing e scegli qual'è quello perfetto per te.</p>
+							<a href="prezzi.jsp" title="Read more" class="read-more" >Portami lì<i class="fa fa-angle-double-right ml-2"></i></a>
+						</div>
+					</div>
+				</div>
 			</div>
-
-
-			<div class="col-lg-4" style="text-align: center;">
-
-				<svg class="radial-progress" data-percentage="80" viewBox="0 0 80 80">
-  <circle class="incomplete" cx="40" cy="40" r="35"></circle>
-  <circle class="complete" cx="40" cy="40" r="35" style="stroke-dashoffset: 39.58406743523136;"></circle>
-  <text class="percentage" x="50%" y="57%" transform="matrix(0, 1, -1, 0, 80, 0)">80%</text>
-  <h3>Materiale</h3>
-</svg>
+			<div class="row">
+				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+					<div class="card">
+						<div class="card-block block-4">
+							<h3 class="card-title">SFOGLIA LE NEWS</h3>
+							<p class="card-text">Resta aggiornato sul mondo universitario.</p>
+							<a href="news.jsp" title="Read more" class="read-more" >Portami lì<i class="fa fa-angle-double-right ml-2"></i></a>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+					<div class="card">
+						<div class="card-block block-5">
+							<h3 class="card-title">CERCA AMICI</h3>
+							<p class="card-text">Una volta registrato potrai cercare i tuoi amici aggiungerli alla tua lista.</p>
+							<a href="signup.jsp" title="Read more" class="read-more" >Portami lì<i class="fa fa-angle-double-right ml-2"></i></a>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+					<div class="card">
+						<div class="card-block block-6">
+							<h3 class="card-title">METTITI IN CONTATTO COL MONDO</h3>
+							<p class="card-text">Grazie alla nostra chat potrai scambiare messaggi con chiunque tu voglia.</p>
+							<a href="signup.jsp" title="Read more" class="read-more" >Portami lì<i class="fa fa-angle-double-right ml-2"></i></a>
+						</div>
+					</div>
+				</div>
 			</div>
+		</div>	
+	</section>
+	<!-- /Services section -->	
 
-			<div class="col-lg-4" style="text-align: center;">
-				<svg class="radial-progress" data-percentage="75" viewBox="0 0 80 80">
-  <circle class="incomplete" cx="40" cy="40" r="35"></circle>
-  <circle class="complete" cx="40" cy="40" r="35" style="stroke-dashoffset: 39.58406743523136;"></circle>
-  <text class="percentage" x="50%" y="57%" transform="matrix(0, 1, -1, 0, 80, 0)">1500</text>
-  <h3>Post</h3>
-</svg>
-			</div>
+
+			
+
+			
 
 
 
