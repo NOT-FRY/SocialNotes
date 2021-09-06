@@ -16,16 +16,47 @@
   <body>
   <%
 String homeUser = "homepage_user.jsp";
-	if (session.getAttribute("username")==null)
+	if (session.getAttribute("username")==null){
 		  response.sendRedirect("login.jsp");
+		  return;
+	}
 	else if (((int)session.getAttribute("role"))!=1){
     	String encodeHomeUserURL = response.encodeRedirectURL(homeUser);
     	response.sendRedirect(encodeHomeUserURL);
+    	return;
     }
+	
+	
+	%>
+<%@include file="header_admin.jsp" %>	
+	<%
+	String error = (String)request.getAttribute("error");
+	if(error!=null){
+		%>
+			<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		<strong>Attenzione!</strong> Il file non &egrave; stato caricato correttamente. Si prega di riprovare.
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<%
+	}
+	%>
+	<%
+	String success = (String)request.getAttribute("success");
+	if(success!=null){
+	%>
+					<div class="alert alert-success alert-dismissible fade show" role="alert">
+		 Il file &egrave; stato caricato correttamente.
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<%
+	}
+	%>
+	
 
-%>
-
-<%@include file="header_admin.jsp" %>
 
 
 <div class="container">

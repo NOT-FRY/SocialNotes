@@ -74,11 +74,11 @@
       <label for="inputPassword" class="sr-only">Password</label>
       <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
       
-      <div class="checkbox mb-3">
       <br>
+      
+      <div class="text-left">
+      	<a href="signup.jsp" class="text-secondary">Registrati ora</a>
       </div>
-      
-      
       <button class="btn btn-lg btn-principale btn-block" type="submit">Log In</button>
       <button class="bottoneindietro" onclick="history.back()">Torna indietro</button>
       <p class="mt-5 mb-3 text-muted">&copy; 2021 SocialNotes</p>

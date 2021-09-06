@@ -82,15 +82,17 @@ public class NewsUploadServlet extends HttpServlet {
 			content.setCodiceNews(codiceNews);
 			contentModel.doSave(content);
 			//System.out.println("Ho salvato la riga in Contenuto");
+			String success = "Caricamento news effettuato";
+			request.setAttribute("success", success);
 		} 
 		catch (SQLException e) {
 			String error = "Spiacenti, la registrazione delle informazioni nel database non è andata a buon fine.";
 			request.setAttribute("error", error);
 			//Mando una alert 
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/signup.jsp");
-			dispatcher.forward(request, response);
 			e.printStackTrace();
-		} 
+		}
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/notizie.jsp");
+		dispatcher.forward(request, response);
 	}
 
 }
