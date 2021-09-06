@@ -69,7 +69,7 @@
 	<%
   if (session.getAttribute("username")==null)
 	  response.sendRedirect("login.jsp");
-
+  Collection<MaterialBean>cart=(Collection<MaterialBean>)session.getAttribute("cart");
   String nome = (String)session.getAttribute("nome");
   String cognome = (String)session.getAttribute("cognome");
   String dipName = (String)session.getAttribute("dipName");
@@ -234,6 +234,7 @@
 					int i=0;
 					while(it.hasNext()&&i<10){
 					MaterialBean mat=(MaterialBean)it.next();
+					cart.add(mat);//togliere è solo per provare
 					FriendsModelDS friend=new FriendsModelDS(ds);
 					if(friend.isFriend(mat.getUsername(), username)){
 						UserBean us=user.doRetrieveByUsername(mat.getUsername());

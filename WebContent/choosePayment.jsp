@@ -1,5 +1,11 @@
+<%@page import="it.unisa.model.PaymentMethodBean"%>
+<%@page import="it.unisa.model.PaymentMethodModelDS"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@page import="javax.sql.DataSource"%>
+<%@page import="java.util.Collection"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.LinkedList"%>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,34 +15,54 @@
 <link rel="stylesheet" type="text/css"    href="choosePayment.css">
 </head>
 <body>
-<%@include file="header.jsp" %>
+<%
+	if (session.getAttribute("username")==null)
+		  response.sendRedirect("login.jsp");
+	String username=(String)session.getAttribute("username");
+	DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
+%>
+
+<%@include file="header_user.jsp" %>
 
 
 
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-2">
             
         </div>
-        <div class="col-md-9">
-            <div class="osahan-account-page-right shadow-sm bg-white p-4 h-100">
-                <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade active show" id="payments" role="tabpanel" aria-labelledby="payments-tab">
+        <div class="col-md-8">
+            
+                
+                 
                         <h4 class="font-weight-bold mt-0 mb-4">SCEGLI LA CARTA CON CUI EFFETTUARE IL PAGAMENTO</h4>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="bg-white card payments-item mb-4 shadow-sm">
+                        <!-- inizio codice java -->
+                        <%
+	                     	Collection<PaymentMethodBean> cards=new LinkedList<PaymentMethodBean>();
+	                 	 	PaymentMethodModelDS payment=new PaymentMethodModelDS(ds);
+	                 	 	cards=payment.doRetrieveByUsername(username);
+	                 	 	int i=0;
+	                 	 	if(cards!=null&&cards.size()>0){
+	    						Iterator<?> it=cards.iterator();
+	    						while(it.hasNext()){
+	    							i++;
+	    							PaymentMethodBean card=(PaymentMethodBean)it.next();
+	    							String ultimeCifre=card.getNumeroCarta().substring(11);
+	                      
+                        %>
+      
+                                <div class="bg-white card payments-item mb-4 shadow-sm col-md-5">
                                     <div class="gold-members p-4">
                                         <a href="#">
                                         </a>
                                         <div class="media">
                                             <div class="media-body">
-                                               <a href="payment.jsp">
-                                                   <i class="icofont-visa icofont-4x"></i>
+                                               <a href="payment.jsp?numeroCarta=<%=card.getNumeroCarta()%>">
+                                                  <i class="fab fa-cc-visa" style="font-size:100px"></i>
                                                </a>
-                                                <a href="payment.jsp">
-                                                    <h6 class="mb-1">4159-XXXXXXXX-0666</h6>
-                                                    <p>SCADENZA 10/2025</p>
+                                                <a href="payment.jsp?numeroCarta=<%=card.getNumeroCarta()%>">
+                                                    <h6 class="mb-1">XXXX-XXXX-XXXX-<%=ultimeCifre %></h6>
+                                                    <h6>SCADENZA <%=card.getDataScadenza().getMonth()+1%>/<%=card.getDataScadenza().getYear()+1900 %></h6>
                                                 </a>
                                                 
                                                    
@@ -46,77 +72,20 @@
 
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="bg-white card payments-item mb-4 shadow-sm">
-                                    <div class="gold-members p-4">
-                                        <a href="#">
-                                        </a>
-                                        <div class="media">
-                                            <div class="media-body">
-                                                <a href="payment.jsp">
-                                                    <i class="icofont-mastercard icofont-4x"></i>
-                                                </a>
-                                                <a href="payment.jsp">
-                                                    <h6 class="mb-1">5333-XXXXXXXX-4567</h6>
-                                                    <p>SCADENZA 10/2025</p>
-                                                </a>
-                                                
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row pt-2 pb-2">
-                            <div class="col-md-6">
-                                <div class="bg-white card payments-item mb-4 shadow-sm">
-                                    <div class="gold-members p-4">
-                                        <a href="#">
-                                        </a>
-                                        <div class="media">
-                                            <div class="media-body">
-                                                <a href="payment.jsp#">
-                                                    <i class="icofont-american-express icofont-4x"></i>
-                                                </a>
-                                                <a href="payment.jsp">
-                                                    <h6 class="mb-1">3712-XXXXXXXX-0158</h6>
-                                                    <p>SCADENZA 10/2025</p>
-                                                </a>
-                                               
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="bg-white card payments-item mb-4 shadow-sm">
-                                    <div class="gold-members p-4">
-                                        <a href="#">
-                                        </a>
-                                        <div class="media">
-                                            <div class="media-body">
-                                                <a href="payment.jsp">
-                                                    <i class="icofont-mastercard icofont-4x"></i>
-                                                </a>
-                                                <a href="payment.jsp">
-                                                    <h6 class="mb-1">5333-XXXXXXXX-1234</h6>
-                                                    <p>SCADENZA 10/2025</p>
-                                                </a>
-                                                
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+               
+	                        <%
+		    					}
+	                 	 	}
+	                 	 	%>
+                            <!-- fine codice java -->
                     
-                        </div>
-                    </div>
-                </div>
+                    
+                      
+                  
+              
+                <div class="col-md-2">
+            
+        </div>
             </div>
         </div>
     </div>

@@ -40,6 +40,7 @@
 	String changeLink = "change.jsp";
 	String logoutLink = "homepage.jsp";
 	String search = "searchFriend.jsp";
+	String cartLink="cart.jsp";
 	int coin = 0;
 	
 	//Sessione: non posso fare la sendRedirect probabilmente perchè questo header viene incluso in jsp dove già ne viene fatta un'altra
@@ -52,7 +53,8 @@
 		priceLink = response.encodeURL(priceLink);
 		newsLink = response.encodeURL(newsLink);
 		changeLink = response.encodeURL(changeLink);
-		search = response.encodeRedirectURL(search);
+		search = response.encodeURL(search);
+		cartLink=response.encodeURL(cartLink);
 		
 	}
 	 
@@ -61,7 +63,7 @@
 
 	<nav
 		class="navbar navbar-expand-lg navbar-dark colore-principale justify-content-end">
-		<a class="navbar-brand" href="#"> <img
+		<a class="navbar-brand" href="<%=homeLink%>"> <img
 			src="img/LogoDefinitivo1.png" height="25" width="150">
 		</a>
 		<button class="navbar-toggler my-1" type="button"
@@ -97,20 +99,19 @@
 
 
 
-					<!-- Campanella -->
-					<li class="nav-item icona"><a class="nav-link" href="#"> <svg
-								style="color: white;" xmlns="http://www.w3.org/2000/svg"
-								width="24" height="24" fill="currentColor"
-								class="bi bi-bell-fill" viewBox="0 0 16 16">
-								  <path
-									d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
+					<!-- Carrello -->
+					<li class="nav-item icona"><a class="nav-link" href="<%=cartLink%>"> 
+					<svg style="color: white"  width="24" height="24" focusable="true" data-prefix="fas" data-icon="cart-arrow-down" 
+					class="svg-inline--fa fa-cart-arrow-down fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+					<path fill="currentColor" d="M504.717 320H211.572l6.545 32h268.418c15.401 0 26.816 14.301 23.403 29.319l-5.517 24.276C523.112 414.668 536 433.828 536 456c0 31.202-25.519 56.444-56.824 55.994-29.823-.429-54.35-24.631-55.155-54.447-.44-16.287 6.085-31.049 16.803-41.548H231.176C241.553 426.165 248 440.326 248 456c0 31.813-26.528 57.431-58.67 55.938-28.54-1.325-51.751-24.385-53.251-52.917-1.158-22.034 10.436-41.455 28.051-51.586L93.883 64H24C10.745 64 0 53.255 0 40V24C0 10.745 10.745 0 24 0h102.529c11.401 0 21.228 8.021 23.513 19.19L159.208 64H551.99c15.401 0 26.816 14.301 23.403 29.319l-47.273 208C525.637 312.246 515.923 320 504.717 320zM403.029 192H360v-60c0-6.627-5.373-12-12-12h-24c-6.627 0-12 5.373-12 12v60h-43.029c-10.691 0-16.045 12.926-8.485 20.485l67.029 67.029c4.686 4.686 12.284 4.686 16.971 0l67.029-67.029c7.559-7.559 2.205-20.485-8.486-20.485z">
+					</path></svg>
 								    	
-								    	<!-- Counter -->
+								    	<!-- Counter 
 								    	<span
 									class="position-absolute top-0 start-0 translate-middle badge rounded-pill bg-danger">
 								    	99
 								  		</span>
-								  </svg>
+								  </svg>-->
 					</a></li>
 					<!-- Coins -->
 					<li class="nav-item icona"><a class="nav-link" href="#"> <svg

@@ -9,7 +9,9 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Enumeration;
+import java.util.LinkedList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,6 +24,7 @@ import javax.sql.DataSource;
 
 import it.unisa.model.FileBean;
 import it.unisa.model.FileModelDS;
+import it.unisa.model.MaterialBean;
 import it.unisa.model.UserBean;
 import it.unisa.model.UserModelDS;
 import it.unisa.model.UserRoleBean;
@@ -151,14 +154,9 @@ public class SignupControl extends HttpServlet {
 			session.setAttribute("ban",user.getBan());
 			session.setAttribute("denominazione",user.getDenominazione());
 			session.setAttribute("dipName",user.getDipName());
-				 System.out.println("ID SESSIONE:"+session.getId());
-			  Enumeration <String> nomeAttributi = session.getAttributeNames();
-			 while (nomeAttributi.hasMoreElements()){
-				 String nomeAtt = nomeAttributi.nextElement();
-				 System.out.println("Nome attributo.. : "+nomeAtt);
-				 System.out.println("Valore :"+session.getAttribute(nomeAtt));
-			 }
-		
+		    System.out.println("ID SESSIONE:"+session.getId());
+			Collection<MaterialBean>cart=new LinkedList<MaterialBean>();
+			session.setAttribute("cart", cart);
 		
 				String link = "Success.jsp";
 				 String encodedURL = response.encodeRedirectURL(link);
