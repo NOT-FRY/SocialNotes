@@ -16,9 +16,11 @@
 
     if ((session.getAttribute("username")==null)){
     	response.sendRedirect("login.jsp");
+    	return;
     }else if (((int)session.getAttribute("role"))!=1){
     	String encodeHomeUserURL = response.encodeRedirectURL(homeUser);
     	response.sendRedirect(encodeHomeUserURL);
+    	return;
     }
   %>
 
