@@ -166,14 +166,8 @@ if(collection!=null&&collection.size()>0){
                         <% 
 						String documentPreviewLink="documentPreview.jsp";
 	  
-   						if(session.getAttribute("username")==null){
+   						if(session.getAttribute("username")!=null){
 						  
-						  String homeGuest = "homepage.jsp";
-						  String encodedURL = response.encodeRedirectURL(homeGuest);
-						  response.sendRedirect(encodedURL);
-
-	  
-					   }else{
 						   documentPreviewLink=response.encodeURL(documentPreviewLink);
 						   }%>
                             <a href="documentPreview.jsp;jsessionid=<%=session.getId() %>?codice=<%=mbean.getCodiceMateriale()%>"> <h4><%=mbean.getDescrizione() %></h4></a>

@@ -189,7 +189,9 @@
 </div>
 <br>
 <%} %>
-	<%if ((((String)session.getAttribute("username")).compareTo(material.getUsername()))!=0)
+	<%
+	   if(session.getAttribute("username")!=null){
+	if ((((String)session.getAttribute("username")).compareTo(material.getUsername()))!=0)
 	{
 		%>
 	<div class="card">
@@ -224,7 +226,7 @@
   </div>
   <button type="submit" class="btn btn-primary mb-2" style="background-color:#9697e7">Invia</button>
 </form>
-  <%} %>
+  <%}} %>
   
 </div>
 	

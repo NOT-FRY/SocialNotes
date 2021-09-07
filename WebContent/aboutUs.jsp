@@ -9,7 +9,15 @@
  <link rel="stylesheet" type="text/css" href="css/aboutUs.css">
 </head>
 <body>
- <%@include file="header.jsp" %>
+<% if(session.getAttribute("username")!=null){
+	
+%>
+<jsp:include page="header_user.jsp"></jsp:include>
+<%}else{ %>
+
+<jsp:include page="header.jsp"></jsp:include>
+<% 
+} %>
  
 
 <div id="main-content" class="blog-page">

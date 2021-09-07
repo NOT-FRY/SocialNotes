@@ -16,11 +16,13 @@
 <body>
 <%
 String homeUser = "homepage_user.jsp";
-	if (session.getAttribute("username")==null)
+	if (session.getAttribute("username")==null){
 		  response.sendRedirect("login.jsp");
-	else if (((int)session.getAttribute("role"))!=1){
+		  return;
+	}else if (((int)session.getAttribute("role"))!=1){
     	String encodeHomeUserURL = response.encodeRedirectURL(homeUser);
     	response.sendRedirect(encodeHomeUserURL);
+    	return;
     }
 	DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
 	UserModelDS model=new UserModelDS(ds);
