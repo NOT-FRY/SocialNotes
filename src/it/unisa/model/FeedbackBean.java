@@ -1,6 +1,7 @@
 package it.unisa.model;
 
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Timestamp;
 
 public class FeedbackBean {
 
@@ -33,12 +34,12 @@ public class FeedbackBean {
 	}
 	
 	
-	public Date getDataFeed() {
+	public Timestamp getDataFeed() {
 		return dataFeed;
 	}
 	
 	
-	public void setDataFeed(Date dataFeed) {
+	public void setDataFeed(Timestamp dataFeed) {
 		this.dataFeed = dataFeed;
 	}
 	
@@ -83,7 +84,7 @@ public class FeedbackBean {
 
 	private int codiceMateriale;
     private String username;
-    private Date dataFeed;
+    private Timestamp dataFeed;
     private String commento;
     private int valutazione;
 }

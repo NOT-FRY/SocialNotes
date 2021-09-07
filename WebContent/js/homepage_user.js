@@ -33,3 +33,7 @@ ctx.fillStyle = my_gradient;
     ctx.fill();
     ctx.restore();
 }
+
+
+
+

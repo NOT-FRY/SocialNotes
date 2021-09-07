@@ -176,7 +176,7 @@ if(collection!=null&&collection.size()>0){
 					   }else{
 						   documentPreviewLink=response.encodeURL(documentPreviewLink);
 						   }%>
-                            <a href="documentPreview.jsp?codice=<%=mbean.getCodiceMateriale()%>"> <h4><%=mbean.getDescrizione() %></h4></a>
+                            <a href="documentPreview.jsp;jsessionid=<%=session.getId() %>?codice=<%=mbean.getCodiceMateriale()%>"> <h4><%=mbean.getDescrizione() %></h4></a>
                             <span>Utente: <%=mbean.getUsername() %></span><br>
                             <span>Costo :<%=mbean.getCosto() %></span><br>
                             <span>Data caricamento : <%=mbean.getDataCaricamento() %></span><br>
