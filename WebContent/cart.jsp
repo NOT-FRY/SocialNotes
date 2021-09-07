@@ -85,7 +85,6 @@
     <td class="text-center align-middle px-0"> <a href="RemoveFromCart?codice=<%=mbean.getCodiceMateriale()%>" class="shop-tooltip close float-none text-danger" title="" data-original-title="Remove">X</a></td>
     </tr>
     <%
-    	//System.out.println("codice materiale in jsp:"+mbean.getCodiceMateriale());
 	        			}} %>
     </tbody>
               </table>
@@ -150,7 +149,7 @@
             </div>
         	<br>
             <div class="float-right">
-             <a href="choosePayment.jsp"> <button type="button" class="btn btn-lg btn-primary mt-2">Continua Acquisto</button> </a>
+             <a href="BuyMaterial?totale=<%=tot%>"> <button type="button" class="btn btn-lg btn-primary mt-2">Continua Acquisto</button> </a>
             </div>
         
           </div>

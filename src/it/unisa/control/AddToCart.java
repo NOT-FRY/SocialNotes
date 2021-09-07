@@ -43,16 +43,6 @@ public class AddToCart extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		/*if(cart!=null&&cart.size()>0){
-			Iterator<?> it=cart.iterator();
-			while(it.hasNext()) {
-				MaterialBean material=(MaterialBean)it.next();
-				if(material.getCodiceMateriale()==codiceMateriale)
-					//cart.remove(material);
-					it.remove();
-			}
-			session.setAttribute("cart",cart);
-		}*/
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/homepage_user.jsp");
 		dispatcher.forward(request, response);
 	

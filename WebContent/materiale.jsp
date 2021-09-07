@@ -71,21 +71,6 @@ String homeUser = "homepage_user.jsp";
 								</div>
 							</div>
 							<div>
-								<!-- <div class="dropdown">
-									<button class="btn btn-link dropdown-toggle" type="button"
-										id="gedf-drop11" data-toggle="dropdown" aria-haspopup="true"
-										aria-expanded="false">
-										<i class="fa fa-ellipsis-h"></i>
-									</button>
-									<div class="dropdown-menu dropdown-menu-right"
-										aria-labelledby="gedf-drop11" x-placement="bottom-end"
-										style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(42px, 38px, 0px);">
-										<div class="h6 dropdown-header">Configuration</div>
-										<a class="dropdown-item" href="#">Save</a> <a
-											class="dropdown-item" href="#">Hide</a> <a
-											class="dropdown-item" href="#">Report</a>
-									</div>
-								</div> -->
 							</div>
 						</div>
 					</div>
@@ -93,7 +78,7 @@ String homeUser = "homepage_user.jsp";
 						<div class="text-muted h7 mb-2">
 							<i class="fa fa-clock-o"></i><%=diff %> days ago
 						</div>
-						<a class="card-link" href="provaDownloadFile.jsp?filename=<%=mat.getFileName()%>"><h5 class="card-title"><%=mat.getDescrizione() %></h5> </a> 
+						<a class="card-link" href="viewFile.jsp?filename=<%=mat.getFileName()%>"><h5 class="card-title"><%=mat.getDescrizione() %></h5> </a> 
 						<img src="PrintAnteprima?codice=<%=mat.getCodiceMateriale() %>" height="500px" width="500px"
 							class="img-fluid">
 					</div>
