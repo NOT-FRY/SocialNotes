@@ -20,37 +20,8 @@ public class PaymentMethodModelDS implements Model<PaymentMethodBean> {
 	
 	@Override
 	public PaymentMethodBean doRetrieveByKey(String code) throws SQLException {
-		Connection con=null;
-		PreparedStatement ps=null;
-		String sql="SELECT * FROM MetodoPagamento WHERE NumeroCarta=?;";
-		ResultSet rs=null;
-		PaymentMethodBean bean=new PaymentMethodBean();
-		try {
-			con=ds.getConnection();
-			ps=con.prepareStatement(sql);
-			ps.setString(1,code);
-			rs=ps.executeQuery();
-			if(rs.next()) {
-				bean.setNumeroCarta(rs.getString("NumeroCarta"));
-				bean.setDataScadenza(rs.getDate("DataScadenza"));
-				bean.setNomeIntestatario(rs.getString("NomeIntestatario"));
-				bean.setCognomeIntestatario(rs.getString("CognomeIntestatario"));
-				bean.setUsername(rs.getString("Username"));
-			}
-		}
-		finally {
-			try {
-				if(rs!=null)
-					rs.close();
-				if(ps!=null)
-					ps.close();
-			}
-			finally {
-				if(con!=null)
-					con.close();
-			}
-		}
-		return bean;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

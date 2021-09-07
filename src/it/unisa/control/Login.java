@@ -2,8 +2,6 @@ package it.unisa.control;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Collection;
-import java.util.LinkedList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
-import it.unisa.model.MaterialBean;
 import it.unisa.model.UserBean;
 import it.unisa.model.UserModelDS;
 import it.unisa.model.UserRoleModelDS;
@@ -113,8 +110,7 @@ public class Login extends HttpServlet {
 					int userRole=role.doRetrieveByUsername(bean.getUsername());
 					
 					session.setAttribute("role", userRole);
-					Collection<MaterialBean>cart=new LinkedList<MaterialBean>();
-					session.setAttribute("cart", cart);
+					
 					//System.out.println("user role in login.java"+userRole);
 					String adminURL=response.encodeURL("admin.jsp");
 					String homeURL = response.encodeURL("homepage_user.jsp");

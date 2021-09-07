@@ -266,6 +266,7 @@
                 
                   <input type="hidden" name="_csrf_token" id="-csrf-token" value="1440526831-01-FIiAtX3_sdMNiFb34GXRG49qaUBWsxonFotdT79C_3s=">
                   		<%
+                  			//DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
                   			UniversityModelDS umodel = new UniversityModelDS(ds);
                   			Collection <UniversityBean> universities = umodel.doRetrieveAll();
                   			
@@ -297,6 +298,11 @@
                          
                        </select>
                   
+                 <!--  <input type="text" class="text-input" name="nomeuni" placeholder="Nome">
+                  <input type="text" class="text-input" name="indirizzo"  placeholder="Indirizzo">
+
+                  <input type="text" class="text-input" name="dipartimento" placeholder="Facoltà">
+					-->
                   <div class="submit">
                     <div class="messages"></div>
                     <button class="btn btn-principale cancel-hidden-form text-dark">Chiudi</button>
@@ -342,6 +348,8 @@
                 <div class="invalid-feedback">Per favore inserisci una password di lunghezza compresa tra 5 e 12 caratteri, che contenga almeno una lettera maiuscola, un numero e una lettera minuscola.</div>
                     
                     <input type="password" class="text-input" name="confirm_password" id="newpwd" onblur="passwordUguali()" placeholder="Conferma nuova Password"></input>
+                    <!--  <div class="valid-feedback">Password valida.</div>
+                	<div class="invalid-feedback">Le password non corrispondono.</div> -->
                   </div>
 
                   <div class="submit">
