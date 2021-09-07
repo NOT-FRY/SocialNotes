@@ -144,7 +144,7 @@ if(collection!=null&&collection.size()>0){
 					        	}else{
 					        			%>
 					        	
-					        		<img class="" src="img/news3.jpg" width="300" height="182" alt="News">
+					        		<img class="" src="img/logo.png" width="300" height="182" alt="News">
 					        		<%
 					        		}
 					        	%>

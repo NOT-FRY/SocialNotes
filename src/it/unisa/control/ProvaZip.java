@@ -56,7 +56,7 @@ public class ProvaZip extends HttpServlet {
 				
 			}
 			response.setContentType("application/zip");
-	        response.setHeader("Content-Disposition", "attachment; filename=\"allfiles.zip\"");
+	        response.setHeader("Content-Disposition", "attachment; filename=\"SocialNotes.zip\"");
 
 	        ZipOutputStream output = null;
 	        byte[] buffer = new byte[16777];
@@ -82,11 +82,12 @@ public class ProvaZip extends HttpServlet {
 	                    finally{
 	                    	if (input != null) try { input.close(); } catch (IOException logOrIgnore) { /**/ }
 	                    }
-	                input.close();
 	                    
 	            }//for
 	          }//try
-	          finally{}
+	          finally{
+	        	  output.close();
+	          }
 	        //catch (Exception e1) {e1.printStackTrace();}
 		    // finally{}
 	     } 

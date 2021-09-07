@@ -149,7 +149,7 @@
             </div>
         	<br>
             <div class="float-right">
-             <a href="BuyMaterial?totale=<%=tot%>"> <button type="button" class="btn btn-lg btn-primary mt-2">Continua Acquisto</button> </a>
+             <a href="ProvaZip"> <button type="button" class="btn btn-lg btn-primary mt-2">Continua Acquisto</button> </a>
             </div>
         
           </div>

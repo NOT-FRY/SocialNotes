@@ -92,7 +92,7 @@ p, li, li a {
   FileModelDS fmodel = new FileModelDS(ds);
   String idNews = (String)request.getParameter("newsId");
   String imageNews = (String)request.getParameter("newsImage");
-  if(idNews==null) {
+  if(idNews==null||imageNews==null) {
 	String link = "news.jsp";
 	String encodedURL = response.encodeRedirectURL(link);
 	response.sendRedirect(encodedURL);
@@ -122,7 +122,7 @@ p, li, li a {
 					
 					        	}else{
 					        			%>
-					        		<img class="img-thumbnail md-margin-bottom-10" src="img/sciopero.jpg" alt="SocialNotes News">
+					        		<img class="img-thumbnail md-margin-bottom-10" src="img/logo.png" alt="SocialNotes News">
 					        		<%
 					        		}
 	                   				 %>
