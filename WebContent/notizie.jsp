@@ -66,7 +66,7 @@ String homeUser = "homepage_user.jsp";
 <div class="file-upload">
 <form method="post" action=<%="NewsUploadServlet;jsessionid="+session.getId()%> enctype="multipart/form-data">
 	  <div class="image-upload-wrap">
-	    <input class="file-upload-input" name="img" type='file' onchange="readURL(this);" accept="image/*" />
+	    <input class="file-upload-input" name="img" type='file' onchange="readURL(this);" accept="image/*" required/>
 	    <div class="drag-text">
 	      <h3>TRASCINA E RILASCIA UNA FOTO</h3>
 	    </div>
