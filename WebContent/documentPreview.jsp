@@ -185,7 +185,7 @@
   <div class="card-body">
     <blockquote class="blockquote mb-0">
       <p><%=fbean.getCommento() %></p>
-      <footer class="blockquote-footer"><%=fbean.getUsername() %>  DATA: <%=fbean.getDataFeed() %> </footer>
+      <footer class="blockquote-footer"><%=fbean.getUsername() %>  DATA: <%=fbean.getDataFeed().getYear()+1900 %>-<%=fbean.getDataFeed().getMonth()+1 %>-<%=fbean.getDataFeed().getDate() %> <%=fbean.getDataFeed().getHours() %>:<%=fbean.getDataFeed().getMinutes() %> </footer>
     </blockquote>
   </div>
 </div>
