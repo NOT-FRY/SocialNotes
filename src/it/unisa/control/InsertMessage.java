@@ -29,15 +29,16 @@ public class InsertMessage extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String message=request.getParameter("mex");
-		//System.out.println(message);
+		String chatID = (String)request.getParameter("chatID");
+		System.out.println(message+"  "+request.getParameter("username")+"  "+chatID);
 		Timestamp invioMex = new Timestamp(System.currentTimeMillis());
 		MessageBean mex=new MessageBean();
 		String username="manselmo";
 		DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
 		mex.setTesto(message);
 		mex.setDataInvio(invioMex);
-		mex.setUsername(username);
-		mex.setChatID(8);
+		mex.setUsername(request.getParameter("username"));
+		mex.setChatID(Integer.parseInt(request.getParameter("chatID")));
 		MessageModelDS messageModel=new MessageModelDS(ds);
 		try {
 			messageModel.doSave(mex);
