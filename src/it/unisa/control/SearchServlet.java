@@ -104,7 +104,7 @@ public class SearchServlet extends HttpServlet {
 			
 			request.setAttribute("ricercaNew", str);
 			request.setAttribute("materiale", material);
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Search.jsp");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Search.jsp;jsessionid="+session.getId());
 			dispatcher.forward(request, response);
 			
 		}catch(SQLException e) {

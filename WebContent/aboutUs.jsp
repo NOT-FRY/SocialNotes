@@ -10,14 +10,21 @@
 </head>
 <body>
 <% if(session.getAttribute("username")!=null){
-	
+	if ((int)session.getAttribute("role")==1){
+		
 %>
-<jsp:include page="header_user.jsp"></jsp:include>
+<jsp:include page="header_admin.jsp"></jsp:include>
 <%}else{ %>
-
-<jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="header_user.jsp"></jsp:include>
 <% 
-} %>
+}
+}else{
+	%>
+	<jsp:include page="header.jsp"></jsp:include>
+	<% 
+}
+	
+	%>
  
 
 <div id="main-content" class="blog-page">

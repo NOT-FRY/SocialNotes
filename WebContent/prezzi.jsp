@@ -12,6 +12,8 @@
 <body>
 
 <%
+String adminURL = "admin.jsp";
+
    if(session.getAttribute("username")==null){
 	  %>
 	  
@@ -19,6 +21,11 @@
 	  
 	  <%
    }else{
+		  if (((int)session.getAttribute("role"))==1){
+			  adminURL = response.encodeURL(adminURL);
+			  response.sendRedirect(adminURL);
+			  return;
+		  }
 	   %>
 	   <jsp:include page="header_user.jsp"></jsp:include>
 	   <% }

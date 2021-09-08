@@ -71,12 +71,21 @@ $(document).ready(function() {
 <body>
 
  <%    
+ 
+ String adminURL = "admin.jsp";
+ 
    if(session.getAttribute("username")==null){
 	  System.out.println("L'utente non è loggato");
 	  %>
 	  <jsp:include page="header.jsp"></jsp:include>
 	  <% 
   }else{
+	  if (((int)session.getAttribute("role"))==1){
+		  adminURL = response.encodeURL(adminURL);
+		  response.sendRedirect(adminURL);
+		  return;
+	  }
+                
 	  synchronized(session) {
 	  System.out.println("ID SESSIONE NEWS:"+session.getId());
 	  Date dataSessione = new Date(session.getCreationTime());

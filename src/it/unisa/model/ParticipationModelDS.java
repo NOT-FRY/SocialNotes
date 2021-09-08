@@ -57,6 +57,29 @@ public class ParticipationModelDS implements Model<ParticipationBean>{
 	@Override
 	public void doSave(ParticipationBean item) throws SQLException {
 		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+				Connection con=null;
+				PreparedStatement ps=null;
+				//ResultSet rs=null;
+				String sql="INSERT INTO Partecipazione (Username,ChatID) VALUES (?,?)";
+				try {
+					con=ds.getConnection();
+					ps=con.prepareStatement(sql);
+					ps.setString(1, item.getUsername());
+					ps.setInt(2, item.getChatID());
+					System.out.println(ps.executeUpdate());
+
+
+				}finally {
+					try {
+						if (ps != null)
+							ps.close();
+					} finally {
+						if (con != null) {
+							con.close();
+						}
+					}
+				}
 		
 	}
 
