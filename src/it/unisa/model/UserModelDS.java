@@ -441,6 +441,31 @@ public class UserModelDS implements Model<UserBean> {
 		}
 	}
 	
+	
+	public void doUpdateCoin(String username,int coin)throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql="UPDATE Utente SET Coin=? WHERE Username=?";
+		try {
+			con=ds.getConnection();
+			ps=con.prepareStatement(sql);
+			ps.setInt(1, coin);
+			ps.setString(2, username);
+			ps.executeUpdate();
+			System.out.println("Coins aggiornati");
+		}finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			}
+			finally {
+				if(con!=null)
+					con.close();
+			}
+		}
+	}
+	
+	
 	public void doUpdatePassword(String username,String newPassword)throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;

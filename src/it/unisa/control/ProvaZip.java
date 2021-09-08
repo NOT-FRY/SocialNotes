@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,6 +24,7 @@ import javax.sql.DataSource;
 import it.unisa.model.FileBean;
 import it.unisa.model.FileModelDS;
 import it.unisa.model.MaterialBean;
+import it.unisa.model.UserModelDS;
 
 @WebServlet("/ProvaZip")
 public class ProvaZip extends HttpServlet {
@@ -42,61 +44,73 @@ public class ProvaZip extends HttpServlet {
 		Collection<MaterialBean>cart=(Collection<MaterialBean>)session.getAttribute("cart");
 		List<FileBean> fileList = new ArrayList<FileBean>();
 		FileModelDS fileModel=new FileModelDS(ds);
-		if(cart!=null&&cart.size()>0){
-			Iterator<?> it=cart.iterator();
-			while(it.hasNext()) {
-				MaterialBean material=(MaterialBean)it.next();
+		int coin=(int)session.getAttribute("coin");
+		String tot=request.getParameter("tot");
+		int totale=Integer.parseInt(tot);
+		if(totale<=coin) {
+			if(cart!=null&&cart.size()>0){
+				Iterator<?> it=cart.iterator();
+				while(it.hasNext()) {
+					MaterialBean material=(MaterialBean)it.next();
+					try {
+						FileBean file=fileModel.doRetrieveByKey(material.getFileName());
+						fileList.add(file);
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				response.setContentType("application/zip");
+				response.setHeader("Content-Disposition", "attachment; filename=\"SocialNotes.zip\"");
+
+				ZipOutputStream output = null;
+				byte[] buffer = new byte[16777];
 				try {
-					FileBean file=fileModel.doRetrieveByKey(material.getFileName());
-					fileList.add(file);
+					output = new ZipOutputStream(new BufferedOutputStream(response.getOutputStream(), 16777));
+					for (FileBean file: fileList){
+						InputStream input = null;
+						try {
+							input = new BufferedInputStream(file.getContenuto(),16777);
+
+							output.putNextEntry(new ZipEntry(file.getFilename()));
+							for (int length = 0; (length = input.read(buffer)) > 0;){
+								output.write(buffer, 0, length);
+							}
+							output.closeEntry();
+						}
+						finally{
+							if (input != null)
+								try { input.close(); 
+								}catch (IOException logOrIgnore) {}
+						}
+					}
+					cart.clear();
+					UserModelDS userModel=new UserModelDS(ds);
+					String username=(String)session.getAttribute("username");
+					userModel.doUpdateCoin(username, coin-totale);
+					session.setAttribute("coin", coin-totale);
+					session.setAttribute("cart", cart);
+					String success="Acquisto effettuato con successo";
+					request.setAttribute("success", success);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
-			}
-			response.setContentType("application/zip");
-	        response.setHeader("Content-Disposition", "attachment; filename=\"SocialNotes.zip\"");
-
-	        ZipOutputStream output = null;
-	        byte[] buffer = new byte[16777];
-
-	        try {
-	            output = new ZipOutputStream(new BufferedOutputStream(response.getOutputStream(), 16777));
-
-	            for (FileBean file: fileList)
-	            {
-	                InputStream input = null;
-	                try {
-	                        input = new BufferedInputStream(file.getContenuto(),16777);
-
-	                        output.putNextEntry(new ZipEntry(file.getFilename()));
-	                        for (int length = 0; (length = input.read(buffer)) > 0;)
-	                        {
-	                            output.write(buffer, 0, length);
-	                        }
-	                        output.closeEntry();
-	                        System.out.println("ciao alla fine");
-	                    }//try
-	                   // catch (SQLException e) {e.printStackTrace();}
-	                    finally{
-	                    	if (input != null) try { input.close(); } catch (IOException logOrIgnore) { /**/ }
-	                    }
-	                    
-	            }//for
-	          }//try
-	          finally{
-	        	  output.close();
-	          }
-	        //catch (Exception e1) {e1.printStackTrace();}
-		    // finally{}
-	     } 
-	     
-	
+				finally{
+					output.close();
+				}
+			} 
+		}else {
+			String error="Coins insufficienti";
+			request.setAttribute("error",error);
 		}
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cart.jsp");
+		dispatcher.forward(request, response);
+		return;
+	}
 
 
-	
+
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

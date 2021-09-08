@@ -69,7 +69,6 @@
 	<%
   if (session.getAttribute("username")==null)
 	  response.sendRedirect("login.jsp");
-  Collection<MaterialBean>cart=(Collection<MaterialBean>)session.getAttribute("cart");
   String nome = (String)session.getAttribute("nome");
   String cognome = (String)session.getAttribute("cognome");
   String dipName = (String)session.getAttribute("dipName");

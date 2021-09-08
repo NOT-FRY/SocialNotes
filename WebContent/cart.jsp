@@ -26,7 +26,31 @@
  <%@include file="header_user.jsp" %>
 
 <div class="container px-3 my-5 clearfix">
-    <!-- Shopping cart table -->
+<% 
+		String success =(String)request.getAttribute("success");
+		if (success!=null){
+		%>
+		<div class="alert alert-success alert-dismissible fade show" role="alert">
+  			<strong>Fatto!</strong> <%=success%>
+  			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    		<span aria-hidden="true">&times;</span>
+ 			 </button>
+		</div>
+		<%
+		}
+		String error = (String)request.getAttribute("error");
+		if(error!=null){
+		%>
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  			<strong>Ops!</strong> <%=error%>
+  			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    		<span aria-hidden="true">&times;</span>
+ 			 </button>
+		</div>
+		<%
+		} 
+		%>
+		
     <div class="card">
         <div class="card-header">
             <h2>Carrello</h2>
@@ -36,16 +60,12 @@
               <table class="table table-bordered m-0 ">
                 <thead>
                   <tr>
-                    <!-- Set columns width -->
                     <th class="text-center py-3 px-4" style="min-width: 400px;">Nome del prodotto &amp; Dettagli</th>
                     <th class="text-right py-3 px-4" style="width: 100px;">Prezzo</th>
-                    <!-- <th class="text-center py-3 px-4" style="width: 120px;">Quantita'</th>
-                    <th class="text-right py-3 px-4" style="width: 100px;">Totale</th> -->
                     <th class="text-center align-middle py-3 px-0" style="width: 40px;"><a href="#" class="shop-tooltip float-none text-light" title="" data-original-title="Clear cart"><i class="ino ion-md-trash"></i></a></th>
                   </tr>
                 </thead>
                 <tbody>
-        		<!-- inizio codice java -->
         		<%
         			int tot=0;
 	        		if(cart!=null&&cart.size()>0){
@@ -78,7 +98,6 @@
           
            
         </div>
-        <!--  <hr class="my-4"> -->
     </div>
     </td>
     <td><span><b><%=mbean.getCosto() %></b></span><br></td>
@@ -89,51 +108,7 @@
     </tbody>
               </table>
              
-        		<!-- fine java -->
-                <!--  <tr>
-                    <td class="p-4">
-                      <div class="media align-items-center">
-                        <img src="img/100.jpg" class="d-block ui-w-40 ui-bordered mr-4" alt="">
-                        <div class="media-body">
-                          <p class="d-block text-dark">Il giusto sprint</p>
-                          <small>
-                            <span class="text-muted">Coins:</span>
-                            <span class="ui-product-descr ui-product-color-sm align-text-bottom">100</span> &nbsp;
-                            <span class="text-muted">Vantaggio: </span> Puoi scaricare fino a 10 documenti &nbsp;
-                          
-                          </small>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-right font-weight-semibold align-middle p-4">&euro;25</td>
-                  <!--   <td class="align-middle p-4"><input type="text" class="form-control text-center" value="1"></td>
-                    <td class="text-right font-weight-semibold align-middle p-4">&euro;25</td> -->
-                    <!-- <td class="text-center align-middle px-0"><a href="#" class="shop-tooltip close float-none text-danger" title="" data-original-title="Remove">X</a></td>
-                  </tr>
-        
-                  <tr>
-                    <td class="p-4">
-                      <div class="media align-items-center">
-                        <img src="img/500.jpg" class="d-block ui-w-40 ui-bordered mr-4" alt="">
-                        <div class="media-body">
-                          <p class="d-block text-dark">Vai alla grande!</p>
-                          <small>
-                            <span class="text-muted">Coins: </span> 500&nbsp;
-                            <span class="text-muted">Vantaggio: </span> Puoi scaricare fino a 50 documenti &nbsp;
-                          </small>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-right font-weight-semibold align-middle p-4">&euro;150</td>
-                    <!-- <td class="align-middle p-4"><input type="text" class="form-control text-center" value="1"></td>
-                    <td class="text-right font-weight-semibold align-middle p-4">&euro;150</td> -->
-                 <!--    <td class="text-center align-middle px-0"><a href="#" class="shop-tooltip close float-none text-danger" title="" data-original-title="Rimuovi">X</a></td>
-                  </tr>
-        
-                </tbody>
-              </table>-->
             </div>
-            <!-- / Shopping cart table -->
         
             <br>
              <div class="float-right">
@@ -149,7 +124,7 @@
             </div>
         	<br>
             <div class="float-right">
-             <a href="ProvaZip"> <button type="button" class="btn btn-lg btn-primary mt-2">Continua Acquisto</button> </a>
+             <a href="ProvaZip?tot=<%=tot%>"> <button type="button" class="btn btn-lg btn-primary mt-2">Continua Acquisto</button> </a>
             </div>
         
           </div>
