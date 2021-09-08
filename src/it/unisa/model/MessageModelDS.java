@@ -32,13 +32,12 @@ public class MessageModelDS implements Model<MessageBean> {
 		try {
 			con=ds.getConnection();
 			ps=con.prepareStatement(selectSQL);
-			Utility.print("doRetrieveAll:"+ps.toString());
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()) {
 				MessageBean bean=new MessageBean();
 				bean.setIdMessaggio(rs.getInt("IDMessaggio"));
 				bean.setTesto(rs.getString("Testo"));
-				bean.setDataInvio(rs.getDate("DataInvio"));
+				bean.setDataInvio(rs.getTimestamp("DataInvio"));
 				bean.setUsername(rs.getString("Username"));
 				bean.setChatID(rs.getInt("ChatID"));
 				messages.add(bean);
@@ -56,11 +55,70 @@ public class MessageModelDS implements Model<MessageBean> {
 		}
 		return messages;
 	}
+	
+	
+	public Collection<MessageBean> doRetrieveByChatID(int chatID) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		String sql="SELECT * FROM Messaggio WHERE ChatID=? ORDER BY DataInvio;";
+		Collection<MessageBean> messages=new LinkedList<MessageBean>();
+		try {
+			con=ds.getConnection();
+			ps=con.prepareStatement(sql);
+			ps.setInt(1, chatID);
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()) {
+				MessageBean bean=new MessageBean();
+				bean.setIdMessaggio(rs.getInt("IDMessaggio"));
+				bean.setTesto(rs.getString("Testo"));
+				bean.setDataInvio(rs.getTimestamp("DataInvio"));
+				bean.setUsername(rs.getString("Username"));
+				bean.setChatID(rs.getInt("ChatID"));
+				messages.add(bean);
+			}
+		}
+		finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			}
+			finally {
+				if(con!=null)
+					con.close();
+			}
+		}
+		return messages;
+	}
+	
 
 	@Override
 	public void doSave(MessageBean item) throws SQLException {
-		// TODO Auto-generated method stub
+		Connection connection = null;
+		PreparedStatement ps = null;
+
+		String sql = "INSERT INTO Messaggio (Testo,DataInvio,Username,ChatID)  values (?,?,?,?);";
 		
+		try {
+			connection = ds.getConnection();
+			ps = connection.prepareStatement(sql);
+			ps.setString(1, item.getTesto());
+			ps.setTimestamp(2, item.getDataInvio());
+			ps.setString(3, item.getUsername());
+			ps.setInt(4, item.getChatID());
+		
+
+			ps.executeUpdate();
+			//System.out.println("Messaggio inserito");
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			}
+			finally {
+				if(connection!=null)
+					connection.close();
+			}
+		}
 	}
 
 	@Override

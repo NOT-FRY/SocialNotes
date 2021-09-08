@@ -1,6 +1,6 @@
 package it.unisa.model;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class MessageBean {
 
@@ -34,12 +34,12 @@ public class MessageBean {
 	}
 	
 	
-	public Date getDataInvio() {
+	public Timestamp getDataInvio() {
 		return dataInvio;
 	}
 	
 	
-	public void setDataInvio(Date dataInvio) {
+	public void setDataInvio(Timestamp dataInvio) {
 		this.dataInvio = dataInvio;
 	}
 	
@@ -87,7 +87,7 @@ public class MessageBean {
 	
 	private int idMessaggio;
     private String testo;
-    private Date dataInvio;
+    private Timestamp dataInvio;
     private String username;
     private String fileName;
     private int chatID;
