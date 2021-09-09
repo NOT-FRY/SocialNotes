@@ -46,7 +46,7 @@ public class InsertMessage extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/testInserimentoMex.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/chat.jsp");
 		dispatcher.forward(request, response);
 	}
 
