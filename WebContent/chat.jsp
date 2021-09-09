@@ -160,8 +160,8 @@ String creaChatURL = "creaChat.jsp";
                                             <span class="status busy"></span>
                                         </div>
                                         <p class="name-time">
-                                            <span class="name" onclick="funzione2()"><%=item.getTitolo() %></span>
-                                            <input type="text" hidden  id="chatcode" class="name" value="<%=item.getChatID() %>">
+                                            <span class="name" onclick="funzione3(<%=item.getChatID() %>)"><%=item.getTitolo() %></span>
+                                      
                                         </p>
                                     </li>
                                   <%}} %>
