@@ -154,12 +154,12 @@ String creaChatURL = "creaChat.jsp";
                         		
                                 
                                 %>
-                                    <li class="person" id="testo" data-chat="person1">
+                                    <li class="person" id="testo" data-chat="person1" id=<%=item.getChatID() %>>
                                         <div class="user">
                                             <img src="img/MicrosoftTeams-image.png"  alt="Retail Admin">
                                             <span class="status busy"></span>
                                         </div>
-                                        <p class="name-time">
+                                        <p class="name-time" >
                                             <span class="name" onclick="funzione3(<%=item.getChatID() %>)"><%=item.getTitolo() %></span>
                                       
                                         </p>
