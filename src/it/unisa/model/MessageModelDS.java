@@ -1,5 +1,6 @@
 package it.unisa.model;
 
+import java.sql.Timestamp;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -90,6 +91,40 @@ public class MessageModelDS implements Model<MessageBean> {
 		return messages;
 	}
 	
+	
+	public Collection<MessageBean> doRetrieveLatestMessages(Timestamp orario) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		String sql="SELECT * FROM Messaggio WHERE DataInvio>? ORDER BY DataInvio;";
+		Collection<MessageBean> messages=new LinkedList<MessageBean>();
+		try {
+			con=ds.getConnection();
+			ps=con.prepareStatement(sql);
+			ps.setTimestamp(1, orario);
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()) {
+				MessageBean bean=new MessageBean();
+				bean.setIdMessaggio(rs.getInt("IDMessaggio"));
+				bean.setTesto(rs.getString("Testo"));
+				bean.setDataInvio(rs.getTimestamp("DataInvio"));
+				bean.setUsername(rs.getString("Username"));
+				bean.setChatID(rs.getInt("ChatID"));
+				messages.add(bean);
+			}
+		}
+		finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			}
+			finally {
+				if(con!=null)
+					con.close();
+			}
+		}
+		return messages;
+	}
+	
 
 	@Override
 	public void doSave(MessageBean item) throws SQLException {
@@ -120,7 +155,7 @@ public class MessageModelDS implements Model<MessageBean> {
 			}
 		}
 	}
-
+	
 	@Override
 	public void doUpdate(MessageBean item) throws SQLException {
 		// TODO Auto-generated method stub
