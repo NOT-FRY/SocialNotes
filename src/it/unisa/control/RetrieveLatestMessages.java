@@ -37,9 +37,11 @@ public class RetrieveLatestMessages extends HttpServlet {
 		DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
 		String data=request.getParameter("datamessaggio");
 		Timestamp orarioUltimoMessaggio=Timestamp.valueOf(data);
+		String chat=request.getParameter("chatID");
+		int chatID=Integer.parseInt(chat);
 		MessageModelDS messageModel=new MessageModelDS(ds);
 		try {
-			Collection<MessageBean> messages=messageModel.doRetrieveLatestMessages(orarioUltimoMessaggio);
+			Collection<MessageBean> messages=messageModel.doRetrieveLatestMessages(orarioUltimoMessaggio, chatID);
 			if(messages!=null&&messages.size()>0) {
 				Gson gson=new Gson();
 				String messaggi=gson.toJson(messages);

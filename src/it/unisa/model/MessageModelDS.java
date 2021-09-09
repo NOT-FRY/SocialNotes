@@ -92,15 +92,16 @@ public class MessageModelDS implements Model<MessageBean> {
 	}
 	
 	
-	public Collection<MessageBean> doRetrieveLatestMessages(Timestamp orario) throws SQLException {
+	public Collection<MessageBean> doRetrieveLatestMessages(Timestamp orario,int chatID) throws SQLException {
 		Connection con=null;
 		PreparedStatement ps=null;
-		String sql="SELECT * FROM Messaggio WHERE DataInvio>? ORDER BY DataInvio;";
+		String sql="SELECT * FROM Messaggio WHERE DataInvio>? AND ChatID=? ORDER BY DataInvio;";
 		Collection<MessageBean> messages=new LinkedList<MessageBean>();
 		try {
 			con=ds.getConnection();
 			ps=con.prepareStatement(sql);
 			ps.setTimestamp(1, orario);
+			ps.setInt(2, chatID);
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()) {
 				MessageBean bean=new MessageBean();
