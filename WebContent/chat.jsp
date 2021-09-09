@@ -180,8 +180,8 @@ String creaChatURL = "creaChat.jsp";
                                 <!--     <input type="text"  id="chatcode" class="name" value="9"> -->
                                     <input type="text" name="username" id="username" hidden value="<%=session.getAttribute("username") %>">
                                     <textarea class="form-control" rows="2" placeholder="Type your message here..." id="mex" name="mex" required></textarea> 
-                                    <br>
-                                    <button class="btn btn-light" name="bottone" onclick="funzione()" id="bottone" type="submit" style="background-color : #9697e7; color:white;">Invia il messaggio</button>
+									<br>
+                                    <button  onblur="mex.value=''"class="btn btn-light" name="bottone" onclick="funzione()" id="bottone" type="submit" style="background-color : #9697e7; color:white;">Invia il messaggio</button>
                                     </form>
                                 </div>
                             </div>
