@@ -160,8 +160,8 @@ String creaChatURL = "creaChat.jsp";
                                             <span class="status busy"></span>
                                         </div>
                                         <p class="name-time">
-                                            <span class="name"><%=item.getTitolo() %></span>
-                                            <span hidden  id="chatCode" class="name" value="<%=item.getChatID() %>"></span>
+                                            <span class="name" onclick="funzione2()"><%=item.getTitolo() %></span>
+                                            <input type="text" hidden  id="chatcode" class="name" value="<%=item.getChatID() %>">
                                         </p>
                                     </li>
                                   <%}} %>
@@ -177,11 +177,11 @@ String creaChatURL = "creaChat.jsp";
                                </ul>
                                 <div class="form-group mt-3 mb-0">
                                 <form id="form1" name="form1" method="GET">
-                                <input type="text" hidden  id="chatCode" class="name" value="9">
+                                <!--     <input type="text"  id="chatcode" class="name" value="9"> -->
                                     <input type="text" name="username" id="username" hidden value="<%=session.getAttribute("username") %>">
                                     <textarea class="form-control" rows="2" placeholder="Type your message here..." id="mex" name="mex"></textarea> 
                                     <br>
-                                    <button class="btn btn-light" name="bottone" id="bottone" type="submit" style="background-color : #9697e7; color:white;">Invia il messaggio</button>
+                                    <button class="btn btn-light" name="bottone" onclick="funzione()" id="bottone" type="submit" style="background-color : #9697e7; color:white;">Invia il messaggio</button>
                                     </form>
                                 </div>
                             </div>
