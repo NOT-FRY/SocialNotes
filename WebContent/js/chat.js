@@ -78,9 +78,9 @@ function funzione3(parameter){
          $("#messaggio2").remove();
    for (var mex of messaggi){
 	if (mex["username"]==user)
-	 $("#listchat").append("<li class='chat-right' id='messaggio1'> <div class='chat-hour'>"+mex["dataInvio"]+" <span class='fa fa-check-circle'></span></div> <div class='chat-text'>"+mex["testo"]+"</div> <div class='chat-avatar'> <img src='https://www.bootdey.com/img/Content/avatar/avatar3.png' alt='Retail Admin'> <div class='chat-name'>"+mex["username"]+"</div> </div> </li>");
+	 $("#listchat").append("<li class='chat-right' id='messaggio1'> <div class='chat-hour'>"+mex["dataInvio"]+" <span class='fa fa-check-circle'></span></div> <div class='chat-text'>"+mex["testo"]+"</div> <div class='chat-avatar'> <img src='PrintImage?username="+mex["username"]+"' alt='Retail Admin'> <div class='chat-name'>"+mex["username"]+"</div> </div> </li>");
        else
- $("#listchat").append("<li class='chat-left' id='messaggio2'> <div class='chat-avatar'> <img src='https://www.bootdey.com/img/Content/avatar/avatar3.png' alt='Retail Admin'> <div class='chat-name'>"+mex["username"]+"</div> </div> <div class='chat-text'>"+mex["testo"]+"</div> <div class='chat-hour'>"+mex["dataInvio"]+" <span class='fa fa-check-circle'></span></div> </li> ");
+ $("#listchat").append("<li class='chat-left' id='messaggio2'> <div class='chat-avatar'> <img src='PrintImage?username="+mex["username"]+"' alt='Retail Admin'> <div class='chat-name'>"+mex["username"]+"</div> </div> <div class='chat-text'>"+mex["testo"]+"</div> <div class='chat-hour'>"+mex["dataInvio"]+" <span class='fa fa-check-circle'></span></div> </li> ");
 
  date=mex["dataInvio"];
 }
@@ -111,9 +111,9 @@ function funzione2(){
 	let messaggi = JSON.parse(data);
    for (var mex of messaggi){
 	if (mex["username"]==user)
-	 $("#listchat").append("<li class='chat-right' id='messaggio1'> <div class='chat-hour'>"+mex["dataInvio"]+" <span class='fa fa-check-circle'></span></div> <div class='chat-text'>"+mex["testo"]+"</div> <div class='chat-avatar'> <img src='https://www.bootdey.com/img/Content/avatar/avatar3.png' alt='Retail Admin'> <div class='chat-name'>"+mex["username"]+"</div> </div> </li>");
+	 $("#listchat").append("<li class='chat-right' id='messaggio1'> <div class='chat-hour'>"+mex["dataInvio"]+" <span class='fa fa-check-circle'></span></div> <div class='chat-text'>"+mex["testo"]+"</div> <div class='chat-avatar'> <img src='PrintImage?username="+mex["username"]+"' alt='Retail Admin'> <div class='chat-name'>"+mex["username"]+"</div> </div> </li>");
        else
- $("#listchat").append("<li class='chat-left' id='messaggio2'> <div class='chat-avatar'> <img src='https://www.bootdey.com/img/Content/avatar/avatar3.png' alt='Retail Admin'> <div class='chat-name'>"+mex["username"]+"</div> </div> <div class='chat-text'>"+mex["testo"]+"</div> <div class='chat-hour'>"+mex["dataInvio"]+" <span class='fa fa-check-circle'></span></div> </li> ");
+ $("#listchat").append("<li class='chat-left' id='messaggio2'> <div class='chat-avatar'> <img src='PrintImage?username="+mex["username"]+"' alt='Retail Admin'> <div class='chat-name'>"+mex["username"]+"</div> </div> <div class='chat-text'>"+mex["testo"]+"</div> <div class='chat-hour'>"+mex["dataInvio"]+" <span class='fa fa-check-circle'></span></div> </li> ");
 
  date=mex["dataInvio"];
 }
@@ -144,3 +144,10 @@ $(document).ready(function() {
   }, 1000); // the "3000" 
 
 });
+
+
+$("#bottone").click(function(){
+	$("#mex").val("");
+})
+
+

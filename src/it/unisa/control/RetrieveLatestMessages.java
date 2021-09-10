@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.sql.SQLException;
 import java.util.Collection;
@@ -39,26 +41,19 @@ public class RetrieveLatestMessages extends HttpServlet {
 		PrintWriter out=response.getWriter();
 		DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
 		String data=request.getParameter("datamessaggio");
-		
-		String dateNew = data.substring(0, 10);
-		Timestamp timestamp = null;
-		try {
-			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
-			Date parseDate = dateFormat.parse(dateNew);
-			 timestamp = new Timestamp(parseDate.getTime());
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		System.out.println(" TIME: "+timestamp);
-		// Timestamp orarioUltimoMessaggio=Timestamp.valueOf(dateNew);
+
+		//String dateNew = data.substring(0, 10);
+		//Timestamp timestamp = null;
+		//LocalDate date = LocalDate.parse(data, DateTimeFormatter.BASIC_ISO_DATE);
+		long time=Long.parseLong(data);
+		Timestamp date=new Timestamp(time);
+		System.out.println(date);
+
 		String chat=request.getParameter("chatID");
-		
-		
 		int chatID=Integer.parseInt(chat);
 		MessageModelDS messageModel=new MessageModelDS(ds);
-				try {
-			Collection<MessageBean> messages=messageModel.doRetrieveLatestMessages(timestamp, chatID);
+		try {
+			Collection<MessageBean> messages=messageModel.doRetrieveLatestMessages(date, chatID);
 			if(messages!=null&&messages.size()>0) {
 				Gson gson=new Gson();
 				String messaggi=gson.toJson(messages);
