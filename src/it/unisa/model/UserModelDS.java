@@ -5,12 +5,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.LinkedList;
 
 import javax.sql.DataSource;
 
-import it.unisa.utils.Utility;
 
 public class UserModelDS implements Model<UserBean> {
 
@@ -28,7 +28,7 @@ public class UserModelDS implements Model<UserBean> {
 	public UserBean checkLogin(String name,String password)throws SQLException {
 		Connection con=null;
 		PreparedStatement ps=null;
-		String sql="SELECT * FROM Utente WHERE Email = ? OR Username=?";
+		String sql="SELECT Username,Nome,Cognome,Img,Email,Pass,DataNascita,Matricola,UltimoAccesso,Coin,Ban,Denominazione,DipName, AES_DECRYPT(Pass,'despacito') as Password FROM Utente WHERE Email = ? OR Username=?";
 		//System.out.println("name in usermodel "+name);
 		//System.out.println("pass in usermodel "+password);
 		UserBean bean=new UserBean();
@@ -39,7 +39,7 @@ public class UserModelDS implements Model<UserBean> {
 			ps.setString(2, name);
 			ResultSet rs=ps.executeQuery();
 
-			if(rs.next()&&(rs.getString("Pass").compareTo(password))==0) {
+			if(rs.next()&&(rs.getString("Password").compareTo(password))==0) {
 				System.out.println("Utente loggato");
 				bean.setUsername(rs.getString("Username"));
 				bean.setNome(rs.getString("Nome"));
@@ -332,7 +332,6 @@ public class UserModelDS implements Model<UserBean> {
 				ps.setString(3, '%'+str+'%');
 			}
 			
-			int feed=0;
 			dropViewFeedbackmedia.execute();
 			viewFeedbackmedia.execute();
 			dropViewFeedbackuser.execute();
@@ -377,7 +376,7 @@ public class UserModelDS implements Model<UserBean> {
 		Connection connection = null;
 		PreparedStatement ps = null;
 
-		String insertSQL = "INSERT INTO Utente (Username, Nome, Cognome, Email, Pass, DataNascita, UltimoAccesso, Coin, Denominazione, DipName,Ban) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+		String insertSQL = "INSERT INTO Utente (Username, Nome, Cognome, Email, Pass, DataNascita, UltimoAccesso, Coin, Denominazione, DipName,Ban) VALUES (?, ?, ?, ?, AES_ENCRYPT(?,'despacito'), ?, ?, ?, ?, ?,?)";
 
 		try {
 			connection = ds.getConnection();
@@ -470,7 +469,7 @@ public class UserModelDS implements Model<UserBean> {
 		Connection connection = null;
 		PreparedStatement ps = null;
 
-		String sql = "UPDATE Utente SET Pass = ? WHERE Username = ?";
+		String sql = "UPDATE Utente SET Pass = AES_ENCRYPT(?,'despacito') WHERE Username = ?";
 		
 		try {
 			connection = ds.getConnection();
@@ -559,6 +558,32 @@ public class UserModelDS implements Model<UserBean> {
 			ps.setString(2, username);
 			ps.executeUpdate();
 			System.out.println("Immagine di profilo aggiornata");
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			}
+			finally {
+				if(connection!=null)
+					connection.close();
+			}
+		}
+	}
+	
+	
+	public void doUpdateUltimoAccesso(String username,Timestamp ultimoAccesso)throws SQLException{
+		Connection connection = null;
+		PreparedStatement ps = null;
+
+		String sql = "UPDATE Utente SET  UltimoAccesso=? WHERE Username = ?";
+		
+		try {
+			connection = ds.getConnection();
+			ps = connection.prepareStatement(sql);
+			ps.setTimestamp(1, ultimoAccesso);
+			ps.setString(2, username);
+			ps.executeUpdate();
+			System.out.println("Ultimo accesso aggiornato");
 		} finally {
 			try {
 				if(ps!=null)

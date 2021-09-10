@@ -2,9 +2,7 @@ package it.unisa.control;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.LinkedList;
+import java.sql.Timestamp;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,35 +15,27 @@ import javax.sql.DataSource;
 
 import it.unisa.model.ChatBean;
 import it.unisa.model.ChatModelDS;
+import it.unisa.model.MessageBean;
+import it.unisa.model.MessageModelDS;
 import it.unisa.model.ParticipationBean;
 import it.unisa.model.ParticipationModelDS;
 
-/**
- * Servlet implementation class ChatCreateServlet
- */
 @WebServlet("/ChatCreateServlet")
 public class ChatCreateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public ChatCreateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
+	
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		HttpSession session = request.getSession(false);
@@ -77,15 +67,6 @@ public class ChatCreateServlet extends HttpServlet {
 		
 			ChatBean chatBean = new ChatBean();
 		
-		Collection<ParticipationBean> participation=new LinkedList<ParticipationBean>();
-		Iterator<?> it= participation.iterator();
-		
-		
-		for(String e: users) {
-			ParticipationBean pBean = new ParticipationBean();
-			pBean.setUsername(e);
-			
-		}
 		
 		chatBean.setTitolo(titoloChat);
 		try {
@@ -115,14 +96,21 @@ public class ChatCreateServlet extends HttpServlet {
 					h.printStackTrace();
 				}
 				
-		       // participation.add(pBean);
 			}
 			
-			while (it.hasNext()) {
-				ParticipationBean participationBean = (ParticipationBean)it.next();
-				pModel.doSave(participationBean);
-			} 
-			
+			MessageModelDS messageModel=new MessageModelDS(ds);
+			MessageBean firstMex=new MessageBean();
+			Timestamp invioMex = new Timestamp(System.currentTimeMillis());
+			String testo=""+(String)session.getAttribute("username")+" ha creato la chat";
+			firstMex.setTesto(testo);
+			firstMex.setDataInvio(invioMex);
+			firstMex.setUsername((String)session.getAttribute("username"));
+			firstMex.setChatID(chatID);
+			try { 
+				messageModel.doSave(firstMex);
+			} catch (SQLException h) {
+				h.printStackTrace();
+			}
 			
 			chat = response.encodeURL(chat);
 			response.sendRedirect(chat);

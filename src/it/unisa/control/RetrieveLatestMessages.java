@@ -3,10 +3,6 @@ package it.unisa.control;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.sql.SQLException;
 import java.util.Collection;
 
@@ -42,9 +38,6 @@ public class RetrieveLatestMessages extends HttpServlet {
 		DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
 		String data=request.getParameter("datamessaggio");
 
-		//String dateNew = data.substring(0, 10);
-		//Timestamp timestamp = null;
-		//LocalDate date = LocalDate.parse(data, DateTimeFormatter.BASIC_ISO_DATE);
 		long time=Long.parseLong(data);
 		Timestamp date=new Timestamp(time);
 		System.out.println(date);
@@ -57,7 +50,7 @@ public class RetrieveLatestMessages extends HttpServlet {
 			if(messages!=null&&messages.size()>0) {
 				Gson gson=new Gson();
 				String messaggi=gson.toJson(messages);
-				System.out.println(messaggi);
+				//System.out.println(messaggi);
 				out.write(messaggi);
 			}
 		} catch (SQLException e) {
