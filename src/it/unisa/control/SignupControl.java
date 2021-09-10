@@ -78,8 +78,8 @@ public class SignupControl extends HttpServlet {
 	    java.util.Date javaDate = new java.util.Date();
 	    long javaTime = javaDate.getTime();
 		Timestamp ultimoAccesso = new Timestamp(javaTime);
-		
-		Date dataNascita =Date.valueOf(nascita);
+		System.out.println("data:"+nascita);
+		Date dataNascita = Date.valueOf(nascita);
 		
 		/*try {
 			SimpleDateFormat formatter = new SimpleDateFormat("YYYY-MM-gg");
@@ -154,6 +154,8 @@ public class SignupControl extends HttpServlet {
 			session.setAttribute("ban",user.getBan());
 			session.setAttribute("denominazione",user.getDenominazione());
 			session.setAttribute("dipName",user.getDipName());
+			session.setAttribute("role",role.getIdRuolo());
+			System.out.println("Ruolo in sessione:"+session.getAttribute("role"));
 		    System.out.println("ID SESSIONE:"+session.getId());
 			Collection<MaterialBean>cart=new LinkedList<MaterialBean>();
 			session.setAttribute("cart", cart);

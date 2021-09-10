@@ -163,7 +163,7 @@
 			<div class="mb-3">
               <label for="datanascita">Data di Nascita:</label>
                 <input type="date" class="form-control" name="nascita" id="nascita" placeholder="gg/mm/aaaa" onblur="validateDate(this)" required >
-              <div class="valid-feedback">Password valida.</div>
+              <div class="valid-feedback">Data di nacita valida.</div>
               <div class="invalid-feedback">Inserisci un formato di data corretto (gg/mm/aaaa)</div>
             </div>
 
