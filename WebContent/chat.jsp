@@ -160,7 +160,7 @@ String creaChatURL = "creaChat.jsp";
                                             <span class="status busy"></span>
                                         </div>
                                         <p class="name-time" >
-                                            <span class="name" onclick="funzione3(<%=item.getChatID() %>)"  id ="<%=item.getChatID() %>" onload="funzione3(<%=item.getChatID() %>)"><%=item.getTitolo() %></span>
+                                            <span class="name" onclick="funzione3(<%=item.getChatID() %>,'<%=item.getTitolo() %>')"  id ="<%=item.getChatID() %>" onload="funzione3(<%=item.getChatID() %>,'<%=item.getTitolo() %>')"><%=item.getTitolo() %></span>
                                       
                                         </p>
                                     </li>
@@ -170,7 +170,7 @@ String creaChatURL = "creaChat.jsp";
                         </div>
                         <div class="col-xl-8 col-lg-8 col-md-8 col-sm-9 col-9" >
                             <div class="selected-user">
-                                <span>To: <span class="name">Emily Russell</span></span>
+                                <span>To: <span class="name" id="titolo"></span></span>
                             </div>
                             <div class="chat-container" id="divchat">
                                <ul class="chat-box chatContainerScroll" id="listchat">

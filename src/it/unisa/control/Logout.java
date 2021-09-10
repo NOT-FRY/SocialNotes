@@ -28,19 +28,16 @@ public class Logout extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		
-HttpSession session = request.getSession(false);
+	
+HttpSession session = request.getSession();
 		
 		if(session == null) {
 			String signUpURL = "login.jsp";
-			String link = response.encodeRedirectURL(signUpURL);
-			response.sendRedirect(link);
+			response.sendRedirect(signUpURL);
 		}else {
 			session.invalidate();
 			String homeURL = "homepage.jsp";
-			String link = response.encodeRedirectURL(homeURL);
-			response.sendRedirect(link);
+			response.sendRedirect(homeURL);
 			
 		}
 	}

@@ -75,7 +75,7 @@
 %>
 
 	<nav
-		class="navbar navbar-expand-lg navbar-dark colore-principale justify-content-end">
+		class="navbar navbar-expand-lg navbar-dark colore-principale justify-content-end sticky-top">
 		<a class="navbar-brand" href="<%=homeLink%>"> <img
 			src="img/LogoDefinitivo1.png" height="25" width="150">
 		</a>

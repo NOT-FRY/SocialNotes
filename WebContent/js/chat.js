@@ -51,8 +51,7 @@ function funzione(){
     username: "username="+ user,
    success: function(){
 //	alert("Sul cesso");
-	$("#messaggio1").remove();
-    $("#messaggio2").remove();
+
   //  $("#listchat").append("<li class='chat-right' id='messaggio1'> <div class='chat-hour'>08:56 <span class='fa fa-check-circle'></span></div> <div class='chat-text'>Hi, Russell <br> I need more information about Developer Plan.</div> <div class='chat-avatar'> <img src='https://www.bootdey.com/img/Content/avatar/avatar3.png' alt='Retail Admin'> <div class='chat-name'>Sam</div> </div> </li> <li class='chat-left' id='messaggio2'> <div class='chat-avatar'> <img src='https://www.bootdey.com/img/Content/avatar/avatar3.png' alt='Retail Admin'> <div class='chat-name'>Russell</div> </div> <div class='chat-text'>Are we meeting today? <br>Project has been already finished and I have results to show you.</div> <div class='chat-hour'>08:57 <span class='fa fa-check-circle'></span></div> </li> ");
  },
    error: function(){
@@ -64,8 +63,9 @@ function funzione(){
 }
 
 
-function funzione3(parameter){
+function funzione3(parameter,parameter2){
 	   var chat = parameter;
+       var titolo = parameter2;
         chatID = chat;
       var user = document.getElementById("username").value;
      $.ajax({
@@ -74,8 +74,10 @@ function funzione3(parameter){
    data: "chatid=" + chatID,
    success: function(data){
 	let messaggi = JSON.parse(data);
-	       	    $("#messaggio1").remove();
-         $("#messaggio2").remove();
+
+      document.getElementById("titolo").innerHTML = titolo; 
+    		  $("li").remove(".chat-right");
+        $("li").remove(".chat-left");
    for (var mex of messaggi){
 	if (mex["username"]==user)
 	 $("#listchat").append("<li class='chat-right' id='messaggio1'> <div class='chat-hour'>"+mex["dataInvio"]+" <span class='fa fa-check-circle'></span></div> <div class='chat-text'>"+mex["testo"]+"</div> <div class='chat-avatar'> <img src='PrintImage?username="+mex["username"]+"' alt='Retail Admin'> <div class='chat-name'>"+mex["username"]+"</div> </div> </li>");
@@ -84,9 +86,9 @@ function funzione3(parameter){
 
  date=mex["dataInvio"];
 }
- },
+},
    error: function(){
-		alert("errore");
+	
 	}
 	
 });
@@ -109,6 +111,7 @@ function funzione2(){
    data: {chatID: chatID, datamessaggio: dateM},
    success: function(data){
 	let messaggi = JSON.parse(data);
+	
    for (var mex of messaggi){
 	if (mex["username"]==user)
 	 $("#listchat").append("<li class='chat-right' id='messaggio1'> <div class='chat-hour'>"+mex["dataInvio"]+" <span class='fa fa-check-circle'></span></div> <div class='chat-text'>"+mex["testo"]+"</div> <div class='chat-avatar'> <img src='PrintImage?username="+mex["username"]+"' alt='Retail Admin'> <div class='chat-name'>"+mex["username"]+"</div> </div> </li>");
@@ -117,9 +120,11 @@ function funzione2(){
 
  date=mex["dataInvio"];
 }
- },
+ 
+
+},
    error: function(){
-		alert("errore");
+		
 	}
 	
 });

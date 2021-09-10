@@ -316,12 +316,9 @@ if (session.getAttribute("username")!=null){
 
 
 		</div>
-		<br>
-		<br>
-		<br>
-		<br>
 		
-		<div class="container">
+			<div class="row">
+			<div class="container">
     <div class="mgb-40 padb-30 auto-invert line-b-4 align-center">
         <h4 class="font-cond-l fg-accent lts-md mgb-10" contenteditable="false">Non ti abbiamo ancora convinto?</h4>
         <h1 class="font-cond-b fg-text-d lts-md fs-300 fs-300-xs no-mg" contenteditable="false">Leggi le recensioni dei nostri utenti</h1>
@@ -350,15 +347,18 @@ if (session.getAttribute("username")!=null){
           <small class="font-cond case-u lts-sm fs-80 fg-text-l" contenteditable="false">abate</small>
         </li>
       </ul>
-</div>
+      </div>
 		<br>
-
-		<div class="row">
+		<br>
+		<br>
+		<br>
+		
+	</div>
+      <div class="row">
 
 
 		<!-- Services section -->
     <section id="what-we-do">
-    	<div class="container-fluid">
 			<h2 class="section-title mb-2 h1">Unisciti a noi!</h2>
 			<p class="text-center text-muted h5">Osserva tutto ciò che ha da offrire SocialNotes. Il prezzo? Solo la tua iscrizione!</p>
 			<div class="row mt-5">
@@ -419,7 +419,7 @@ if (session.getAttribute("username")!=null){
 					</div>
 				</div>
 			</div>
-		</div>	
+
 	</section>
 	<!-- /Services section -->	
 
@@ -431,6 +431,10 @@ if (session.getAttribute("username")!=null){
 
 
 		</div>
+</div>
+		<br>
+
+		
 
 
 
