@@ -53,7 +53,7 @@ String adminURL = "admin.jsp";
                     <li><span class="fontawesome-cloud"></span>A SOLI 5 &euro;</li>
                 </ul>
                 <div class="pt-footer">
-                    <a href="choosePayment.jsp">ACQUISTA COINS</a>
+                    <a href="choosePayment.jsp?coin=50">ACQUISTA COINS</a>
                 </div>
             </div>
             <div class="block professional fl card shadow" style="border-radius: 15px;right:17px;">
@@ -73,7 +73,7 @@ String adminURL = "admin.jsp";
                     <li><span class="fontawesome-cloud"></span>A SOLI 10 &euro; </li>
                 </ul>
                 <div class="pt-footer">
-                        <a href="choosePayment.jsp">ACQUISTA COINS</a>
+                        <a href="choosePayment.jsp?coin=120">ACQUISTA COINS</a>
                 </div>
             </div>
             <div class="block business fl card shadow" style="border-radius: 15px;right:17px;">
@@ -92,7 +92,7 @@ String adminURL = "admin.jsp";
                     <li><span class="fontawesome-cloud"></span>A SOLI 20 &euro;</li>
                 </ul>
                 <div class="pt-footer">
-                      <a href="choosePayment.jsp">ACQUISTA COINS</a>
+                      <a href="choosePayment.jsp?coin=600">ACQUISTA COINS</a>
                 </div>
             </div>
         </div>

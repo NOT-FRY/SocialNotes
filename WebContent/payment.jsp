@@ -69,7 +69,7 @@
 						<input id="cvc" type="text" class="form-control" placeholder="000" aria-label="CVC" aria-describedby="basic-addon1">
 					  </div>
 					  <div class="form-group col-sm-12">
-						<button type="button" class="btn btn-primary btn-block">Conferma Acquisto</button>
+						<a href="AddCoin?coin=<%=Integer.parseInt(request.getParameter("coin"))%>"><button type="button" class="btn btn-primary btn-block">Conferma Acquisto</button></a>
 					  </div>
 					</div>
 				  </div>

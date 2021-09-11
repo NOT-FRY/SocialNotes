@@ -125,7 +125,7 @@
 							
 					</a></li>
 					<!-- Coins -->
-					<li class="nav-item icona"><a class="nav-link" href="#"> <svg
+					<li class="nav-item icona" style="margin-right:30px"><a class="nav-link" href="#"> <svg
 								style="color: yellow;" aria-hidden="true" focusable="false"
 								width="24" height="24" data-prefix="fas" data-icon="coins"
 								class="svg-inline--fa fa-coins fa-w-16" role="img"

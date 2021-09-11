@@ -2,8 +2,6 @@ package it.unisa.control;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Collection;
-import java.util.Iterator;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,13 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
-import it.unisa.model.MaterialBean;
-import it.unisa.model.MaterialModelDS;
+import it.unisa.model.UserModelDS;
 
-@WebServlet("/AddToCart")
-public class AddToCart extends HttpServlet {
+@WebServlet("/AddCoin")
+public class AddCoin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    public AddToCart() {
+       
+    public AddCoin() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,24 +28,20 @@ public class AddToCart extends HttpServlet {
 		if(session==null) {
 			response.sendRedirect("homepage.jsp");
 		}
+		int coin=(int)session.getAttribute("coin");
+		int newCoin=Integer.parseInt(request.getParameter("coin"))+coin;
 		DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
-		Collection<MaterialBean>cart=(Collection<MaterialBean>)session.getAttribute("cart");
-		String codice=request.getParameter("codice");
-		System.out.println("codice materiale in servlet: "+codice);
-		MaterialModelDS materialModel=new MaterialModelDS(ds);
+		UserModelDS userModel=new UserModelDS(ds);
+		String username=(String)session.getAttribute("username");
 		try {
-			MaterialBean material=materialModel.doRetrieveByKey(codice);
-			cart.add(material);
-			session.setAttribute("cart",cart);
-			
+			userModel.doUpdateCoin(username, coin);
+			session.setAttribute("coin",newCoin);
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String url=(String)request.getParameter("url");
-		System.out.println(url);
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/"+url);
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/homepage_user.jsp");
 		dispatcher.forward(request, response);
-	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

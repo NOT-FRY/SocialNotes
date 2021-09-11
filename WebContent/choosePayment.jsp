@@ -53,14 +53,12 @@
       
                                 <div class="bg-white card payments-item mb-4 shadow-sm col-md-5">
                                     <div class="gold-members p-4">
-                                        <a href="#">
-                                        </a>
                                         <div class="media">
                                             <div class="media-body">
-                                               <a href="payment.jsp?numeroCarta=<%=card.getNumeroCarta()%>">
+                                               <a href="payment.jsp?numeroCarta=<%=card.getNumeroCarta()%>&coin=<%=Integer.parseInt(request.getParameter("coin"))%>">
                                                   <i class="fab fa-cc-visa" style="font-size:100px"></i>
                                                </a>
-                                                <a href="payment.jsp?numeroCarta=<%=card.getNumeroCarta()%>">
+                                                <a href="payment.jsp?numeroCarta=<%=card.getNumeroCarta()%>&coin=<%=Integer.parseInt(request.getParameter("coin"))%>">
                                                     <h6 class="mb-1">XXXX-XXXX-XXXX-<%=ultimeCifre %></h6>
                                                     <h6>SCADENZA <%=card.getDataScadenza().getMonth()+1%>/<%=card.getDataScadenza().getYear()+1900 %></h6>
                                                 </a>
@@ -76,6 +74,12 @@
 	                        <%
 		    					}
 	                 	 	}
+	                 	 	else{
+	                 	 	%>
+	                 	 		<h4>Non hai nessun metodo di pagamento!</h4>
+	                 	 		<a href="change.jsp">Aggiugi metodo di pagamento</a>
+	                 	 	<%	
+	                 	 	}
 	                 	 	%>
                             <!-- fine codice java -->
                     
@@ -86,6 +90,7 @@
                 <div class="col-md-2">
             
         </div>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
             </div>
         </div>
     </div>
