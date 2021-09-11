@@ -27,13 +27,7 @@
   <body class="text-center">
   <%
   String link ="homepage.jsp";
-  String signUp = "signup.jsp";
-  String recoveryPass = "RecoveryPassword.jsp";
   if(session.getAttribute("username")!=null){
-	  
-	  signUp = response.encodeURL(signUp);
-	  recoveryPass = response.encodeURL(recoveryPass);
-	  
 	    DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
 		String username=(String)session.getAttribute("username");
 		UserRoleModelDS role=new UserRoleModelDS(ds);
@@ -54,44 +48,21 @@
 		
 	}
   %>
-  		<%
-	String errore = (String) request.getAttribute("error");
-	if (errore != null) {
-	%>
+ 
+  		
+  		
+  		
+    <form class="form-signin" action="RecoveryPass" method="POST" >
+      <a href="<%=link %>"><img class="d-block mx-auto mb-4" src="img/logo.png" alt="SocialNotes" width="140" height="140"></a>
+      <h1 class="h3 mb-3 font-weight-normal">Recupero Password</h1>
+      <label for="inputUser" class="sr-only">Username</label>
+      <input type="text" name="inputUser" id="inputUser" class="form-control" placeholder="username" required autofocus>
 
-	<div class="alert alert-danger alert-dismissible fade show" role="alert">
-		<strong>Attenzione!</strong> Nome utente e/o password non corrispondono.
-		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-			<span aria-hidden="true">&times;</span>
-		</button>
-	</div>
-
-	<%
-	}
-	%>
-  		
-  		
-  		
-    <form class="form-signin" action="Login" method="POST" >
-      <a href="<%=link%>"><img class="d-block mx-auto mb-4" src="img/logo.png" alt="SocialNotes" width="140" height="140"></a>
-      <h1 class="h3 mb-3 font-weight-normal">Effettua il Login</h1>
-      <label for="inputEmail" class="sr-only">Email</label>
-      <input type="text" name="login"id="inputEmail" class="form-control" placeholder="Indirizzo mail o username" required autofocus>
-      <br>
-      <label for="inputPassword" class="sr-only">Password</label>
-      <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
       
       <br>
-      
-      <div class="text-left">
-      	<a href="<%=signUp %>" class="text-secondary">Registrati ora</a>
-      </div>
-      <button class="btn btn-lg btn-principale btn-block" type="submit">Log In</button>
+
+      <button class="btn btn-lg btn-principale btn-block" type="submit">Recupera password</button>
       <button class="bottoneindietro" onclick="history.back()">Torna indietro</button>
-      
-      <div class="text-left">
-      	<a href="<%=recoveryPass %>" class="text-secondary">Hai dimenticato la password?</a>
-      </div>
       <p class="mt-5 mb-3 text-muted">&copy; 2021 SocialNotes</p>
     </form>
 
@@ -107,4 +78,3 @@
     
   </body>
 </html>
-    
