@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.LinkedList;
+import java.util.Properties;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,7 +30,15 @@ import it.unisa.model.UserBean;
 import it.unisa.model.UserModelDS;
 import it.unisa.model.UserRoleBean;
 import it.unisa.model.UserRoleModelDS;
+import it.unisa.utils.SendEmail;
 import it.unisa.utils.Validation;
+
+import javax.mail.*;
+import javax.mail.internet.*;
+import javax.activation.*;
+import javax.mail.Session;
+import javax.mail.Transport;
+
 
 /**
  * Servlet implementation class SignupControl
@@ -127,7 +136,19 @@ public class SignupControl extends HttpServlet {
 			try {
 				model.doSave(user);
 				roleModel.doSave(role);
-				model.doUpdateImage(username, image);
+				
+				
+			    String from = "socialnotes2021@gmail.com";
+		        String pass = "Despacito21";
+		        String[] to = { user.getEmail() }; // list of recipient email addresses
+		        String subject = "CONFERMA DI AVVENUTA REGISTRAZIONE SU Social Notes";
+		        String body = "Ciao! , "+user.getUsername()+ "  Il team di SocialNotes è lieto di accoglierti sul sito!";
+				
+		        SendEmail sendEmail = new SendEmail(from,pass,to,subject,body);
+		        sendEmail.SendMail();
+		        
+		        
+				 model.doUpdateImage(username, image);
 				user=model.doRetrieveByUsername(username);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

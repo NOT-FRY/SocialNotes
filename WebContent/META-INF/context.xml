@@ -7,6 +7,6 @@
         type="javax.sql.DataSource"
         username="not-fry"
         password="despacito"
-        url="jdbc:mysql://151.73.152.16:3306/SocialNotes?serverTimezone=Europe/Rome" />
+        url="jdbc:mysql://151.70.119.134:3306/SocialNotes?serverTimezone=Europe/Rome" />
         </Context>
  
