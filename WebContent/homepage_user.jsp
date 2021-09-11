@@ -100,7 +100,39 @@
 %>
 
 	<%@ include file="header_user.jsp"%>
+	
+	<%
+	String errore = (String) request.getAttribute("error");
+	String success= (String) request.getAttribute("success");
+	if (errore != null) {
+	%>
 
+	<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		<strong>Attenzione!</strong> Il materiale non &egrave; stato caricato correttamente, si prega di riprovare.
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+
+	<%
+	}
+	%>
+	
+	<%
+	if(success!=null){
+	%>
+	
+		<div class="alert alert-success alert-dismissible fade show" role="alert">
+		 Il materiale &egrave; stato caricato correttamente!
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	
+	<%
+	}
+	%>
+	
 	<br>
 	<main class="container">
 

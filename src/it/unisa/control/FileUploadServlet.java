@@ -97,12 +97,16 @@ public class FileUploadServlet extends HttpServlet {
 		try {
 			fileModel.doSave(file);
 			materialModel.doSave(material);
+			String success = "Il materiale è stato caricato correttamente!";
+			request.setAttribute("success", success);
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/homepage_user.jsp");
+			dispatcher.forward(request, response);
 		} 
 		catch (SQLException e) {
 			String error = "Spiacenti, la registrazione delle informazioni nel database non è andata a buon fine.";
 			request.setAttribute("error", error);
 			//Mando una alert 
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/signup.jsp");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/homepage_user.jsp");
 			dispatcher.forward(request, response);
 			e.printStackTrace();
 		} 

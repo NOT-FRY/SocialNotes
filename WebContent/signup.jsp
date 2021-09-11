@@ -55,7 +55,7 @@
     
     
       <div class="py-5 text-center">
-        <img class="d-block mx-auto mb-4" src="img/logo.png" alt="SocialNotes" width="140" height="140">
+        <a href="homepage.jsp"><img class="d-block mx-auto mb-4" src="img/logo.png" alt="SocialNotes" width="140" height="140"></a>
         <h2>Registrazione</h2>
       </div>
 

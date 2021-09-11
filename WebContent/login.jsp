@@ -66,7 +66,7 @@
   		
   		
     <form class="form-signin" action="Login" method="POST" >
-      <img class="d-block mx-auto mb-4" src="img/logo.png" alt="SocialNotes" width="140" height="140">
+      <a href="homepage.jsp"><img class="d-block mx-auto mb-4" src="img/logo.png" alt="SocialNotes" width="140" height="140"></a>
       <h1 class="h3 mb-3 font-weight-normal">Effettua il Login</h1>
       <label for="inputEmail" class="sr-only">Email</label>
       <input type="text" name="login"id="inputEmail" class="form-control" placeholder="Indirizzo mail o username" required autofocus>
