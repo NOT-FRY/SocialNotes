@@ -22,7 +22,15 @@
 	Collection<MaterialBean> cart=(Collection<MaterialBean>)session.getAttribute("cart");
 	CourseModelDS cModel=new CourseModelDS(ds);
 	MaterialModelDS material = new MaterialModelDS(ds);
-%>
+	
+	String ProvaZipURL = "ProvaZip";
+	String RemoveFromCart = "RemoveFromCart";
+	String documentPreviewUrl = "documentPreview.jsp";
+	documentPreviewUrl = response.encodeURL(documentPreviewUrl);
+	RemoveFromCart = response.encodeURL(RemoveFromCart);
+	ProvaZipURL = response.encodeURL(ProvaZipURL);
+	%>
+
  <%@include file="header_user.jsp" %>
 
 <div class="container px-3 my-5 clearfix">
@@ -65,12 +73,14 @@
                     <th class="text-center align-middle py-3 px-0" style="width: 40px;"><a href="#" class="shop-tooltip float-none text-light" title="" data-original-title="Clear cart"><i class="ino ion-md-trash"></i></a></th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="articolo">
         		<%
         			int tot=0;
+      
 	        		if(cart!=null&&cart.size()>0){
 	        			Iterator<?> it=cart.iterator();
 	        			while(it.hasNext()){
+	        			
 	        				MaterialBean mbean=(MaterialBean)it.next();
 	        				String keyCourse = String.valueOf(mbean.getCodiceCorso());
 	        				CourseBean cBean = cModel.doRetrieveByKey(keyCourse);
@@ -87,7 +97,7 @@
                             <img class="img-responsive" src="PrintAnteprima?codice=<%=mbean.getCodiceMateriale() %>" width="160" height="160" alt="hello">
                         </div>
                         <div class="col-xs-4 col-sm-9 col-md-9 col-lg-10 title" style="padding-left:85px">
-                            <a href="documentPreview.jsp?codice=<%=mbean.getCodiceMateriale()%>"> <h4><%=mbean.getDescrizione() %></h4></a>
+                            <a href="<%=documentPreviewUrl %>?codice=<%=mbean.getCodiceMateriale()%>"> <h4><%=mbean.getDescrizione() %></h4></a>
                             <span>Utente: <%=mbean.getUsername() %></span><br>
                             <span>Data caricamento : <%=mbean.getDataCaricamento() %></span><br>
                             <span>Feedback :<%=feedback %></span><br>
@@ -101,7 +111,7 @@
     </div>
     </td>
     <td><span><b><%=mbean.getCosto() %></b></span><br></td>
-    <td class="text-center align-middle px-0"> <a href="RemoveFromCart?codice=<%=mbean.getCodiceMateriale()%>" class="shop-tooltip close float-none text-danger" title="" data-original-title="Remove">X</a></td>
+    <td class="text-center align-middle px-0"> <a href="<%=RemoveFromCart %>?codice=<%=mbean.getCodiceMateriale()%>" class="shop-tooltip close float-none text-danger" title="" data-original-title="Remove">X</a></td>
     </tr>
     <%
 	        			}} %>
@@ -124,7 +134,7 @@
             </div>
         	<br>
             <div class="float-right">
-             <a href="ProvaZip?tot=<%=tot%>"> <button type="button" class="btn btn-lg btn-primary mt-2">Continua Acquisto</button> </a>
+            <button type="button" class="btn btn-lg btn-primary mt-2" onclick="funzione(<%=tot%>,'<%=ProvaZipURL%>')">Continua Acquisto</button> 
             </div>
         
           </div>
@@ -132,4 +142,6 @@
   </div>
 <%@include file="footer.jsp" %>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+   <script src="js/cart.js"></script>
 </html>

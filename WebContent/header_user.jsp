@@ -65,10 +65,11 @@
 		changeLink = response.encodeURL(changeLink);
 		search = response.encodeURL(search);
 		cartLink=response.encodeURL(cartLink);
+		if ((session.getAttribute("cart")!=null)){
 		Collection<MaterialBean>carrello=(Collection<MaterialBean>)session.getAttribute("cart");
 		if(carrello!=null){
 			 numeroElementi=carrello.size();
-		}
+		}}
 	}
 	 
 	

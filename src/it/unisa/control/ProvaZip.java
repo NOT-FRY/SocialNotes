@@ -13,6 +13,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -104,12 +105,11 @@ public class ProvaZip extends HttpServlet {
 			String error="Coins insufficienti";
 			request.setAttribute("error",error);
 		}
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cart.jsp");
-		dispatcher.forward(request, response);
-		return;
+
 	}
 
-
+  
+   
 
 
 
