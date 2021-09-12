@@ -212,7 +212,7 @@ public class ChangeProfile extends HttpServlet {
 		/*
 		 * 
 		 * 
-		 * CVC non lo prendo per ora
+		 * CVC non lo prendo e non lo controllo
 		 * 
 		 * 
 		 * 

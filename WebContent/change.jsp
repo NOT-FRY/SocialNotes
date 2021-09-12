@@ -50,20 +50,39 @@
 
 	<script type="text/javascript">
 	function passwordUguali(){
-		console.log("ciao");
-		var pwd1 = document.main-profile.pwd;
-		var pwd2 = document.main-profile.newpwd;
+		//console.log("ciao");
+		var pwd1 = document.getElementById("pwd");
+		var pwd2 = document.getElementById("newpwd");
+		//console.log("password:"+pwd1.value+"conferma:"+pwd2.value);
 	    pwd2.classList.remove("is-invalid");
 	    pwd2.classList.remove("is-valid");
-	    if(pwd1.valueof()===pwd2.valueof())
-	    	console.log("sono uguali");
+	    if(pwd1.value===pwd2.value){
+	    	//console.log("sono uguali");
 	    	pwd2.classList.add("is-valid");
 	    	return true;
+	    }
 	    else{
-	    	console.log("sono diversi");
+	    	pwd2.classList.remove("is-valid");
+	    	//console.log("sono diversi");
 	    	pwd2.classList.add("is-invalid");
 	    	return false;
 	    }
+	}
+	
+	function cardNumberValidation(number){
+		//console.log("ciao");
+	    number.classList.remove("is-invalid");
+	    number.classList.remove("is-valid");
+	    var strLen = /^[0-9]{16}$/;
+	    if(number.value.match(strLen)){
+	        number.classList.add("is-valid");
+	        return true;
+	      }
+	      else{
+	        number.classList.add("is-invalid");
+	       	number.focus();
+	        return false;
+	      }
 	}
 	</script>
 
@@ -336,12 +355,18 @@
                   <input type="hidden" name="_csrf_token" id="_csrf_token1" value="1440526831-01-FIiAtX3_sdMNiFb34GXRG49qaUBWsxonFotdT79C_3s=">
 
                   <div class="input-group">
-                    <input type="password" class="text-input" name="current_password" placeholder="Password corrente"></input>
-                    <input type="password" class="text-input" name="password" id="pwd" placeholder="Nuova Password" onblur="passwordValidation(this,5,12)"></input>
-                    <div class="valid-feedback">Password valida.</div>
-                <div class="invalid-feedback">Per favore inserisci una password di lunghezza compresa tra 5 e 12 caratteri, che contenga almeno una lettera maiuscola, un numero e una lettera minuscola.</div>
-                    
-                    <input type="password" class="text-input" name="confirm_password" id="newpwd" onblur="passwordUguali()" placeholder="Conferma nuova Password"></input>
+                    <input type="password" class="text-input" name="current_password" placeholder="Password corrente">
+                    <div class="input-group">
+                    	<input type="password" class="text-input" name="password" id="pwd" placeholder="Nuova Password" onblur="passwordValidation(this,5,12)">
+                    	<div class="valid-feedback">Password valida.</div>
+                		<div class="invalid-feedback">Per favore inserisci una password di lunghezza compresa tra 5 e 12 caratteri, che contenga almeno una lettera maiuscola, un numero e una lettera minuscola.</div>
+                		<br>
+                    </div>
+                    <div class="input-group">
+                    	<input type="password" class="text-input" name="confirm_password" id="newpwd" onblur="passwordUguali()" placeholder="Conferma nuova Password">
+                    	<div class="valid-feedback">Le password corrispondono.</div>
+                		<div class="invalid-feedback">Le password non corrispondono.</div>
+                	</div>
                   </div>
 
                   <div class="submit">
@@ -374,23 +399,27 @@
              	 	PaymentMethodModelDS payment=new PaymentMethodModelDS(ds);
              	 	cards=payment.doRetrieveByUsername(username);
              	 	if(cards!=null&&cards.size()>0){
+             	 		%>
+             	 		<ul>
+             	 		
+             	 		<%
 						Iterator<?> it=cards.iterator();
 						while(it.hasNext()){
 							PaymentMethodBean bean=(PaymentMethodBean)it.next();
 							String ultimeCifre=bean.getNumeroCarta().substring(11);
-                  %>
-               			 <p class='data' data-field='name'><%=bean.getNomeIntestatario() %> <%=bean.getCognomeIntestatario() %>		<%=ultimeCifre %></p>
+                  %>	
+               			 <li class='data' data-field='name'><%=bean.getNomeIntestatario() %> <%=bean.getCognomeIntestatario() %>&nbsp;&nbsp;&nbsp;&nbsp;    Numero Carta: &#8226;&#8226;&#8226;&#8226; &#8226;&#8226;&#8226;&#8226; &#8226;&#8226;&#8226;<%=ultimeCifre %></li>
 				<%
 						}
              	 	}
 				%>
-
+						</ul>
 
 
                   </div>
                   <div class="grid__item one-quarter">
                     <button href="#" class="btn edit-hidden-form btn-principale">
-                      Modifica
+                      Aggiungi una carta
                     </button>
                   </div>
                 </div>
@@ -415,7 +444,9 @@
                    <div class="form-group">
                      <label class="col-sm-3 control-label">Numero carta </label>
                      <div class="col-sm-9">
-                       <input type="text" class="form-control" placeholder="&#8226;&#8226;&#8226;&#8226; &#8226;&#8226;&#8226;&#8226; &#8226;&#8226;&#8226;&#8226; &#8226;&#8226;&#8226;&#8226;" name="numcarta"></input>
+                       <input type="text" class="form-control" placeholder="&#8226;&#8226;&#8226;&#8226; &#8226;&#8226;&#8226;&#8226; &#8226;&#8226;&#8226;&#8226; &#8226;&#8226;&#8226;&#8226;" name="numcarta" onblur="cardNumberValidation(this);"></input>
+                       <div class="valid-feedback">Numero di carta valido.</div>
+                <div class="invalid-feedback">Per favore inserisci un numero di carta corretto.</div>
                        <p class="help-block">Le 16 cifre che trovi sulla carta.</p>
                      </div>
                    </div>
@@ -447,7 +478,7 @@
                      </div>
                      <label class="col-sm-3 control-label">CVC</label>
                      <div class="col-sm-9">
-                       <input type="text" class="form-control" style="width: 120px;" placeholder="CVC">
+                       <input type="text" class="form-control" style="width: 120px;" placeholder="CVC" maxlength="3">
                        <p class="help-block">Le 3 cifre che trovi sul retro della carta.</p>
                      </div>
                    </div>
@@ -484,9 +515,11 @@
               <div class="grid__item one-third">
                
 				  <div class="form-group">
-                     <label class="col-sm-3 control-label">Numero carta </label>
+                     <label class="col-sm-3 control-label">Numero carta da eliminare</label>
                      <div class="col-sm-9">
-                       <input type="text" class="form-control" placeholder="&#8226;&#8226;&#8226;&#8226; &#8226;&#8226;&#8226;&#8226; &#8226;&#8226;&#8226;&#8226; &#8226;&#8226;&#8226;&#8226;" name="numcartaDelete"></input>
+                       <input type="text" class="form-control" placeholder="&#8226;&#8226;&#8226;&#8226; &#8226;&#8226;&#8226;&#8226; &#8226;&#8226;&#8226;&#8226; &#8226;&#8226;&#8226;&#8226;" name="numcartaDelete" onblur="cardNumberValidation(this)"></input>
+                    <div class="valid-feedback">Numero di carta valido.</div>
+                <div class="invalid-feedback">Per favore inserisci un numero di carta corretto.</div>
                        <p class="help-block">Le 16 cifre che trovi sulla carta.</p>
                      </div>
 

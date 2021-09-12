@@ -54,4 +54,12 @@ public class Validation {
 		else
 			return true;
 	}
+	
+	public static boolean validateCardNumber(String cardNumber) {
+		if (cardNumber.length()==16)
+			return true;
+		else
+			return false;
+	}
+	
 }

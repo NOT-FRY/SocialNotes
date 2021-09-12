@@ -40,8 +40,11 @@ public class AddCoin extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/homepage_user.jsp");
-		dispatcher.forward(request, response);
+		String link = "paymentSuccess.jsp";
+		 String encodedURL = response.encodeRedirectURL(link);
+		 response.sendRedirect(encodedURL);
+		/*RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/homepage_user.jsp");
+		dispatcher.forward(request, response);*/
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
