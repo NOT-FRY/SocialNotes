@@ -5,6 +5,15 @@
 <head>
 <meta charset="ISO-8859-1">
 <title></title>
+<style>
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+ 
+}
+</style>
 </head>
 <body><% 
 String aboutUsURL="aboutUs.jsp";

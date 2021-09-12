@@ -73,6 +73,7 @@ $(document).ready(function() {
  <%    
  
  String adminURL = "admin.jsp";
+ String showNewsUrl = "showNews.jsp";
  
    if(session.getAttribute("username")==null){
 	  System.out.println("L'utente non è loggato");
@@ -84,13 +85,15 @@ $(document).ready(function() {
 		  adminURL = response.encodeURL(adminURL);
 		  response.sendRedirect(adminURL);
 		  return;
+		  
 	  }
                 
 	  synchronized(session) {
 	  System.out.println("ID SESSIONE NEWS:"+session.getId());
 	  Date dataSessione = new Date(session.getCreationTime());
 	  System.out.println("Data creazione "+ dataSessione);
-	 
+	   
+	  showNewsUrl = response.encodeURL(showNewsUrl);
 	  %>
 	  <jsp:include page="header_user.jsp"></jsp:include>
 	 <%  
@@ -162,7 +165,7 @@ if(collection!=null&&collection.size()>0){
 					            <h4 class="card-title"><%=nbean.getTitolo() %></h4>
 					            <p class="card-text"><%=nbean.getArgomento() %></p>
 					            <br>
-					            <a href="showNews.jsp<%="?newsId="+nbean.getCodiceNews()+"&newsImage="+fileName%>" class="btn btn-principale stretched-link">Vai alla notizia</a>
+					            <a href="<%=showNewsUrl %><%="?newsId="+nbean.getCodiceNews()+"&newsImage="+fileName%>" class="btn btn-principale stretched-link">Vai alla notizia</a>
 					            <!-- stretched link rende tutta la card un link -->
 					        </div>
 					    </div>
