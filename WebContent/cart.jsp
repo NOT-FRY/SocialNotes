@@ -10,6 +10,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="icon" href="img/favicon.ico">
 <title>Il tuo carrello</title>
  <link rel="stylesheet" type="text/css" href="css/cart.css">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">

@@ -7,6 +7,7 @@
   
     <link rel="stylesheet" type="text/css" href="css/admin.css">
     <meta charset="utf-8">
+    <link rel="icon" href="img/favicon.ico">
     <title>Admin</title>
   </head>
   <body>

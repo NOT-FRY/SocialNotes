@@ -15,6 +15,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <link rel="icon" href="img/favicon.ico">
     <title>Gestione Materiale</title>
     <link rel="stylesheet" type="text/css" href="css/materiale.css">
 

@@ -16,6 +16,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="icon" href="img/favicon.ico">
 <title>Anteprima Materiale</title>
 <link rel="stylesheet" type="text/css" href="css/documentPreview.css">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">

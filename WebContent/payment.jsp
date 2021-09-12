@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="icon" href="img/favicon.ico">
 <title>Effettua Pagamento</title>
 <link rel="stylesheet" type="text/css" href="css/payment.css">
 </head>

@@ -10,6 +10,7 @@
   <script src="js/grafici.js"></script>
   <link rel="stylesheet" type="text/css" href="css/grafici.css">
 <meta charset=utf-8 />
+<link rel="icon" href="img/favicon.ico">
 <title>Grafici andamento</title>
 </head>
 <body>

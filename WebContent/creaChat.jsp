@@ -11,6 +11,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="icon" href="img/favicon.ico">
 <title>Crea chat - SocialNotes</title>
 
 <link rel="stylesheet"
