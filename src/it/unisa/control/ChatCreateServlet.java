@@ -57,9 +57,10 @@ public class ChatCreateServlet extends HttpServlet {
 					
 			}
 		}
-		
-		String titoloChat = request.getParameter("titolo");
-		String[] users = request.getParameterValues("amici");
+		String titoloChat = null;
+		String[] users = null;
+		 titoloChat = request.getParameter("titolo");
+		 users = request.getParameterValues("amici");
 		
 		DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
 		ChatModelDS chatModel = new ChatModelDS(ds);

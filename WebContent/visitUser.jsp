@@ -21,6 +21,14 @@
 
 
 <%
+    String chatCreateUrl = "ChatCreateServlet";
+    if((session.getAttribute("username"))!=null){
+    	if(((int)session.getAttribute("role"))==1){
+    		response.sendRedirect(response.encodeURL("admin.jsp"));
+    	}
+    	chatCreateUrl = response.encodeURL(chatCreateUrl);
+    }
+
 	DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
 	String friendname;
 	if((String)request.getParameter("friendname")!=null){
@@ -61,7 +69,12 @@
 									<%}else{ %>
 									<a href="AddFriend?friendname=<%=bean.getUsername() %>"><button class="btn btn-primary" id="aggiungi">Aggiungi Amico</button></a>
 									<%} %>
-									<button class="btn btn-outline-primary" id="messaggio">Invia Messaggio</button>
+
+									<form method="post" action="<%=chatCreateUrl %>" >
+									<input type="text" name="titolo" id="titolo" hidden value='Chat tra <%=session.getAttribute("username")%> e  <%=bean.getUsername() %>'>
+									<input type="text" name="amici" id="amici" hidden value="<%=bean.getUsername() %>">
+									<button class="btn btn-outline-primary" id="messaggio">Invia Messaggio</button></a>
+									</form>
 								</div>
 							</div>
 							<hr class="my-4">
