@@ -201,7 +201,7 @@ if(collection!=null&&collection.size()>0){
 	 
 	 <% 
 }else{
-	response.sendRedirect("errorSearch.jsp");
+	response.sendRedirect(response.encodeURL("errorSearch.jsp"));
 }
 %>
 
