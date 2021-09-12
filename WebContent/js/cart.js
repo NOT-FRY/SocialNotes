@@ -3,7 +3,7 @@
  */
 
 function funzione(parameter,url){
-
+  var totale = parameter;
 
 window.location.href=url+"?tot="+totale;
 $("#articolo").remove();
