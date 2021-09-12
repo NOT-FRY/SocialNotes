@@ -78,11 +78,15 @@ public class ProvaZip extends HttpServlet {
 								output.write(buffer, 0, length);
 							}
 							output.closeEntry();
+						}catch(Exception e){
+							e.printStackTrace();
 						}
 						finally{
 							if (input != null)
 								try { input.close(); 
-								}catch (IOException logOrIgnore) {}
+								}catch (IOException logOrIgnore) {
+									logOrIgnore.printStackTrace();
+								}
 						}
 					}
 					cart.clear();
