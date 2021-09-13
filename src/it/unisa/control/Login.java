@@ -1,6 +1,7 @@
 package it.unisa.control;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -94,7 +95,10 @@ public class Login extends HttpServlet {
 						
 					}
 					else if(bean.getBan()) {
-						System.out.println("Sei bannato go to fuck your self");
+						System.out.println("Sei bannato");
+						PrintWriter out = response.getWriter();	
+						out.write("Spiacente, sei stato bannato");
+						
 					}
 					else {
 				   // System.out.println("USERNAME: "+bean.getUsername());		

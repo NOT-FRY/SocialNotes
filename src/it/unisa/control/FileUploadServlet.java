@@ -83,8 +83,7 @@ public class FileUploadServlet extends HttpServlet {
 				material.setUsername((String)session.getAttribute("username"));
 				material.setFileName(filePart.getSubmittedFileName());
 				is=materialPart.getInputStream();
-				material.setAnteprima(is);
-				
+				material.setAnteprima(is);	
 				
 			}
 		}
