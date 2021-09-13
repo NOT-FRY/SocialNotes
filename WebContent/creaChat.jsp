@@ -46,6 +46,23 @@ String ChatCreateServlet = "ChatCreateServlet";
 	   <% }
 
 %>
+
+  	<%
+	String errore = (String) request.getAttribute("error");
+	if (errore != null) {
+	%>
+
+	<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		<strong>Attenzione!</strong> Errore nella creazione della chat.
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+
+	<%
+	}
+	%>
+
 <br><br><br>
 <div class="container">
 <div class="row">

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -60,8 +61,15 @@ public class ChatCreateServlet extends HttpServlet {
 		String titoloChat = null;
 		String[] users = null;
 		 titoloChat = request.getParameter("titolo");
+		 //users = request.getParameterValues("amici");
+		 if(request.getParameterValues("amici")==null) {
+			 String error = "Errore nella creazione della chat";
+			 request.setAttribute("error", error);
+			 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(response.encodeURL("/creaChat.jsp"));
+			 dispatcher.forward(request, response);
+			 return;
+		 }
 		 users = request.getParameterValues("amici");
-		
 		DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
 		ChatModelDS chatModel = new ChatModelDS(ds);
 		ParticipationModelDS pModel = new ParticipationModelDS(ds);

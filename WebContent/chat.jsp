@@ -194,10 +194,10 @@ String creaChatURL = "creaChat.jsp";
 
         </div>
         <!-- Row end -->
-
+	
     </div>
     <!-- Content wrapper end -->
-
+	<br><br><br><br><br><br><br><br><br><br><br><br>
 </div>
 <br><br><br>
 <%@ include file="footer.jsp" %>
