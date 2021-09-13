@@ -217,10 +217,19 @@ section .section-title{
 <body>
 
 <%
+String linkAdmin = "admin.jsp";
+String link = "homepage_user.jsp";
 if (session.getAttribute("username")!=null){
-	 String link = "homepage_user.jsp";
+	
+	if (((int)session.getAttribute("role"))==1){
+		 String encodedURL = response.encodeRedirectURL(linkAdmin);
+		 response.sendRedirect(encodedURL);
+		 return;
+	}
+	
 	 String encodedURL = response.encodeRedirectURL(link);
 	 response.sendRedirect(encodedURL);
+	 return;
 }
     	
 %>

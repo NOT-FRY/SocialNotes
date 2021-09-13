@@ -20,15 +20,23 @@
  <link rel="stylesheet" type="text/css" href="css/documento1.css">
 </head>
 <body>
-<%@include file="header_admin.jsp" %>
+
 
 
 <%
-    if((session.getAttribute("username"))!=null){
-    	if(((int)session.getAttribute("role"))!=1){
-    		response.sendRedirect(response.encodeURL("homepage_user.jsp"));
-    	}
 
+    if((session.getAttribute("username"))!=null){
+    	if (((int)session.getAttribute("role"))!=1){
+    		response.sendRedirect(response.encodeURL("homepage_user.jsp"));
+    		return;
+    	}
+%>     
+   <jsp:include page="header_admin.jsp"></jsp:include>
+<% 
+    }else{
+    
+    	response.sendRedirect("homepage.jsp");
+    	return;
     }
 
 	DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");

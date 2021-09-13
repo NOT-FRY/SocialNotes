@@ -39,9 +39,11 @@
   String logoutURL = "Logout";
     if ((session.getAttribute("username")==null)){
     	response.sendRedirect(homeGuest);
+    	return;
     }else if (((int)session.getAttribute("role"))!=1){
     	String encodeHomeUserURL = response.encodeRedirectURL(homeUserURL);
     	response.sendRedirect(encodeHomeUserURL);
+    	return;
     }else{
     	adminURL = response.encodeRedirectURL(adminURL);
     	notizieURL = response.encodeRedirectURL(notizieURL);

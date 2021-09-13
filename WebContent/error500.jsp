@@ -11,6 +11,17 @@
 <link rel="stylesheet" type="text/css" href="css/error500.css">
 </head>
 <body>
+<% 
+  String homepageUrl = "homepage_user.jsp";
+  String homepageUrlAdmin = "admin.jsp";
+  String link = "homepage.jsp";
+  if ((session.getAttribute("username"))!=null){
+	  if (((int)session.getAttribute("role"))==1){
+		  link = response.encodeURL(homepageUrlAdmin);
+	  }
+		  link = response.encodeURL(homepageUrl);
+  }
+%>
 <!--dust particel-->
 <div>
   <div class="starsec"></div>
@@ -40,7 +51,7 @@
       <p class="message__text">Spiacenti, errore interno del server. Riprova pi&ugrave; tardi.</p>
     </div>
     <div class="error__nav e-nav">
-      <a href="homepage.jsp" class="e-nav__link"></a>
+      <a href="<%=link %>" class="e-nav__link"></a>
     </div>
   </div>
   <!-- END Content -->

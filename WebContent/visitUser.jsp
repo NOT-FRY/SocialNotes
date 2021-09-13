@@ -27,6 +27,9 @@
     		response.sendRedirect(response.encodeURL("admin.jsp"));
     	}
     	chatCreateUrl = response.encodeURL(chatCreateUrl);
+    }else{
+    	response.sendRedirect("homepage.jsp");
+    	return;
     }
 
 	DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
