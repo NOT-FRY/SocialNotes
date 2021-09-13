@@ -30,7 +30,7 @@
 
 <%} %>
 <br><br><br>
-
+<div class="container">
 <div class="row justify-content-center">
     <div class="col-md-12 col-sm-12">
         <div class="card shadow-lg border-0 rounded-lg mt-5 mx-auto" style="width: 30rem;">
@@ -49,8 +49,9 @@
         </div>
     </div>
 </div>
+</div>
 
-<br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <%@include file="footer.jsp" %>
 
 </body>

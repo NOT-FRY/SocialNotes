@@ -54,11 +54,11 @@ public class RecoveryPass extends HttpServlet {
 		try {
 			bean = uModel.doRetrieveByUsername(username);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// TODO Auto-generated catch block	
 			e.printStackTrace();
 		}
 		
-		if (!bean.isEmpty()) {
+		if (bean!=null) {
 		RandomString gen = new RandomString(12, ThreadLocalRandom.current());
 		String password = gen.nextString();
 		System.out.println("NUOVA PASSWORD : "+password);
@@ -80,7 +80,9 @@ public class RecoveryPass extends HttpServlet {
 	    
 	    sendEmail.SendMail();
 	    response.sendRedirect("login.jsp");
-	}
+		}
+		else
+			response.sendRedirect("login.jsp");
 	}
 
 }

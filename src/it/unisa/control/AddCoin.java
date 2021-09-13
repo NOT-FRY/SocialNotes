@@ -34,7 +34,7 @@ public class AddCoin extends HttpServlet {
 		UserModelDS userModel=new UserModelDS(ds);
 		String username=(String)session.getAttribute("username");
 		try {
-			userModel.doUpdateCoin(username, coin);
+			userModel.doUpdateCoin(username, newCoin);
 			session.setAttribute("coin",newCoin);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -48,6 +48,7 @@ public class AddCoin extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 	}
 
 }

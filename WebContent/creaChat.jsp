@@ -65,7 +65,7 @@ Collection<FriendsBean> f=friends.doRetrieveByUsername(username);
 <form method="POST" action="<%=ChatCreateServlet%>">
   <div class="form-group">
       <label for="exampleFormControlTextarea1">Titolo</label>
-    <textarea class="form-control" name="titolo" id="exampleFormControlTextarea1" placeholder="Inserisci il titolo della chat che vuoi creare" rows="3"></textarea>
+    <textarea class="form-control" name="titolo" id="exampleFormControlTextarea1" placeholder="Inserisci il titolo della chat che vuoi creare" rows="3" required></textarea>
   </div>
   <label for="checkAmici">Scegli gli amici con cui vuoi chattare</label>
   <div class="form-group" id="checkAmici">

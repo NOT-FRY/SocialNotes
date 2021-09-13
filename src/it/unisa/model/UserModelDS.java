@@ -452,7 +452,10 @@ public class UserModelDS implements Model<UserBean> {
 			ps.setString(2, username);
 			ps.executeUpdate();
 			System.out.println("Coins aggiornati");
-		}finally {
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally {
 			try {
 				if(ps!=null)
 					ps.close();
