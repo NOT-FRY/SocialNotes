@@ -37,8 +37,9 @@ public class RemoveBan extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		String removeBanLink=response.encodeURL("/editUser.jsp");
 		request.setAttribute("username", username);
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/editUser.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(removeBanLink);
 		dispatcher.forward(request, response);
 
 	}

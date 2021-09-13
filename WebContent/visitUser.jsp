@@ -69,8 +69,9 @@
 									<%}else{ %>
 									<a href="AddFriend?friendname=<%=bean.getUsername() %>"><button class="btn btn-primary" id="aggiungi">Aggiungi Amico</button></a>
 									<%} %>
-
+								
 									<form method="post" action="<%=chatCreateUrl %>" >
+									<br>
 									<input type="text" name="titolo" id="titolo" hidden value='Chat tra <%=session.getAttribute("username")%> e  <%=bean.getUsername() %>'>
 									<input type="text" name="amici" id="amici" hidden value="<%=bean.getUsername() %>">
 									<button class="btn btn-outline-primary" id="messaggio">Invia Messaggio</button></a>

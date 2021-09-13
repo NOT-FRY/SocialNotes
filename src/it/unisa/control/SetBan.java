@@ -37,8 +37,9 @@ public class SetBan extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		String editUserLink=response.encodeURL("/editUser.jsp");
 		request.setAttribute("username", username);
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/editUser.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(editUserLink);
 		dispatcher.forward(request, response);
 		
 	}

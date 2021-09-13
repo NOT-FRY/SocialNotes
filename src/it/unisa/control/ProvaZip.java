@@ -48,7 +48,6 @@ public class ProvaZip extends HttpServlet {
 		int coin=(int)session.getAttribute("coin");
 		String tot=request.getParameter("tot");
 		int totale=Integer.parseInt(tot);
-		if(totale<=coin) {
 			if(cart!=null&&cart.size()>0){
 				Iterator<?> it=cart.iterator();
 				while(it.hasNext()) {
@@ -105,10 +104,6 @@ public class ProvaZip extends HttpServlet {
 					output.close();
 				}
 			} 
-		}else {
-			String error="Coins insufficienti";
-			request.setAttribute("error",error);
-		}
 
 	}
 

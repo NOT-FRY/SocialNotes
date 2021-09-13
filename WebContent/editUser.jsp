@@ -28,6 +28,9 @@ String homeUser = "homepage_user.jsp";
 	DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
 	UserModelDS model=new UserModelDS(ds);
 	Collection<UserBean> users=model.doRetrieveUsers();
+	String visitUserLink=response.encodeURL("visitUserAdmin.jsp");
+	String setBanLink=response.encodeURL("SetBan");
+	String removeBanLink=response.encodeURL("RemoveBan");
 %>
 
 
@@ -68,7 +71,7 @@ String homeUser = "homepage_user.jsp";
                   <div class="candidate-list-details">
                     <div class="candidate-list-info">
                       <div class="candidate-list-title">
-                        <h5 class="mb-0"><a href="visitUser.jsp?friendname=<%=bean.getUsername()%>"><%=bean.getUsername() %> - <%=bean.getNome() %> <%=bean.getCognome() %></a></h5>
+                        <h5 class="mb-0"><a href="<%=visitUserLink %>?friendname=<%=bean.getUsername()%>"><%=bean.getUsername() %> - <%=bean.getNome() %> <%=bean.getCognome() %></a></h5>
                       </div>
                       
                     </div>
@@ -80,9 +83,9 @@ String homeUser = "homepage_user.jsp";
                 </td>
                 <td>
                   <ul class="list-unstyled mb-0 d-flex justify-content-end">
-                    <li><a href="visitUser.jsp?friendname=<%=bean.getUsername() %>" class="text-primary" data-toggle="tooltip" title="" data-original-title="Visita"><i class="far fa-eye"></i></a></li>
-                    <li><a href="RemoveBan?username=<%=bean.getUsername() %>" class="text-info" data-toggle="tooltip" title="" data-original-title="Sblocca"><i class="fas fa-lock-open"></i></a></li>
-                    <li><a href="SetBan?username=<%=bean.getUsername() %>" class="text-danger" data-toggle="tooltip" title="" data-original-title="Blocca"><i class="fas fa-lock"></i></a></li>
+                    <li><a href="<%=visitUserLink %>?friendname=<%=bean.getUsername() %>" class="text-primary" data-toggle="tooltip" title="" data-original-title="Visita"><i class="far fa-eye"></i></a></li>
+                    <li><a href="<%=removeBanLink %>?username=<%=bean.getUsername() %>" class="text-info" data-toggle="tooltip" title="" data-original-title="Sblocca"><i class="fas fa-lock-open"></i></a></li>
+                    <li><a href="<%=setBanLink %>?username=<%=bean.getUsername() %>" class="text-danger" data-toggle="tooltip" title="" data-original-title="Blocca"><i class="fas fa-lock"></i></a></li>
                   </ul>
                 </td>
               </tr>

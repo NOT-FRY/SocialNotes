@@ -24,12 +24,12 @@
 	CourseModelDS cModel=new CourseModelDS(ds);
 	MaterialModelDS material = new MaterialModelDS(ds);
 	
-	String ProvaZipURL = "ProvaZip";
+	String buyMaterialUrl = "buyMaterial.jsp";
 	String RemoveFromCart = "RemoveFromCart";
 	String documentPreviewUrl = "documentPreview.jsp";
 	documentPreviewUrl = response.encodeURL(documentPreviewUrl);
 	RemoveFromCart = response.encodeURL(RemoveFromCart);
-	ProvaZipURL = response.encodeURL(ProvaZipURL);
+	buyMaterialUrl = response.encodeURL(buyMaterialUrl);
 	%>
 
  <%@include file="header_user.jsp" %>
@@ -135,14 +135,13 @@
             </div>
         	<br>
             <div class="float-right">
-            <button type="button" class="btn btn-lg btn-primary mt-2" onclick="funzione(<%=tot%>,'<%=ProvaZipURL%>')">Continua Acquisto</button> 
+            <button type="button" class="btn btn-lg btn-primary mt-2" onclick="window.location.href='<%=buyMaterialUrl%>?tot=<%=tot%>'">Continua Acquisto</button> 
             </div>
-        
           </div>
       </div>
   </div>
 <%@include file="footer.jsp" %>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-   <script src="js/cart.js"></script>
+   
 </html>
