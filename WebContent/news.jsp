@@ -20,13 +20,27 @@
 </style>
 
 <style>
-.card-horizontal {
-  display: flex;
-  flex: 1 1 auto;
-}
+
 
 .btn-principale{
 	background-color: #9697e7 !important;
+}
+
+@media screen and (max-device-width:600px){
+	.img-resp{
+		width:225px;
+		height:182px;
+	}
+}
+@media screen and (min-device-width:601px){
+	.img-resp{
+		width:300px;
+		height:182px;
+	}
+	.card-horizontal {
+  		display: flex;
+  		flex: 1 1 auto;
+	}
 }
 </style>
 
@@ -149,14 +163,14 @@ if(collection!=null&&collection.size()>0){
 					        			FileBean fb = fmodel.doRetrieveByKey(fileName);
 					        			if(fb!=null){
 					        				%>
-					        				<img class="" src="PrintNewsImage?filename=<%=fb.getFilename()%>"  width="225" height="182" alt="News">
+					        				<img class="img-resp" src="PrintNewsImage?filename=<%=fb.getFilename()%>"   alt="News">
 					        			<%
 					        			}
 					        		}
 					        	}else{
 					        			%>
 					        	
-					        		<img class="" src="img/logo.png" width="225" height="182" alt="News">
+					        		<img class="img-resp" src="img/logo.png"  alt="News">
 					        		<%
 					        		}
 					        	%>
