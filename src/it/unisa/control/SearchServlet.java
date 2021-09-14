@@ -42,8 +42,9 @@ public class SearchServlet extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		
 		String url = "errorSearch.jsp";
+		String searchPage = "/Search.jsp";
 		if (session!=null) {
-			
+			searchPage = response.encodeURL(searchPage);
 			url = response.encodeRedirectURL(url);
 			
 		}
@@ -104,7 +105,7 @@ public class SearchServlet extends HttpServlet {
 			
 			request.setAttribute("ricercaNew", str);
 			request.setAttribute("materiale", material);
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Search.jsp;jsessionid="+session.getId());
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(searchPage);
 			dispatcher.forward(request, response);
 			
 		}catch(SQLException e) {
