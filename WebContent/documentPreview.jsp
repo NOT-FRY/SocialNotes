@@ -129,7 +129,7 @@
                         <div class="product-buttons mt-4">
                             <div class="row align-items-center">
                                
-                               <% if (session!=null) { %>
+                               <% if (session.getAttribute("username")!=null) { %>
                                 <div class="col-8">
                                     <button type="button" class="btn btn-block btn-primary btn-circle btn-icon-left" id="scarica">
                                         <a href="<%=addCartLink %>?codice=<%=material.getCodiceMateriale() %>&url=documentPreview.jsp" style="color:white">Aggiungi al carello <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus-fill" viewBox="0 0 16 16">
