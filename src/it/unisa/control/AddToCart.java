@@ -20,10 +20,10 @@ import it.unisa.model.MaterialModelDS;
 @WebServlet("/AddToCart")
 public class AddToCart extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    public AddToCart() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	public AddToCart() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
@@ -39,15 +39,21 @@ public class AddToCart extends HttpServlet {
 			MaterialBean material=materialModel.doRetrieveByKey(codice);
 			cart.add(material);
 			session.setAttribute("cart",cart);
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		String url=(String)request.getParameter("url");
 		System.out.println(url);
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/"+response.encodeURL(url));
-		dispatcher.forward(request, response);
-	
+		if(request.getParameter("friendname")!=null) {
+			System.out.println(request.getParameter("friendname"));
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/"+response.encodeURL(url)+"?friendname="+request.getParameter("friendname"));
+			dispatcher.forward(request, response);
+		}
+		else {
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/"+response.encodeURL(url));
+			dispatcher.forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
