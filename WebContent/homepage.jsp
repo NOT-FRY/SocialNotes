@@ -385,7 +385,7 @@ if (session.getAttribute("username")!=null){
 						<div class="card-block block-2">
 							<h3 class="card-title">NAVIGA</h3>
 							<p class="card-text">Cerca e sfoglia il materiale di cui hai bisogno.</p>
-							<a href="news.jsp" title="Read more" class="read-more" >Portami lì<i class="fa fa-angle-double-right ml-2"></i></a>
+							<a href="login.jsp" title="Read more" class="read-more" >Portami lì<i class="fa fa-angle-double-right ml-2"></i></a>
 						</div>
 					</div>
 				</div>
@@ -414,7 +414,7 @@ if (session.getAttribute("username")!=null){
 						<div class="card-block block-5">
 							<h3 class="card-title">CERCA AMICI</h3>
 							<p class="card-text">Una volta registrato potrai cercare i tuoi amici aggiungerli alla tua lista.</p>
-							<a href="signup.jsp" title="Read more" class="read-more" >Portami lì<i class="fa fa-angle-double-right ml-2"></i></a>
+							<a href="login.jsp" title="Read more" class="read-more" >Portami lì<i class="fa fa-angle-double-right ml-2"></i></a>
 						</div>
 					</div>
 				</div>
@@ -423,7 +423,7 @@ if (session.getAttribute("username")!=null){
 						<div class="card-block block-6">
 							<h3 class="card-title">METTITI IN CONTATTO COL MONDO</h3>
 							<p class="card-text">Grazie alla nostra chat potrai scambiare messaggi con chiunque tu voglia.</p>
-							<a href="signup.jsp" title="Read more" class="read-more" >Portami lì<i class="fa fa-angle-double-right ml-2"></i></a>
+							<a href="login.jsp" title="Read more" class="read-more" >Portami lì<i class="fa fa-angle-double-right ml-2"></i></a>
 						</div>
 					</div>
 				</div>

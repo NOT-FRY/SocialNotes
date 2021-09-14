@@ -67,7 +67,8 @@ else{
 	 String encodedURL = response.encodeURL(linkHomepage);
 	 String priceUrl= response.encodeURL("prezzi.jsp");
 	 String provaZipUrl=response.encodeURL("ProvaZip");
-%>
+	 String cartUrl=response.encodeURL("cart.jsp");
+	 %>
 
 		
 	<div class="card">
@@ -75,7 +76,28 @@ else{
 			String tot=request.getParameter("tot");
 			int totale=Integer.parseInt(tot);
 			int coin=(int)session.getAttribute("coin");
-			if(totale<=coin) {
+			if(totale==0){
+				
+				
+				
+	%>
+	<div style="border-radius: 200px; height: 200px; width: 200px; background: #F8FAF5; margin: 0 auto;">
+			<i>	&#10060;</i>
+		</div>
+
+		<h1 style=" color:#ff0000">OPS!</h1>
+		<p style="color:#ff0000">
+			Inserisci prima qualcosa nel tuo carrello!
+		</p>
+		<br>
+		<button class="btn btn-principale btn-lg" onclick="window.location.href='<%=cartUrl%>'">Vai al carrello</button>
+		<br>
+		<br>
+		<button class="btn btn-light btn-lg" onclick="window.location.href='<%=encodedURL%>'">Vai alla Home</button>
+	<%		
+			}
+			
+			else if(totale<=coin) {
 				
 		
 		%>
@@ -97,7 +119,7 @@ else{
 			else{
 		%>
 		<div style="border-radius: 200px; height: 200px; width: 200px; background: #F8FAF5; margin: 0 auto;">
-			<i style="color:#ff0000">&#10006;</i>
+			<i style="color:red">&#10060;</i>
 		</div>
 
 		<h1 style=" color:#ff0000">OPS!</h1>
