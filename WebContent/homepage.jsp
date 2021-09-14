@@ -344,16 +344,16 @@ if (session.getAttribute("username")!=null){
         <li>
           <img src="https://bootdey.com/img/Content/avatar/avatar4.png" class="wpx-100 img-round mgb-20" title="" alt="" data-edit="false" data-editor="field" data-field="src[Image Path]; title[Image Title]; alt[Image Alternate Text]">
           <p class="fs-110 font-cond-l" contenteditable="false">" Nel momento di difficoltà dovuto alla pandemia, avete trovato subito la soluzione migliore per aiutarci con gli esami.   "</p>
-          <h5 class="font-cond mgb-5 fg-text-d fs-130" contenteditable="false">Marcella Anselmo</h5>
-          <small class="font-cond case-u lts-sm fs-80 fg-text-l" contenteditable="false">manselmo</small>
+          <h5 class="font-cond mgb-5 fg-text-d fs-130" contenteditable="false">Leonardo Bonucci</h5>
+          <small class="font-cond case-u lts-sm fs-80 fg-text-l" contenteditable="false">lbonucci19</small>
         </li>
         </ul>
        <ul class="hash-list cols-3 cols-1-xs pad-30-all align-center text-sm">
         <li>
           <img src="https://bootdey.com/img/Content/avatar/avatar5.png" class="wpx-100 img-round mgb-20" title="" alt="" data-edit="false" data-editor="field" data-field="src[Image Path]; title[Image Title]; alt[Image Alternate Text]">
           <p class="fs-110 font-cond-l" contenteditable="false">" Team preparato e sempre disponibile, rispondono in maniera veloce e sono sempre pronti a dare una mano..IL MEGLIO! "</p>
-          <h5 class="font-cond mgb-5 fg-text-d fs-130" contenteditable="false">Andrea Abate</h5>
-          <small class="font-cond case-u lts-sm fs-80 fg-text-l" contenteditable="false">abate</small>
+          <h5 class="font-cond mgb-5 fg-text-d fs-130" contenteditable="false">Gigi Buffon</h5>
+          <small class="font-cond case-u lts-sm fs-80 fg-text-l" contenteditable="false">Gbffuno</small>
         </li>
       </ul>
       </div>
