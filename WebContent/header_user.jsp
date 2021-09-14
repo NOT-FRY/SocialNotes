@@ -70,6 +70,9 @@
 		if(carrello!=null){
 			 numeroElementi=carrello.size();
 		}}
+	}else{
+		response.sendRedirect("login.jsp");
+		return;
 	}
 	 
 	
