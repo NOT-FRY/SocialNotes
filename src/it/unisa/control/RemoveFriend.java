@@ -42,7 +42,7 @@ public class RemoveFriend extends HttpServlet {
 			e.printStackTrace();
 		}
 		request.setAttribute("friendname", friendname);
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/visitUser.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(response.encodeURL("/visitUser.jsp"));
 		dispatcher.forward(request, response);
 	}
 

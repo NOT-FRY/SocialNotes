@@ -59,7 +59,7 @@
                                                <a href="payment.jsp?numeroCarta=<%=card.getNumeroCarta()%>&coin=<%=Integer.parseInt(request.getParameter("coin"))%>">
                                                   <i class="fab fa-cc-visa" style="font-size:100px"></i>
                                                </a>
-                                                <a href="payment.jsp?numeroCarta=<%=card.getNumeroCarta()%>&coin=<%=Integer.parseInt(request.getParameter("coin"))%>">
+                                                <a href="<%=response.encodeURL("payment.jsp") %>?numeroCarta=<%=card.getNumeroCarta()%>&coin=<%=Integer.parseInt(request.getParameter("coin"))%>">
                                                     <h6 class="mb-1">XXXX-XXXX-XXXX-<%=ultimeCifre %></h6>
                                                     <h6>SCADENZA <%=card.getDataScadenza().getMonth()+1%>/<%=card.getDataScadenza().getYear()+1900 %></h6>
                                                 </a>
@@ -78,7 +78,8 @@
 	                 	 	else{
 	                 	 	%>
 	                 	 		<h4>Non hai nessun metodo di pagamento!</h4>
-	                 	 		<a href="change.jsp">Aggiugi metodo di pagamento</a>
+                              <a href="<%=response.encodeURL("change.jsp")%>">Aggiugi metodo di pagamento</a>
+	                 	 		
 	                 	 	<%	
 	                 	 	}
 	                 	 	%>

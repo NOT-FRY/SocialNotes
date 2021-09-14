@@ -13,7 +13,7 @@
 
 <%
 String adminURL = "admin.jsp";
-
+String choosePaymentUrl = "choosePayment.jsp";
    if(session.getAttribute("username")==null){
 	  %>
 	  
@@ -26,6 +26,8 @@ String adminURL = "admin.jsp";
 			  response.sendRedirect(adminURL);
 			  return;
 		  }
+		  
+		  choosePaymentUrl = response.encodeURL(choosePaymentUrl);
 	   %>
 	   <jsp:include page="header_user.jsp"></jsp:include>
 	   <% }
@@ -53,7 +55,7 @@ String adminURL = "admin.jsp";
                     <li><span class="fontawesome-cloud"></span>A SOLI 5 &euro;</li>
                 </ul>
                 <div class="pt-footer">
-                    <a href="choosePayment.jsp?coin=50">ACQUISTA COINS</a>
+                    <a href="<%=choosePaymentUrl %>?coin=50">ACQUISTA COINS</a>
                 </div>
             </div>
             <div class="block professional fl card shadow" style="border-radius: 15px;right:17px;">
@@ -73,7 +75,7 @@ String adminURL = "admin.jsp";
                     <li><span class="fontawesome-cloud"></span>A SOLI 10 &euro; </li>
                 </ul>
                 <div class="pt-footer">
-                        <a href="choosePayment.jsp?coin=120">ACQUISTA COINS</a>
+                        <a href="<%=choosePaymentUrl %>?coin=120">ACQUISTA COINS</a>
                 </div>
             </div>
             <div class="block business fl card shadow" style="border-radius: 15px;right:17px;">
@@ -92,7 +94,7 @@ String adminURL = "admin.jsp";
                     <li><span class="fontawesome-cloud"></span>A SOLI 20 &euro;</li>
                 </ul>
                 <div class="pt-footer">
-                      <a href="choosePayment.jsp?coin=600">ACQUISTA COINS</a>
+                      <a href="<%=choosePaymentUrl %>?coin=600">ACQUISTA COINS</a>
                 </div>
             </div>
         </div>

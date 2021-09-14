@@ -16,6 +16,10 @@
 <%
 	if (session.getAttribute("username")==null)
 		  response.sendRedirect("login.jsp");
+    
+		  
+	String addCoinUrl = "AddCoin";
+	addCoinUrl = response.encodeUrl(addCoinUrl);
 	String numeroCarta=(String)request.getParameter("numeroCarta");
 	System.out.println(numeroCarta);
 	DataSource ds=(DataSource)getServletContext().getAttribute("DataSource");
@@ -70,7 +74,7 @@
 						<input id="cvc" type="text" class="form-control" placeholder="000" aria-label="CVC" aria-describedby="basic-addon1" maxlength="3" minlength="3" required>
 					  </div>
 					  <div class="form-group col-sm-12">
-						<a href="AddCoin?coin=<%=Integer.parseInt(request.getParameter("coin"))%>"><button type="button" class="btn btn-primary btn-block">Conferma Acquisto</button></a>
+						<a href="<%=addCoinUrl %>?coin=<%=Integer.parseInt(request.getParameter("coin"))%>"><button type="button" class="btn btn-primary btn-block">Conferma Acquisto</button></a>
 					  </div>
 					</div>
 				  </div>

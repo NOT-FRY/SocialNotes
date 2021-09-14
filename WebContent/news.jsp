@@ -149,14 +149,14 @@ if(collection!=null&&collection.size()>0){
 					        			FileBean fb = fmodel.doRetrieveByKey(fileName);
 					        			if(fb!=null){
 					        				%>
-					        				<img class="" src="PrintNewsImage?filename=<%=fb.getFilename()%>"  width="300" height="182" alt="News">
+					        				<img class="" src="PrintNewsImage?filename=<%=fb.getFilename()%>"  width="225" height="182" alt="News">
 					        			<%
 					        			}
 					        		}
 					        	}else{
 					        			%>
 					        	
-					        		<img class="" src="img/logo.png" width="300" height="182" alt="News">
+					        		<img class="" src="img/logo.png" width="225" height="182" alt="News">
 					        		<%
 					        		}
 					        	%>

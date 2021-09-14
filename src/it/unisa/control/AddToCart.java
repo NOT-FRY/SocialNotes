@@ -45,7 +45,7 @@ public class AddToCart extends HttpServlet {
 		}
 		String url=(String)request.getParameter("url");
 		System.out.println(url);
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/"+url);
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/"+response.encodeURL(url));
 		dispatcher.forward(request, response);
 	
 	}
