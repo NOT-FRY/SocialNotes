@@ -229,11 +229,11 @@
 										enctype="multipart/form-data">
 										<h4>Condivisione materiale</h4>
 										<div class="mb-3">
-											<label>File PDF</label> <input class="form-control"
+											<label>File PDF</label> <input class="form-control" required
 												type="file" id="formFile" name="Contenuto"
 												accept=".pdf,.doc,.docx,.odt,.ppt,.pptx"> <br>
 											<label>Immagine anteprima del materiale</label> <input
-												class="form-control" type="file" id="formFile"
+												class="form-control" type="file" id="formFile" required
 												name="Anteprima" accept=".jpeg,.png,.jpg,.PNG">
 										</div>
 
